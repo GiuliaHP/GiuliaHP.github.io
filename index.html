@@ -14,9 +14,9 @@
 <body>
 
 <div class="cursor" id="cursor"></div>
-
-<div class="project-preview" id="projectPreview">
-  <div class="preview-placeholder" id="previewInner">Aperçu</div>
+<div class="project-cursor-icon" id="projectCursorIcon" aria-hidden="true">
+  <img id="projectCursorIconImg" alt="" />
+  <span id="projectCursorIconLabel"></span>
 </div>
 
 <!-- NAV -->
@@ -50,10 +50,11 @@
           Je me spécialise dans l'utilisation d'<em>Unity</em>, avec une
           connaissance approfondie de ses <em>fonctionnalités les moins
           conventionnelles</em>, et je suis également à l'aise avec <em>Unreal Engine 5</em>.
+        <br><br>
         </p>
       </div>
       <div class="hero-meta">
-        <p><strong>Je suis actuellement :</strong></p>
+        <p><strong>Je suis actuellement —</strong></p><br>
         <ul>
           <li>En master (Arts et Technologies de l'Image)</li>
           <li>Disponible pour des <strong>missions freelance</strong></li>
@@ -69,30 +70,73 @@
   <div class="wrap">
     <div class="section-label reveal">Projets sélectionnés</div>
     <ul class="projects-list">
-      <!-- data-preview="assets/img/projet1.jpg" quand tu as une image -->
-      <li><a class="project-row reveal" href="project-herbarium.html" data-preview="assets/img/backgrounds/BG_Herbarium.png" data-bg="assets/img/backgrounds/BG_Herbarium.png">
-        <span class="project-name">The Herbarium</span>
-        <span class="project-engine">Unity · C#</span>
-        <span class="project-year">2026</span>
-      </a></li>
+      <li>
+        <a class="project-row reveal" href="project-herbarium.html" data-bg="assets/img/backgrounds/BG_Herbarium.png" data-icon="assets/img/icons/IC_Herbarium.png" data-video-webm="" data-video-mp4="">
+          <div class="project-main">
+            <span class="project-year">2026</span>
+            <div class="project-title-wrap">
+              <span class="project-name">The Herbarium</span>
+            </div>
+          </div>
+          <div class="project-side">
+            <div class="project-media-frame">
+              <img src="assets/img/backgrounds/BG_Herbarium.png" alt="Aperçu The Herbarium" loading="lazy" />
+            </div>
+            <span class="project-tags">Unity · C#</span>
+          </div>
+        </a>
+      </li>
 
-      <li><a class="project-row reveal" href="project-blueprint.html" data-preview="assets/img/backgrounds/BG_TUBP.png" data-bg="assets/img/backgrounds/BG_TUBP.png">
-        <span class="project-name">The Unfinished Blueprint</span>
-        <span class="project-engine">UE 5 · C++ & Blueprint</span>
-        <span class="project-year">2025</span>
-      </a></li>
+      <li>
+        <a class="project-row reveal" href="project-blueprint.html" data-bg="assets/img/backgrounds/BG_TUBP.png" data-icon="assets/img/icons/IC_TUBP.png" data-video-webm="" data-video-mp4="">
+          <div class="project-main">
+            <span class="project-year">2025</span>
+            <div class="project-title-wrap">
+              <span class="project-name">The Unfinished Blueprint</span>
+            </div>
+          </div>
+          <div class="project-side">
+            <div class="project-media-frame">
+              <img src="assets/img/backgrounds/BG_TUBP.png" alt="Aperçu The Unfinished Blueprint" loading="lazy" />
+            </div>
+            <span class="project-tags">UE 5 · C++ · Blueprint</span>
+          </div>
+        </a>
+      </li>
 
-      <li><a class="project-row reveal" href="project-prophecy.html" data-preview="assets/img/backgrounds/BG_Prophecy.png" data-bg="assets/img/backgrounds/BG_Prophecy.png">
-        <span class="project-name">Prophecy</span>
-        <span class="project-engine"> Unity · C#</span>
-        <span class="project-year">2025</span>
-      </a></li>
+      <li>
+        <a class="project-row reveal" href="project-prophecy.html" data-bg="assets/img/backgrounds/BG_Prophecy.png" data-icon="assets/img/icons/IC_Prophecy.png" data-video-webm="" data-video-mp4="">
+          <div class="project-main">
+            <span class="project-year">2025</span>
+            <div class="project-title-wrap">
+              <span class="project-name">Prophecy</span>
+            </div>
+          </div>
+          <div class="project-side">
+            <div class="project-media-frame">
+              <img src="assets/img/backgrounds/BG_Prophecy.png" alt="Aperçu Prophecy" loading="lazy" />
+            </div>
+            <span class="project-tags">Unity · C#</span>
+          </div>
+        </a>
+      </li>
 
-      <li><a class="project-row reveal" href="project-portrait.html" data-preview="" data-bg="">
-        <span class="project-name">Custom Character Portrait Maker</span>
-        <span class="project-engine">Blender · Python</span>
-        <span class="project-year">2025</span>
-      </a></li>
+      <li>
+        <a class="project-row reveal" href="project-portrait.html" data-icon-label="CCP" data-video-webm="" data-video-mp4="">
+          <div class="project-main">
+            <span class="project-year">2025</span>
+            <div class="project-title-wrap">
+              <span class="project-name">Custom Character Portrait Maker</span>
+            </div>
+          </div>
+          <div class="project-side">
+            <div class="project-media-frame project-media-frame-empty">
+              <span>Preview</span>
+            </div>
+            <span class="project-tags">Blender · Python</span>
+          </div>
+        </a>
+      </li>
     </ul>
   </div>
 </section>
