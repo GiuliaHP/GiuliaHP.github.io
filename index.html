@@ -1,12 +1,157 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mon Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Game Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
 </head>
 <body>
-  <h1>Bonjour, je suis [ton prénom]</h1>
-  <p>Game Developer · Unity · Unreal · Blender</p>
+
+<div class="cursor" id="cursor"></div>
+
+<div class="project-preview" id="projectPreview">
+  <div class="preview-placeholder" id="previewInner">Aperçu</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Giulia HP.</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <p class="hero-label">Technical Artist · Généraliste Game Art · Paris</p>
+    <h1 class="hero-title">
+      Bienvenue<br>
+      dans mon<br>
+      <em>univers</em>.
+    </h1>
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-desc">
+          <em>Technical artist</em> généraliste orientée vers la création de <em>jeux
+          vidéos</em>, avec une fascination pour la mise en place d'<em>outils
+          personnalisés</em> à chaque projet et le <em>fait-main stylisé</em>.
+          <br><br>
+          Je me spécialise dans l'utilisation d'<em>Unity</em>, avec une
+          connaissance approfondie de ses <em>fonctionnalités les moins
+          conventionnelles</em>, et je suis également à l'aise avec <em>Unreal Engine 5</em>.
+        </p>
+      </div>
+      <div class="hero-meta">
+        <p><strong>Je suis actuellement :</strong></p>
+        <ul>
+          <li>En master (Arts et Technologies de l'Image)</li>
+          <li>Disponible pour des <strong>missions freelance</strong></li>
+          <li>Ouverte aux <strong>stages / collaborations</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-label reveal">Projets sélectionnés</div>
+    <ul class="projects-list">
+      <!-- data-preview="assets/img/projet1.jpg" quand tu as une image -->
+      <li><a class="project-row reveal" href="project-herbarium.html" data-preview="assets/img/backgrounds/BG_Herbarium.png" data-bg="assets/img/backgrounds/BG_Herbarium.png">
+        <span class="project-name">The Herbarium</span>
+        <span class="project-engine">Unity · C#</span>
+        <span class="project-year">2026</span>
+      </a></li>
+
+      <li><a class="project-row reveal" href="project-blueprint.html" data-preview="assets/img/backgrounds/BG_TUBP.png" data-bg="assets/img/backgrounds/BG_TUBP.png">
+        <span class="project-name">The Unfinished Blueprint</span>
+        <span class="project-engine">UE 5 · C++ & Blueprint</span>
+        <span class="project-year">2025</span>
+      </a></li>
+
+      <li><a class="project-row reveal" href="project-prophecy.html" data-preview="assets/img/backgrounds/BG_Prophecy.png" data-bg="assets/img/backgrounds/BG_Prophecy.png">
+        <span class="project-name">Prophecy</span>
+        <span class="project-engine"> Unity · C#</span>
+        <span class="project-year">2025</span>
+      </a></li>
+
+      <li><a class="project-row reveal" href="project-portrait.html" data-preview="" data-bg="">
+        <span class="project-name">Custom Character Portrait Maker</span>
+        <span class="project-engine">Blender · Python</span>
+        <span class="project-year">2025</span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-label reveal">Compétences</div>
+    <div class="skills-cols">
+      <div class="reveal">
+        <div class="skill-col-title">Moteurs</div>
+        <div class="skill-entry high"><span>Unity</span><span class="skill-dot"></span></div>
+        <div class="skill-entry high"><span>Unreal Engine 5</span><span class="skill-dot"></span></div>
+      </div>
+      <div class="reveal">
+        <div class="skill-col-title">Langages</div>
+        <div class="skill-entry high"><span>C#</span><span class="skill-dot"></span></div>
+        <div class="skill-entry mid"><span>Python</span><span class="skill-dot"></span></div>
+        <div class="skill-entry low"><span>HTML / CSS / JS</span><span class="skill-dot"></span></div>
+      </div>
+      <div class="reveal">
+        <div class="skill-col-title">Outils 3D</div>
+        <div class="skill-entry high"><span>Blender</span><span class="skill-dot"></span></div>
+        <div class="skill-entry mid"><span>Substance Painter</span><span class="skill-dot"></span></div>
+        <div class="skill-entry mid"><span>Git</span><span class="skill-dot"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid reveal">
+      <div>
+        <div class="section-label" style="margin-bottom:2rem">Contact</div>
+        <h2 class="contact-title">Travaillons<br><em>ensemble.</em></h2>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:tonemail@exemple.com" class="contact-link">
+          tonemail@exemple.com <span>Email</span>
+        </a>
+        <a href="https://github.com/tonpseudo" target="_blank" class="contact-link">
+          github.com/tonpseudo <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/tonprofil" target="_blank" class="contact-link">
+          LinkedIn <span>Réseau</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Votre Nom</span>
+  <span>Hébergé sur GitHub Pages</span>
+</footer>
+
+<script src="assets/js/script.js"></script>
+
 </body>
 </html>
