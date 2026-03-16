@@ -10,18 +10,43 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+  <div class="cursor" id="cursor"></div>
+  <div class="project-cursor-icon" id="projectCursorIcon" aria-hidden="true">
+    <img id="projectCursorIconImg" alt="" />
+    <span id="projectCursorIconLabel"></span>
+  </div>
+
   <nav>
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html">Votre Nom</a>
+      <a class="nav-logo" href="index.html">Giulia HP.</a>
       <ul class="nav-links">
-        <li><a href="index.html#projects">Projets</a></li>
+        <li class="nav-projects-dropdown">
+          <button type="button" class="nav-projects-trigger" aria-haspopup="true">Projets</button>
+          <ul class="nav-projects-menu" aria-label="Liste des projets">
+            <li><a href="index.html#projects">Tous les projets</a></li>
+            <li><a href="project-herbarium.html">The Herbarium</a></li>
+            <li><a href="project-blueprint.html">The Unfinished Blueprint</a></li>
+            <li><a href="project-prophecy.html">Prophecy</a></li>
+            <li><a href="project-portrait.html">Custom Character Portrait Maker</a></li>
+          </ul>
+        </li>
         <li><a href="index.html#skills">Compétences</a></li>
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <section id="hero">
+  <section class="project-trailer-banner" aria-label="Trailer Prophecy">
+    <div class="wrap">
+      <div class="project-trailer-frame">
+        <video class="project-trailer-video" muted loop playsinline preload="none" poster="assets/img/backgrounds/BG_Prophecy.png">
+          <source src="assets/img/trailers/TR_Prophecy.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section id="hero" class="project-page-hero">
     <div class="wrap">
       <p class="hero-label">Project</p>
       <h1 class="hero-title"><em>Prophecy</em></h1>
@@ -41,7 +66,7 @@
   </section>
 
   <footer>
-    <span>© 2026 Votre Nom</span>
+    <span>© 2026 Giulia HP.</span>
     <span>Hébergé sur GitHub Pages</span>
   </footer>
 

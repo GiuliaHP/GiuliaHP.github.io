@@ -22,9 +22,18 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">Giulia HP.</a>
+    <a class="nav-logo" href="#">Giulia Haut Perucca</a>
     <ul class="nav-links">
-      <li><a href="#projects">Projets</a></li>
+      <li class="nav-projects-dropdown">
+        <button type="button" class="nav-projects-trigger" aria-haspopup="true">Projets</button>
+        <ul class="nav-projects-menu" aria-label="Liste des projets">
+          <li><a href="#projects">Tous les projets</a></li>
+          <li><a href="project-herbarium.html">The Herbarium</a></li>
+          <li><a href="project-blueprint.html">The Unfinished Blueprint</a></li>
+          <li><a href="project-prophecy.html">Prophecy</a></li>
+          <li><a href="project-portrait.html">Custom Character Portrait Maker</a></li>
+        </ul>
+      </li>
       <li><a href="#skills">Compétences</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -71,7 +80,7 @@
     <div class="section-label reveal">Projets sélectionnés</div>
     <ul class="projects-list">
       <li>
-        <a class="project-row reveal" href="project-herbarium.html" data-bg="assets/img/backgrounds/BG_Herbarium.png" data-icon="assets/img/icons/IC_Herbarium.png" data-video-webm="" data-video-mp4="">
+        <a class="project-row reveal" href="project-herbarium.html" data-bg="assets/img/backgrounds/BG_Herbarium.png" data-icon="assets/img/icons/IC_Herbarium.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_Herbarium.mp4">
           <div class="project-main">
             <span class="project-year">2026</span>
             <div class="project-title-wrap">
@@ -82,13 +91,16 @@
             <div class="project-media-frame">
               <img src="assets/img/backgrounds/BG_Herbarium.png" alt="Aperçu The Herbarium" loading="lazy" />
             </div>
-            <span class="project-tags">Unity · C#</span>
+            <span class="project-tags">
+              <img class="tag-logo" src="assets/img/logos/LO_Unity.png" alt="Unity" title="Unity" loading="lazy" />
+              <img class="tag-logo" src="assets/img/logos/LO_CSharp.png" alt="C#" title="C#" loading="lazy" />
+            </span>
           </div>
         </a>
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-blueprint.html" data-bg="assets/img/backgrounds/BG_TUBP.png" data-icon="assets/img/icons/IC_TUBP.png" data-video-webm="" data-video-mp4="">
+        <a class="project-row reveal" href="project-blueprint.html" data-bg="assets/img/backgrounds/BG_TUBP.png" data-icon="assets/img/icons/IC_TUBP.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_TUBP.mp4">
           <div class="project-main">
             <span class="project-year">2025</span>
             <div class="project-title-wrap">
@@ -99,13 +111,16 @@
             <div class="project-media-frame">
               <img src="assets/img/backgrounds/BG_TUBP.png" alt="Aperçu The Unfinished Blueprint" loading="lazy" />
             </div>
-            <span class="project-tags">UE 5 · C++ · Blueprint</span>
+            <span class="project-tags">
+              <img class="tag-logo" src="assets/img/logos/LO_Unreal.png" alt="Unreal Engine 5" title="Unreal Engine 5" loading="lazy" />
+              <img class="tag-logo" src="assets/img/logos/LO_CPlusPlus.png" alt="C++" title="C++" loading="lazy" />
+            </span>
           </div>
         </a>
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-prophecy.html" data-bg="assets/img/backgrounds/BG_Prophecy.png" data-icon="assets/img/icons/IC_Prophecy.png" data-video-webm="" data-video-mp4="">
+        <a class="project-row reveal" href="project-prophecy.html" data-bg="assets/img/backgrounds/BG_Prophecy.png" data-icon="assets/img/icons/IC_Prophecy.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_Prophecy.mp4">
           <div class="project-main">
             <span class="project-year">2025</span>
             <div class="project-title-wrap">
@@ -116,13 +131,16 @@
             <div class="project-media-frame">
               <img src="assets/img/backgrounds/BG_Prophecy.png" alt="Aperçu Prophecy" loading="lazy" />
             </div>
-            <span class="project-tags">Unity · C#</span>
+            <span class="project-tags">
+              <img class="tag-logo" src="assets/img/logos/LO_Unity.png" alt="Unity" title="Unity" loading="lazy" />
+              <img class="tag-logo" src="assets/img/logos/LO_CSharp.png" alt="C#" title="C#" loading="lazy" />
+            </span>
           </div>
         </a>
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-portrait.html" data-icon-label="CCP" data-video-webm="" data-video-mp4="">
+        <a class="project-row reveal" href="project-portrait.html" data-bg="assets/img/backgrounds/BG_Chara.png" data-icon="assets/img/icons/IC_Chara.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_Chara.mp4">
           <div class="project-main">
             <span class="project-year">2025</span>
             <div class="project-title-wrap">
@@ -130,10 +148,13 @@
             </div>
           </div>
           <div class="project-side">
-            <div class="project-media-frame project-media-frame-empty">
-              <span>Preview</span>
+            <div class="project-media-frame">
+              <img src="assets/img/backgrounds/BG_Chara.png" alt="Aperçu Custom Character Portrait Maker" loading="lazy" />
             </div>
-            <span class="project-tags">Blender · Python</span>
+            <span class="project-tags">
+              <img class="tag-logo" src="assets/img/logos/LO_Blender.png" alt="Blender" title="Blender" loading="lazy" />
+              <img class="tag-logo" src="assets/img/logos/LO_Python.png" alt="Python" title="Python" loading="lazy" />
+            </span>
           </div>
         </a>
       </li>
@@ -148,20 +169,63 @@
     <div class="skills-cols">
       <div class="reveal">
         <div class="skill-col-title">Moteurs</div>
-        <div class="skill-entry high"><span>Unity</span><span class="skill-dot"></span></div>
-        <div class="skill-entry high"><span>Unreal Engine 5</span><span class="skill-dot"></span></div>
+        <div class="skill-entry" data-level="92">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Unity.png" alt="Unity" loading="lazy" /><span>Unity</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="79">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Unreal.png" alt="Unreal Engine 5" loading="lazy" /><span>Unreal Engine 5</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
       </div>
       <div class="reveal">
         <div class="skill-col-title">Langages</div>
-        <div class="skill-entry high"><span>C#</span><span class="skill-dot"></span></div>
-        <div class="skill-entry mid"><span>Python</span><span class="skill-dot"></span></div>
-        <div class="skill-entry low"><span>HTML / CSS / JS</span><span class="skill-dot"></span></div>
+        <div class="skill-entry" data-level="67">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_CSharp.png" alt="C#" loading="lazy" /><span>C#</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="43">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Python.png" alt="Python" loading="lazy" /><span>Python</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
       </div>
       <div class="reveal">
         <div class="skill-col-title">Outils 3D</div>
-        <div class="skill-entry high"><span>Blender</span><span class="skill-dot"></span></div>
-        <div class="skill-entry mid"><span>Substance Painter</span><span class="skill-dot"></span></div>
-        <div class="skill-entry mid"><span>Git</span><span class="skill-dot"></span></div>
+        <div class="skill-entry" data-level="87">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Blender.png" alt="Blender" loading="lazy" /><span>Blender</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="84">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Painter.png" alt="Substance Painter" loading="lazy" /><span>Substance Painter</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="71">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Maya.png" alt="Maya" loading="lazy" /><span>Maya</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="52">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Designer.png" alt="Substance Designer" loading="lazy" /><span>Substance Designer</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="skill-col-title">2D</div>
+        <div class="skill-entry" data-level="91">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_CSP.png" alt="Clip Studio Paint" loading="lazy" /><span>Clip Studio Paint</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="87">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Krita.png" alt="Krita" loading="lazy" /><span>Krita</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="74">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Photoshop.png" alt="Photoshop" loading="lazy" /><span>Photoshop</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
+        <div class="skill-entry" data-level="57">
+          <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_After.png" alt="After Effects" loading="lazy" /><span>After Effects</span></div>
+          <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -176,14 +240,33 @@
         <h2 class="contact-title">Travaillons<br><em>ensemble.</em></h2>
       </div>
       <div class="contact-links">
-        <a href="mailto:tonemail@exemple.com" class="contact-link">
-          tonemail@exemple.com <span>Email</span>
+        <a href="mailto:giulia.perucca@gmail.com" class="contact-link">
+          <span class="contact-link-label">
+            <img class="contact-logo" src="assets/img/logos/LO_Gmail.png" alt="" aria-hidden="true" />
+            giulia.perucca@gmail.com
+          </span>
+          <span>Email</span>
         </a>
-        <a href="https://github.com/tonpseudo" target="_blank" class="contact-link">
-          github.com/tonpseudo <span>GitHub</span>
+        <a href="https://github.com/giuliahp" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">
+            <img class="contact-logo" src="assets/img/logos/LO_Git.png" alt="" aria-hidden="true" />
+            giuliahp
+          </span>
+          <span>GitHub</span>
         </a>
-        <a href="https://linkedin.com/in/tonprofil" target="_blank" class="contact-link">
-          LinkedIn <span>Réseau</span>
+        <a href="https://linkedin.com/in/giulia-haut-perucca-91b04a271" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">
+            <img class="contact-logo" src="assets/img/logos/LO_Linkedin.png" alt="" aria-hidden="true" />
+            giulia haut perucca
+          </span>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://aconitum-napellus.itch.io/" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-label">
+            <img class="contact-logo" src="assets/img/logos/LO_Itchio.png" alt="" aria-hidden="true" />
+            Aconitum
+          </span>
+          <span>Itch.io</span>
         </a>
       </div>
     </div>
@@ -191,8 +274,8 @@
 </section>
 
 <footer>
-  <span>© 2026 Votre Nom</span>
-  <span>Hébergé sur GitHub Pages</span>
+  <span> </span>
+  <span>© 2026 Giulia Haut Perucca</span>
 </footer>
 
 <script src="assets/js/script.js"></script>

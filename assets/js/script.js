@@ -119,18 +119,21 @@ function hideProjectCursorIcon() {
   projectCursorIconLabel.textContent = '';
 }
 
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top  = e.clientY + 'px';
+if (cursor) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
 
-  if (activeProjectRow) {
-    setProjectCursorPosition(e.clientX, e.clientY);
-  }
-});
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-});
+    if (activeProjectRow) {
+      setProjectCursorPosition(e.clientX, e.clientY);
+    }
+  });
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+  });
+}
 
 /* PROJECT BACKGROUNDS */
 document.querySelectorAll('.project-row').forEach(row => {
@@ -162,10 +165,50 @@ document.querySelectorAll('.project-row').forEach(row => {
 /* REVEAL */
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
-    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 100);
+    if (e.isIntersecting) setTimeout(() => {
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.skill-entry[data-level]').forEach(entry => {
+        const parsedLevel = Number.parseInt(entry.dataset.level, 10);
+        const level = Number.isFinite(parsedLevel)
+          ? Math.max(0, Math.min(100, parsedLevel))
+          : 0;
+        entry.classList.remove('high', 'mid', 'low');
+        entry.classList.add(level >= 70 ? 'high' : level >= 45 ? 'mid' : 'low');
+        const bar = entry.querySelector('.skill-bar');
+        if (bar) bar.style.width = `${level}%`;
+      });
+    }, i * 100);
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* TRAILER AUTOPLAY + REDUCED MOTION */
+const trailerVideos = document.querySelectorAll('.project-trailer-video');
+if (trailerVideos.length) {
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const updateTrailerPlayback = () => {
+    trailerVideos.forEach(video => {
+      if (reducedMotionQuery.matches) {
+        video.pause();
+        return;
+      }
+
+      const playAttempt = video.play();
+      if (playAttempt && typeof playAttempt.catch === 'function') {
+        playAttempt.catch(() => {});
+      }
+    });
+  };
+
+  updateTrailerPlayback();
+
+  if (typeof reducedMotionQuery.addEventListener === 'function') {
+    reducedMotionQuery.addEventListener('change', updateTrailerPlayback);
+  } else if (typeof reducedMotionQuery.addListener === 'function') {
+    reducedMotionQuery.addListener(updateTrailerPlayback);
+  }
+}
 
 /* LOCAL DEV AUTO-RELOAD */
 (() => {
