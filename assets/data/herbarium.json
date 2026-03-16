@@ -1,0 +1,62 @@
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.mp4",
+    "caption": "Animation & Rigging 2D — Personnages"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.mp4",
+    "caption": "Rigging 2D — Décors & Props"
+  },
+  {
+    "type": "text",
+    "title": "Rig & Animation",
+    "body": "Les sprites 2D des personnages, utilisés comme transitions entre les phases de gameplay, ont ete rigges en style puppet. Chaque personnage est decoupe en plusieurs layers correspondant aux differentes parties du corps, puis rigge et anime en keyframes.\n\nL'ensemble des rigs et des animations 2D a ete realise dans Unity, a l'exception de quelques animations clefs prealablement faites a la main."
+  },
+  {
+    "type": "text",
+    "title": "Notes Techniques",
+    "body": "Les elements d'environnement 2D (feuilles, herbes, petales) sont animes via un script qui deplace des chaines de bones en simulant le vent.\n\nUn systeme de physique simplifie a egalement ete code pour que les elements dragges a la souris, eux aussi relies a des chaines de bones, aient un effet de balancier coherent avec leurs mouvements dans la scene."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.mp4",
+    "caption": "Toon Shader"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.png",
+    "caption": "Shadergraph toon"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.mp4",
+    "caption": "Shader triplanaire"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.png",
+    "caption": "Shadergraph triplanaire"
+  },
+  {
+    "type": "text",
+    "title": "Shader Breakdown",
+    "body": "L'objectif des shaders sur ce projet etait de s'integrer naturellement au style 2D des mini-jeux.\n\nPour les personnages, j'ai privilegie un rendu cartoon en cell shading. Pour les decors, j'ai opte pour un shader triplanaire afin de reduire le temps de production et obtenir des textures modulaires sans passer par Substance Painter."
+  },
+  {
+    "type": "text",
+    "title": "Notes Shader",
+    "body": "Le shader toon permet d'ajuster la taille des ombres, leur contraste et la couleur des highlights.\n\nLe shader triplanaire permet de melanger deux textures et un gradient, avec controle de l'offset, du blend, de la couleur et de l'orientation.\n\nLe shader de l'eau permet de regler la profondeur, l'ecume, la taille des motifs et la vitesse d'animation.\n\nL'idee globale est d'avoir des shaders stylises, adaptables a plusieurs objets et reutilisables sur d'autres projets."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.mp4",
+    "caption": "Shader d'eau"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.png",
+    "caption": "Shadergraph d'eau"
+  }
+]
