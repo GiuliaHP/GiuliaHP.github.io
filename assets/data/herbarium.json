@@ -1,12 +1,12 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.mp4",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.mp4?v=20260320",
     "caption": "Animation & Rigging 2D — Personnages"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.mp4",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.mp4?v=20260320",
     "caption": "Rigging 2D — Décors & Props"
   },
   {
@@ -21,7 +21,7 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.mp4",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.mp4?v=20260320",
     "caption": "Toon Shader"
   },
   {
@@ -31,7 +31,7 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.mp4",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.mp4?v=20260320",
     "caption": "Shader triplanaire"
   },
   {
@@ -51,7 +51,7 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.mp4",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.mp4?v=20260320",
     "caption": "Shader d'eau"
   },
   {
