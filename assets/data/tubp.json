@@ -1,17 +1,17 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260320",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
     "caption": "Système de dégâts — Animation et VFX"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png?v=20260323",
     "caption": "Simulation de dégâts — Phase 1"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_B.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_B.png?v=20260323",
     "caption": "Simulation de dégâts — Phase 2"
   },
   {
@@ -26,12 +26,12 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260320",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
     "caption": "Génération Procédurale — Environnement"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.png?v=20260323",
     "caption": "Réseau procédural et génération d'assets"
   },
   {
@@ -46,27 +46,27 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260320",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
     "caption": "Design UI/UX — Interface narrative"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png?v=20260323",
     "caption": "Système de menus — État 1"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_B.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_B.png?v=20260323",
     "caption": "Système de menus — État 2"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png?v=20260323",
     "caption": "Dialogue et narration"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png?v=20260323",
     "caption": "HUD in-game et feedback"
   },
   {
