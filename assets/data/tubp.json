@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260320",
+    "caption": "Système de dégâts — Animation et VFX"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png",
+    "caption": "Simulation de dégâts — Phase 1"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_B.png",
+    "caption": "Simulation de dégâts — Phase 2"
+  },
+  {
+    "type": "text",
+    "title": "Système de Dégâts",
+    "body": "Le système de dégâts utilise des matériaux proceduraux qui simulent l'usure et la destruction des surfaces. Les blessures sont appliquées en temps réel via des textures dynamiques qui se mettent à jour selon les impacts et interactions du joueur.\n\nChaque impact génère des particules appropriées et modifie la géométrie locale pour un retour visuel immédiat et convaincant."
+  },
+  {
+    "type": "text",
+    "title": "Notes VFX",
+    "body": "Le shader de dégâts utilise plusieurs couches de textures et de masques pour créer un effet progressif et réaliste. Les particules sont générées via Niagara et scale leurs émissions en fonction de l'intensité du dégât.\n\nLe système est optimisé pour supporter de nombreux impacts sans surcharge GPU, en utilisant des pooling de particules et des LOD adaptés à la distance caméra."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260320",
+    "caption": "Génération Procédurale — Environnement"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.png",
+    "caption": "Réseau procédural et génération d'assets"
+  },
+  {
+    "type": "text",
+    "title": "Génération Procédurale",
+    "body": "Les environnements sont générés procdéralement via un système de blueprints paramétriques. Des règles procedurales définissent le placement des éléments, la variation des assets et l'adaptation du terrain aux exigences de gameplay.\n\nCe système permet une variation infinie tout en maintenant une cohérence visuelle et des performances optimales."
+  },
+  {
+    "type": "text",
+    "title": "Notes Procéduré",
+    "body": "Le système utilise des seed pour la reproduction déterministe des environnements. Les assets sont placés via des influenceurs spatiales qui contrôlent densité, échelle et rotation.\n\nLes performances sont maintenues via culling dynamique et LOD streaming. Les bâtiments, arbres et décors s'instancient uniquement dans le rayon de vision du joueur."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260320",
+    "caption": "Design UI/UX — Interface narrative"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png",
+    "caption": "Système de menus — État 1"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_B.png",
+    "caption": "Système de menus — État 2"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png",
+    "caption": "Dialogue et narration"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png",
+    "caption": "HUD in-game et feedback"
+  },
+  {
+    "type": "text",
+    "title": "Design UI/UX",
+    "body": "L'interface narrative a été conçue pour fusionner le gameplay et la narration de manière cohésive. Les menus et dialogues utilisent une typographie distincte et des animations qui renforcent l'atmosphère du projet.\n\nChaque élément d'interface est dimensionné et placé pour maximiser la lisibilité sans surcharger l'écran, avec des animations douces qui guident l'attention du joueur."
+  },
+  {
+    "type": "text",
+    "title": "Notes UX",
+    "body": "L'UI a été construite entièrement via Umg dans Unreal Engine, avec des classes Blueprint custom pour gérer les interactions et animations. Les transitions entre états sont contrôlées via une state machine pour assurer une fluidité constante.\n\nL'accessibilité a été prise en compte avec des tailles de police ajustables et des contrastes suffisants pour la lisibilité optimale."
+  }
+]

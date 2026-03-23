@@ -570,6 +570,6 @@ if (trailerVideos.length) {
   }
 
   warmUp().finally(() => {
-    setInterval(checkUpdates, 1200);
+    // setInterval(checkUpdates, 1200); // DISABLED: Auto-reload in dev
   });
 })();
