@@ -1065,7 +1065,7 @@ section { padding: 6rem 0; }
 }
 
 .gallery-item--video .gallery-item-inner {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: var(--media-ratio, 16 / 9);
 }
 
 .gallery-item--image .gallery-item-inner {

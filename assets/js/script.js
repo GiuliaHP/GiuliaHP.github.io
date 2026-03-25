@@ -499,6 +499,16 @@ if (trailerVideos.length) {
         video.appendChild(source);
         inner.appendChild(video);
 
+        // Apply video aspect ratio to frame
+        const applyVideoRatio = () => {
+          const w = video.videoWidth;
+          const h = video.videoHeight;
+          if (!w || !h) return;
+          inner.style.setProperty('--media-ratio', `${w} / ${h}`);
+        };
+
+        video.addEventListener('loadedmetadata', applyVideoRatio, { once: true });
+
         // Autoplay when scrolled into view
         const videoObs = new IntersectionObserver(entries => {
           entries.forEach(e => {
