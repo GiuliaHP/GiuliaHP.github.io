@@ -1,0 +1,22 @@
+﻿[
+  {
+    "title": "Breakout for Candy",
+    "description": "Un jeu de casse-briques avec une touche sucrée. Casse les blocs et survie aux obstacles !",
+    "buildPath": "assets/games/BreakoutForCandyBUILD_WebGl/BreakoutForCandyBUILD_WebGl/index.html"
+  },
+  {
+    "title": "Dress Up Game Demo",
+    "description": "Crée ton personnage ! Habille-le avec différents vêtements et accessoires.",
+    "buildPath": "assets/games/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html"
+  },
+  {
+    "title": "Prophecy",
+    "description": "Une expérience mystique et poétique. Explore et découvre les secrets.",
+    "buildPath": "assets/games/Prophecy_WebGL/Prophecy_WebGL/index.html"
+  },
+  {
+    "title": "Sandbox",
+    "description": "Un terrain de jeu libre. Expérimente et crée ton propre scénario.",
+    "buildPath": "assets/games/SandboxBUILD_WebGl/SandboxBUILD_WebGl/index.html"
+  }
+]

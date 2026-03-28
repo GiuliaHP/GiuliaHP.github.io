@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeux WebGL — Game Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    #games-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .game-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(128, 158, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .game-card-preview {
+      width: 100%;
+      height: 250px;
+      background: linear-gradient(135deg, rgba(154, 181, 255, 0.1), rgba(8, 14, 33, 0.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .game-card-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .game-card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      font-family: var(--head);
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .game-card-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+
+    .game-card-button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .game-card-button:hover {
+      background: var(--accent-glow);
+      transform: scale(1.05);
+    }
+
+    /* Modal pour lancer le jeu */
+    .game-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(8, 11, 24, 0.95);
+      z-index: 5000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .game-modal.active {
+      display: flex;
+    }
+
+    .game-modal-content {
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(128, 158, 255, 0.3);
+    }
+
+    .game-modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .game-modal-title {
+      font-family: var(--head);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .game-modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .game-modal-close:hover {
+      color: var(--text);
+    }
+
+    .game-modal-body {
+      padding: 1.5rem;
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-canvas {
+      width: 100%;
+      max-width: 800px;
+      max-height: 60vh;
+      display: block;
+      background: #000;
+    }
+
+    .game-loading {
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .game-loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(128, 158, 255, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 1rem auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .game-error {
+      color: #ff6b6b;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      #games-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .game-modal-content {
+        max-height: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="project-cursor-icon" id="projectCursorIcon" aria-hidden="true">
+    <img id="projectCursorIconImg" alt="" />
+    <span id="projectCursorIconLabel"></span>
+  </div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Giulia HP.</a>
+      <ul class="nav-links">
+        <li class="nav-projects-dropdown">
+          <button type="button" class="nav-projects-trigger" aria-haspopup="true">Projets</button>
+          <ul class="nav-projects-menu" aria-label="Liste des projets">
+            <li><a href="index.html#projects">Tous les projets</a></li>
+            <li><a href="project-herbarium.html">The Herbarium</a></li>
+            <li><a href="project-blueprint.html">The Unfinished Blueprint</a></li>
+            <li><a href="project-prophecy.html">Prophecy</a></li>
+            <li><a href="project-portrait.html">Custom Character Portrait Maker</a></li>
+          </ul>
+        </li>
+        <li><a href="games.html">Jeux</a></li>
+        <li><a href="index.html#skills">Compétences</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="hero" class="project-page-hero">
+    <div class="wrap">
+      <p class="hero-label">Essai</p>
+      <h1 class="hero-title">Jeux <em>WebGL</em></h1>
+      <div class="hero-bottom">
+        <p class="hero-desc">
+          Essaie mes jeux développés en WebGL. Des petites expériences interactives directement dans le navigateur.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label reveal">Sélectionne un jeu</div>
+      <div id="games-gallery"></div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding: 3rem 0;">
+    <a href="index.html" class="project-back-link">← Retour à l'accueil</a>
+  </section>
+
+  <footer>
+    <span>© 2026 Giulia HP.</span>
+    <span>Hébergé sur GitHub Pages</span>
+  </footer>
+
+  <!-- Modal pour lancer les jeux -->
+  <div class="game-modal" id="gameModal">
+    <div class="game-modal-content">
+      <div class="game-modal-header">
+        <h2 class="game-modal-title" id="gameModalTitle">Jeu</h2>
+        <button class="game-modal-close" id="gameModalClose">✕</button>
+      </div>
+      <div class="game-modal-body" id="gameModalBody">
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/script.js"></script>
+  <script>
+    // Données des jeux
+    const games = [
+      {
+        "title": "Breakout for Candy",
+        "description": "Un jeu de casse-briques avec une touche sucrée. Casse les blocs et survie aux obstacles !",
+        "buildPath": "assets/games/BreakoutForCandyBUILD_WebGl/BreakoutForCandyBUILD_WebGl/index.html"
+      },
+      {
+        "title": "Dress Up Game Demo",
+        "description": "Crée ton personnage ! Habille-le avec différents vêtements et accessoires.",
+        "buildPath": "assets/games/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html"
+      },
+      {
+        "title": "Prophecy",
+        "description": "Une expérience mystique et poétique. Explore et découvre les secrets.",
+        "buildPath": "assets/games/Prophecy_WebGL/Prophecy_WebGL/index.html"
+      },
+      {
+        "title": "Sandbox",
+        "description": "Un terrain de jeu libre. Expérimente et crée ton propre scénario.",
+        "buildPath": "assets/games/SandboxBUILD_WebGl/SandboxBUILD_WebGl/index.html"
+      }
+    ];
+
+    // Charge les jeux et les affiche
+    function loadGames() {
+      const gallery = document.getElementById('games-gallery');
+      gallery.innerHTML = '';
+
+      games.forEach((game, index) => {
+        const card = document.createElement('div');
+        card.className = 'game-card reveal';
+        const firstLetter = game.title.charAt(0).toUpperCase();
+        card.innerHTML = `
+          <div class="game-card-preview">${firstLetter}</div>
+          <div class="game-card-content">
+            <div>
+              <h3 class="game-card-title">${game.title}</h3>
+              <p class="game-card-desc">${game.description}</p>
+            </div>
+            <button class="game-card-button" data-game-id="${index}">Lancer le jeu</button>
+          </div>
+        `;
+        gallery.appendChild(card);
+      });
+
+      // Écoute les clics des boutons
+      document.querySelectorAll('.game-card-button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const gameId = parseInt(e.target.dataset.gameId);
+          launchGame(games[gameId]);
+        });
+      });
+    }
+
+    // Lance un jeu dans la modal
+    function launchGame(game) {
+      const modal = document.getElementById('gameModal');
+      const modalTitle = document.getElementById('gameModalTitle');
+      const modalBody = document.getElementById('gameModalBody');
+
+      modalTitle.textContent = game.title;
+      modalBody.innerHTML = `
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement du jeu...</p>
+        </div>
+      `;
+
+      modal.classList.add('active');
+
+      // Simule le chargement du jeu
+      setTimeout(() => {
+        if (game.buildPath) {
+          // Pour les jeux WebGL, intégrer via iframe
+          // Le chemin est déjà URL-encodé
+          modalBody.innerHTML = `
+            <iframe 
+              src="${game.buildPath}" 
+              style="width: 100%; height: 600px; border: none; border-radius: 4px;"
+              allow="autoplay; fullscreen"
+              allowfullscreen>
+            </iframe>
+          `;
+        } else if (game.canvasId) {
+          // Ou utiliser un canvas
+          modalBody.innerHTML = `
+            <canvas id="${game.canvasId}" class="game-canvas"></canvas>
+          `;
+          // Charger le script du jeu ici
+          const script = document.createElement('script');
+          script.src = game.scriptPath;
+          document.body.appendChild(script);
+        }
+      }, 400);
+    }
+
+    // Ferme la modal
+    document.getElementById('gameModalClose').addEventListener('click', () => {
+      const modal = document.getElementById('gameModal');
+      modal.classList.remove('active');
+      // Nettoie le contenu
+      document.getElementById('gameModalBody').innerHTML = `
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement...</p>
+        </div>
+      `;
+    });
+
+    // Ferme en cliquant en dehors
+    document.getElementById('gameModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('gameModal')) {
+        document.getElementById('gameModalClose').click();
+      }
+    });
+
+    // Charge les jeux au démarrage
+    window.addEventListener('load', function() {
+      loadGames();
+    });
+    // Fallback si load n'est pas appelé
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadGames);
+    } else {
+      loadGames();
+    }
+  </script>
+</body>
+</html>

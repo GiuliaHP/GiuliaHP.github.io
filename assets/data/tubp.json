@@ -17,12 +17,12 @@
   {
     "type": "text",
     "title": "Projection de Sang",
-    "body": "Pour se repérer dans le labyrinthe, on peut projeter son propre sang. Ce dernier est représenté par des projectiles qui posent, à l'endorit de l'impact, un décal au hasard parmis ceux référencé, tout en calculant la normal de la surface sur laquelle il est projeté pour l'orienté dans le bon sens.\n\nCe decal laisse ensuite son material chnager de couleur avec le temps, simulant le viellissement du sang et permettant de mesurer dans le temps le passage du joeur dans le labyrinthe."
+    "body": "Pour se repérer dans le labyrinthe, on peut projeter son propre sang. Ce dernier est représenté par des projectiles qui posent, à l'endroit de l'impact, un décal au hasard parmi ceux référencés, tout en calculant la normale de la surface sur laquelle il est projeté pour l'orienter dans le bon sens.\n\nCe décal laisse ensuite son material changer de couleur avec le temps, simulant le vieillissement du sang et permettant de mesurer dans le temps le passage du joueur dans le labyrinthe."
   },
   {
     "type": "text",
     "title": "Note VFX",
-    "body": "La modularité du blueprint de projection et de son material permettraient d'adapter ces sytème à d'autres types de projectiles et de surfaces, pour des effets variés dans d'autres projets. Il serait égalment possible d'animer le shader du décal pour en faire des FXs peu couteux en ressource mais visuellmeent poussés."
+    "body": "La modularité du blueprint de projection et de son material permettraient d'adapter ces système à d'autres types de projectiles et de surfaces, pour des effets variés dans d'autres projets. Il serait également possible d'animer le shader du décal pour en faire des FXs peu coûteux en ressource mais visuellement poussés."
   },
 
   {
@@ -38,12 +38,12 @@
   {
     "type": "text",
     "title": "C++ — Génération Procédurale",
-    "body": "La génération du labyrinthe a été entierement réalisé en procédural, en passant par du C++. Une grille est sessinée en focntion de la taille définit dans les properties, puis les murs sont placés en aillant toujours au moins une ouverture.\n\nLe calcul est fait de manière à ce qu'aucune zone ne soit innaccecible. Ensuite on place l'entrée du labyrinthe et les collectibles — potions de régén,ération, clefs, pqiues et indices."
+    "body": "La génération du labyrinthe a été entièrement réalisée en procédural, en passant par du C++. Une grille est dessinée en fonction de la taille définie dans les properties, puis les murs sont placés en allant toujours au moins une ouverture.\n\nLe calcul est fait de manière à ce qu'aucune zone ne soit inaccessible. Ensuite on place l'entrée du labyrinthe et les collectibles — potions de régénération, clefs, piques et indices."
   },
   {
     "type": "text",
     "title": "Note C++",
-    "body": "Le défis dans cette utilisation du C++ était de faire le lien entre le code pur et le bleuprint. Ainsi, les properties du Blueprint de labyrinthe sont assez nombreuses pour avoir un labyrinthe assez modifiable, tout en étant toujours fonctionnel."
+    "body": "Le défi dans cette utilisation du C++ était de faire le lien entre le code pur et le blueprint. Ainsi, les properties du Blueprint de labyrinthe sont assez nombreuses pour avoir un labyrinthe assez modifiable, tout en étant toujours fonctionnel."
   },
   {
     "type": "video",
@@ -73,11 +73,11 @@
   {
     "type": "text",
     "title": "Design UI/UX des Clefs",
-    "body": "La ddificulté dans la réalisation de l'UI des clefs était de faire correspondre l'aquisition de chaque clef a son icone ; en effet, pusique chaque clef avait son propre design, l'idée était que collecter une celf appellait la bonne icone dans l'interface, tout en gardant l'uniformité d'avoir un Blueprint de clef principal.\n\nAinsi, réaliser une interface cohérente pour les clefs à pousser le système de celles-ci à être plus poussé et permettarit d'être tilisié pour d'autres collectibles, qui eux même pourraient avoir de nmbreux vairants et leur correpsondance dans un inventaire en UI."
+    "body": "La difficulté dans la réalisation de l'UI des clefs était de faire correspondre l'acquisition de chaque clef à son icône ; en effet, puisque chaque clef avait son propre design, l'idée était que collecter une clef appelait la bonne icône dans l'interface, tout en gardant l'uniformité d'avoir un Blueprint de clef principal.\n\nAinsi, réaliser une interface cohérente pour les clefs à pousser le système de celles-ci à être plus poussé et permettrait d'être utilisé pour d'autres collectibles, qui eux-mêmes pourraient avoir de nombreuses variantes et leur correspondance dans un inventaire en UI."
   },
   {
     "type": "text",
     "title": "Note Interfaces",
-    "body": "Les interfaces de ce projet on été réalisées en utilisant les UMG Widgets. L'interface de l'inventaire des clefs a été conçue pour être facilement modifiable et adaptable à d'autres types de collectibles, avec des propriétés permettant de définir les icônes et les interactions associées à chaque objet collecté.\n\nLes barres de stamina et de vie sont de simples sliders qui pourraient, eux aussi, être utilisés pour d'autres types de ressources dans d'autres projets, avec des propriétés pour ajuster leur apparence et leur comportement."
+    "body": "Les interfaces de ce projet ont été réalisées en utilisant les UMG Widgets. L'interface de l'inventaire des clefs a été conçue pour être facilement modifiable et adaptable à d'autres types de collectibles, avec des propriétés permettant de définir les icônes et les interactions associées à chaque objet collecté.\n\nLes barres de stamina et de vie sont de simples sliders qui pourraient, eux aussi, être utilisés pour d'autres types de ressources dans d'autres projets, avec des propriétés pour ajuster leur apparence et leur comportement."
   }
 ]
