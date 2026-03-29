@@ -1,1 +1,119 @@
-[]
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.mp4",
+    "caption": "Système de dialogue"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_A.png"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_B.png"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_C.png"
+  },
+  {
+    "type": "text",
+    "title": "Système de Dialogue",
+    "body": "Le système de dialogue de Prophecy a été conçu pour offrir une expérience narrative immersive et non-linéaire. Chaque conversation présente plusieurs choix qui influencent la progression et le développement des personnages. Le système gère dynamiquement l'affichage du texte, les portraits des caractères et l'ambiance sonore associée à chaque réplique."
+  },
+  {
+    "type": "text",
+    "title": "Note Narratifs",
+    "body": "Les dialogues sont stockés dans un système modulaire de data qui permet une modification rapide des contenus et des branches narratives sans rechargement du jeu. Cet système prend également en charge les flags de progression pour débloquer de nouveaux dialogues et variables de jeu en fonction du contexte du joueur."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.mp4",
+    "caption": "Exploration environnement 1"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.mp4",
+    "caption": "Exploration environnement 2"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro.png"
+  },
+  {
+    "type": "text",
+    "title": "Design Environnemental",
+    "body": "Les environnements de Prophecy ont été conçus pour renforcer l'ambiance narrative et symbolique du jeu. Chaque zone a ses propres caractéristiques visuelles, sa palette de couleurs et son éclairage spécifiques pour créer une immersion cohérente. L'exploration est encouragée via des indices visuels subtils et des éléments interactifs cachés."
+  },
+  {
+    "type": "text",
+    "title": "Note Artistique",
+    "body": "La direction artistique s'inspire de la mythologie moderne tout en maintenant une esthétique épurée et symbolique. Les modèles 3D sont optimisés pour maintenir une performance fluide sans compromis sur la qualité visuelle, permettant de créer des mondes complexes et riches qui captivent les joueurs."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.mp4",
+    "caption": "Animation pixel art"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.png"
+  },
+  {
+    "type": "text",
+    "title": "Pixel Art & Animation",
+    "body": "Le style pixel art de Prophecy apporte une dimension rétro et nostalgique qui contraste avec l'environnement 3D moderne. Ces sprites animés représentent des éléments clés du jeu et sont utilisés pour enrichir certaines zones ainsi que les transitions narratives. Chaque animation a été réalisée en keyframes pour garantir une fluidité cohérente."
+  },
+  {
+    "type": "text",
+    "title": "Note Artistiques",
+    "body": "L'hybridation entre 3D et pixel art crée une identité visuelle unique, renforçant l'aspect mythologique et surlenaturel du jeu. La palette de couleurs limitée du pixel art s'intègre harmonieusement avec la direction chromatique générale, créant une cohésion visuelle entre tous les éléments."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.mp4",
+    "caption": "Dynamiques des ombres"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.png"
+  },
+  {
+    "type": "text",
+    "title": "Effects & Ombres Dynamiques",
+    "body": "Les ombres dynamiques jouent un rôle crucial dans l'ambiance générale de Prophecy. Elles réagissent en temps réel aux changements d'éclairage et aux mouvements des sources de lumière, créant une atmosphère vivante et réactive. Plusieurs techniques de shadow mapping et de screen-space ambient occlusion sont utilisées pour optimiser les performances."
+  },
+  {
+    "type": "text",
+    "title": "Note Techniques VFX",
+    "body": "L'ajout d'effets de particules procédurales et d'animations de shader rend les ombres plus organiques et mystérieuses, en harmonie avec l'atmosphère surnaturelle du jeu. Cette approche permet également une modularité : les mêmes techniques peuvent être réappliquées à d'autres types d'effets ou projets."
+  },
+  {
+    "type": "text",
+    "title": "Caractères & Animations",
+    "body": "Les animations des personnages et créatures de Prophecy ont été conçues pour exprimer leur essence et leur rôle dans la mythologie. Chaque mouvement raconte une histoire, chaque geste transporte l'émotion. Les sprites sont animés en keyframes minutieusement élaborées pour une fluidité naturelle et une cohérence stylistique."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
+    "caption": "Animation des sprites"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_A.png"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_B.png"
+  },
+  {
+    "type": "text",
+    "title": "Sprites & Rigging 2D",
+    "body": "Les sprites des personnages principaux ont été riggés en style puppet pour permettre une animation fluide et expressive. Chaque personnage est composé de multiples layers représentant différentes parties du corps, permettant une réutilisabilité et une flexibilité lors des animations complexes et des variations de mouvements."
+  },
+  {
+    "type": "text",
+    "title": "Note Animations",
+    "body": "L'approche modulaire du rigging 2D a permis de créer rapidement de nombreuses variations de poses et d'animations sans réduplicaliser le travail. Esta système facilite également l'ajustement des animations en postproduction et l'adaptation des caractères à de nouvelles situations narratives au cours du développement."
+  }
+]

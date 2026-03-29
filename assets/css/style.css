@@ -1027,6 +1027,7 @@ section { padding: 6rem 0; }
 
 .gallery-item--stack-image .gallery-item-inner {
   border: 1px solid rgba(255, 255, 255, 0.06);
+  aspect-ratio: var(--media-ratio, 16 / 10);
 }
 
 .gallery-item--stack-image img {
@@ -1052,6 +1053,10 @@ section { padding: 6rem 0; }
   padding: 0;
   box-shadow: none;
   align-self: start;
+}
+
+.gallery-item--under-video .gallery-item-inner {
+  aspect-ratio: var(--media-ratio, 16 / 10);
 }
 
 .gallery-item--under-video .gallery-caption {
