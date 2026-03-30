@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command \":*)",
+      "Bash(node -e \"require\\(''zlib''\\); console.log\\(''node ok, version:'', process.version\\)\")",
+      "Bash(powershell -Command \"[System.Runtime.InteropServices.RuntimeInformation]::FrameworkDescription\")",
+      "Bash(powershell -Command \"dotnet --version\")",
+      "Bash(pwsh --version)",
+      "Bash(mkdir -p /tmp/decompress)",
+      "Bash(/tmp/decompress/decompress.csproj:*)",
+      "Bash(dotnet run:*)",
+      "Bash(\"C:/Users/Admin/AppData/Local/Temp/decompress/decompress.csproj\":*)",
+      "Read(//c/Users/Admin/AppData/Local/Temp/decompress/**)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Admin\\AppData\\Local\\Temp\\decompress"
+    ]
+  }
+}

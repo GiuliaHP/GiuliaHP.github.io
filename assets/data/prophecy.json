@@ -89,11 +89,6 @@
     "body": "L'ajout d'effets de particules procédurales et d'animations de shader rend les ombres plus organiques et mystérieuses, en harmonie avec l'atmosphère surnaturelle du jeu. Cette approche permet également une modularité : les mêmes techniques peuvent être réappliquées à d'autres types d'effets ou projets."
   },
   {
-    "type": "text",
-    "title": "Caractères & Animations",
-    "body": "Les animations des personnages et créatures de Prophecy ont été conçues pour exprimer leur essence et leur rôle dans la mythologie. Chaque mouvement raconte une histoire, chaque geste transporte l'émotion. Les sprites sont animés en keyframes minutieusement élaborées pour une fluidité naturelle et une cohérence stylistique."
-  },
-  {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
     "caption": "Animation des sprites"

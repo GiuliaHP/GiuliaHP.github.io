@@ -88,6 +88,11 @@
       transform: scale(1.05);
     }
 
+    a.game-card-button {
+      display: inline-block;
+      text-decoration: none;
+    }
+
     /* Modal pour lancer le jeu */
     .game-modal {
       display: none;
@@ -282,22 +287,50 @@
       {
         "title": "Breakout for Candy",
         "description": "Un jeu de casse-briques avec une touche sucrée. Casse les blocs et survie aux obstacles !",
-        "buildPath": "assets/games/BreakoutForCandyBUILD_WebGl/BreakoutForCandyBUILD_WebGl/index.html"
+        "buildPath": "assets/games/BreakoutForCandyBUILD_WebGl/BreakoutForCandyBUILD_WebGl/index.html",
+        "type": "webgl"
       },
       {
         "title": "Dress Up Game Demo",
         "description": "Crée ton personnage ! Habille-le avec différents vêtements et accessoires.",
-        "buildPath": "assets/games/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html"
+        "buildPath": "assets/games/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html",
+        "type": "webgl"
       },
       {
         "title": "Prophecy",
         "description": "Une expérience mystique et poétique. Explore et découvre les secrets.",
-        "buildPath": "assets/games/Prophecy_WebGL/Prophecy_WebGL/index.html"
+        "buildPath": "assets/games/Prophecy_WebGL/Prophecy_WebGL/index.html",
+        "type": "webgl"
       },
       {
         "title": "Sandbox",
         "description": "Un terrain de jeu libre. Expérimente et crée ton propre scénario.",
-        "buildPath": "assets/games/SandboxBUILD_WebGl/SandboxBUILD_WebGl/index.html"
+        "buildPath": "assets/games/SandboxBUILD_WebGl/SandboxBUILD_WebGl/index.html",
+        "type": "webgl"
+      },
+      {
+        "title": "TUBP",
+        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
+        "downloadPath": "assets/games/TUBP/TUBP.exe",
+        "type": "desktop"
+      },
+      {
+        "title": "The Herbarium",
+        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
+        "downloadPath": "assets/games/The%20Herbarium/The%20Herbarium.exe",
+        "type": "desktop"
+      },
+      {
+        "title": "Vallée d'Éther",
+        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
+        "downloadPath": "assets/games/Vall%C3%A9e%20d%27%C3%89ther/Vall%C3%A9e%20d%27%C3%89ther.exe",
+        "type": "desktop"
+      },
+      {
+        "title": "Sur la bonne voie",
+        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
+        "downloadPath": "assets/games/_Sur%20la%20bonne%20voie%20%E2%80%94%20BUILD/Sur%20la%20bonne%20voie.exe",
+        "type": "desktop"
       }
     ];
 
@@ -310,6 +343,7 @@
         const card = document.createElement('div');
         card.className = 'game-card reveal';
         const firstLetter = game.title.charAt(0).toUpperCase();
+        const isDesktop = game.type === 'desktop';
         card.innerHTML = `
           <div class="game-card-preview">${firstLetter}</div>
           <div class="game-card-content">
@@ -317,14 +351,24 @@
               <h3 class="game-card-title">${game.title}</h3>
               <p class="game-card-desc">${game.description}</p>
             </div>
-            <button class="game-card-button" data-game-id="${index}">Lancer le jeu</button>
+            ${isDesktop
+              ? `<a class="game-card-button" href="${game.downloadPath}" download>⬇ Télécharger</a>`
+              : `<button class="game-card-button" data-game-id="${index}">Lancer le jeu</button>`
+            }
           </div>
         `;
         gallery.appendChild(card);
       });
 
-      // Écoute les clics des boutons
-      document.querySelectorAll('.game-card-button').forEach(btn => {
+      // Branche les nouvelles cartes sur l'observer reveal
+      if (typeof obs !== 'undefined') {
+        gallery.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+      } else {
+        gallery.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      }
+
+      // Écoute les clics des boutons WebGL uniquement
+      document.querySelectorAll('.game-card-button[data-game-id]').forEach(btn => {
         btn.addEventListener('click', (e) => {
           const gameId = parseInt(e.target.dataset.gameId);
           launchGame(games[gameId]);
