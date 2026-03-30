@@ -6,39 +6,48 @@
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_A.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_A.png",
+    "caption": "Déclencheur de dialogue"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_B.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_B.png",
+    "caption": "Dialogue Manager"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_C.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_C.png",
+    "caption": "Scriptable Object de dialogue"
   },
   {
     "type": "text",
     "title": "Système de Dialogue",
-    "body": "Le système de dialogue de Prophecy a été conçu pour offrir une expérience narrative immersive et non-linéaire. Chaque conversation présente plusieurs choix qui influencent la progression et le développement des personnages. Le système gère dynamiquement l'affichage du texte, les portraits des caractères et l'ambiance sonore associée à chaque réplique."
+    "body": "Les dialogues se deconstruisent en scriptable objects. Dans chacun, et pour chaque ligne de dialogue, sont assignés les sprites des yeux, des sourcils et de la bouche pour une maxiùmum de personnalisation des expressions des personnages. Des choix peuvent également être ajoutés, déclanchant la boite de désisions avec les différentes réponses pré-construites pour le joeueur.\n\nLe dialogue manager se charge de faire le lien entre les déclencheurs de dialogue dans le niveau et les scriptable objects, ainsi que de faire le lien entre les différentes lignes de dialogue et les différentes boites de dialogue à afficher."
   },
   {
     "type": "text",
-    "title": "Note Narratifs",
-    "body": "Les dialogues sont stockés dans un système modulaire de data qui permet une modification rapide des contenus et des branches narratives sans rechargement du jeu. Cet système prend également en charge les flags de progression pour débloquer de nouveaux dialogues et variables de jeu en fonction du contexte du joueur."
+    "title": "NOTE — Choix",
+    "body": "Une autre version du projet permettait également au joeueur de répondre au perosnnage non-joueur en écrivant lui-même sa réponse. Celle-ci passait dans un arbre de décision qui chosisiat le dialogue correspondant aux mots clefs donnés dans la phrase du joeueur, permettant une plus grand immersion du joeuer dans le dialogue.\n\nFinalement, cette version a été abandonnée pour une version plus classique de choix pré-construits, afin de se concentrer sur d'autres aspects du projet et le rendre plus accessible."
   },
+
+
+
+
+
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.mp4",
-    "caption": "Exploration environnement 1"
+    "caption": "Environement — Perspective"
   },
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.mp4",
-    "caption": "Exploration environnement 2"
+    "caption": "Environement — Couches & Parallax"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro.png",
+    "caption": "Vue ortographique sans post-process de l'environement"
   },
   {
     "type": "text",
@@ -47,9 +56,14 @@
   },
   {
     "type": "text",
-    "title": "Note Artistique",
+    "title": "NOTE — Artistique",
     "body": "La direction artistique s'inspire de la mythologie moderne tout en maintenant une esthétique épurée et symbolique. Les modèles 3D sont optimisés pour maintenir une performance fluide sans compromis sur la qualité visuelle, permettant de créer des mondes complexes et riches qui captivent les joueurs."
   },
+
+
+
+
+
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.mp4",
@@ -57,7 +71,8 @@
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.png",
+    "caption": ""
   },
   {
     "type": "text",
@@ -69,6 +84,11 @@
     "title": "Note Artistiques",
     "body": "L'hybridation entre 3D et pixel art crée une identité visuelle unique, renforçant l'aspect mythologique et surlenaturel du jeu. La palette de couleurs limitée du pixel art s'intègre harmonieusement avec la direction chromatique générale, créant une cohésion visuelle entre tous les éléments."
   },
+
+
+
+
+
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.mp4",
@@ -76,7 +96,8 @@
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.png",
+    "caption": ""
   },
   {
     "type": "text",
@@ -88,6 +109,11 @@
     "title": "Note Techniques VFX",
     "body": "L'ajout d'effets de particules procédurales et d'animations de shader rend les ombres plus organiques et mystérieuses, en harmonie avec l'atmosphère surnaturelle du jeu. Cette approche permet également une modularité : les mêmes techniques peuvent être réappliquées à d'autres types d'effets ou projets."
   },
+
+
+
+
+
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
@@ -95,11 +121,13 @@
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_A.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_A.png",
+    "caption": ""
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_B.png"
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_B.png",
+    "caption": ""
   },
   {
     "type": "text",
