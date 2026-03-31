@@ -1,0 +1,39 @@
+(function () {
+  const NAV_HTML = `
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">Giulia HP.</a>
+    <ul class="nav-links">
+      <li class="nav-projects-dropdown">
+        <button type="button" class="nav-projects-trigger" aria-haspopup="true">Projets</button>
+        <ul class="nav-projects-menu" aria-label="Liste des projets">
+          <li><a href="index.html#projects">Tous les projets</a></li>
+          <li><a href="project-herbarium.html">The Herbarium</a></li>
+          <li><a href="project-blueprint.html">The Unfinished Blueprint</a></li>
+          <li><a href="project-prophecy.html">Prophecy</a></li>
+          <li><a href="project-portrait.html">Character Maker</a></li>
+        </ul>
+      </li>
+      <li><a href="games.html">Jeux</a></li>
+      <li><a href="index.html#skills">Compétences</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>`;
+
+  const FOOTER_HTML = `
+<footer>
+  <span>© 2026 Giulia HP.</span>
+  <span>Hébergé sur GitHub Pages</span>
+</footer>`;
+
+  function inject(id, html) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.outerHTML = html;
+  }
+
+  inject('nav-placeholder', NAV_HTML);
+  inject('footer-placeholder', FOOTER_HTML);
+})();

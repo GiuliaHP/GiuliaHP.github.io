@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeux WebGL — Game Developer</title>
+  <title>Jeux</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -11,86 +11,155 @@
   <style>
     #games-gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .games-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    /* Réduit l'espace entre les sections sur cette page */
+    section {
+      padding: 1rem 0;
     }
 
     .game-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      transition: all 0.3s ease;
+      width: 160px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+      transition: transform 0.24s ease;
     }
 
     .game-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(128, 158, 255, 0.15);
-      transform: translateY(-4px);
+      transform: scale(1.08);
+    }
+
+    /* Wrapper icône + badge logo — référence de positionnement */
+    .game-card-icon-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
     }
 
     .game-card-preview {
       width: 100%;
-      height: 250px;
-      background: linear-gradient(135deg, rgba(154, 181, 255, 0.1), rgba(8, 14, 33, 0.8));
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      color: var(--muted);
-      font-weight: 700;
+      border-radius: var(--radius-md, 4px);
+      border: 1px solid rgba(150, 181, 255, 0.6);
+      background: linear-gradient(160deg, rgba(154, 181, 255, 0.34), rgba(8, 14, 33, 0.66));
+      box-shadow:
+        0 0 0 1px rgba(224, 232, 255, 0.08) inset,
+        0 16px 36px rgba(8, 11, 24, 0.5),
+        0 0 16px rgba(128, 158, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .game-card-content {
-      padding: 1.5rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    /* Cercle lumineux derrière l'icône */
+    .game-card-preview::before {
+      content: '';
+      position: absolute;
+      width: 68%;
+      height: 68%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(128, 158, 255, 0.18) 0%, transparent 72%);
+      pointer-events: none;
     }
 
+    .game-card:hover .game-card-preview {
+      box-shadow:
+        0 0 0 1px rgba(224, 232, 255, 0.12) inset,
+        0 18px 40px rgba(8, 11, 24, 0.54),
+        0 0 26px rgba(128, 158, 255, 0.45);
+    }
+
+    .game-card-preview img {
+      width: 72%;
+      height: 72%;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px rgba(158, 185, 255, 0.36));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .game-card:hover .game-card-preview img {
+      transform: translateY(-2px);
+      filter: drop-shadow(0 0 10px rgba(158, 185, 255, 0.6));
+    }
+
+    /* Badge logo (Blender, RD…) — pop-up à l'extérieur du cadre, coin bas-droite */
+    .addon-logo {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 30px;
+      height: 30px;
+      background: #151b2e;
+      border-radius: 6px;
+      border: 1px solid rgba(150, 181, 255, 0.4);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.55), 0 0 8px rgba(128,158,255,0.15);
+      z-index: 3;
+      pointer-events: none;
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+    }
+
+    .game-card:hover .addon-logo {
+      transform: scale(1.2) translate(-1px, 1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5), 0 0 12px rgba(128,158,255,0.3);
+    }
+
+    /* Titre toujours visible sous la carte */
     .game-card-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      font-family: var(--head);
-      color: var(--text);
-      margin-bottom: 0.5rem;
+      font-family: var(--head, 'Space Grotesk', sans-serif);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #dbe3ff;
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
+    /* Description visible au hover, se déploie sous le titre */
     .game-card-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      flex: 1;
+      font-size: 0.72rem;
+      color: rgba(171, 160, 255, 0.7);
+      text-align: center;
+      width: 160px;
+      line-height: 1.45;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.28s ease, opacity 0.22s ease;
     }
 
-    .game-card-button {
-      background: var(--accent);
-      color: var(--bg);
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .game-card-button:hover {
-      background: var(--accent-glow);
-      transform: scale(1.05);
-    }
-
-    a.game-card-button {
-      display: inline-block;
-      text-decoration: none;
+    .game-card:hover .game-card-desc {
+      max-height: 72px;
+      opacity: 1;
     }
 
     /* Modal pour lancer le jeu */
@@ -215,34 +284,15 @@
     <span id="projectCursorIconLabel"></span>
   </div>
 
-  <nav>
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">Giulia HP.</a>
-      <ul class="nav-links">
-        <li class="nav-projects-dropdown">
-          <button type="button" class="nav-projects-trigger" aria-haspopup="true">Projets</button>
-          <ul class="nav-projects-menu" aria-label="Liste des projets">
-            <li><a href="index.html#projects">Tous les projets</a></li>
-            <li><a href="project-herbarium.html">The Herbarium</a></li>
-            <li><a href="project-blueprint.html">The Unfinished Blueprint</a></li>
-            <li><a href="project-prophecy.html">Prophecy</a></li>
-            <li><a href="project-portrait.html">Custom Character Portrait Maker</a></li>
-          </ul>
-        </li>
-        <li><a href="games.html">Jeux</a></li>
-        <li><a href="index.html#skills">Compétences</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div id="nav-placeholder"></div>
 
   <section id="hero" class="project-page-hero">
     <div class="wrap">
       <p class="hero-label">Essai</p>
-      <h1 class="hero-title">Jeux <em>WebGL</em></h1>
+      <h1 class="hero-title"><em>Jeux</em> divers</h1>
       <div class="hero-bottom">
         <p class="hero-desc">
-          Essaie mes jeux développés en WebGL. Des petites expériences interactives directement dans le navigateur.
+          De nombreux jeux et quelques addons réalisés au fil du temps, certains en <em>WebGl</em>, la plupart pour <em>Windows</em>. Certains sont plus des <em>démos techniques</em>, d'autres des <em>expériences plus abouties</em>.
         </p>
       </div>
     </div>
@@ -250,8 +300,22 @@
 
   <section>
     <div class="wrap">
-      <div class="section-label reveal">Sélectionne un jeu</div>
-      <div id="games-gallery"></div>
+      <div class="section-label reveal">Jouer</div>
+      <div id="games-gallery-play" class="games-gallery"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label reveal">Télécharger</div>
+      <div id="games-gallery-download" class="games-gallery"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-label reveal">Addons</div>
+      <div id="games-gallery-addons" class="games-gallery"></div>
     </div>
   </section>
 
@@ -259,10 +323,7 @@
     <a href="index.html" class="project-back-link">← Retour à l'accueil</a>
   </section>
 
-  <footer>
-    <span>© 2026 Giulia HP.</span>
-    <span>Hébergé sur GitHub Pages</span>
-  </footer>
+  <div id="footer-placeholder"></div>
 
   <!-- Modal pour lancer les jeux -->
   <div class="game-modal" id="gameModal">
@@ -280,100 +341,159 @@
     </div>
   </div>
 
+  <script src="assets/js/components.js"></script>
   <script src="assets/js/script.js"></script>
   <script>
     // Données des jeux
     const games = [
       {
-        "title": "Breakout for Candy",
-        "description": "Un jeu de casse-briques avec une touche sucrée. Casse les blocs et survie aux obstacles !",
-        "buildPath": "assets/games/BreakoutForCandyBUILD_WebGl/BreakoutForCandyBUILD_WebGl/index.html",
-        "type": "webgl"
-      },
-      {
-        "title": "Dress Up Game Demo",
-        "description": "Crée ton personnage ! Habille-le avec différents vêtements et accessoires.",
-        "buildPath": "assets/games/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html",
-        "type": "webgl"
-      },
-      {
         "title": "Prophecy",
-        "description": "Une expérience mystique et poétique. Explore et découvre les secrets.",
-        "buildPath": "assets/games/Prophecy_WebGL/Prophecy_WebGL/index.html",
+        "description": "Démo d'un plateformer narratif en pixel art, avec desphases de Visual Novel.",
+        "icon": "assets/img/icons/IC_Prophecy.png",
+        "buildPath": "assets/games/WEBGL_Prophecy/index.html",
         "type": "webgl"
       },
       {
-        "title": "Sandbox",
-        "description": "Un terrain de jeu libre. Expérimente et crée ton propre scénario.",
-        "buildPath": "assets/games/SandboxBUILD_WebGl/SandboxBUILD_WebGl/index.html",
+        "title": "Dress Up Game",
+        "description": "Jeu de dress-up, permettant la customisation d'un personnage avce de nombreuses options.",
+        "icon": "assets/img/icons/IC_Dressup.png",
+        "buildPath": "assets/games/WEBGL_DressUpGame/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html",
         "type": "webgl"
+      },
+      {
+        "title": "Solar System",
+        "description": "Exploration de notre système solaire à échelle réduite en conduisant un petit vaisseau.",
+        "icon": "assets/img/icons/IC_Solar.png",
+        "buildPath": "assets/games/WEBGL_SolarSystem/index.html",
+        "type": "webgl"
+      },
+      {
+        "title": "Breakout for Candy",
+        "description": "Casse-briques classique avec une difficulté croissante.",
+        "icon": "assets/img/icons/IC_Candy.png",
+        "buildPath": "assets/games/WEBGL_BreakoutForCandy/BreakoutForCandyBUILD_WebGl/index.html",
+        "type": "webgl"
+      },
+
+
+
+
+      
+      {
+        "title": "The Herbarium",
+        "description": "Jeu cozy inspiré de Cooking Mama, permettant la création de potions.",
+        "icon": "assets/img/icons/IC_Herbarium.png",
+        "link": "https://aconitum-napellus.itch.io/the-herbarium-demo",
+        "type": "itch"
       },
       {
         "title": "TUBP",
-        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
-        "downloadPath": "assets/games/TUBP/TUBP.exe",
-        "type": "desktop"
-      },
-      {
-        "title": "The Herbarium",
-        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
-        "downloadPath": "assets/games/The%20Herbarium/The%20Herbarium.exe",
-        "type": "desktop"
-      },
-      {
-        "title": "Vallée d'Éther",
-        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
-        "downloadPath": "assets/games/Vall%C3%A9e%20d%27%C3%89ther/Vall%C3%A9e%20d%27%C3%89ther.exe",
-        "type": "desktop"
+        "description": "Exploration et résolution de puzzlesdans un labyrinthe procédural, avec une esthétique épurée.",
+        "icon": "assets/img/icons/IC_TUBP.png",
+        "link": "https://aconitum-napellus.itch.io/the-unfinished-blueprint",
+        "type": "itch"
       },
       {
         "title": "Sur la bonne voie",
-        "description": "Un jeu Windows à télécharger et lancer sur ton PC.",
-        "downloadPath": "assets/games/_Sur%20la%20bonne%20voie%20%E2%80%94%20BUILD/Sur%20la%20bonne%20voie.exe",
-        "type": "desktop"
+        "description": "Jeu de gestion ferroviaire relaxant sur une île paisible.",
+        "icon": "assets/img/icons/IC_SLBV.png",
+        "link": "https://aconitum-napellus.itch.io/sur-la-bonne-voie",
+        "type": "itch"
+      },
+      {
+        "title": "Vallée d'Éther",
+        "description": "Jeu d'exploration, où un petit renard parcours la vallée avant l'arrivée de l'hivers.",
+        "icon": "assets/img/icons/IC_Ether.png",
+        "link": "https://aconitum-napellus.itch.io/vallether",
+        "type": "itch"
+      },
+
+
+
+
+
+      
+      {
+        "title": "Character Maker",
+        "description": "Addon Blender de créateur de portrait stylisé avec édition poussé du visage.",
+        "icon": "assets/img/icons/IC_Chara.png",
+        "downloadPath": "assets/games/ADDON_Chara.zip",
+        "type": "addon",
+        "addonLogo": "assets/img/logos/LO_Blender.png"
+      },
+      {
+        "title": "Blink Doctor",
+        "description": "Addon pour le jeu Rhythm Doctor permettant de jouer en clignant des yeux plutot qu'au clavier.",
+        "icon": "assets/img/icons/IC_Blink.png",
+        "link": "https://aconitum-napellus.itch.io/blink-doctor",
+        "type": "addon",
+        "addonLogo": "assets/img/logos/LO_RD.png"
       }
     ];
 
     // Charge les jeux et les affiche
     function loadGames() {
-      const gallery = document.getElementById('games-gallery');
-      gallery.innerHTML = '';
+      const playGallery = document.getElementById('games-gallery-play');
+      const downloadGallery = document.getElementById('games-gallery-download');
+      const addonsGallery = document.getElementById('games-gallery-addons');
+      
+      if (!playGallery || !downloadGallery || !addonsGallery) return;
 
-      games.forEach((game, index) => {
-        const card = document.createElement('div');
-        card.className = 'game-card reveal';
-        const firstLetter = game.title.charAt(0).toUpperCase();
-        const isDesktop = game.type === 'desktop';
-        card.innerHTML = `
-          <div class="game-card-preview">${firstLetter}</div>
-          <div class="game-card-content">
-            <div>
-              <h3 class="game-card-title">${game.title}</h3>
-              <p class="game-card-desc">${game.description}</p>
+      // Filtre les jeux par catégorie
+      const playGames = games.filter(g => g.type === 'webgl');
+      const downloadGames = games.filter(g => g.type === 'itch');
+      const addonGames = games.filter(g => g.type === 'addon');
+
+      // Fonction pour créer les cartes d'une galerie
+      function renderGallery(gallery, gameList) {
+        gallery.innerHTML = '';
+        gameList.forEach((game) => {
+          const card = document.createElement('div');
+          card.className = 'game-card reveal';
+          let addonLogoHtml = '';
+          if (game.addonLogo) {
+            addonLogoHtml = `<img src="${game.addonLogo}" class="addon-logo" alt="Addon logo">`;
+          }
+          card.innerHTML = `
+            <div class="game-card-icon-wrap">
+              <div class="game-card-preview">
+                <img src="${game.icon}" alt="${game.title}" loading="lazy">
+              </div>
+              ${addonLogoHtml}
             </div>
-            ${isDesktop
-              ? `<a class="game-card-button" href="${game.downloadPath}" download>⬇ Télécharger</a>`
-              : `<button class="game-card-button" data-game-id="${index}">Lancer le jeu</button>`
+            <div class="game-card-title">${game.title}</div>
+            <div class="game-card-desc">${game.description}</div>
+          `;
+          // Ajoute la logique du clic
+          card.addEventListener('click', () => {
+            if (game.title === 'Blink' && game.link) {
+              window.open(game.link, '_blank', 'noopener,noreferrer');
+            } else if (game.type === 'itch') {
+              window.open(game.link, '_blank', 'noopener,noreferrer');
+            } else if (game.type === 'addon') {
+              const link = document.createElement('a');
+              link.href = game.downloadPath;
+              link.download = game.title + '.zip';
+              link.click();
+            } else if (game.type === 'webgl') {
+              launchGame(game);
             }
-          </div>
-        `;
-        gallery.appendChild(card);
-      });
+          });
+          gallery.appendChild(card);
+        });
 
-      // Branche les nouvelles cartes sur l'observer reveal
-      if (typeof obs !== 'undefined') {
-        gallery.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-      } else {
-        gallery.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        // Branche les nouvelles cartes sur l'observer reveal
+        if (typeof obs !== 'undefined') {
+          gallery.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        } else {
+          gallery.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }
       }
 
-      // Écoute les clics des boutons WebGL uniquement
-      document.querySelectorAll('.game-card-button[data-game-id]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const gameId = parseInt(e.target.dataset.gameId);
-          launchGame(games[gameId]);
-        });
-      });
+      // Remplit chaque galerie
+      renderGallery(playGallery, playGames);
+      renderGallery(downloadGallery, downloadGames);
+      renderGallery(addonsGallery, addonGames);
     }
 
     // Lance un jeu dans la modal
@@ -391,20 +511,41 @@
       `;
 
       modal.classList.add('active');
+      // Désactive le scroll du body
+      document.body.style.overflow = 'hidden';
 
       // Simule le chargement du jeu
       setTimeout(() => {
         if (game.buildPath) {
-          // Pour les jeux WebGL, intégrer via iframe
-          // Le chemin est déjà URL-encodé
+          // Pour les jeux WebGL, intégrer via iframe 16/9 + bouton fullscreen
           modalBody.innerHTML = `
-            <iframe 
-              src="${game.buildPath}" 
-              style="width: 100%; height: 600px; border: none; border-radius: 4px;"
-              allow="autoplay; fullscreen"
-              allowfullscreen>
-            </iframe>
+            <div style="width: 100%; max-width: 900px; aspect-ratio: 16/9; position: relative; margin: 0 auto;">
+              <iframe 
+                id="webglGameIframe"
+                src="${game.buildPath}" 
+                style="width: 100%; height: 100%; border: none; border-radius: 4px; display: block; background: #000;"
+                allow="autoplay; fullscreen"
+                allowfullscreen>
+              </iframe>
+              <button id="fullscreenBtn" style="position: absolute; bottom: 16px; right: 16px; z-index: 10; background: rgba(24,32,64,0.85); color: #dbe3ff; border: none; border-radius: 6px; padding: 0.5em 1em; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s;">⛶ Plein écran</button>
+            </div>
           `;
+          // Ajoute l'action fullscreen
+          setTimeout(() => {
+            const btn = document.getElementById('fullscreenBtn');
+            const iframe = document.getElementById('webglGameIframe');
+            if (btn && iframe) {
+              btn.addEventListener('click', function() {
+                if (iframe.requestFullscreen) {
+                  iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                  iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) {
+                  iframe.msRequestFullscreen();
+                }
+              });
+            }
+          }, 100);
         } else if (game.canvasId) {
           // Ou utiliser un canvas
           modalBody.innerHTML = `
@@ -422,6 +563,8 @@
     document.getElementById('gameModalClose').addEventListener('click', () => {
       const modal = document.getElementById('gameModal');
       modal.classList.remove('active');
+      // Réactive le scroll du body
+      document.body.style.overflow = '';
       // Nettoie le contenu
       document.getElementById('gameModalBody').innerHTML = `
         <div class="game-loading">

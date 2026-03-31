@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Giulia HP.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    section { padding: 4rem 0; }
+    section:first-of-type { padding-top: 2rem; }
+
+    /* ── CV GRID ── */
+    .cv-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── BLOCS GÉNÉRIQUES ── */
+    .cv-block { margin-bottom: 3rem; }
+    .cv-block:last-child { margin-bottom: 0; }
+
+    .cv-block-title {
+      font-family: var(--head);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent-glow);
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .cv-block-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ENTRÉES EXPÉRIENCE / FORMATION ── */
+    .cv-entries { display: grid; gap: 1.6rem; }
+
+    .cv-entry.cv-entry-hidden { display: none; }
+
+    .cv-more-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--head, 'Space Grotesk', sans-serif);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0;
+      transition: color 0.2s ease, gap 0.2s ease;
+    }
+    .cv-more-btn:hover { color: #fff; gap: 0.7rem; }
+    .cv-more-btn::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .cv-entry {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.2rem;
+      padding: 1.1rem 1.3rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.02);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .cv-entry:hover {
+      border-color: rgba(128, 158, 255, 0.38);
+      background: rgba(128, 158, 255, 0.04);
+    }
+
+    .cv-entry-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.18rem;
+      line-height: 1.5;
+    }
+
+    .cv-entry-title {
+      font-family: var(--head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .cv-entry-org {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .cv-entry-desc {
+      font-size: 0.78rem;
+      color: rgba(171, 160, 255, 0.72);
+      line-height: 1.65;
+    }
+
+    /* ── TAGS INLINE ── */
+    .cv-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.65rem;
+    }
+    .cv-tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(128, 158, 255, 0.85);
+      border: 1px solid rgba(128, 158, 255, 0.28);
+      border-radius: var(--radius-pill);
+      padding: 0.18rem 0.6rem;
+    }
+
+    /* ── COLONNE LATÉRALE ── */
+    .cv-aside { display: grid; gap: 2rem; }
+
+    /* Infos de contact */
+    .cv-contact-list {
+      list-style: none;
+      display: grid;
+      gap: 0.7rem;
+    }
+    .cv-contact-list li {
+      font-size: 0.78rem;
+      color: rgba(171, 160, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .cv-contact-list a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .cv-contact-list a:hover { color: var(--accent); }
+    .cv-contact-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 56px;
+    }
+
+    /* Langues */
+    .cv-lang-list { display: grid; gap: 0.8rem; }
+    .cv-lang-entry { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.78rem; }
+    .cv-lang-top { display: flex; justify-content: space-between; align-items: baseline; }
+    .cv-lang-name { color: var(--text); }
+    .cv-lang-level { font-size: 0.65rem; letter-spacing: 0.08em; color: var(--muted); }
+    .cv-lang-bar-wrap {
+      height: 3px;
+      border-radius: var(--radius-pill);
+      background: rgba(128, 158, 255, 0.12);
+      overflow: hidden;
+    }
+    .cv-lang-bar {
+      height: 100%;
+      border-radius: var(--radius-pill);
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    /* Disponibilité / statut */
+    .cv-status {
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(128, 158, 255, 0.3);
+      border-radius: var(--radius-md);
+      background: rgba(128, 158, 255, 0.05);
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: rgba(210, 219, 255, 0.82);
+    }
+    .cv-status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #5dffb0;
+      box-shadow: 0 0 6px #5dffb0;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* Bouton télécharger */
+    .cv-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.65rem 1.2rem;
+      border: 1px solid rgba(128, 158, 255, 0.45);
+      border-radius: var(--radius-md);
+      background: rgba(128, 158, 255, 0.06);
+      font-family: var(--head);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      width: 100%;
+      justify-content: center;
+    }
+    .cv-download:hover {
+      background: rgba(128, 158, 255, 0.12);
+      border-color: rgba(128, 158, 255, 0.7);
+      color: #fff;
+    }
+
+    @media (max-width: 860px) {
+      .cv-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .cv-aside { order: -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="project-cursor-icon" id="projectCursorIcon" aria-hidden="true">
+    <img id="projectCursorIconImg" alt="" />
+    <span id="projectCursorIconLabel"></span>
+  </div>
+
+  <div id="nav-placeholder"></div>
+
+  <section id="hero" class="project-page-hero">
+    <div class="wrap">
+      <p class="hero-label">Curriculum Vitae</p>
+      <h1 class="hero-title">Giulia <em>HP.</em></h1>
+      <div class="hero-bottom">
+        <p class="hero-desc">
+          <em>Technical artist</em> généraliste orientée jeu vidéo — spécialisée Unity,
+          outils personnalisés et <em>fait-main stylisé</em>. Disponible pour des
+          missions freelance, stages et collaborations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cv-grid">
+
+        <!-- COLONNE PRINCIPALE -->
+        <div>
+
+          <!-- EXPÉRIENCE -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Expérience</div>
+            <div class="cv-entries">
+              
+              <div class="cv-entry">
+                <div class="cv-entry-date">2021<br>→ 2024</div>
+                <div>
+                  <div class="cv-entry-title">Game Jams</div>
+                  <div class="cv-entry-desc">Divers Game Jams de 48h réalisées en équipes de trois à cinqs personnes.</div>
+                  <div class="cv-tags">
+                    <span class="cv-tag">Unity</span>
+                    <span class="cv-tag">Maya</span>
+                    <span class="cv-tag">Modeling</span>
+                    <span class="cv-tag">Rigging</span>
+                    <span class="cv-tag">Animation</span>
+                    <span class="cv-tag">Dessin</span>
+                    <span class="cv-tag">C#</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2020</div>
+                <div>
+                  <div class="cv-entry-title">Concours de la BD scolaire</div>
+                  <div class="cv-entry-org">Festival de la Bande Dessinée — Angoulème</div>
+                  <div class="cv-entry-desc">Création originale d'une page de bande dessinée.</div>
+                  <div class="cv-tags">
+                    <span class="cv-tag">Dessin</span>
+                    <span class="cv-tag">Ecriture</span>
+                  </div>
+                  <div class="cv-entry-org"><br>Petit Fauve de bronze</div>
+                  </div>
+                </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2019</div>
+                <div>
+                  <div class="cv-entry-title">Concours Jeunesse de la Nouvelle Policière</div>
+                  <div class="cv-entry-org">Festival du Polar — Avignon</div>
+                  <div class="cv-tags">
+                    <span class="cv-tag">Ecriture</span>
+                  </div>
+                  <div class="cv-entry-org"><br>Seconde place</div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2019</div>
+                <div>
+                  <div class="cv-entry-title">Représentation semi-théatrâle au Musée Louis Vouland</div>
+                  <div class="cv-entry-org">Club d'Ecriture du lycée Frédérique Mistral — Avignon</div>
+                  <div class="cv-entry-desc">Ecriture en colaboration plus réalisation d'une pièce immersive semi-théatrale dans le cadre de la Nuit des musée.</div>
+                  <div class="cv-tags">
+                    <span class="cv-tag">Ecriture</span>
+                    <span class="cv-tag">Théâtre</span>
+                    
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- FORMATION -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Formation</div>
+            <div class="cv-entries">
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2025<br>→ 2027<br>(en cours)</div>
+                <div>
+                  <div class="cv-entry-title">Master ATI<br>Création Numérique - parcours Arts et Technologies de l'Image Virtuelle</div>
+                  <div class="cv-entry-org">Université Paris 8 — St Denis</div>
+                  <div class="cv-entry-desc">Conception, le développement et la production de œuvres artistiques numériques innovantes dans les domaines de l'image de synthèse, du temps réel, de la réalité virtuelle et augmentée.</div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2024<br>→ 2025</div>
+                <div>
+                  <div class="cv-entry-title">Licence 3 ATI<br>Arts Plastiques – parcours Arts et Technologies de l'Image</div>
+                  <div class="cv-entry-org">Université Paris 8 — St Denis</div>
+                  <div class="cv-entry-desc">Approche artistique et technique de l'image numérique, et développement des expertises spécifiques adaptées aux secteurs de l'animation, des effets spéciaux, du jeu vidéo et des environnements immersifs.</div>
+                  <div class="cv-entry-org"><br>Mention Très Bien</div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2021<br>→ 2024</div>
+                <div>
+                  <div class="cv-entry-title">Formation en Game Art</div>
+                  <div class="cv-entry-org">Ecole des Nouvelles Images — Avignon</div>
+                  <div class="cv-entry-desc">Formation artistique et technique pour préparer au travail en studio de jeu vidéo et en entreprise de création d'images numériques.</div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2018<br>→ 2021</div>
+                <div>
+                  <div class="cv-entry-title">BAC Technologique STD2A<br>Sciences et Technologies du Design et des Arts Appliqués</div>
+                  <div class="cv-entry-org">Lycée Frédéric Mistral — Avignon</div>
+                  <div class="cv-entry-desc">Filière technologique qui initie aux principaux métiers créatifs, à travers un cursus axé sur le design, l’art et les technologies associées.</div>
+                  <div class="cv-entry-org"><br>Mention Bien</div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2014<br>→ 2018</div>
+                <div>
+                  <div class="cv-entry-title">Brevet des collèges</div>
+                  <div class="cv-entry-org">Cité Scolaire Jean Henri Fabre — Carpentras</div>
+                <div class="cv-entry-org"><br>Mention Très Bien</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- PROJETS NOTABLES -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Projets notables</div>
+            <div class="cv-entries">
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2026</div>
+                <div>
+                  <div class="cv-entry-title"><a href="project-herbarium.html" style="color:inherit;text-decoration:none;">The Herbarium</a></div>
+                  <div class="cv-entry-org">Jeu Unity · C#</div>
+                  <div class="cv-entry-desc">Jeu cozy inspiré de Cooking Mama, permettant la création de potions.</div>
+                  <div class="cv-tags"><span class="cv-tag">Unity</span><span class="cv-tag">C#</span></div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2025</div>
+                <div>
+                  <div class="cv-entry-title"><a href="project-blueprint.html" style="color:inherit;text-decoration:none;">The Unfinished Blueprint</a></div>
+                  <div class="cv-entry-org">Jeu Unreal Engine 5 · Blueprint & C++</div>
+                  <div class="cv-entry-desc">Exploration et résolution de puzzlesdans un labyrinthe procédural, avec une esthétique épurée.</div>
+                  <div class="cv-tags"><span class="cv-tag">Unreal Engine 5</span><span class="cv-tag">C++</span></div>
+                </div>
+              </div>
+
+              <div class="cv-entry">
+                <div class="cv-entry-date">2024</div>
+                <div>
+                  <div class="cv-entry-title"><a href="project-prophecy.html" style="color:inherit;text-decoration:none;">Prophecy</a></div>
+                  <div class="cv-entry-org">Demo Unity · C#</div>
+                  <div class="cv-entry-desc">Démo d'un plateformer narratif en pixel art, avec desphases de Visual Novel.</div>
+                  <div class="cv-tags"><span class="cv-tag">Blender</span><span class="cv-tag">Python</span></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- COMPÉTENCES -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Compétences techniques</div>
+            <div class="skills-cols" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+
+              <div>
+                <div class="skill-col-title">Moteurs</div>
+                <div class="skill-entry" data-level="92">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Unity.png" alt="Unity" /><span>Unity</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+                <div class="skill-entry" data-level="79">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Unreal.png" alt="Unreal Engine 5" /><span>Unreal Engine 5</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="skill-col-title">Langages</div>
+                <div class="skill-entry" data-level="67">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_CSharp.png" alt="C#" /><span>C#</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+                <div class="skill-entry" data-level="43">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Python.png" alt="Python" /><span>Python</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="skill-col-title">Outils 3D</div>
+                <div class="skill-entry" data-level="87">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Blender.png" alt="Blender" /><span>Blender</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+                <div class="skill-entry" data-level="84">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Painter.png" alt="Substance Painter" /><span>Substance Painter</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+                <div class="skill-entry" data-level="71">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Maya.png" alt="Maya" /><span>Maya</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="skill-col-title">2D</div>
+                <div class="skill-entry" data-level="91">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_CSP.png" alt="Clip Studio Paint" /><span>Clip Studio Paint</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+                <div class="skill-entry" data-level="87">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Krita.png" alt="Krita" /><span>Krita</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+                <div class="skill-entry" data-level="74">
+                  <div class="skill-left"><img class="skill-logo" src="assets/img/logos/LO_Photoshop.png" alt="Photoshop" /><span>Photoshop</span></div>
+                  <div class="skill-bar-wrap"><div class="skill-bar"></div></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COLONNE LATÉRALE -->
+        <div class="cv-aside">
+
+          <!-- Statut -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Statut</div>
+            <div class="cv-status">
+              <span class="cv-status-dot"></span>
+              <strong style="color:var(--text);">Recherche</strong> alternance pour l'année universitaire 2026-2027
+              <br>
+              <span class="cv-status-dot"></span>
+              <strong style="color:var(--text);">Disponible</strong> pour des missions freelance, stages et collaborations
+              <br><br>
+              <span class="cv-status-dot"></span>
+              <strong style="color:var(--text);">Paris & Remote</strong>
+            </div>
+          </div>
+
+          <!-- Télécharger -->
+          <div class="cv-block reveal">
+            <a href="#" class="cv-download">
+              ↓ &nbsp;Télécharger le CV (PDF)
+            </a>
+          </div>
+
+          <!-- Contact -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Contact</div>
+            <ul class="cv-contact-list">
+              <li>
+                <span class="cv-contact-label">Email</span>
+                <a href="mailto:giulia.perucca@gmail.com">giulia.perucca@gmail.com</a>
+              </li>
+              <li>
+                <span class="cv-contact-label">GitHub</span>
+                <a href="https://github.com/giuliahp" target="_blank" rel="noopener">giuliahp</a>
+              </li>
+              <li>
+                <span class="cv-contact-label">LinkedIn</span>
+                <a href="https://linkedin.com/in/giulia-haut-perucca-91b04a271" target="_blank" rel="noopener">giulia haut perucca</a>
+              </li>
+              <li>
+                <span class="cv-contact-label">Itch.io</span>
+                <a href="https://aconitum-napellus.itch.io/" target="_blank" rel="noopener">Aconitum</a>
+              </li>
+              <li>
+                <span class="cv-contact-label">Lieu</span>
+                <span style="color:var(--text);">Paris, France</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Langues -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Langues</div>
+            <div class="cv-lang-list">
+              <div class="cv-lang-entry">
+                <div class="cv-lang-top">
+                  <span class="cv-lang-name">Français</span>
+                  <span class="cv-lang-level">Natif</span>
+                </div>
+                <div class="cv-lang-bar-wrap"><div class="cv-lang-bar" style="width:100%"></div></div>
+              </div>
+              <div class="cv-lang-entry">
+                <div class="cv-lang-top">
+                  <span class="cv-lang-name">Anglais</span>
+                  <span class="cv-lang-level">B2</span>
+                </div>
+                <div class="cv-lang-bar-wrap"><div class="cv-lang-bar" style="width:70%"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Centres d'intérêt -->
+          <div class="cv-block reveal">
+            <div class="cv-block-title">Intérêts</div>
+            <div class="cv-tags">
+              <span class="cv-tag">Dessin</span>
+              <span class="cv-tag">Animation</span>
+              <span class="cv-tag">Jeux-vidéos</span>
+              <span class="cv-tag">Écriture</span>
+              <span class="cv-tag">Lecture</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding: 3rem 0;">
+    <a href="index.html" class="project-back-link">← Retour à l'accueil</a>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script>
+    document.querySelectorAll('.cv-entries').forEach(function (entries) {
+      var items = entries.querySelectorAll('.cv-entry');
+      if (items.length <= 3) return;
+
+      for (var i = 3; i < items.length; i++) {
+        items[i].classList.add('cv-entry-hidden');
+      }
+
+      var btn = document.createElement('button');
+      btn.className = 'cv-more-btn';
+      var hidden = true;
+      btn.textContent = 'Voir plus (' + (items.length - 3) + ')';
+      entries.after(btn);
+
+      btn.addEventListener('click', function () {
+        hidden = !hidden;
+        for (var i = 3; i < items.length; i++) {
+          items[i].classList.toggle('cv-entry-hidden', hidden);
+        }
+        btn.textContent = hidden
+          ? 'Voir plus (' + (items.length - 3) + ')'
+          : 'Voir moins';
+      });
+    });
+  </script>
+</body>
+</html>
