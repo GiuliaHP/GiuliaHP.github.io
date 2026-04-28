@@ -12,6 +12,11 @@
   {
     "type": "text",
     "title": "Rig & Animation",
+    "listing": [
+      "Rigging puppet sur sprites 2D personnages",
+      "Animation en keyframes — Unity",
+      "Décors & props — simulation vent"
+    ],
     "body": "Les sprites 2D des personnages, utilisés comme transitions entre les phases de gameplay, ont ete rigges en style puppet. Chaque personnage est decoupe en plusieurs layers correspondant aux differentes parties du corps, puis rigge et anime en keyframes.\n\nL'ensemble des rigs et des animations 2D a ete realise dans Unity, a l'exception de quelques animations clefs prealablement faites a la main."
   },
   {
@@ -47,6 +52,11 @@
   {
     "type": "text",
     "title": "Shader Breakdown",
+    "listing": [
+      "Cell shading —rendu cartoon personnages",
+      "Shader triplanaire — décors modulaires",
+      "Shader d'eau — animation paramétrable"
+    ],
     "body": "L'objectif des shaders sur ce projet etait de s'integrer naturellement au style 2D des mini-jeux.\n\nPour les personnages, j'ai privilegie un rendu cartoon en cell shading. Pour les decors, j'ai opte pour un shader triplanaire afin de reduire le temps de production et obtenir des textures modulaires sans passer par Substance Painter."
   },
   {

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoulTide — Projet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .coming-soon-section {
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .coming-soon-message {
+      font-size: 1.1rem;
+      color: rgba(210, 219, 255, 0.8);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="project-cursor-icon" id="projectCursorIcon" aria-hidden="true">
+    <img id="projectCursorIconImg" alt="" />
+    <span id="projectCursorIconLabel"></span>
+  </div>
+
+  <div id="nav-placeholder"></div>
+
+  <section class="project-trailer-banner" aria-label="Trailer SoulTide" style="--project-banner-bg: url('assets/img/backgrounds/BG_SoulTide.png');">
+    <div class="wrap">
+      <div class="project-trailer-frame">
+        <video class="project-trailer-video" muted loop playsinline preload="none" poster="assets/img/backgrounds/BG_SoulTide.png">
+          <source src="assets/img/trailers/TR_SoulTide.mp4?v=20260320" type="video/mp4" />
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section id="hero" class="project-page-hero">
+    <div class="wrap">
+      <div class="hero-left">
+        <h1 class="hero-title"><em>SoulTide</em></h1>
+        <div class="hero-bottom">
+          <p class="hero-desc">
+            SoulTide est un jeu de pêche reposant ou l'on incarne le passeur d'âmes.
+          </p>
+        </div>
+      </div>
+      <div class="project-icon-link">
+        <img src="assets/img/icons/IC_SoulTide.png" alt="" class="project-icon" />
+      </div>
+    </div>
+  </section>
+
+  <section class="coming-soon-section">
+    <div class="wrap">
+      <p class="coming-soon-message">Arrive prochainement...</p>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding: 3rem 0;">
+    <a href="index.html#projects" class="project-back-link">← Retour aux projets</a>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="assets/js/components.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

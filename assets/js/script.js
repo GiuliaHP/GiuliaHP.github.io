@@ -349,7 +349,38 @@ if (trailerVideos.length) {
   const mounts = document.querySelectorAll('.showcase-gallery-mount[data-manifest]');
   if (!mounts.length) return;
 
-  function createTextBlock(item, extraClass = '') {
+  function extractKeyPoints(body) {
+    // Split by sentence and extract 2-3 first key points
+    const sentences = body.split(/(?<=[.!?])\s+/).filter(s => s.trim());
+    const keyPoints = [];
+    
+    // Take first 1-2 sentences and break them into key points
+    for (let i = 0; i < Math.min(2, sentences.length); i++) {
+      const sent = sentences[i].trim();
+      // Extract tech terms or main concepts from the sentence
+      // Remove extra text and keep it concise
+      const cleaned = sent
+        .replace(/^[A-Z]es\s+/, '') // "Les " -> ""
+        .replace(/\s*,.*/, '') // Remove clauses after comma
+        .substring(0, 85); // Limit length
+      
+      if (cleaned.length > 15) {
+        keyPoints.push(cleaned);
+      }
+    }
+    
+    // If we have less than 2, try to add a third
+    if (keyPoints.length < 2 && sentences.length > 2) {
+      const sent = sentences[2].trim();
+      const cleaned = sent.replace(/^[A-Z]es\s+/, '').substring(0, 85);
+      if (cleaned.length > 15) keyPoints.push(cleaned);
+    }
+    
+    return keyPoints.length > 0 ? keyPoints : ['Voir la description complète'];
+  }
+
+  function createTextBlock(item, extraClass = '', attachedNotes = []) {
+    const isNote = item.title && item.title.startsWith('NOTE');
     const block = document.createElement('div');
     block.className = `gallery-text-block ${extraClass}`.trim();
 
@@ -359,7 +390,84 @@ if (trailerVideos.length) {
       block.appendChild(h3);
     }
 
-    if (item.body) {
+    if (item.body && !isNote) {
+      // Use manual listing if provided, otherwise generate
+      const keyPoints = item.listing || extractKeyPoints(item.body);
+      
+      // Create listing
+      const listing = document.createElement('ul');
+      listing.className = 'gallery-text-listing';
+      keyPoints.forEach(point => {
+        const li = document.createElement('li');
+        li.textContent = point;
+        listing.appendChild(li);
+      });
+      block.appendChild(listing);
+
+      // Create hidden full content container
+      const fullContent = document.createElement('div');
+      fullContent.className = 'gallery-full-content';
+      fullContent.hidden = true;
+
+      // Add full description
+      const fullText = document.createElement('p');
+      fullText.className = 'gallery-full-text';
+      fullText.textContent = item.body;
+      fullContent.appendChild(fullText);
+
+      // Add attached notes if any
+      if (attachedNotes.length > 0) {
+        attachedNotes.forEach(noteItem => {
+          const noteBlock = document.createElement('div');
+          noteBlock.className = 'gallery-note-block';
+          
+          if (noteItem.title) {
+            const noteTitle = document.createElement('h4');
+            noteTitle.textContent = noteItem.title;
+            noteBlock.appendChild(noteTitle);
+          }
+          
+          if (noteItem.body) {
+            const noteText = document.createElement('p');
+            noteText.textContent = noteItem.body;
+            noteBlock.appendChild(noteText);
+          }
+          
+          fullContent.appendChild(noteBlock);
+        });
+      }
+
+      block.appendChild(fullContent);
+
+      // Create button with icon
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'gallery-voir-plus';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Voir la description complète');
+      
+      const icon = document.createElement('img');
+      icon.src = 'assets/img/logos/LO_ShowMore.png';
+      icon.alt = '';
+      icon.className = 'voir-plus-icon';
+      btn.appendChild(icon);
+      
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          fullContent.hidden = true;
+          btn.setAttribute('aria-expanded', 'false');
+          icon.src = 'assets/img/logos/LO_ShowMore.png';
+        } else {
+          fullContent.hidden = false;
+          btn.setAttribute('aria-expanded', 'true');
+          icon.src = 'assets/img/logos/LO_ShowLess.png';
+          try { fullContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch(e) {}
+        }
+      });
+      block.appendChild(btn);
+    } else if (item.body && isNote) {
+      // NOTE blocks shown directly without listing
       const p = document.createElement('p');
       p.textContent = item.body;
       block.appendChild(p);
@@ -405,8 +513,19 @@ if (trailerVideos.length) {
       const current = items[index];
 
       if (current.type === 'text') {
-        rows.push({ kind: 'text', item: current });
-        index += 1;
+        // Collect following NOTE items
+        const attachedNotes = [];
+        let lookahead = index + 1;
+        while (lookahead < items.length && 
+               items[lookahead].type === 'text' && 
+               items[lookahead].title && 
+               items[lookahead].title.startsWith('NOTE')) {
+          attachedNotes.push(items[lookahead]);
+          lookahead += 1;
+        }
+        
+        rows.push({ kind: 'text', item: current, attachedNotes });
+        index = lookahead;
         continue;
       }
 
@@ -558,27 +677,8 @@ if (trailerVideos.length) {
     for (let i = 0; i < rows.length; i += 1) {
       const row = rows[i];
       if (row.kind === 'text') {
-        const next = rows[i + 1];
-        const hasNotesPair =
-          next &&
-          next.kind === 'text' &&
-          /^notes?/i.test((next.item.title || '').trim());
-
-        if (hasNotesPair) {
-          const pair = document.createElement('div');
-          pair.className = 'gallery-text-pair reveal';
-
-          const mainBlock = createTextBlock(row.item, 'is-main');
-          const noteBlock = createTextBlock(next.item, 'is-note');
-          pair.appendChild(mainBlock);
-          pair.appendChild(noteBlock);
-          gallery.appendChild(pair);
-
-          i += 1;
-        } else {
-          const block = createTextBlock(row.item, 'reveal');
-          gallery.appendChild(block);
-        }
+        const block = createTextBlock(row.item, 'reveal', row.attachedNotes || []);
+        gallery.appendChild(block);
       } else if (row.kind === 'media') {
         const rowEl = document.createElement('div');
         rowEl.className = 'gallery-row reveal';
@@ -690,6 +790,20 @@ if (trailerVideos.length) {
 
     // Hook new .reveal elements into the existing scroll observer
     container.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    
+    // Hook gallery media for cursor ring on hover
+    if (cursor) {
+      const galleryMedia = container.querySelectorAll('.gallery-item-inner img, .gallery-item-inner video');
+      galleryMedia.forEach(media => {
+        media.addEventListener('mouseenter', () => {
+          cursor.classList.add('hovering');
+        });
+        
+        media.addEventListener('mouseleave', () => {
+          cursor.classList.remove('hovering');
+        });
+      });
+    }
   }
 })();
 
@@ -753,5 +867,32 @@ if (trailerVideos.length) {
 
   warmUp().finally(() => {
     // setInterval(checkUpdates, 1200); // DISABLED: Auto-reload in dev
+  });
+})();
+
+/* VOIR PLUS (toggle full description) */
+(function() {
+  const buttons = document.querySelectorAll('.voir-plus');
+  if (!buttons.length) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const wrap = btn.closest('.hero-desc-wrap');
+      if (!wrap) return;
+      const full = wrap.querySelector('.hero-full-desc');
+      if (!full) return;
+
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        full.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.textContent = 'voir plus';
+      } else {
+        full.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+        btn.textContent = 'voir moins';
+        try { full.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch(e) {}
+      }
+    });
   });
 })();

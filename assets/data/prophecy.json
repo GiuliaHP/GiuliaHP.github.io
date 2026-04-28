@@ -22,6 +22,11 @@
   {
     "type": "text",
     "title": "Système de Dialogue",
+    "listing": [
+      "Scriptable Objects — personnalisation expressions",
+      "Manager de dialogue multilignes & choix",
+      "Déclencheurs liés aux niveaux"
+    ],
     "body": "Les dialogues se deconstruisent en scriptable objects. Dans chacun, et pour chaque ligne de dialogue, sont assignés les sprites des yeux, des sourcils et de la bouche pour une maxiùmum de personnalisation des expressions des personnages. Des choix peuvent également être ajoutés, déclanchant la boite de désisions avec les différentes réponses pré-construites pour le joeueur.\n\nLe dialogue manager se charge de faire le lien entre les déclencheurs de dialogue dans le niveau et les scriptable objects, ainsi que de faire le lien entre les différentes lignes de dialogue et les différentes boites de dialogue à afficher."
   },
   {
@@ -52,6 +57,11 @@
   {
     "type": "text",
     "title": "Design Environnemental",
+    "listing": [
+      "Palette chromatique unique par zone",
+      "Indices visuels subtils — exploration encouragée",
+      "Immersion cohérente ambiance narrative"
+    ],
     "body": "Les environnements de Prophecy ont été conçus pour renforcer l'ambiance narrative et symbolique du jeu. Chaque zone a ses propres caractéristiques visuelles, sa palette de couleurs et son éclairage spécifiques pour créer une immersion cohérente. L'exploration est encouragée via des indices visuels subtils et des éléments interactifs cachés."
   },
   {
@@ -77,11 +87,16 @@
   {
     "type": "text",
     "title": "Pixel Art & Animation",
+    "listing": [
+      "Style pixel art rétro-nostalgique contraste 3D",
+      "Sprites 3D clés — transitions narratives",
+      "Animation keyframes — fluidité cohérente"
+    ],
     "body": "Le style pixel art de Prophecy apporte une dimension rétro et nostalgique qui contraste avec l'environnement 3D moderne. Ces sprites animés représentent des éléments clés du jeu et sont utilisés pour enrichir certaines zones ainsi que les transitions narratives. Chaque animation a été réalisée en keyframes pour garantir une fluidité cohérente."
   },
   {
     "type": "text",
-    "title": "Note Artistiques",
+    "title": "NOTE — Hybridation 3D & Pixel Art",
     "body": "L'hybridation entre 3D et pixel art crée une identité visuelle unique, renforçant l'aspect mythologique et surlenaturel du jeu. La palette de couleurs limitée du pixel art s'intègre harmonieusement avec la direction chromatique générale, créant une cohésion visuelle entre tous les éléments."
   },
 
@@ -102,11 +117,16 @@
   {
     "type": "text",
     "title": "Effects & Ombres Dynamiques",
+    "listing": [
+      "Shadow mapping — éclairage temps réel",
+      "Screen-space ambient occlusion — optimisation",
+      "Atmosphère vivante & réactive"
+    ],
     "body": "Les ombres dynamiques jouent un rôle crucial dans l'ambiance générale de Prophecy. Elles réagissent en temps réel aux changements d'éclairage et aux mouvements des sources de lumière, créant une atmosphère vivante et réactive. Plusieurs techniques de shadow mapping et de screen-space ambient occlusion sont utilisées pour optimiser les performances."
   },
   {
     "type": "text",
-    "title": "Note Techniques VFX",
+    "title": "NOTE — Techniques VFX",
     "body": "L'ajout d'effets de particules procédurales et d'animations de shader rend les ombres plus organiques et mystérieuses, en harmonie avec l'atmosphère surnaturelle du jeu. Cette approche permet également une modularité : les mêmes techniques peuvent être réappliquées à d'autres types d'effets ou projets."
   },
 
@@ -132,11 +152,16 @@
   {
     "type": "text",
     "title": "Sprites & Rigging 2D",
+    "listing": [
+      "Rigging puppet style — animation fluide",
+      "Multiple layers modulaires — réutilisabilité",
+      "Variations de mouvements — flexibilité"
+    ],
     "body": "Les sprites des personnages principaux ont été riggés en style puppet pour permettre une animation fluide et expressive. Chaque personnage est composé de multiples layers représentant différentes parties du corps, permettant une réutilisabilité et une flexibilité lors des animations complexes et des variations de mouvements."
   },
   {
     "type": "text",
-    "title": "Note Animations",
+    "title": "NOTE — Animations",
     "body": "L'approche modulaire du rigging 2D a permis de créer rapidement de nombreuses variations de poses et d'animations sans réduplicaliser le travail. Esta système facilite également l'ajustement des animations en postproduction et l'adaptation des caractères à de nouvelles situations narratives au cours du développement."
   }
 ]

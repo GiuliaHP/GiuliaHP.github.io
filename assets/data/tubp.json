@@ -17,6 +17,11 @@
   {
     "type": "text",
     "title": "Projection de Sang",
+    "listing": [
+      "Décals aléatoires au calcul de normale",
+      "Material changeant couleur — aging animation",
+      "Repérage spatial dans le labyrinthe"
+    ],
     "body": "Pour se repérer dans le labyrinthe, on peut projeter son propre sang. Ce dernier est représenté par des projectiles qui posent, à l'endroit de l'impact, un décal au hasard parmi ceux référencés, tout en calculant la normale de la surface sur laquelle il est projeté pour l'orienter dans le bon sens.\n\nCe décal laisse ensuite son material changer de couleur avec le temps, simulant le vieillissement du sang et permettant de mesurer dans le temps le passage du joueur dans le labyrinthe."
   },
   {
@@ -42,6 +47,11 @@
   {
     "type": "text",
     "title": "C++ — Génération Procédurale",
+    "listing": [
+      "Génération grille — placement murs C++",
+      "Garantir accès toutes zones (pathfinding)",
+      "Placement dynamique entrée & collectibles"
+    ],
     "body": "La génération du labyrinthe a été entièrement réalisée en procédural, en passant par du C++. Une grille est dessinée en fonction de la taille définie dans les properties, puis les murs sont placés en allant toujours au moins une ouverture.\n\nLe calcul est fait de manière à ce qu'aucune zone ne soit inaccessible. Ensuite on place l'entrée du labyrinthe et les collectibles — potions de régénération, clefs, piques et indices."
   },
   {
@@ -81,8 +91,11 @@
   },
   {
     "type": "text",
-    "title": "Design UI/UX des Clefs",
-    "body": "La difficulté dans la réalisation de l'UI des clefs était de faire correspondre l'acquisition de chaque clef à son icône ; en effet, puisque chaque clef avait son propre design, l'idée était que collecter une clef appelait la bonne icône dans l'interface, tout en gardant l'uniformité d'avoir un Blueprint de clef principal.\n\nAinsi, réaliser une interface cohérente pour les clefs à pousser le système de celles-ci à être plus poussé et permettrait d'être utilisé pour d'autres collectibles, qui eux-mêmes pourraient avoir de nombreuses variantes et leur correspondance dans un inventaire en UI."
+    "title": "Design UI/UX des Clefs",    "listing": [
+      "Clef collectable — icône dynamique associée",
+      "Blueprint modulable pour nombreuses variantes",
+      "Système réutilisable sur d'autres collectibles"
+    ],    "body": "La difficulté dans la réalisation de l'UI des clefs était de faire correspondre l'acquisition de chaque clef à son icône ; en effet, puisque chaque clef avait son propre design, l'idée était que collecter une clef appelait la bonne icône dans l'interface, tout en gardant l'uniformité d'avoir un Blueprint de clef principal.\n\nAinsi, réaliser une interface cohérente pour les clefs à pousser le système de celles-ci à être plus poussé et permettrait d'être utilisé pour d'autres collectibles, qui eux-mêmes pourraient avoir de nombreuses variantes et leur correspondance dans un inventaire en UI."
   },
   {
     "type": "text",
