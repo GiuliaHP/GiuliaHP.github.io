@@ -5,7 +5,6 @@
     <div class="nav-logo-section">
       <a class="nav-logo" href="index.html">Giulia HP.</a>
       <div class="nav-logo-submenu">
-        <a href="index.html#skills">Compétences</a>
         <a href="index.html#contact">Contact</a>
       </div>
     </div>
