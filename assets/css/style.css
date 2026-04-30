@@ -152,7 +152,7 @@ nav {
 .nav-logo {
   font-family: var(--head);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.8rem;
   color: var(--text);
   text-decoration: none;
 }
@@ -161,7 +161,7 @@ nav {
   gap: 1.5rem;
 }
 .nav-logo-submenu a {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
@@ -184,7 +184,7 @@ nav {
 
 .nav-links a,
 .nav-projects-trigger {
-  font-size: 0.72rem; letter-spacing: 0.14em;
+  font-size: 0.8rem; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--muted);
   text-decoration: none; transition: color 0.25s;
 }
@@ -279,7 +279,7 @@ nav {
   border-bottom: 1px solid var(--border);
 }
 .hero-label {
-  font-size: 0.72rem; letter-spacing: 0.18em;
+  font-size: 0.9rem; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--muted);
   margin-bottom: 2rem;
 }
