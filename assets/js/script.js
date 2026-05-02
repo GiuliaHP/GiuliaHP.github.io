@@ -505,6 +505,16 @@ if (trailerVideos.length) {
       continue;
     }
 
+    // Filter by category if specified
+    const category = container.dataset.category;
+    if (category) {
+      items = items.filter(item => item.category === category);
+      if (items.length === 0) {
+        container.closest('.competences-section')?.remove();
+        continue;
+      }
+    }
+
     // Build rows with support for: one video + multiple side images.
     const rows = [];
     let index = 0;

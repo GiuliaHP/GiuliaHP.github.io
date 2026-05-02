@@ -21,6 +21,7 @@
         </ul>
       </li>
       <li><a href="games.html">Jeux</a></li>
+      <li><a href="competences.html">Compétences</a></li>
       <li><a href="3d-viewer.html">3D</a></li>
       <li><a href="cv.html">CV</a></li>
     </ul>

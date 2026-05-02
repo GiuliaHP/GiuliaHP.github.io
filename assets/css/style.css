@@ -28,6 +28,10 @@ body {
   cursor: none;
 }
 
+html, body, body * {
+  cursor: none !important;
+}
+
 /* ── CUSTOM CURSOR ─────────────────────────── */
 .cursor {
   position: fixed;
@@ -381,8 +385,21 @@ nav {
 #hero.project-page-hero {
   min-height: auto;
   justify-content: flex-start;
-  padding-top: 3.4rem;
+  padding-top: 16rem;
   padding-bottom: 4.5rem;
+}
+
+#hero.project-page-hero.competences-hero:has(.hero-left) .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  grid-template-columns: none;
+  gap: 0;
+}
+
+#hero.project-page-hero.competences-hero .hero-left {
+  max-width: 700px;
 }
 
 #hero.project-page-hero:has(.hero-left) .wrap {
@@ -607,7 +624,7 @@ nav {
   }
 
   #hero.project-page-hero {
-    padding-top: 2.8rem;
+    padding-top: 10rem;
     padding-bottom: 3.6rem;
   }
 }
@@ -1629,7 +1646,80 @@ footer {
   }
 
   #hero.project-page-hero {
-    padding-top: 2.2rem;
+    padding-top: 6rem;
     padding-bottom: 3.1rem;
   }
+}
+
+/* ── COMPETENCES PAGE ───────────────────────── */
+.competences-section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.competences-section:last-of-type {
+  border-bottom: none;
+}
+
+.competences-section .section-title {
+  font-family: var(--head);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+}
+
+/* Styles simples pour les galeries de compétences */
+.competences-gallery-mount .showcase-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.competences-gallery-mount .gallery-row {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+  overflow: visible !important;
+}
+
+.competences-gallery-mount .gallery-row.has-mixed-media-pair {
+  grid-template-columns: 1fr !important;
+  align-items: stretch !important;
+  column-gap: 1.5rem !important;
+  overflow: visible !important;
+}
+
+.competences-gallery-mount .gallery-item--image {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  align-self: auto !important;
+  justify-self: auto !important;
+}
+
+.competences-gallery-mount .gallery-row.has-mixed-media-pair .gallery-item--image {
+  position: static !important;
+  z-index: auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  transform: none !important;
+  background: rgba(8, 13, 29, 0.6) !important;
+}
+
+.competences-gallery-mount .gallery-item-inner {
+  aspect-ratio: auto !important;
+}
+
+.competences-gallery-mount .gallery-item--image img {
+  object-fit: cover !important;
+  background: transparent !important;
+}
+
+.competences-gallery-mount .gallery-text-block,
+.competences-gallery-mount .gallery-row--media-stack,
+.competences-gallery-mount .gallery-image-stack,
+.competences-gallery-mount .gallery-item--stack-image {
+  display: none !important;
 }
