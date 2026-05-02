@@ -275,12 +275,73 @@ nav {
   transform: translateY(1px) rotate(225deg);
 }
 
+/* ── DEMOREEL ──────────────────────────────── */
+.demoreel-section {
+  width: 100%;
+  background: rgba(8, 13, 29, 0.4);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  margin: 0;
+  margin-top: 10rem;
+}
+
+.demoreel-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.demoreel-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 70vh;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.demoreel-container:hover .demoreel-video {
+  opacity: 0.9;
+}
+
+.demoreel-sound-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: rgba(8, 12, 28, 0.85);
+  border: 1px solid rgba(128, 158, 255, 0.34);
+  color: var(--text);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.demoreel-sound-btn:hover {
+  background: rgba(24, 33, 70, 0.92);
+  border-color: rgba(128, 158, 255, 0.6);
+  box-shadow: 0 0 12px rgba(128, 158, 255, 0.3);
+}
+
 /* ── HERO ───────────────────────────────────── */
 #hero {
   min-height: 100vh;
   display: flex; flex-direction: column; justify-content: flex-end;
-  padding-bottom: 5rem; padding-top: 8rem;
+  padding-bottom: 5rem; padding-top: 0;
   border-bottom: 1px solid var(--border);
+}
+
+/* Hero après la vidéo demoreel */
+.demoreel-section + #hero {
+  min-height: auto;
+  padding-top: 10rem;
 }
 .hero-label {
   font-size: 0.9rem; letter-spacing: 0.18em;
@@ -1672,54 +1733,41 @@ footer {
 
 /* Styles simples pour les galeries de compétences */
 .competences-gallery-mount .showcase-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
 
 .competences-gallery-mount .gallery-row {
   grid-template-columns: 1fr !important;
   gap: 1.5rem !important;
-  overflow: visible !important;
 }
 
 .competences-gallery-mount .gallery-row.has-mixed-media-pair {
   grid-template-columns: 1fr !important;
-  align-items: stretch !important;
+  align-items: auto !important;
   column-gap: 1.5rem !important;
-  overflow: visible !important;
+  margin-left: 0 !important;
+  overflow: visible;
 }
 
 .competences-gallery-mount .gallery-item--image {
-  width: 100% !important;
+  width: auto !important;
   margin: 0 !important;
   padding: 0 !important;
   transform: none !important;
-  align-self: auto !important;
-  justify-self: auto !important;
+  position: relative !important;
+  z-index: auto !important;
+  margin-left: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .competences-gallery-mount .gallery-row.has-mixed-media-pair .gallery-item--image {
-  position: static !important;
+  position: relative !important;
   z-index: auto !important;
-  width: 100% !important;
-  margin: 0 !important;
   transform: none !important;
-  background: rgba(8, 13, 29, 0.6) !important;
-}
-
-.competences-gallery-mount .gallery-item-inner {
-  aspect-ratio: auto !important;
 }
 
 .competences-gallery-mount .gallery-item--image img {
   object-fit: cover !important;
-  background: transparent !important;
-}
-
-.competences-gallery-mount .gallery-text-block,
-.competences-gallery-mount .gallery-row--media-stack,
-.competences-gallery-mount .gallery-image-stack,
-.competences-gallery-mount .gallery-item--stack-image {
-  display: none !important;
 }

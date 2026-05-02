@@ -210,6 +210,70 @@ if (trailerVideos.length) {
   }
 }
 
+/* DEMOREEL SOUND & LIGHTBOX */
+function initDemoReel() {
+  const demoReelVideo = document.querySelector('.demoreel-video');
+  const soundBtn = document.querySelector('.demoreel-sound-btn');
+  const demoReelContainer = document.querySelector('.demoreel-container');
+  
+  if (!demoReelVideo || !soundBtn) {
+    console.warn('Demoreel elements not found');
+    return;
+  }
+
+  console.log('Demoreel initialized:', { demoReelVideo, soundBtn });
+
+  // Sound button - toggle muted state
+  soundBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('Sound button clicked, current muted:', demoReelVideo.muted);
+    demoReelVideo.muted = !demoReelVideo.muted;
+    soundBtn.innerHTML = demoReelVideo.muted ? '<span class="sound-icon">🔇</span>' : '<span class="sound-icon">🔊</span>';
+    console.log('Muted now:', demoReelVideo.muted);
+  });
+
+  // Click to open lightbox
+  demoReelContainer.addEventListener('click', function(e) {
+    if (e.target === soundBtn || soundBtn.contains(e.target)) return;
+    console.log('Container clicked, opening lightbox');
+    const sourceUrl = demoReelVideo.querySelector('source').src;
+    const overlay = document.createElement('div');
+    overlay.className = 'video-lightbox';
+    overlay.innerHTML = `
+      <button type="button" class="video-lightbox-close" aria-label="Fermer">x</button>
+      <div class="video-lightbox-inner" role="dialog" aria-modal="true" aria-label="Video plein ecran">
+        <video controls autoplay style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="${sourceUrl}" type="video/mp4" />
+        </video>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+    document.body.classList.add('lightbox-open');
+
+    const closeBtn = overlay.querySelector('.video-lightbox-close');
+    const closeLightbox = function() {
+      overlay.remove();
+      document.body.classList.remove('lightbox-open');
+    };
+    
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeLightbox();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDemoReel);
+} else {
+  initDemoReel();
+}
+
 /* MEDIA LIGHTBOX */
 (() => {
   const clickableMedia = () => document.querySelectorAll('.project-trailer-video, .gallery-item-inner video, .gallery-item-inner img');
