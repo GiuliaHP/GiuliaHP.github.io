@@ -25,9 +25,11 @@
 <!-- DEMOREEL -->
 <section class="demoreel-section">
   <div class="demoreel-container">
-    <video autoplay muted loop playsinline preload="metadata" class="demoreel-video">
+    <video id="demoreel-video" autoplay muted loop playsinline preload="metadata" class="demoreel-video">
+      <source src="assets/img/DemoReel2026.webm" type="video/webm" />
       <source src="assets/img/DemoReel2026.mp4" type="video/mp4" />
     </video>
+    <img id="demoreel-placeholder" src="assets/img/DemoReelPlaceholder.webp" alt="Demo Reel" class="demoreel-video" style="display:none;object-fit:cover;" />
     <button class="demoreel-sound-btn" aria-label="Activer le son" title="Activer le son">
       <span class="sound-icon">🔇</span>
     </button>
@@ -75,7 +77,7 @@
     <ul class="projects-list">
 
       <li>
-        <a class="project-row reveal" href="project-soultide.html" data-bg="assets/img/backgrounds/BG_SoulTide.png" data-icon="assets/img/icons/IC_SoulTide.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_SoulTide.mp4?v=20260320">
+        <a class="project-row reveal" href="project-soultide.html" data-bg="assets/img/backgrounds/BG_Soultide.webp" data-icon="assets/img/icons/IC_SoulTide.png" data-video-webm="assets/img/previews/PR_Soultide.webm" data-video-mp4="assets/img/previews/PR_Soultide.mp4?v=20260320">
           <div class="project-main">
             <span class="project-year">En cours</span>
             <div class="project-title-wrap">
@@ -84,7 +86,7 @@
           </div>
           <div class="project-side">
             <div class="project-media-frame">
-              <img src="assets/img/backgrounds/BG_SoulTide.png" alt="Aperçu SoulTide" loading="lazy" />
+              <img src="assets/img/backgrounds/BG_Soultide.webp" alt="Aperçu SoulTide" loading="lazy" />
             </div>
             <span class="project-tags">
               <img class="tag-logo" src="assets/img/logos/LO_Unreal.png" alt="Unreal Engine 5" title="Unreal Engine 5" loading="lazy" />
@@ -95,7 +97,7 @@
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-herbarium.html" data-bg="assets/img/backgrounds/BG_Herbarium.png" data-icon="assets/img/icons/IC_Herbarium.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_Herbarium.mp4?v=20260320">
+        <a class="project-row reveal" href="project-herbarium.html" data-bg="assets/img/backgrounds/BG_Herbarium.webp" data-icon="assets/img/icons/IC_Herbarium.webp" data-video-webm="assets/img/previews/PR_Herbarium.webm" data-video-mp4="assets/img/previews/PR_Herbarium.mp4?v=20260320">
           <div class="project-main">
             <span class="project-year">2026</span>
             <div class="project-title-wrap">
@@ -104,10 +106,10 @@
           </div>
           <div class="project-side">
             <div class="project-media-frame">
-              <img src="assets/img/backgrounds/BG_Herbarium.png" alt="Aperçu The Herbarium" loading="lazy" />
+              <img src="assets/img/backgrounds/BG_Herbarium.webp" alt="Aperçu The Herbarium" loading="lazy" />
             </div>
             <span class="project-tags">
-              <img class="tag-logo" src="assets/img/logos/LO_Unity.png" alt="Unity" title="Unity" loading="lazy" />
+              <img class="tag-logo" src="assets/img/logos/LO_Unity.webp" alt="Unity" title="Unity" loading="lazy" />
               <img class="tag-logo" src="assets/img/logos/LO_CSharp.png" alt="C#" title="C#" loading="lazy" />
             </span>
           </div>
@@ -115,7 +117,7 @@
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-blueprint.html" data-bg="assets/img/backgrounds/BG_TUBP.png" data-icon="assets/img/icons/IC_TUBP.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_TUBP.mp4?v=20260320">
+        <a class="project-row reveal" href="project-blueprint.html" data-bg="assets/img/backgrounds/BG_TUBP.webp" data-icon="assets/img/icons/IC_TUBP.png" data-video-webm="assets/img/previews/PR_TUBP.webm" data-video-mp4="assets/img/previews/PR_TUBP.mp4?v=20260320">
           <div class="project-main">
             <span class="project-year">2025</span>
             <div class="project-title-wrap">
@@ -124,7 +126,7 @@
           </div>
           <div class="project-side">
             <div class="project-media-frame">
-              <img src="assets/img/backgrounds/BG_TUBP.png" alt="Aperçu The Unfinished Blueprint" loading="lazy" />
+              <img src="assets/img/backgrounds/BG_TUBP.webp" alt="Aperçu The Unfinished Blueprint" loading="lazy" />
             </div>
             <span class="project-tags">
               <img class="tag-logo" src="assets/img/logos/LO_Unreal.png" alt="Unreal Engine 5" title="Unreal Engine 5" loading="lazy" />
@@ -135,7 +137,7 @@
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-prophecy.html" data-bg="assets/img/backgrounds/BG_Prophecy.png" data-icon="assets/img/icons/IC_Prophecy.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_Prophecy.mp4?v=20260320">
+        <a class="project-row reveal" href="project-prophecy.html" data-bg="assets/img/backgrounds/BG_Prophecy.webp" data-icon="assets/img/icons/IC_Prophecy.png" data-video-webm="assets/img/previews/PR_Prophecy.webm" data-video-mp4="assets/img/previews/PR_Prophecy.mp4?v=20260320">
           <div class="project-main">
             <span class="project-year">2025</span>
             <div class="project-title-wrap">
@@ -144,10 +146,10 @@
           </div>
           <div class="project-side">
             <div class="project-media-frame">
-              <img src="assets/img/backgrounds/BG_Prophecy.png" alt="Aperçu Prophecy" loading="lazy" />
+              <img src="assets/img/backgrounds/BG_Prophecy.webp" alt="Aperçu Prophecy" loading="lazy" />
             </div>
             <span class="project-tags">
-              <img class="tag-logo" src="assets/img/logos/LO_Unity.png" alt="Unity" title="Unity" loading="lazy" />
+              <img class="tag-logo" src="assets/img/logos/LO_Unity.webp" alt="Unity" title="Unity" loading="lazy" />
               <img class="tag-logo" src="assets/img/logos/LO_CSharp.png" alt="C#" title="C#" loading="lazy" />
             </span>
           </div>
@@ -155,7 +157,7 @@
       </li>
 
       <li>
-        <a class="project-row reveal" href="project-portrait.html" data-bg="assets/img/backgrounds/BG_Chara.png" data-icon="assets/img/icons/IC_Chara.png" data-video-webm="" data-video-mp4="assets/img/previews/PR_Chara.mp4?v=20260320">
+        <a class="project-row reveal" href="project-portrait.html" data-bg="assets/img/backgrounds/BG_Chara.webp" data-icon="assets/img/icons/IC_Chara.png" data-video-webm="assets/img/previews/PR_Chara.webm" data-video-mp4="assets/img/previews/PR_Chara.mp4?v=20260320">
           <div class="project-main">
             <span class="project-year">2025</span>
             <div class="project-title-wrap">
@@ -164,7 +166,7 @@
           </div>
           <div class="project-side">
             <div class="project-media-frame">
-              <img src="assets/img/backgrounds/BG_Chara.png" alt="Aperçu Character Maker" loading="lazy" />
+              <img src="assets/img/backgrounds/BG_Chara.webp" alt="Aperçu Character Maker" loading="lazy" />
             </div>
             <span class="project-tags">
               <img class="tag-logo" src="assets/img/logos/LO_Blender.png" alt="Blender" title="Blender" loading="lazy" />
@@ -174,6 +176,45 @@
         </a>
       </li>
 
+    </ul>
+  </div>
+</section>
+
+<!-- QUICK LINKS -->
+<section id="quick-links">
+  <div class="wrap">
+    <div class="section-label reveal">Accès rapides</div>
+    <ul class="quick-links-list">
+      <li>
+        <a class="page-link-row reveal" href="games.html">
+          <div class="page-link-main">
+            <span class="page-link-kicker">Page dédiée</span>
+            <span class="page-link-name">Jeux</span>
+          </div>
+          <p class="page-link-copy">Les prototypes WebGL et les expériences jouables hébergées sur le site.</p>
+          <span class="page-link-badge" aria-hidden="true">01</span>
+        </a>
+      </li>
+      <li>
+        <a class="page-link-row reveal" href="travaux.html">
+          <div class="page-link-main">
+            <span class="page-link-kicker">Page dédiée</span>
+            <span class="page-link-name">Travaux</span>
+          </div>
+          <p class="page-link-copy">Les éléments individuels classés par domaine : character, environment, UI et animation 2D.</p>
+          <span class="page-link-badge" aria-hidden="true">02</span>
+        </a>
+      </li>
+      <li>
+        <a class="page-link-row reveal" href="cv.html">
+          <div class="page-link-main">
+            <span class="page-link-kicker">Page dédiée</span>
+            <span class="page-link-name">CV</span>
+          </div>
+          <p class="page-link-copy">Le parcours, les informations clés et les liens utiles pour me contacter.</p>
+          <span class="page-link-badge" aria-hidden="true">03</span>
+        </a>
+      </li>
     </ul>
   </div>
 </section>
@@ -197,7 +238,7 @@
         </a>
         <a href="https://github.com/giuliahp" target="_blank" rel="noopener noreferrer" class="contact-link">
           <span class="contact-link-top">
-            <img class="contact-logo" src="assets/img/logos/LO_Git.png" alt="" aria-hidden="true" />
+            <img class="contact-logo" src="assets/img/logos/LO_Git.webp" alt="" aria-hidden="true" />
             <span class="contact-link-label">GitHub</span>
           </span>
           <span class="contact-link-value">giuliahp</span>
@@ -223,8 +264,8 @@
 
 <div id="footer-placeholder"></div>
 
-<script src="assets/js/components.js"></script>
-<script src="assets/js/script.js"></script>
+<script defer src="assets/js/components.js"></script>
+<script defer src="assets/js/script.js"></script>
 
 </body>
 </html>

@@ -2,6 +2,7 @@
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.webm",
     "caption": "Système de dialogue"
   },
   {
@@ -42,11 +43,13 @@
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.webm",
     "caption": "Environement — Perspective"
   },
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.webm",
     "caption": "Environement — Couches & Parallax"
   },
   {
@@ -77,6 +80,7 @@
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.webm",
     "caption": "Animation pixel art"
   },
   {
@@ -107,6 +111,7 @@
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.webm",
     "caption": "Dynamiques des ombres"
   },
   {
@@ -137,6 +142,7 @@
   {
     "type": "video",
     "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.webm",
     "caption": "Animation des sprites"
   },
   {

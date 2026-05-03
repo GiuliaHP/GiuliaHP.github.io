@@ -2,11 +2,12 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
+    "webm": "assets/img/showcase/TUBP/SH_TUBP_Blood.webm",
     "caption": "Projection de sang"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.webp?v=20260323",
     "caption": "Référence aux décals de sang"
   },
   {
@@ -37,6 +38,7 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
+    "webm": "assets/img/showcase/TUBP/SH_TUBP_Procedural.webm",
     "caption": "Génération Procédurale — Labyrinthe"
   },
   {
@@ -67,11 +69,12 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
+    "webm": "assets/img/showcase/TUBP/SH_TUBP_UX.webm",
     "caption": "Design UI/UX — Clefs"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.webp?v=20260323",
     "caption": "Blueprint clefs — UI"
   },
   {
@@ -81,12 +84,12 @@
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.webp?v=20260323",
     "caption": "Blueprint clefs — Set keys UI"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.webp?v=20260323",
     "caption": "Blueprint clefs — Use keys"
   },
   {

@@ -162,6 +162,21 @@ document.querySelectorAll('.project-row').forEach(row => {
   row.addEventListener('blur', hideProjectCursorIcon);
 });
 
+/* SLOW-CONNECTION DEMOREEL FALLBACK */
+(function () {
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const slow = conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g');
+  if (!slow) return;
+  const vid = document.getElementById('demoreel-video');
+  const placeholder = document.getElementById('demoreel-placeholder');
+  if (!vid || !placeholder) return;
+  vid.pause();
+  vid.removeAttribute('src');
+  vid.load();
+  vid.style.display = 'none';
+  placeholder.style.display = 'block';
+})();
+
 /* REVEAL */
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
@@ -686,6 +701,12 @@ if (document.readyState === 'loading') {
         video.loop = true;
         video.playsInline = true;
         video.preload = 'none';
+        if (media.webm) {
+          const sourceWebm = document.createElement('source');
+          sourceWebm.src = media.webm;
+          sourceWebm.type = 'video/webm';
+          video.appendChild(sourceWebm);
+        }
         const source = document.createElement('source');
         source.src = media.src;
         source.type = 'video/mp4';

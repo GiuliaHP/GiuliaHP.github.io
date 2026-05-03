@@ -19,10 +19,11 @@
 
   <div id="nav-placeholder"></div>
 
-  <section class="project-trailer-banner" aria-label="Trailer Prophecy" style="--project-banner-bg: url('assets/img/backgrounds/BG_Prophecy.png');">
+  <section class="project-trailer-banner" aria-label="Trailer Prophecy" style="--project-banner-bg: url('assets/img/backgrounds/BG_Prophecy.webp');">
     <div class="wrap">
       <div class="project-trailer-frame">
-        <video class="project-trailer-video" muted loop playsinline preload="none" poster="assets/img/backgrounds/BG_Prophecy.png">
+        <video class="project-trailer-video" muted loop playsinline preload="none" poster="assets/img/backgrounds/BG_Prophecy.webp">
+          <source src="assets/img/trailers/TR_Prophecy.webm" type="video/webm" />
           <source src="assets/img/trailers/TR_Prophecy.mp4?v=20260320" type="video/mp4" />
         </video>
       </div>
@@ -40,7 +41,7 @@
         </div>
       </div>
       <a href="#prophecy-webgl" class="project-icon-link" title="Jouer à Prophecy">
-        <img src="assets/img/icons/IC_Prophecy.png" alt="" class="project-icon" />
+        <img src="assets/img/icons/IC_Prophecy.png" alt="" class="project-icon" loading="lazy" />
       </a>
     </div>
   </section>
@@ -71,7 +72,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="assets/js/components.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script defer src="assets/js/components.js"></script>
+  <script defer src="assets/js/script.js"></script>
 </body>
 </html>

@@ -19,10 +19,11 @@
 
   <div id="nav-placeholder"></div>
 
-  <section class="project-trailer-banner" aria-label="Trailer Character Maker" style="--project-banner-bg: url('assets/img/backgrounds/BG_Chara.png');">
+  <section class="project-trailer-banner" aria-label="Trailer Character Maker" style="--project-banner-bg: url('assets/img/backgrounds/BG_Chara.webp');">
     <div class="wrap">
       <div class="project-trailer-frame">
-        <video class="project-trailer-video" muted loop playsinline preload="none" poster="assets/img/backgrounds/BG_Chara.png">
+        <video class="project-trailer-video" muted loop playsinline preload="none" poster="assets/img/backgrounds/BG_Chara.webp">
+          <source src="assets/img/trailers/TR_Chara.webm" type="video/webm" />
           <source src="assets/img/trailers/TR_Chara.mp4?v=20260320" type="video/mp4" />
         </video>
       </div>
@@ -42,7 +43,7 @@
           </p>
         </div>
       </div>
-      <img src="assets/img/icons/IC_Chara.png" alt="" class="project-icon" />
+      <img src="assets/img/icons/IC_Chara.png" alt="" class="project-icon" loading="lazy" />
     </div>
   </section>
 
@@ -58,7 +59,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="assets/js/components.js"></script>
-  <script src="assets/js/script.js"></script>
+  <script defer src="assets/js/components.js"></script>
+  <script defer src="assets/js/script.js"></script>
 </body>
 </html>

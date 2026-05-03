@@ -729,6 +729,107 @@ section { padding: 6rem 0; }
 /* ── PROJECTS LIST ──────────────────────────── */
 #projects { border-bottom: 1px solid var(--border); }
 
+#quick-links { border-bottom: 1px solid var(--border); }
+
+.quick-links-list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.page-link-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 1.6rem;
+  border: 1px solid rgba(128, 158, 255, 0.26);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(128, 158, 255, 0.16), transparent 42%),
+    linear-gradient(160deg, rgba(12, 17, 36, 0.92), rgba(10, 14, 32, 0.96));
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-link-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0.08), transparent 38%);
+  pointer-events: none;
+}
+
+.page-link-row:hover,
+.page-link-row:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(137, 170, 255, 0.62);
+  box-shadow: 0 16px 30px rgba(8, 11, 24, 0.38);
+}
+
+.page-link-main {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.page-link-kicker {
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(201, 210, 255, 0.84);
+}
+
+.page-link-name {
+  font-family: var(--head);
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.page-link-copy {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 42rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.page-link-badge {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(144, 177, 255, 0.34);
+  background: rgba(9, 14, 31, 0.72);
+  color: rgba(231, 237, 255, 0.94);
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+}
+
+@media (max-width: 900px) {
+  .page-link-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-link-badge {
+    align-self: flex-end;
+  }
+}
+
 .projects-list {
   list-style: none;
   display: grid;
@@ -1025,6 +1126,74 @@ section { padding: 6rem 0; }
 
   .project-cursor-icon {
     display: none;
+  }
+}
+
+/* ── SKILLS ─────────────────────────────────── */
+.skills-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.4rem; }
+.skill-col-title {
+  font-size: 1.05rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.5rem; padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.skill-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+.skill-entry:last-child { border-bottom: none; }
+
+.skill-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.skill-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.65;
+}
+
+.skill-bar-wrap {
+  width: 100%;
+  height: 3px;
+  border-radius: var(--radius-pill);
+  background: rgba(128, 158, 255, 0.12);
+  overflow: hidden;
+}
+.skill-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  width: 0;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skill-entry.high .skill-bar {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+.skill-entry.mid .skill-bar {
+  background: var(--muted);
+}
+.skill-entry.low .skill-bar {
+  background: var(--muted);
+  opacity: 0.5;
+}
+
+.skill-entry:nth-child(2) .skill-bar { transition-delay: 0.08s; }
+.skill-entry:nth-child(3) .skill-bar { transition-delay: 0.16s; }
+.skill-entry:nth-child(4) .skill-bar { transition-delay: 0.24s; }
+
+@media (max-width: 1100px) {
+  .skills-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
   }
 }
 
