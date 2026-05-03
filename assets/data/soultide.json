@@ -1,1 +1,156 @@
-[]
+[ 
+    
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.mp4",
+		"caption": "Skybox"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.png",
+		"caption": "Setup Unreal"
+	},
+	{
+		"type": "text",
+		"title": "Lighting Nocturne",
+		"listing": [
+			"Contraste doux pour ambiance contemplative",
+			"Utilisation des outils d'Unreal",
+			"Blend du ciel et de l'océan"
+		],
+		"body": "Le lighting de SoulTide avait pour but d'une part de proposer une ambiance contemplative, de l'autre de coller à une esthétique stylisée, et enfin de rester optimisé.\n\nLe choix des outils s'est porté sur une simple Directional Light pour l'ambiance, un fog général pour renforcer la profondeur, et surtout une skysphere pour le ciel. Cet outil natif d'Unreal permet de modifier une skybox complexe et de l'adapter pour en faire un joli ciel nocturne et étoilé qui baigne la scène d'une douce lumière bleutée."
+	},
+
+
+
+    
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Random.mp4",
+		"caption": "Randomisation des poissons"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Parameters.png",
+		"caption": "Paramètres de génération"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_A.png",
+		"caption": "Blueprint de Poisson — Randomisation"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_B.png",
+		"caption": "Blueprint de Poisson — Génération"
+	},
+	{
+		"type": "text",
+		"title": "Randomisation & Paramétrage",
+		"listing": [
+			"Variantes de tailles et de formes",
+			"Modularité du poisson",
+			"Randomisation customisable"
+		],
+		"body": "Chaque poisson est généré à partir de cinq éléments générés aléatoirement : la taille, la tête, la nageoire dorsale, les nageoires ventrales et enfin le material. Chacun de ces éléments est référencé sous forme de liste comprenant toutes les variantes et est appelé aléatoirement.\n\nCette approche permet de créer une grande variété de poissons à partir d'un nombre limité de ressources, tout en assurant l'accès au type de chaque poisson et d'adapter le code dans ce sens. Par exemple, la taille du poisson — petit, long ou gros — affecte son nombre de points lors de la pêche. Cet élément est référencé et peut être changé rapidement."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Adaptabilité",
+		"body": "La logique de randomisation s'applique à chaque élément en changeant le skeletal mesh par un autre de la liste. Cette simple approche de la génération modulaire pourrait être adaptée à de la customization ou à tout type d'autres personnages ou objets."
+	},
+
+    
+
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish.mp4",
+		"caption": "Rig Poisson"
+	},
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
+		"caption": "Adaptabilite des variantes au Rig"
+	},
+	{
+		"type": "text",
+		"title": "Rigging Poisson Modulaire",
+		"listing": [
+			"Spline IK & Damped Track",
+			"Facilité de prise en main pour l'animation",
+			"Structure réutilisable"
+		],
+		"body": "Le défi de ce RIG était de le rendre facile à animer pour des mouvements sinusoïdaux et organiques.\n\nLa solution a été d'utiliser une Spline IK, contrôlée par une Spline. Un contrôleur a été créé pour chaque point de cette spline, permettant de déplacer la courbe et donc la colonne du poisson naturellement.\n\nPour simuler les mouvements de nageoires sans avoir à les animer à la main ni à les simuler, des modifiers de Damped Track ont été utilisés : chaque bone de la chaîne d'une nageoire copie avec un délai la rotation de son parent, créant ainsi un mouvement naturel basé sur le déplacement de la chaîne."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Variantes",
+		"body": "La simplicité de ce RIG permettait aux variantes des éléments composant le poisson de pouvoir toutes y être parentées sans nécessiter de changements ou d'adaptations, rendant ainsi le système de randomisation totalement compatible avec le rig et les animations prévues. Il serait donc très facile de créer plusieurs variantes sans avoir à changer le RIG."
+	},
+
+
+	
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel.mp4",
+		"caption": "Rig Anguille — Amplitude"
+	},
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
+		"caption": "Rig Anguille — Utilisation"
+	},
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
+		"caption": "Rig Anguille — Contrôles Faciaux"
+	},
+	{
+		"type": "text",
+		"title": "Rigging Anguille",
+		"listing": [
+			"Réutilisation de la structure du rig de poisson",
+			"Rangement des bones",
+			"Rig facial sommaire"
+		],
+		"body": "Le rig de l'anguille est une mise en application de l'adaptabilité du rig original du poisson. On y retrouve l'utilisation d'une Spline et de ses contrôleurs. Ainsi, le temps de RIG a été réduit grandement par cette réutilisation d'une même base.\n\nLe rangement des groupes de bones permet aux animateurs de ne pas perdre de temps sur la compréhension du rig et sur ce qu'ils peuvent toucher ou non. Cela permet également une plus grande visibilité.\n\nEnfin, les contrôles de la mâchoire et des yeux permettent, avec de simples contraintes de bones, d'ajouter du caractère à l'animation de l'anguille, qui est un personnage plus expressif que les poissons classiques."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Perspectives d'Animation",
+		"body": "La simplicité d'utilisation de ce rig révèle qu'il serait facile à animer par du code ou en passant par des moyens plus expérimentaux et moins chronofages que l'animation manuelle."
+	},
+
+
+
+    {
+		"type": "video",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal.mp4",
+		"caption": "Banc de poissons"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_A.png",
+		"caption": "Génération des poissons"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_B.png",
+		"caption": "Animation des poissons"
+	},
+	{
+		"type": "text",
+		"title": "Système de Banc de Poissons",
+		"listing": [
+			"Génération de poissons",
+			"Choix aléatoire de la spline de déplacement",
+			"Animation des poissons"
+		],
+		"body": "Le Blueprint de banc de poissons est composé de trois splines circulaires et de paramètres éditables comme le nombre de poissons à générer.\n\nPour économiser des ressources, lorsque le joueur est assez proche d'un banc de poissons, ces derniers sont générés un par un. Chacun choisira aléatoirement un des trois splines et, avec une vitesse variable, suivra cette spline."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Contrôle général",
+		"body": "Puisque de nombreux bancs sont présents dans la scène, leurs paramètres généraux sont contrôlés par un manager qui permet de lister les bancs de poissons et modifier les paramètres de chacun en un seul Blueprint."
+	}
+]
