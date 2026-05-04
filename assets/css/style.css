@@ -296,8 +296,12 @@ nav {
   height: auto;
   object-fit: cover;
   max-height: 70vh;
-  cursor: pointer;
+  cursor: zoom-in;
   transition: opacity 0.3s ease;
+}
+
+.demoreel-container {
+  cursor: zoom-in;
 }
 
 .demoreel-container:hover .demoreel-video {
@@ -1025,6 +1029,24 @@ section { padding: 6rem 0; }
   opacity: 0;
 }
 
+.video-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(128, 158, 255, 0.2);
+  border-top-color: #809eff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  z-index: 10;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 .project-media-frame-empty {
   display: grid;
   place-items: center;
@@ -1297,6 +1319,7 @@ section { padding: 6rem 0; }
   display: grid;
   gap: 2.2rem;
   grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr));
+  align-items: start;
 }
 
 .gallery-item {
@@ -1518,7 +1541,7 @@ section { padding: 6rem 0; }
 }
 
 .gallery-item-inner video {
-  object-fit: contain;
+  object-fit: cover;
   background: rgba(5, 8, 19, 0.82);
 }
 

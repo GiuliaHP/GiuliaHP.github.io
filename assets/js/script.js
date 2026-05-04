@@ -41,9 +41,8 @@ function getProjectPreviewVideo(row) {
   const mediaFrame = row.querySelector('.project-media-frame');
   if (!mediaFrame) return null;
 
-  const webmSrc = (row.dataset.videoWebm || '').trim();
   const mp4Src = (row.dataset.videoMp4 || '').trim();
-  if (!webmSrc && !mp4Src) return null;
+  if (!mp4Src) return null;
 
   let video = mediaFrame.querySelector('.project-preview-video');
   if (!video) {
@@ -63,11 +62,12 @@ function getProjectPreviewVideo(row) {
   }
 
   if (!video.dataset.loaded) {
-    if (webmSrc) {
-      const sourceWebm = document.createElement('source');
-      sourceWebm.src = new URL(webmSrc, location.href).href;
-      sourceWebm.type = 'video/webm';
-      video.appendChild(sourceWebm);
+    // Show loading spinner
+    let loader = mediaFrame.querySelector('.video-loader');
+    if (!loader) {
+      loader = document.createElement('div');
+      loader.className = 'video-loader';
+      mediaFrame.appendChild(loader);
     }
 
     if (mp4Src) {
@@ -79,6 +79,13 @@ function getProjectPreviewVideo(row) {
 
     video.load();
     video.dataset.loaded = 'true';
+
+    // Remove loader when video is ready to play
+    video.addEventListener('canplay', () => {
+      if (loader && loader.parentNode) {
+        loader.remove();
+      }
+    }, { once: true });
   }
 
   return video;
@@ -129,7 +136,7 @@ if (cursor) {
     }
   });
 
-  document.querySelectorAll('a, button').forEach(el => {
+  document.querySelectorAll('a, button, .demoreel-container, .demoreel-video').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
   });
@@ -161,21 +168,6 @@ document.querySelectorAll('.project-row').forEach(row => {
   row.addEventListener('mouseleave', hideProjectCursorIcon);
   row.addEventListener('blur', hideProjectCursorIcon);
 });
-
-/* SLOW-CONNECTION DEMOREEL FALLBACK */
-(function () {
-  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-  const slow = conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g');
-  if (!slow) return;
-  const vid = document.getElementById('demoreel-video');
-  const placeholder = document.getElementById('demoreel-placeholder');
-  if (!vid || !placeholder) return;
-  vid.pause();
-  vid.removeAttribute('src');
-  vid.load();
-  vid.style.display = 'none';
-  placeholder.style.display = 'block';
-})();
 
 /* REVEAL */
 const obs = new IntersectionObserver(entries => {
@@ -229,7 +221,6 @@ if (trailerVideos.length) {
 function initDemoReel() {
   const demoReelVideo = document.querySelector('.demoreel-video');
   const soundBtn = document.querySelector('.demoreel-sound-btn');
-  const demoReelContainer = document.querySelector('.demoreel-container');
   
   if (!demoReelVideo || !soundBtn) {
     console.warn('Demoreel elements not found');
@@ -247,39 +238,6 @@ function initDemoReel() {
     soundBtn.innerHTML = demoReelVideo.muted ? '<span class="sound-icon">🔇</span>' : '<span class="sound-icon">🔊</span>';
     console.log('Muted now:', demoReelVideo.muted);
   });
-
-  // Click to open lightbox
-  demoReelContainer.addEventListener('click', function(e) {
-    if (e.target === soundBtn || soundBtn.contains(e.target)) return;
-    console.log('Container clicked, opening lightbox');
-    const sourceUrl = demoReelVideo.querySelector('source').src;
-    const overlay = document.createElement('div');
-    overlay.className = 'video-lightbox';
-    overlay.innerHTML = `
-      <button type="button" class="video-lightbox-close" aria-label="Fermer">x</button>
-      <div class="video-lightbox-inner" role="dialog" aria-modal="true" aria-label="Video plein ecran">
-        <video controls autoplay style="width: 100%; height: 100%; object-fit: contain;">
-          <source src="${sourceUrl}" type="video/mp4" />
-        </video>
-      </div>
-    `;
-    document.body.appendChild(overlay);
-    document.body.classList.add('lightbox-open');
-
-    const closeBtn = overlay.querySelector('.video-lightbox-close');
-    const closeLightbox = function() {
-      overlay.remove();
-      document.body.classList.remove('lightbox-open');
-    };
-    
-    closeBtn.addEventListener('click', closeLightbox);
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) closeLightbox();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeLightbox();
-    });
-  });
 }
 
 // Initialize when DOM is ready
@@ -291,7 +249,7 @@ if (document.readyState === 'loading') {
 
 /* MEDIA LIGHTBOX */
 (() => {
-  const clickableMedia = () => document.querySelectorAll('.project-trailer-video, .gallery-item-inner video, .gallery-item-inner img');
+  const clickableMedia = () => document.querySelectorAll('.project-trailer-video, .demoreel-video, .gallery-item-inner video, .gallery-item-inner img');
   if (!clickableMedia().length) return;
 
   const overlay = document.createElement('div');
@@ -397,7 +355,7 @@ if (document.readyState === 'loading') {
   };
 
   document.addEventListener('click', event => {
-    const targetVideo = event.target.closest('.project-trailer-video, .gallery-item-inner video');
+    const targetVideo = event.target.closest('.project-trailer-video, .demoreel-video, .gallery-item-inner video');
     if (targetVideo) {
       event.preventDefault();
       openVideoLightbox(targetVideo);

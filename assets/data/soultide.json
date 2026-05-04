@@ -97,13 +97,13 @@
 	},
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
-		"caption": "Rig Anguille — Utilisation"
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
+		"caption": "Rig Anguille — Contrôles Faciaux"
 	},
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
-		"caption": "Rig Anguille — Contrôles Faciaux"
+		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
+		"caption": "Rig Anguille — Utilisation"
 	},
 	{
 		"type": "text",
