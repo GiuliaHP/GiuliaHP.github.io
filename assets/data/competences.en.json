@@ -2,26 +2,23 @@
   {
     "category": "character",
     "type": "image",
-    "src": "assets/img/skills/SK_Chara_Herbarium_Concept.webp"
+    "src": "assets/img/skills/SK_Chara_Herbarium_Concept.png"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Herbarium_Wireframe.mp4",
-    "webm": "assets/img/skills/SK_Chara_Herbarium_Wireframe.webm"
+    "src": "assets/img/skills/SK_Chara_Herbarium_Wireframe.mp4"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Herbarium_Shading.mp4",
-    "webm": "assets/img/skills/SK_Chara_Herbarium_Shading.webm"
+    "src": "assets/img/skills/SK_Chara_Herbarium_Shading.mp4"
   },
 
   {
     "category": "environment",
     "type": "video",
-    "src": "assets/img/skills/SK_Enviro_Herbarium_Wireframe.mp4",
-    "webm": "assets/img/skills/SK_Enviro_Herbarium_Wireframe.webm"
+    "src": "assets/img/skills/SK_Enviro_Herbarium_Wireframe.mp4"
   },
   {
     "category": "environment",
@@ -31,6 +28,6 @@
   {
     "category": "environment",
     "type": "image",
-    "src": "assets/img/skills/SK_Enviro_HerbariumShop_Shading.webp"
+    "src": "assets/img/skills/SK_Enviro_HerbariumShop_Shading.png"
   }
 ]

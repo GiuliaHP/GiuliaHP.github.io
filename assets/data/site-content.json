@@ -5,7 +5,7 @@
     "projectsMenuLabel": "Liste des projets",
     "projectsAll": "Tous les projets",
     "games": "Jeux",
-    "work": "Travaux",
+    "work": "Recherches",
     "cv": "CV"
   },
   "footer": {
@@ -37,7 +37,7 @@
       },
       "quickLinks": {
         "kickers": ["Page dédiée", "Page dédiée", "Page dédiée"],
-        "names": ["Jeux", "Travaux", "CV"],
+        "names": ["Jeux", "Recherches", "CV"],
         "copies": [
           "Les prototypes WebGL et les expériences jouables hébergées sur le site.",
           "Les éléments individuels classés par domaine : character, environment, UI et animation 2D.",
@@ -72,9 +72,9 @@
       }
     },
     "travaux": {
-      "documentTitle": "Travaux — Giulia HP",
+      "documentTitle": "Recherches — Giulia HP",
       "hero": {
-        "titleHtml": "<em>Travaux</em>",
+        "titleHtml": "<em>Recherches</em>",
         "descriptionHtml": "Un aperçu détaillé de mes domaines d'expertise en game art, du concept au rendu final. Chaque section présente les différentes étapes de production et les techniques utilisées."
       },
       "sections": {

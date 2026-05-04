@@ -29,7 +29,7 @@
           </ul>
         </li>
           <li><a href="games.html" data-i18n="header.games">Jeux</a></li>
-          <li><a href="travaux.html" data-i18n="header.work">Travaux</a></li>
+          <li><a href="travaux.html" data-i18n="header.work">Recherches</a></li>
           <li><a href="cv.html" data-i18n="header.cv">CV</a></li>
       </ul>
     </div>

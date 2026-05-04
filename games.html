@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="assets/img/icons/IC_Main.png" />
+  <link rel="icon" type="image/png" href="assets/img/icons/IC_Prophecy.png" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <style>
     #games-gallery {
@@ -331,14 +331,192 @@
       </div>
       <div class="game-modal-body" id="gameModalBody">
         <div class="game-loading">
-    window.addEventListener('load', function() {
+          <div class="game-loading-spinner"></div>
+          <p>Chargement...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="assets/js/components.js"></script>
+  <script defer src="assets/js/script.js"></script>
+  <script>
+    let games = [];
+
+    async function loadGamesData() {
+      const isEnglish = document.documentElement.lang === 'en';
+      const manifest = isEnglish ? 'assets/data/games.en.json' : 'assets/data/games.json';
+
+      try {
+        const response = await fetch(manifest);
+        if (!response.ok) throw new Error('failed to load games');
+        games = await response.json();
+      } catch (e) {
+        console.error(e);
+      }
+
       loadGames();
+    }
+
+    // Charge les jeux et les affiche
+    function loadGames() {
+      const playGallery = document.getElementById('games-gallery-play');
+      const downloadGallery = document.getElementById('games-gallery-download');
+      const addonsGallery = document.getElementById('games-gallery-addons');
+
+      if (!playGallery || !downloadGallery || !addonsGallery) return;
+
+      // Filtre les jeux par catégorie (et exclut les cachés)
+      const playGames = games.filter(g => g.type === 'webgl' && !g.hidden);
+      const downloadGames = games.filter(g => g.type === 'itch' && !g.hidden);
+      const addonGames = games.filter(g => g.type === 'addon' && !g.hidden);
+
+      // Fonction pour créer les cartes d'une galerie
+      function renderGallery(gallery, gameList) {
+        gallery.innerHTML = '';
+        gameList.forEach((game) => {
+          const card = document.createElement('div');
+          card.className = 'game-card reveal';
+          let addonLogoHtml = '';
+          if (game.addonLogo) {
+            addonLogoHtml = `<img src="${game.addonLogo}" class="addon-logo" alt="Addon logo">`;
+          }
+          card.innerHTML = `
+            <div class="game-card-icon-wrap">
+              <div class="game-card-preview">
+                <img src="${game.icon}" alt="${game.title}" loading="lazy">
+              </div>
+              ${addonLogoHtml}
+            </div>
+            <div class="game-card-title">${game.title}</div>
+            <div class="game-card-desc">${game.description}</div>
+          `;
+          // Ajoute la logique du clic
+          card.addEventListener('click', () => {
+            if (game.title === 'Blink Doctor' && game.link) {
+              window.open(game.link, '_blank', 'noopener,noreferrer');
+            } else if (game.type === 'itch') {
+              window.open(game.link, '_blank', 'noopener,noreferrer');
+            } else if (game.type === 'addon') {
+              const link = document.createElement('a');
+              link.href = game.downloadPath;
+              link.download = game.title + '.zip';
+              link.click();
+            } else if (game.type === 'webgl') {
+              launchGame(game);
+            }
+          });
+          gallery.appendChild(card);
+        });
+
+        // Branche les nouvelles cartes sur l'observer reveal
+        if (typeof obs !== 'undefined') {
+          gallery.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        } else {
+          gallery.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }
+      }
+
+      // Remplit chaque galerie
+      renderGallery(playGallery, playGames);
+      renderGallery(downloadGallery, downloadGames);
+      renderGallery(addonsGallery, addonGames);
+    }
+
+    // Lance un jeu dans la modal
+    function launchGame(game) {
+      const modal = document.getElementById('gameModal');
+      const modalTitle = document.getElementById('gameModalTitle');
+      const modalBody = document.getElementById('gameModalBody');
+
+      modalTitle.textContent = game.title;
+      modalBody.innerHTML = `
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement du jeu...</p>
+        </div>
+      `;
+
+      modal.classList.add('active');
+      // Désactive le scroll du body
+      document.body.style.overflow = 'hidden';
+
+      // Simule le chargement du jeu
+      setTimeout(() => {
+        if (game.buildPath) {
+          // Pour les jeux WebGL, intégrer via iframe 16/9 + bouton fullscreen
+          modalBody.innerHTML = `
+            <div style="width: 100%; max-width: 900px; aspect-ratio: 16/9; position: relative; margin: 0 auto;">
+              <iframe
+                id="webglGameIframe"
+                src="${game.buildPath}"
+                style="width: 100%; height: 100%; border: none; border-radius: 4px; display: block; background: #000;"
+                allow="autoplay; fullscreen"
+                allowfullscreen>
+              </iframe>
+              <button id="fullscreenBtn" style="position: absolute; bottom: 16px; right: 16px; z-index: 10; background: rgba(24,32,64,0.85); color: #dbe3ff; border: none; border-radius: 6px; padding: 0.5em 1em; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s;">⛶ Plein écran</button>
+            </div>
+          `;
+          // Ajoute l'action fullscreen
+          setTimeout(() => {
+            const btn = document.getElementById('fullscreenBtn');
+            const iframe = document.getElementById('webglGameIframe');
+            if (btn && iframe) {
+              btn.addEventListener('click', function() {
+                if (iframe.requestFullscreen) {
+                  iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                  iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) {
+                  iframe.msRequestFullscreen();
+                }
+              });
+            }
+          }, 100);
+        } else if (game.canvasId) {
+          // Ou utiliser un canvas
+          modalBody.innerHTML = `
+            <canvas id="${game.canvasId}" class="game-canvas"></canvas>
+          `;
+          // Charger le script du jeu ici
+          const script = document.createElement('script');
+          script.src = game.scriptPath;
+          document.body.appendChild(script);
+        }
+      }, 400);
+    }
+
+    // Ferme la modal
+    document.getElementById('gameModalClose').addEventListener('click', () => {
+      const modal = document.getElementById('gameModal');
+      modal.classList.remove('active');
+      // Réactive le scroll du body
+      document.body.style.overflow = '';
+      // Nettoie le contenu
+      document.getElementById('gameModalBody').innerHTML = `
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement...</p>
+        </div>
+      `;
+    });
+
+    // Ferme en cliquant en dehors
+    document.getElementById('gameModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('gameModal')) {
+        document.getElementById('gameModalClose').click();
+      }
+    });
+
+    // Charge les jeux au démarrage
+    window.addEventListener('load', function() {
+      loadGamesData();
     });
     // Fallback si load n'est pas appelé
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadGames);
+      document.addEventListener('DOMContentLoaded', loadGamesData);
     } else {
-      loadGames();
+      loadGamesData();
     }
   </script>
 </body>

@@ -5,7 +5,7 @@
     "projectsMenuLabel": "Projects list",
     "projectsAll": "All projects",
     "games": "Games",
-    "work": "Work",
+    "work": "Research",
     "cv": "CV"
   },
   "footer": {
@@ -37,7 +37,7 @@
       },
       "quickLinks": {
         "kickers": ["Dedicated page", "Dedicated page", "Dedicated page"],
-        "names": ["Games", "Work", "CV"],
+        "names": ["Games", "Research", "CV"],
         "copies": [
           "WebGL prototypes and playable experiences hosted on the site.",
           "Individual pieces grouped by domain: character, environment, UI and 2D animation.",
@@ -54,7 +54,7 @@
       "documentTitle": "Games — Giulia HP",
       "hero": {
         "label": "Test bed",
-        "titleHtml": "Miscellaneous <em>games</em>",
+        "titleHtml": "Various <em>games</em>",
         "descriptionHtml": "Many games and a few addons made over time, some in <em>WebGL</em>, most for <em>Windows</em>. Some are more like <em>technical demos</em>, others are <em>more complete experiences</em>."
       },
       "sections": {
@@ -72,9 +72,9 @@
       }
     },
     "travaux": {
-      "documentTitle": "Work — Giulia HP",
+      "documentTitle": "Research — Giulia HP",
       "hero": {
-        "titleHtml": "<em>Work</em>",
+        "titleHtml": "<em>Research</em>",
         "descriptionHtml": "A detailed overview of my game art specialties, from concept to final render. Each section presents the different production stages and the techniques used."
       },
       "sections": {

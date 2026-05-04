@@ -1989,3 +1989,20 @@ footer {
 .competences-gallery-mount .gallery-item--image img {
   object-fit: cover !important;
 }
+
+.competences-gallery-mount .gallery-image-stack {
+  margin-left: 0 !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  overflow: hidden;
+}
+
+.competences-gallery-mount .gallery-item--stack-image {
+  position: relative !important;
+  width: 100% !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+}

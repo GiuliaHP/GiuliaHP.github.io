@@ -1,22 +1,75 @@
-﻿[
-  {
-    "title": "Breakout for Candy",
-    "description": "Un jeu de casse-briques avec une touche sucrée. Casse les blocs et survie aux obstacles !",
-    "buildPath": "assets/games/BreakoutForCandyBUILD_WebGl/BreakoutForCandyBUILD_WebGl/index.html"
-  },
-  {
-    "title": "Dress Up Game Demo",
-    "description": "Crée ton personnage ! Habille-le avec différents vêtements et accessoires.",
-    "buildPath": "assets/games/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html"
-  },
+[
   {
     "title": "Prophecy",
-    "description": "Une expérience mystique et poétique. Explore et découvre les secrets.",
-    "buildPath": "assets/games/Prophecy_WebGL/Prophecy_WebGL/index.html"
+    "description": "Démo d'un plateformer narratif en pixel art, avec des phases de Visual Novel.",
+    "icon": "assets/img/icons/IC_Prophecy.png",
+    "buildPath": "assets/games/WEBGL_Prophecy/index.html",
+    "type": "webgl"
   },
   {
-    "title": "Sandbox",
-    "description": "Un terrain de jeu libre. Expérimente et crée ton propre scénario.",
-    "buildPath": "assets/games/SandboxBUILD_WebGl/SandboxBUILD_WebGl/index.html"
+    "title": "Dress Up Game",
+    "description": "Jeu de dress-up, permettant la customisation d'un personnage avec de nombreuses options.",
+    "icon": "assets/img/icons/IC_Dressup.png",
+    "buildPath": "assets/games/WEBGL_DressUpGame/Dress%20Up%20Game%20Demo%20%E2%80%94%20BUILD%20WEB/index.html",
+    "type": "webgl"
+  },
+  {
+    "title": "Solar System",
+    "description": "Exploration de notre système solaire à échelle réduite en conduisant un petit vaisseau.",
+    "icon": "assets/img/icons/IC_Solar.png",
+    "buildPath": "assets/games/WEBGL_SolarSystem/index.html",
+    "type": "webgl",
+    "hidden": true
+  },
+  {
+    "title": "Breakout for Candy",
+    "description": "Casse-briques classique avec une difficulté croissante.",
+    "icon": "assets/img/icons/IC_Candy.png",
+    "buildPath": "assets/games/WEBGL_BreakoutForCandy/BreakoutForCandyBUILD_WebGl/index.html",
+    "type": "webgl"
+  },
+  {
+    "title": "The Herbarium",
+    "description": "Jeu cozy inspiré de Cooking Mama, permettant la création de potions.",
+    "icon": "assets/img/icons/IC_Herbarium.png",
+    "link": "https://aconitum-napellus.itch.io/the-herbarium-demo",
+    "type": "itch"
+  },
+  {
+    "title": "TUBP",
+    "description": "Exploration et résolution de puzzles dans un labyrinthe procédural, avec une esthétique épurée.",
+    "icon": "assets/img/icons/IC_TUBP.png",
+    "link": "https://aconitum-napellus.itch.io/the-unfinished-blueprint",
+    "type": "itch"
+  },
+  {
+    "title": "Sur la bonne voie",
+    "description": "Jeu de gestion ferroviaire relaxant sur une île paisible.",
+    "icon": "assets/img/icons/IC_SLBV.png",
+    "link": "https://aconitum-napellus.itch.io/sur-la-bonne-voie",
+    "type": "itch"
+  },
+  {
+    "title": "Vallée d'Éther",
+    "description": "Jeu d'exploration, où un petit renard parcourt la vallée avant l'arrivée de l'hiver.",
+    "icon": "assets/img/icons/IC_Ether.png",
+    "link": "https://aconitum-napellus.itch.io/vallether",
+    "type": "itch"
+  },
+  {
+    "title": "Character Maker",
+    "description": "Addon Blender de créateur de portrait stylisé avec édition poussée du visage.",
+    "icon": "assets/img/icons/IC_Chara.png",
+    "downloadPath": "assets/games/ADDON_Chara.zip",
+    "type": "addon",
+    "addonLogo": "assets/img/logos/LO_Blender.png"
+  },
+  {
+    "title": "Blink Doctor",
+    "description": "Addon pour le jeu Rhythm Doctor permettant de jouer en clignant des yeux plutôt qu'au clavier.",
+    "icon": "assets/img/icons/IC_Blink.png",
+    "link": "https://aconitum-napellus.itch.io/blink-doctor",
+    "type": "addon",
+    "addonLogo": "assets/img/logos/LO_RD.png"
   }
 ]

@@ -300,6 +300,8 @@ async function initPageTranslations() {
 }
 
 async function initGamesPage() {
+  if (typeof loadGames === 'function') return;
+
   const playGallery = document.getElementById('games-gallery-play');
   const downloadGallery = document.getElementById('games-gallery-download');
   const addonsGallery = document.getElementById('games-gallery-addons');
@@ -664,8 +666,9 @@ if (trailerVideos.length) {
 
 /* MEDIA LIGHTBOX */
 (() => {
-  const clickableMedia = () => document.querySelectorAll('.project-trailer-video, .demoreel-video, .gallery-item-inner video, .gallery-item-inner img');
-  if (!clickableMedia().length) return;
+  const hasStaticMedia = document.querySelectorAll('.project-trailer-video, .demoreel-video, .gallery-item-inner video, .gallery-item-inner img').length > 0;
+  const hasDynamicGallery = document.querySelector('.showcase-gallery-mount, .competences-gallery-mount') !== null;
+  if (!hasStaticMedia && !hasDynamicGallery) return;
 
   const overlay = document.createElement('div');
   overlay.className = 'video-lightbox';
