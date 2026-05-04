@@ -31,6 +31,7 @@
 <footer>
   <span>© 2026 Giulia HP.</span>
   <span>Hébergé sur GitHub Pages</span>
+  <span>Last Update: 04/05/2026 12:33</span>
 </footer>`;
 
   function inject(id, html) {

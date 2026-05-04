@@ -1,1 +1,177 @@
-[]
+[
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Chara/SH_Chara_Setup.mp4?v=20260504",
+		"caption": "Setup de l'addon"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Setup_A.png",
+		"caption": "Initialisation"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Setup_B.png",
+		"caption": "Interface principale"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_UI.png",
+		"caption": "Icônes"
+	},
+	{
+		"type": "text",
+		"title": "Setup",
+		"listing": [
+			"Import ZIP dans les préférences",
+			"Section Character Maker aux tools",
+			"Load Scene — icônes et éléments 3D"
+		],
+		"body": "Comme tout addon Blender, celui-ci est un simple ZIP à importer dans les préférences. Une fois activé, il ajoute une section Character Maker dans les tools. C'est à partir de cette interface que l'on peut lancer le setup.\n\nLorsqu'on coche le booléen Load Scene, alors sont importées les icônes de l'interface ainsi que tous les éléments 3D du portrait qui vont composer l'éditeur de personnage."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Interface",
+		"body": "Pour faciliter la compréhension de l'interface, chaque catégorie d'éléments éditables possède une icône grisée lui correspondant. Les différentes parties de cette icône sont mises en avant lorsque l'on édite le paramètre correspondant."
+	},
+	
+
+
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Chara/SH_Chara_Render.mp4?v=20260504",
+		"caption": "Démonstration de rendu potenciel"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Shapekeys.png",
+		"caption": "Shapekeys — Générales"
+	},
+	{
+		"type": "text",
+		"title": "Rendu et Shape Keys",
+		"listing": [
+			"Rigging et animation du portrait",
+			"Retopologie et dépliage UV",
+			"Texturing et préparation finale"
+		],
+		"body": "Une fois la customisation du personnage satisfaisante, l'utilisateur peut le rigger puis l'animer.\n\nPour le démontrer, j'ai réalisé ce processus en passant par une étape essentielle de retopologie et de dépliage des UV, afin de rendre le buste utilisable pour le rigging, le texturing et l'animation."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Shape Keys",
+		"body": "Le visage et les cils ont les mêmes Shape Keys. Ces dernières sont synchronisées afin que les modifications soient uniformes sur l'ensemble des éléments faciaux."
+	},
+
+
+
+    {
+		"type": "video",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Ears.mp4?v=20260504",
+		"caption": "Customisation des oreilles"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_A.png",
+		"caption": "Hierarchie des oreilles"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_B.png",
+		"caption": "Modifiers de la tête"
+	},
+	{
+		"type": "text",
+		"title": "Customisation Oreilles",
+		"listing": [
+			"Modèles multiples d'oreilles",
+			"Lissage booléen sur le visage",
+			"Adaptation des boucles d'oreilles"
+		],
+		"body": "Les oreilles sont de simples modèles de plusieurs types qui sont appliqués par un booléen puis lissés sur le visage, permettant une transition douce entre les deux éléments.\n\nLes boucles d'oreilles sont déplacées en fonction du type d'oreille, s'adaptant donc à la longueur et la forme de chacune."
+	},
+
+
+    
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes.mp4?v=20260504",
+		"caption": "Customisation des yeux"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes_.png",
+		"caption": "Hierarchie des yeux"
+	},
+	{
+		"type": "text",
+		"title": "Customisation Yeux",
+		"listing": [
+			"Inclinaison et écartement éditables",
+			"Variations de pupilles et cils",
+			"Contrôleur animable des pupilles"
+		],
+		"body": "Les yeux sont les éléments les plus customisables du portrait. En plus de pouvoir éditer l'inclinaison et l'écartement, on peut basculer entre plusieurs variations de pupilles et de cils, chacune suivant les déformations globales des yeux.\n\nLes pupilles sont des sphères avec de l'alpha, skinwrappées autour de la sphère que sont les globes oculaires. Elles sont contraintes par un contrôleur animable qui les fait tourner, mimant le déplacement des pupilles dans l'œil sans les déformer."
+	},
+
+
+
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows.mp4?v=20260504",
+		"caption": "Customisation des sourcils"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_A.png",
+		"caption": "Hierarchie des sourcils"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_B.png",
+		"caption": "Shape Keys — Sourcils"
+	},
+	{
+		"type": "text",
+		"title": "Customisation Sourcils",
+		"listing": [
+			"Édition par Shape Keys",
+			"Forme, orientation et inclinaison",
+			"Épaisseur via modifiers"
+		],
+		"body": "Les sourcils sont entièrement éditables à partir de Shape Keys qui les déforment. Ainsi, on peut modifier leur forme en détail, leur orientation et leur inclinaison.\n\nLeur forme d'origine, déclinée sous trois variantes, est présentée sous forme d'un plan qui est ensuite déformé à partir de plusieurs modifiers pour lui donner de l'épaisseur tout en simplifiant les modifications appliquées par les Shape Keys."
+	},
+	{
+		"type": "text",
+		"title": "NOTE — Shape Keys",
+		"body": "Certaines des Shape Keys déformant les sourcils sont les mêmes que celles déformant le visage et les cils, permettant que la modification d'un des paramètres de sourcils s'applique à tous les éléments ayant besoin de déformation, de manière synchronisée."
+	},
+
+
+
+	{
+		"type": "video",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Hair.mp4?v=20260504",
+		"caption": "Customisation des cheveux"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_A.png",
+		"caption": "Hierarchie des cheveux"
+	},
+	{
+		"type": "image",
+		"src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_B.png",
+		"caption": "Modifiers de la base des cheveux"
+	},
+	{
+		"type": "text",
+		"title": "Customisation Cheveux",
+		"listing": [
+			"Variantes de coiffures prédéfinies",
+			"Hair Detailed Options (base, frange, mèches)",
+			"Fusion booléenne des parties"
+		],
+		"body": "La customisation des cheveux est disponible sous deux formats. Le premier permet de basculer entre plusieurs variantes de coiffures complexes réalisées au préalable. Ces dernières sont détaillées mais non éditables.\n\nPour aller plus loin dans l'édition de la coiffure, il suffit d'activer le booléen Hair Detailed Options qui permet alors de modifier la base, la frange, les mèches et l'arrière des cheveux.\n\nCette dernière option, bien plus customisable, est possible grâce à un travail de modélisation adapté à l'utilisation de multiples booléens qui fusionnent les parties de la coiffure en une seule."
+	}
+]

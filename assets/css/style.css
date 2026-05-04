@@ -1352,7 +1352,7 @@ section { padding: 6rem 0; }
   z-index: 2;
   align-self: end;
   justify-self: start;
-  width: min(100%, 320px);
+  width: min(100%, 260px);
   padding: 0.38rem;
   margin-left: -4.6rem;
   margin-bottom: -1.1rem;
@@ -1456,7 +1456,7 @@ section { padding: 6rem 0; }
   position: absolute;
   top: 0;
   left: 0;
-  width: min(100%, 300px);
+  width: min(100%, 260px);
   padding: 0.34rem;
   border-color: rgba(186, 204, 255, 0.34);
   background: linear-gradient(180deg, rgba(16, 21, 42, 0.98), rgba(9, 13, 28, 0.98));
@@ -1830,7 +1830,7 @@ body.lightbox-open {
 /* ── FOOTER ─────────────────────────────────── */
 footer {
   padding: 2rem 2.5rem; max-width: 1060px; margin: 0 auto;
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: space-between; gap: 0.75rem 1.5rem; flex-wrap: wrap; align-items: center;
   font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted);
 }
 

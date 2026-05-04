@@ -765,6 +765,7 @@ if (document.readyState === 'loading') {
         );
 
         const sideImages = [];
+        const sideImageRatios = [];
         const underVideoImages = [];
         for (const entry of ratioEntries) {
           // Very tall images are easier to read under the video than inside the side stack.
@@ -772,6 +773,7 @@ if (document.readyState === 'loading') {
             underVideoImages.push(entry.image);
           } else {
             sideImages.push(entry.image);
+            sideImageRatios.push(entry.ratio);
           }
         }
 
@@ -792,18 +794,30 @@ if (document.readyState === 'loading') {
 
           for (let imageIndex = 0; imageIndex < sideImages.length; imageIndex += 1) {
             const image = sideImages[imageIndex];
+            const ratio = sideImageRatios[imageIndex];
             const imageItem = createMediaItem(image);
             imageItem.classList.add('gallery-item--stack-image');
 
             const rotate = (Math.random() * 9) - 4.5;
-            const jitterX = (Math.random() * 12) - 6;
+            const jitterX = (Math.random() * 24) - 12;
             const lift = Math.random() * 8;
             const lane = useTwoLanes ? imageIndex % 2 : 0;
             const tier = useTwoLanes ? Math.floor(imageIndex / 2) : imageIndex;
-            const baseStepY = useTwoLanes ? 98 : 74;
-            const laneOffsetY = useTwoLanes ? lane * 34 : 0;
-            const laneOffsetX = useTwoLanes ? lane * 48 : 0;
-            const offsetY = tier * baseStepY + laneOffsetY - lift;
+            const baseStepY = useTwoLanes ? 120 : 100;
+            const laneOffsetY = useTwoLanes ? lane * 42 : 0;
+            const laneOffsetX = useTwoLanes ? lane * 280 : 0;
+
+            // Adjust offset for very tall images - move them up to prevent overlap with next video
+            let heightAdjustment = 0;
+            if (ratio && ratio < 0.5) {
+              // Very tall image (aspect ratio < 0.5, meaning height > 2x width)
+              heightAdjustment = -70;
+            } else if (ratio && ratio < 0.65) {
+              // Tall image (aspect ratio < 0.65)
+              heightAdjustment = -40;
+            }
+
+            const offsetY = tier * baseStepY + laneOffsetY - lift + heightAdjustment;
             const offsetX = laneOffsetX + jitterX;
 
             if (offsetY > maxOffsetY) maxOffsetY = offsetY;
