@@ -1,10 +1,455 @@
 /* CURSOR */
+const LANGUAGE_STORAGE_KEY = 'site-language';
+const DEFAULT_LANGUAGE = 'fr';
+const SUPPORTED_LANGUAGES = new Set(['fr', 'en']);
 const cursor = document.getElementById('cursor');
 const projectCursorIcon = document.getElementById('projectCursorIcon');
 const projectCursorIconImg = document.getElementById('projectCursorIconImg');
 const projectCursorIconLabel = document.getElementById('projectCursorIconLabel');
 const canTrackProjectIcons = Boolean(projectCursorIcon && projectCursorIconImg && projectCursorIconLabel);
 let activeProjectRow = null;
+let currentLanguage = getInitialLanguage();
+let siteContentPromise = null;
+
+function normalizeLanguage(value) {
+  if (!value) return '';
+  const normalized = String(value).trim().toLowerCase();
+  return SUPPORTED_LANGUAGES.has(normalized) ? normalized : '';
+}
+
+function getInitialLanguage() {
+  const queryLanguage = normalizeLanguage(new URLSearchParams(location.search).get('lang'));
+  if (queryLanguage) {
+    try { localStorage.setItem(LANGUAGE_STORAGE_KEY, queryLanguage); } catch (error) {}
+    return queryLanguage;
+  }
+
+  try {
+    const storedLanguage = normalizeLanguage(localStorage.getItem(LANGUAGE_STORAGE_KEY));
+    if (storedLanguage) return storedLanguage;
+  } catch (error) {}
+
+  return DEFAULT_LANGUAGE;
+}
+
+function setDocumentLanguage(language) {
+  document.documentElement.lang = language;
+}
+
+function getLocalizedManifest(manifest) {
+  if (currentLanguage === DEFAULT_LANGUAGE) return manifest;
+
+  const url = new URL(manifest, location.href);
+  if (url.pathname.endsWith('.fr.json') || url.pathname.endsWith('.en.json')) {
+    url.pathname = url.pathname.replace(/\.(?:fr|en)\.json$/, `.${currentLanguage}.json`);
+  } else if (url.pathname.endsWith('.json')) {
+    url.pathname = url.pathname.replace(/\.json$/, `.${currentLanguage}.json`);
+  }
+
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function updateLanguageButtons() {
+  document.querySelectorAll('[data-lang-option]').forEach(button => {
+    const buttonLanguage = normalizeLanguage(button.dataset.langOption);
+    const isActive = buttonLanguage === currentLanguage;
+    button.classList.toggle('is-active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+    button.setAttribute('aria-label', buttonLanguage === 'fr' ? 'Afficher la version française' : 'Show the English version');
+  });
+}
+
+function setLanguage(language) {
+  const normalized = normalizeLanguage(language);
+  if (!normalized || normalized === currentLanguage) return;
+
+  currentLanguage = normalized;
+  try { localStorage.setItem(LANGUAGE_STORAGE_KEY, currentLanguage); } catch (error) {}
+  setDocumentLanguage(currentLanguage);
+  updateLanguageButtons();
+  location.reload();
+}
+
+setDocumentLanguage(currentLanguage);
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('[data-lang-option]');
+  if (!button) return;
+
+  event.preventDefault();
+  setLanguage(button.dataset.langOption);
+});
+
+updateLanguageButtons();
+
+function getNestedValue(source, path) {
+  if (!source || !path) return null;
+  return String(path).split('.').reduce((value, key) => (value && key in value ? value[key] : null), source);
+}
+
+function setNodeText(selector, value, root = document) {
+  const node = root.querySelector(selector);
+  if (node && typeof value === 'string') node.textContent = value;
+}
+
+function setNodeHTML(selector, value, root = document) {
+  const node = root.querySelector(selector);
+  if (node && typeof value === 'string') node.innerHTML = value;
+}
+
+function setAllNodeText(selector, values, root = document) {
+  const nodes = root.querySelectorAll(selector);
+  nodes.forEach((node, index) => {
+    if (typeof values[index] === 'string') node.textContent = values[index];
+  });
+}
+
+function applyI18nAttributes(bundle, root = document) {
+  root.querySelectorAll('[data-i18n]').forEach(node => {
+    const value = getNestedValue(bundle, node.dataset.i18n);
+    if (typeof value !== 'string') return;
+
+    if (node.dataset.i18nHtml === 'true') {
+      node.innerHTML = value;
+    } else {
+      node.textContent = value;
+    }
+  });
+
+  root.querySelectorAll('[data-i18n-aria]').forEach(node => {
+    const value = getNestedValue(bundle, node.dataset.i18nAria);
+    if (typeof value === 'string') node.setAttribute('aria-label', value);
+  });
+}
+
+function getPageKey() {
+  const path = location.pathname.toLowerCase();
+  if (path.endsWith('/') || path.endsWith('/index.html')) return 'index';
+  if (path.endsWith('/games.html')) return 'games';
+  if (path.endsWith('/travaux.html')) return 'travaux';
+  if (path.endsWith('/cv.html')) return 'cv';
+  return '';
+}
+
+async function loadSiteContent() {
+  if (!siteContentPromise) {
+    siteContentPromise = fetch(getLocalizedManifest('assets/data/site-content.json'))
+      .then(res => {
+        if (!res.ok) throw new Error('failed to load site content');
+        return res.json();
+      })
+      .catch(() => null);
+  }
+
+  return siteContentPromise;
+}
+
+function applyHeaderFooterTranslations(bundle) {
+  if (!bundle) return;
+
+  applyI18nAttributes(bundle, document);
+  setNodeText('.nav-projects-trigger', bundle.header?.projects);
+  setNodeText('[data-i18n="header.contact"]', bundle.header?.contact);
+  setNodeText('[data-i18n="header.projectsAll"]', bundle.header?.projectsAll);
+  setNodeText('[data-i18n="header.games"]', bundle.header?.games);
+  setNodeText('[data-i18n="header.work"]', bundle.header?.work);
+  setNodeText('[data-i18n="header.cv"]', bundle.header?.cv);
+  const navMenu = document.querySelector('.nav-projects-menu');
+  if (navMenu && bundle.header?.projectsMenuLabel) {
+    navMenu.setAttribute('aria-label', bundle.header.projectsMenuLabel);
+  }
+  setNodeText('[data-i18n="footer.copy"]', bundle.footer?.copy);
+  setNodeText('[data-i18n="footer.host"]', bundle.footer?.host);
+  setNodeText('[data-i18n="footer.update"]', bundle.footer?.update);
+}
+
+function applyIndexTranslations(bundle) {
+  if (!bundle) return;
+
+  setNodeText('#hero .hero-label', bundle.hero?.label);
+  setNodeHTML('#hero .hero-title', bundle.hero?.titleHtml);
+  setNodeHTML('#hero .hero-desc', bundle.hero?.descriptionHtml);
+  setNodeHTML('#hero .hero-meta p strong', bundle.hero?.metaLeadHtml);
+  setAllNodeText('#hero .hero-meta li', bundle.hero?.metaItems || []);
+  setNodeText('#projects .section-label', bundle.sections?.projects);
+  setAllNodeText('#projects .project-year', bundle.projects?.years || []);
+  setNodeText('#quick-links .section-label', bundle.sections?.quickLinks);
+  setAllNodeText('#quick-links .page-link-kicker', bundle.quickLinks?.kickers || []);
+  setAllNodeText('#quick-links .page-link-name', bundle.quickLinks?.names || []);
+  setAllNodeText('#quick-links .page-link-copy', bundle.quickLinks?.copies || []);
+  setNodeText('#contact .section-label', bundle.sections?.contact);
+  setNodeHTML('#contact .contact-title', bundle.contact?.titleHtml);
+  setNodeHTML('#contact .contact-copy', bundle.contact?.copyHtml);
+  setAllNodeText('#contact .contact-link-label', bundle.contact?.labels || []);
+}
+
+function applyGamesTranslations(bundle) {
+  if (!bundle) return;
+
+  setNodeText('#hero .hero-label', bundle.hero?.label);
+  setNodeHTML('#hero .hero-title', bundle.hero?.titleHtml);
+  setNodeHTML('#hero .hero-desc', bundle.hero?.descriptionHtml);
+  setNodeText('[data-games-section="play"] .section-label', bundle.sections?.play);
+  setNodeText('[data-games-section="download"] .section-label', bundle.sections?.download);
+  setNodeText('[data-games-section="addons"] .section-label', bundle.sections?.addons);
+  setNodeText('.project-back-link', bundle.backLink);
+  setNodeText('#gameModalTitle', bundle.modal?.title);
+  setNodeText('#gameModalBody p', bundle.modal?.loading);
+  setNodeText('#gameModalClose', bundle.modal?.close);
+}
+
+function applyTravauxTranslations(bundle) {
+  if (!bundle) return;
+
+  setNodeHTML('#hero .hero-title', bundle.hero?.titleHtml);
+  setNodeHTML('#hero .hero-desc', bundle.hero?.descriptionHtml);
+  setAllNodeText('.competences-section .section-title', bundle.sections?.titles || []);
+  setNodeText('.project-back-link', bundle.backLink);
+}
+
+function updateCvEntry(entryEl, entryData) {
+  if (!entryEl || !entryData) return;
+
+  setNodeHTML('.cv-entry-date', entryData.dateHtml, entryEl);
+  setNodeHTML('.cv-entry-title', entryData.titleHtml || entryData.title, entryEl);
+  setAllNodeText('.cv-tag', entryData.tags || [], entryEl);
+
+  const orgNodes = entryEl.querySelectorAll('.cv-entry-org');
+  const orgValues = [...(entryData.orgs || []), ...(entryData.extraOrgs || [])];
+  orgValues.forEach((value, index) => {
+    if (orgNodes[index] && typeof value === 'string') {
+      orgNodes[index].innerHTML = value;
+    }
+  });
+
+  if (typeof entryData.descHtml === 'string') {
+    const descNode = entryEl.querySelector('.cv-entry-desc');
+    if (descNode) descNode.innerHTML = entryData.descHtml;
+  }
+}
+
+function applyCvTranslations(bundle) {
+  if (!bundle) return;
+
+  setNodeText('#hero .hero-label', bundle.hero?.label);
+  setNodeHTML('#hero .hero-title', bundle.hero?.titleHtml);
+  setNodeHTML('#hero .hero-desc', bundle.hero?.descriptionHtml);
+  setAllNodeText('.cv-block-title', bundle.blocks?.titles || []);
+  setAllNodeText('.skill-col-title', bundle.skills?.columnTitles || []);
+  setNodeText('.cv-download', bundle.download?.label);
+  setNodeText('.project-back-link', bundle.backLink);
+
+  const statusNode = document.querySelector('.cv-status');
+  if (statusNode && typeof bundle.status?.html === 'string') {
+    statusNode.innerHTML = bundle.status.html;
+  }
+
+  const entryGroups = document.querySelectorAll('.cv-entries');
+  const experienceEntries = entryGroups[0]?.querySelectorAll('.cv-entry') || [];
+  const educationEntries = entryGroups[1]?.querySelectorAll('.cv-entry') || [];
+  const projectEntries = entryGroups[2]?.querySelectorAll('.cv-entry') || [];
+
+  (bundle.entries?.experience || []).forEach((entryData, index) => updateCvEntry(experienceEntries[index], entryData));
+  (bundle.entries?.education || []).forEach((entryData, index) => updateCvEntry(educationEntries[index], entryData));
+  (bundle.entries?.projects || []).forEach((entryData, index) => updateCvEntry(projectEntries[index], entryData));
+
+  const contactLabels = document.querySelectorAll('.cv-contact-label');
+  (bundle.contact?.labels || []).forEach((label, index) => {
+    if (contactLabels[index]) contactLabels[index].textContent = label;
+  });
+
+  const contactValues = document.querySelectorAll('.cv-contact-list li > span:not(.cv-contact-label), .cv-contact-list li > a');
+  (bundle.contact?.values || []).forEach((value, index) => {
+    if (contactValues[index]) contactValues[index].textContent = value;
+  });
+
+  const langNames = document.querySelectorAll('.cv-lang-name');
+  (bundle.languages?.names || []).forEach((value, index) => {
+    if (langNames[index]) langNames[index].textContent = value;
+  });
+
+  const langLevels = document.querySelectorAll('.cv-lang-level');
+  (bundle.languages?.levels || []).forEach((value, index) => {
+    if (langLevels[index]) langLevels[index].textContent = value;
+  });
+
+  const interestTags = document.querySelectorAll('.cv-aside .cv-tags .cv-tag');
+  (bundle.interests || []).forEach((value, index) => {
+    if (interestTags[index]) interestTags[index].textContent = value;
+  });
+}
+
+async function initPageTranslations() {
+  const siteContent = await loadSiteContent();
+  applyHeaderFooterTranslations(siteContent);
+
+  const pageKey = getPageKey();
+  const pageContent = siteContent?.pages?.[pageKey];
+  if (!pageContent) return siteContent;
+
+  if (pageContent.documentTitle) {
+    document.title = pageContent.documentTitle;
+  }
+
+  if (pageKey === 'index') applyIndexTranslations(pageContent);
+  if (pageKey === 'games') applyGamesTranslations(pageContent);
+  if (pageKey === 'travaux') applyTravauxTranslations(pageContent);
+  if (pageKey === 'cv') applyCvTranslations(pageContent);
+
+  return siteContent;
+}
+
+async function initGamesPage() {
+  const playGallery = document.getElementById('games-gallery-play');
+  const downloadGallery = document.getElementById('games-gallery-download');
+  const addonsGallery = document.getElementById('games-gallery-addons');
+  const modal = document.getElementById('gameModal');
+  const modalTitle = document.getElementById('gameModalTitle');
+  const modalBody = document.getElementById('gameModalBody');
+  const modalClose = document.getElementById('gameModalClose');
+
+  if (!playGallery || !downloadGallery || !addonsGallery || !modal || !modalTitle || !modalBody || !modalClose) {
+    return;
+  }
+
+  const siteContent = await loadSiteContent();
+  const pageContent = siteContent?.pages?.games;
+  applyGamesTranslations(pageContent);
+
+  const gamesManifest = await fetch(getLocalizedManifest('assets/data/games.json'))
+    .then(res => {
+      if (!res.ok) throw new Error('failed to load games');
+      return res.json();
+    })
+    .catch(() => []);
+
+  if (!Array.isArray(gamesManifest) || gamesManifest.length === 0) return;
+
+  const playGames = gamesManifest.filter(game => game.type === 'webgl');
+  const downloadGames = gamesManifest.filter(game => game.type === 'itch');
+  const addonGames = gamesManifest.filter(game => game.type === 'addon');
+
+  const renderGallery = (gallery, gameList) => {
+    gallery.innerHTML = '';
+
+    gameList.forEach(game => {
+      const card = document.createElement('div');
+      card.className = 'game-card reveal';
+
+      const addonLogoHtml = game.addonLogo
+        ? `<img src="${game.addonLogo}" class="addon-logo" alt="Addon logo">`
+        : '';
+
+      card.innerHTML = `
+        <div class="game-card-icon-wrap">
+          <div class="game-card-preview">
+            <img src="${game.icon}" alt="${game.title}" loading="lazy">
+          </div>
+          ${addonLogoHtml}
+        </div>
+        <div class="game-card-title">${game.title}</div>
+        <div class="game-card-desc">${game.description}</div>
+      `;
+
+      card.addEventListener('click', () => {
+        if (game.type === 'itch' && game.link) {
+          window.open(game.link, '_blank', 'noopener,noreferrer');
+          return;
+        }
+
+        if (game.type === 'addon' && game.downloadPath) {
+          const link = document.createElement('a');
+          link.href = game.downloadPath;
+          link.download = `${game.title}.zip`;
+          link.click();
+          return;
+        }
+
+        if (game.type === 'webgl') {
+          launchGame(game, pageContent);
+        }
+      });
+
+      gallery.appendChild(card);
+    });
+
+    if (typeof obs !== 'undefined') {
+      gallery.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    } else {
+      gallery.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+  };
+
+  function closeGameModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    modalBody.innerHTML = `
+      <div class="game-loading">
+        <div class="game-loading-spinner"></div>
+        <p>${pageContent?.modal?.loading || 'Loading...'}</p>
+      </div>
+    `;
+    modalTitle.textContent = pageContent?.modal?.title || 'Game';
+  }
+
+  function launchGame(game, strings) {
+    modalTitle.textContent = game.title;
+    modalBody.innerHTML = `
+      <div class="game-loading">
+        <div class="game-loading-spinner"></div>
+        <p>${strings?.modal?.loadingGame || 'Loading game...'}</p>
+      </div>
+    `;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+      if (!game.buildPath) return;
+
+      modalBody.innerHTML = `
+        <div style="width: 100%; max-width: 900px; aspect-ratio: 16/9; position: relative; margin: 0 auto;">
+          <iframe
+            id="webglGameIframe"
+            src="${game.buildPath}"
+            style="width: 100%; height: 100%; border: none; border-radius: 4px; display: block; background: #000;"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+          </iframe>
+          <button id="fullscreenBtn" type="button" style="position: absolute; bottom: 16px; right: 16px; z-index: 10; background: rgba(24,32,64,0.85); color: #dbe3ff; border: none; border-radius: 6px; padding: 0.5em 1em; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s;">${strings?.modal?.fullscreen || '⛶ Full screen'}</button>
+        </div>
+      `;
+
+      const btn = document.getElementById('fullscreenBtn');
+      const iframe = document.getElementById('webglGameIframe');
+      if (btn && iframe) {
+        btn.addEventListener('click', () => {
+          if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+          } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+          } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+          }
+        });
+      }
+    }, 250);
+  }
+
+  modalClose.addEventListener('click', closeGameModal);
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closeGameModal();
+  });
+
+  renderGallery(playGallery, playGames);
+  renderGallery(downloadGallery, downloadGames);
+  renderGallery(addonsGallery, addonGames);
+}
+
+(async () => {
+  await initPageTranslations();
+  await initGamesPage();
+})();
 
 function setProjectCursorPosition(x, y) {
   if (!canTrackProjectIcons) return;
@@ -215,36 +660,6 @@ if (trailerVideos.length) {
   } else if (typeof reducedMotionQuery.addListener === 'function') {
     reducedMotionQuery.addListener(updateTrailerPlayback);
   }
-}
-
-/* DEMOREEL SOUND & LIGHTBOX */
-function initDemoReel() {
-  const demoReelVideo = document.querySelector('.demoreel-video');
-  const soundBtn = document.querySelector('.demoreel-sound-btn');
-  
-  if (!demoReelVideo || !soundBtn) {
-    console.warn('Demoreel elements not found');
-    return;
-  }
-
-  console.log('Demoreel initialized:', { demoReelVideo, soundBtn });
-
-  // Sound button - toggle muted state
-  soundBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    console.log('Sound button clicked, current muted:', demoReelVideo.muted);
-    demoReelVideo.muted = !demoReelVideo.muted;
-    soundBtn.innerHTML = demoReelVideo.muted ? '<span class="sound-icon">🔇</span>' : '<span class="sound-icon">🔊</span>';
-    console.log('Muted now:', demoReelVideo.muted);
-  });
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initDemoReel);
-} else {
-  initDemoReel();
 }
 
 /* MEDIA LIGHTBOX */
@@ -529,7 +944,7 @@ if (document.readyState === 'loading') {
     let items;
 
     try {
-      const res = await fetch(manifest);
+      const res = await fetch(getLocalizedManifest(manifest));
       if (!res.ok) throw new Error('fetch failed');
       items = await res.json();
     } catch {

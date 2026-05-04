@@ -1,0 +1,77 @@
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.mp4?v=20260320",
+    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.webm",
+    "caption": "2D Animation & Rigging — Characters"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.mp4?v=20260320",
+    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.webm",
+    "caption": "2D Rigging — Environments & Props"
+  },
+  {
+    "type": "text",
+    "title": "Rig & Animation",
+    "listing": [
+      "Puppet rigging on 2D character sprites",
+      "Keyframe animation in Unity",
+      "Environments & props — wind simulation"
+    ],
+    "body": "The 2D character sprites, used as transitions between gameplay phases, were rigged in a puppet style. Each character is split into multiple layers corresponding to different body parts, then rigged and animated with keyframes.\n\nThe entire set of 2D rigs and animations was made in Unity, apart from a few key animations that were previously hand-made."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — 2D Animation RIG",
+    "body": "The 2D environment elements (leaves, grass, petals) are animated through a script that moves chains of bones to simulate wind.\n\nA simplified physics system was also coded so that mouse-dragged elements, which are also linked to bone chains, have a swinging effect consistent with their movement in the scene."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.mp4?v=20260320",
+    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.webm",
+    "caption": "Toon Shader"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.webp",
+    "caption": "Toon Shadergraph"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.mp4?v=20260320",
+    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.webm",
+    "caption": "Triplanar Shader"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.webp",
+    "caption": "Triplanar Shadergraph"
+  },
+  {
+    "type": "text",
+    "title": "Shader Breakdown",
+    "listing": [
+      "Cell shading — cartoon rendering for characters",
+      "Triplanar shader — modular environments",
+      "Water shader — adjustable animation"
+    ],
+    "body": "The goal of the shaders on this project was to blend naturally with the 2D style of the mini-games.\n\nFor the characters, I focused on a cartoon cell-shaded look. For the environments, I chose a triplanar shader to reduce production time and get modular textures without going through Substance Painter."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Parameters",
+    "body": "The toon shader lets you adjust shadow size, contrast, and highlight color.\n\nThe triplanar shader mixes two textures and a gradient, with control over offset, blend, color, and orientation.\n\nThe water shader lets you tune depth, foam, pattern size, and animation speed.\n\nThe overall idea is to have stylized shaders that adapt to several objects and can be reused in other projects."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.mp4?v=20260320",
+    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.webm",
+    "caption": "Water Shader"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.webp",
+    "caption": "Water Shadergraph"
+  }
+]

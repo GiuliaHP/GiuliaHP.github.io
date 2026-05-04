@@ -1,0 +1,153 @@
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.webm",
+    "caption": "Dialogue System"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_A.png",
+    "caption": "Dialogue trigger"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_B.png",
+    "caption": "Dialogue Manager"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_C.png",
+    "caption": "Dialogue Scriptable Object"
+  },
+  {
+    "type": "text",
+    "title": "Dialogue System",
+    "listing": [
+      "Scriptable Objects — expression customization",
+      "Multi-line dialogue manager & choices",
+      "Triggers linked to levels"
+    ],
+    "body": "The dialogues are built from Scriptable Objects. In each one, and for each dialogue line, the sprites for the eyes, eyebrows, and mouth are assigned to allow maximum expression customization for the characters. Choices can also be added, triggering the decision box with the different pre-built answers for the player.\n\nThe dialogue manager links the dialogue triggers in the level with the Scriptable Objects, and also connects the different dialogue lines to the dialogue boxes that need to be displayed."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Choices",
+    "body": "Another version of the project also allowed the player to answer the non-player character by typing their own response. That response went through a decision tree that picked the dialogue matching the keywords in the player's sentence, making the dialogue feel more immersive for the player.\n\nIn the end, that version was dropped in favor of the more classic pre-built choice system, so the project could focus on other aspects and remain more accessible."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.webm",
+    "caption": "Environment — Perspective"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.webm",
+    "caption": "Environment — Layers & Parallax"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro.png",
+    "caption": "Orthographic view of the environment without post-processing"
+  },
+  {
+    "type": "text",
+    "title": "Environmental Design",
+    "listing": [
+      "Unique color palette per area",
+      "Subtle visual cues — exploration encouraged",
+      "Coherent narrative atmosphere"
+    ],
+    "body": "The environments in Prophecy were designed to reinforce the game's narrative and symbolic atmosphere. Each area has its own visual traits, color palette, and lighting setup to create a coherent sense of immersion. Exploration is encouraged through subtle visual cues and hidden interactive elements."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Artistic Direction",
+    "body": "The art direction draws inspiration from modern mythology while maintaining a clean and symbolic aesthetic. The 3D models are optimized to keep performance smooth without compromising visual quality, making it possible to create complex, rich worlds that captivate players."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.webm",
+    "caption": "Pixel Art Animation"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.png",
+    "caption": ""
+  },
+  {
+    "type": "text",
+    "title": "Pixel Art & Animation",
+    "listing": [
+      "Retro-nostalgic pixel art style contrasting with 3D",
+      "Key 3D sprites — narrative transitions",
+      "Keyframe animation — consistent fluidity"
+    ],
+    "body": "The pixel art style in Prophecy adds a retro, nostalgic dimension that contrasts with the modern 3D environment. These animated sprites represent key elements of the game and are used to enrich certain areas as well as the narrative transitions. Each animation was made with keyframes to keep the movement consistently fluid."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — 3D & Pixel Art Hybridization",
+    "body": "The hybrid approach between 3D and pixel art creates a unique visual identity, reinforcing the game's mythological and supernatural feel. The limited pixel art color palette blends naturally with the overall color direction, creating visual cohesion across all elements."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.webm",
+    "caption": "Dynamic Shadow Behavior"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.png",
+    "caption": ""
+  },
+  {
+    "type": "text",
+    "title": "Dynamic Effects & Shadows",
+    "listing": [
+      "Shadow mapping — real-time lighting",
+      "Screen-space ambient occlusion — optimization",
+      "Living, reactive atmosphere"
+    ],
+    "body": "Dynamic shadows play a crucial role in Prophecy's overall atmosphere. They react in real time to lighting changes and moving light sources, creating a living and reactive mood. Several shadow mapping techniques and screen-space ambient occlusion are used to keep performance optimized."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — VFX Techniques",
+    "body": "Adding procedural particle effects and shader animations makes the shadows feel more organic and mysterious, in tune with the game's supernatural atmosphere. This approach also keeps the system modular, since the same techniques can be reused for other types of effects or projects."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
+    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.webm",
+    "caption": "Sprite Animation"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_A.png",
+    "caption": ""
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_B.png",
+    "caption": ""
+  },
+  {
+    "type": "text",
+    "title": "Sprites & 2D Rigging",
+    "listing": [
+      "Puppet-style rigging — fluid animation",
+      "Multiple modular layers — reusability",
+      "Movement variations — flexibility"
+    ],
+    "body": "The main character sprites were rigged in a puppet style to allow fluid and expressive animation. Each character is made up of multiple layers representing different body parts, making them reusable and flexible for complex animations and movement variations."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Animations",
+    "body": "The modular 2D rigging approach made it possible to quickly create many pose and animation variations without duplicating work. This system also makes it easier to tweak animations in post-production and adapt the characters to new narrative situations during development."
+  }
+]

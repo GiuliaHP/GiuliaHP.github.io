@@ -1,0 +1,205 @@
+{
+  "header": {
+    "contact": "Contact",
+    "projects": "Projets",
+    "projectsMenuLabel": "Liste des projets",
+    "projectsAll": "Tous les projets",
+    "games": "Jeux",
+    "work": "Travaux",
+    "cv": "CV"
+  },
+  "footer": {
+    "copy": "© 2026 Giulia HP.",
+    "host": "Hébergé sur GitHub Pages",
+    "update": "Last Update: 04/05/2026 12:33"
+  },
+  "pages": {
+    "index": {
+      "documentTitle": "Giulia HP — Portfolio",
+      "hero": {
+        "label": "Technical Artist · Généraliste Game Art · Paris",
+        "titleHtml": "Bienvenue<br>dans mon<br><em>univers</em>",
+        "descriptionHtml": "<em>Technical artist</em> généraliste orientée vers la création de <em>jeux vidéos</em>, avec une fascination pour la mise en place d'<em>outils personnalisés</em> à chaque projet et le <em>fait-main stylisé</em>.<br><br>Je me spécialise dans l'utilisation d'<em>Unity</em>, avec une connaissance approfondie de ses <em>fonctionnalités les moins conventionnelles</em>, et je suis également à l'aise avec <em>Unreal Engine 5</em>.",
+        "metaLeadHtml": "Je suis actuellement —",
+        "metaItems": [
+          "En master (Arts et Technologies de l'Image)",
+          "Disponible pour des <strong>missions freelance</strong>",
+          "Ouverte aux <strong>stages / collaborations</strong>"
+        ]
+      },
+      "sections": {
+        "projects": "Projets sélectionnés",
+        "quickLinks": "Accès rapides",
+        "contact": "Contact"
+      },
+      "projects": {
+        "years": ["En cours", "2026", "2025", "2025"]
+      },
+      "quickLinks": {
+        "kickers": ["Page dédiée", "Page dédiée", "Page dédiée"],
+        "names": ["Jeux", "Travaux", "CV"],
+        "copies": [
+          "Les prototypes WebGL et les expériences jouables hébergées sur le site.",
+          "Les éléments individuels classés par domaine : character, environment, UI et animation 2D.",
+          "Le parcours, les informations clés et les liens utiles pour me contacter."
+        ]
+      },
+      "contact": {
+        "titleHtml": "Travaillons<br><em>ensemble</em>",
+        "copyHtml": "Pour un projet, une collaboration ou une question, voici les meilleurs moyens de me joindre.",
+        "labels": ["Email", "GitHub", "LinkedIn", "Itch.io"]
+      }
+    },
+    "games": {
+      "documentTitle": "Jeux — Giulia HP",
+      "hero": {
+        "label": "Essai",
+        "titleHtml": "<em>Jeux</em> divers",
+        "descriptionHtml": "De nombreux jeux et quelques addons réalisés au fil du temps, certains en <em>WebGL</em>, la plupart pour <em>Windows</em>. Certains sont plus des <em>démos techniques</em>, d'autres des <em>expériences plus abouties</em>."
+      },
+      "sections": {
+        "play": "Jouer",
+        "download": "Télécharger",
+        "addons": "Addons"
+      },
+      "backLink": "← Retour à l'accueil",
+      "modal": {
+        "title": "Jeu",
+        "loading": "Chargement...",
+        "loadingGame": "Chargement du jeu...",
+        "close": "✕",
+        "fullscreen": "⛶ Plein écran"
+      }
+    },
+    "travaux": {
+      "documentTitle": "Travaux — Giulia HP",
+      "hero": {
+        "titleHtml": "<em>Travaux</em>",
+        "descriptionHtml": "Un aperçu détaillé de mes domaines d'expertise en game art, du concept au rendu final. Chaque section présente les différentes étapes de production et les techniques utilisées."
+      },
+      "sections": {
+        "titles": ["Character", "Environment", "UI", "Animation 2D"]
+      },
+      "backLink": "← Retour à l'accueil"
+    },
+    "cv": {
+      "documentTitle": "CV — Giulia HP.",
+      "hero": {
+        "label": "Curriculum Vitae",
+        "titleHtml": "Giulia <em>HP.</em>",
+        "descriptionHtml": "<em>Technical artist</em> généraliste orientée jeu vidéo — spécialisée Unity, outils personnalisés et <em>fait-main stylisé</em>. Disponible pour des missions freelance, stages et collaborations."
+      },
+      "blocks": {
+        "titles": ["Expérience", "Formation", "Projets notables", "Compétences techniques", "Statut", "Contact", "Langues", "Intérêts"]
+      },
+      "skills": {
+        "columnTitles": ["Moteurs", "Langages", "Outils 3D", "2D"]
+      },
+      "entries": {
+        "experience": [
+          {
+            "dateHtml": "2021<br>→ 2024",
+            "titleHtml": "Game Jams",
+            "descHtml": "Diverses game jams de 48 h réalisées en équipes de trois à cinq personnes.",
+            "tags": ["Unity", "Maya", "Modeling", "Rigging", "Animation", "Dessin", "C#"]
+          },
+          {
+            "dateHtml": "2020",
+            "titleHtml": "Concours de la BD scolaire",
+            "orgs": ["Festival de la Bande Dessinée — Angoulême"],
+            "descHtml": "Création originale d'une page de bande dessinée.",
+            "tags": ["Dessin", "Écriture"],
+            "extraOrgs": ["Petit Fauve de bronze"]
+          },
+          {
+            "dateHtml": "2019",
+            "titleHtml": "Concours Jeunesse de la Nouvelle Policière",
+            "orgs": ["Festival du Polar — Avignon"],
+            "tags": ["Écriture"],
+            "extraOrgs": ["Seconde place"]
+          },
+          {
+            "dateHtml": "2019",
+            "titleHtml": "Représentation semi-théâtrale au Musée Louis Vouland",
+            "orgs": ["Club d'écriture du lycée Frédérique Mistral — Avignon"],
+            "descHtml": "Écriture en collaboration puis réalisation d'une pièce immersive semi-théâtrale dans le cadre de la Nuit des musées.",
+            "tags": ["Écriture", "Théâtre"]
+          }
+        ],
+        "education": [
+          {
+            "dateHtml": "2025<br>→ 2027<br>(en cours)",
+            "titleHtml": "Master ATI<br>Création Numérique - parcours Arts et Technologies de l'Image Virtuelle",
+            "orgs": ["Université Paris 8 — Saint-Denis"],
+            "descHtml": "Conception, développement et production d'œuvres artistiques numériques innovantes dans les domaines de l'image de synthèse, du temps réel, de la réalité virtuelle et augmentée."
+          },
+          {
+            "dateHtml": "2024<br>→ 2025",
+            "titleHtml": "Licence 3 ATI<br>Arts Plastiques – parcours Arts et Technologies de l'Image",
+            "orgs": ["Université Paris 8 — Saint-Denis"],
+            "descHtml": "Approche artistique et technique de l'image numérique, et développement d'expertises spécifiques adaptées aux secteurs de l'animation, des effets spéciaux, du jeu vidéo et des environnements immersifs.",
+            "extraOrgs": ["Mention Très Bien"]
+          },
+          {
+            "dateHtml": "2021<br>→ 2024",
+            "titleHtml": "Formation en Game Art",
+            "orgs": ["École des Nouvelles Images — Avignon"],
+            "descHtml": "Formation artistique et technique pour préparer au travail en studio de jeu vidéo et en entreprise de création d'images numériques."
+          },
+          {
+            "dateHtml": "2018<br>→ 2021",
+            "titleHtml": "BAC Technologique STD2A<br>Sciences et Technologies du Design et des Arts Appliqués",
+            "orgs": ["Lycée Frédéric Mistral — Avignon"],
+            "descHtml": "Filière technologique qui initie aux principaux métiers créatifs à travers un cursus axé sur le design, l'art et les technologies associées.",
+            "extraOrgs": ["Mention Bien"]
+          },
+          {
+            "dateHtml": "2014<br>→ 2018",
+            "titleHtml": "Brevet des collèges",
+            "orgs": ["Cité Scolaire Jean Henri Fabre — Carpentras"],
+            "extraOrgs": ["Mention Très Bien"]
+          }
+        ],
+        "projects": [
+          {
+            "dateHtml": "2026",
+            "titleHtml": "<a href=\"project-herbarium.html\" style=\"color:inherit;text-decoration:none;\">The Herbarium</a>",
+            "orgs": ["Jeu Unity · C#"],
+            "descHtml": "Jeu cozy inspiré de Cooking Mama, centré sur la création de potions.",
+            "tags": ["Unity", "C#"]
+          },
+          {
+            "dateHtml": "2025",
+            "titleHtml": "<a href=\"project-blueprint.html\" style=\"color:inherit;text-decoration:none;\">The Unfinished Blueprint</a>",
+            "orgs": ["Jeu Unreal Engine 5 · Blueprint & C++"],
+            "descHtml": "Exploration et résolution de puzzles dans un labyrinthe procédural, avec une esthétique épurée.",
+            "tags": ["Unreal Engine 5", "C++"]
+          },
+          {
+            "dateHtml": "2024",
+            "titleHtml": "<a href=\"project-prophecy.html\" style=\"color:inherit;text-decoration:none;\">Prophecy</a>",
+            "orgs": ["Démo Unity · C#"],
+            "descHtml": "Démo d'un plateformer narratif en pixel art, avec des phases de Visual Novel.",
+            "tags": ["Blender", "Python"]
+          }
+        ]
+      },
+      "download": {
+        "label": "↓ Télécharger le CV (PDF)"
+      },
+      "backLink": "← Retour à l'accueil",
+      "status": {
+        "html": "<span class=\"cv-status-dot\"></span><strong style=\"color:var(--text);\">Recherche</strong> alternance pour l'année universitaire 2026-2027<br><span class=\"cv-status-dot\"></span><strong style=\"color:var(--text);\">Disponible</strong> pour des missions freelance, stages et collaborations<br><br><span class=\"cv-status-dot\"></span><strong style=\"color:var(--text);\">Paris &amp; Remote</strong>"
+      },
+      "contact": {
+        "labels": ["Email", "GitHub", "LinkedIn", "Itch.io", "Lieu"],
+        "values": ["giulia.perucca@gmail.com", "giuliahp", "giulia haut perucca", "Aconitum", "Paris, France"]
+      },
+      "languages": {
+        "names": ["Français", "Anglais"],
+        "levels": ["Natif", "B2"]
+      },
+      "interests": ["Dessin", "Animation", "Jeux vidéo", "Écriture", "Lecture"]
+    }
+  }
+}

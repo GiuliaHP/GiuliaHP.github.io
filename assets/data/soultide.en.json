@@ -1,0 +1,142 @@
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.mp4",
+    "caption": "Skybox"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.png",
+    "caption": "Unreal setup"
+  },
+  {
+    "type": "text",
+    "title": "Nocturnal Lighting",
+    "listing": [
+      "Soft contrast for a contemplative mood",
+      "Use of Unreal tools",
+      "Blending the sky and the ocean"
+    ],
+    "body": "The lighting in SoulTide aimed both to create a contemplative mood and to match a stylized aesthetic, while still staying optimized.\n\nThe chosen tools were a simple Directional Light for the atmosphere, a global fog to reinforce depth, and especially a skysphere for the sky. This native Unreal tool makes it possible to modify a complex skybox and adapt it into a beautiful starry night sky that bathes the scene in a soft blue glow."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Random.mp4",
+    "caption": "Fish randomization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Parameters.png",
+    "caption": "Generation parameters"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_A.png",
+    "caption": "Fish blueprint — Randomization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_B.png",
+    "caption": "Fish blueprint — Generation"
+  },
+  {
+    "type": "text",
+    "title": "Randomization & Parameterization",
+    "listing": [
+      "Variations in size and shape",
+      "Fish modularity",
+      "Customizable randomization"
+    ],
+    "body": "Each fish is generated from five randomly selected elements: size, head, dorsal fin, ventral fins, and finally the material. Each element is stored as a list containing all the variants and is picked at random.\n\nThis approach makes it possible to create a large variety of fish from a limited number of assets, while still allowing the fish type to be identified and the code to be adjusted accordingly. For example, the fish size — small, long, or large — affects the number of points awarded when fishing. That element is referenced and can be swapped quickly."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Adaptability",
+    "body": "The randomization logic applies to each element by swapping the skeletal mesh for another one from the list. This simple modular generation approach could be adapted to customization systems or any other type of character or object."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish.mp4",
+    "caption": "Fish Rig"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
+    "caption": "Rig adaptability to variants"
+  },
+  {
+    "type": "text",
+    "title": "Modular Fish Rigging",
+    "listing": [
+      "Spline IK & Damped Track",
+      "Easy to handle for animation",
+      "Reusable structure"
+    ],
+    "body": "The challenge with this rig was to make it easy to animate for sinusoidal and organic movements.\n\nThe solution was to use a Spline IK, controlled by a spline. A controller was created for each point on that spline, allowing the curve and therefore the fish spine to be moved naturally.\n\nTo simulate fin motion without hand-animating or simulating it, Damped Track modifiers were used: each bone in a fin chain copies its parent's rotation with a delay, creating a natural movement based on the chain's motion."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Variants",
+    "body": "The simplicity of this rig meant that all variants of the elements making up the fish could be parented to it without needing changes or adjustments, making the randomization system fully compatible with the rig and planned animations. It would therefore be very easy to create multiple variants without having to change the rig."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel.mp4",
+    "caption": "Eel Rig — Amplitude"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
+    "caption": "Eel Rig — Facial Controls"
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
+    "caption": "Eel Rig — Usage"
+  },
+  {
+    "type": "text",
+    "title": "Eel Rigging",
+    "listing": [
+      "Reuse of the fish rig structure",
+      "Clean bone organization",
+      "Basic facial rig"
+    ],
+    "body": "The eel rig is an application of the original fish rig's adaptability. It keeps the same spline-based structure and controllers. As a result, rigging time was drastically reduced thanks to this reuse of a common base.\n\nOrganizing the bone groups allows animators to quickly understand the rig and know what they can or cannot touch. It also improves readability.\n\nFinally, the jaw and eye controls add character to the eel animation through simple bone constraints, making the eel feel more expressive than a standard fish."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Animation Perspectives",
+    "body": "The ease of use of this rig shows that it would be simple to animate through code or by using more experimental and less time-consuming methods than manual animation."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal.mp4",
+    "caption": "Fish shoal"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_A.png",
+    "caption": "Fish generation"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_B.png",
+    "caption": "Fish animation"
+  },
+  {
+    "type": "text",
+    "title": "Fish Shoal System",
+    "listing": [
+      "Fish generation",
+      "Random selection of the movement spline",
+      "Fish animation"
+    ],
+    "body": "The fish shoal blueprint is made up of three circular splines and editable parameters such as the number of fish to generate.\n\nTo save resources, when the player gets close enough to a shoal, the fish are generated one by one. Each one randomly picks one of the three splines and follows it at a variable speed."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Overall Control",
+    "body": "Because many shoals are present in the scene, their general parameters are controlled by a manager that can list the fish shoals and change each one's parameters from a single Blueprint."
+  }
+]

@@ -1,0 +1,100 @@
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
+    "webm": "assets/img/showcase/TUBP/SH_TUBP_Blood.webm",
+    "caption": "Blood Projection"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.webp?v=20260323",
+    "caption": "Blood decal reference"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_B.png?v=20260323",
+    "caption": "Blood projection blueprint"
+  },
+  {
+    "type": "text",
+    "title": "Blood Projection",
+    "listing": [
+      "Random decals based on surface normals",
+      "Material that changes color — aging animation",
+      "Spatial navigation in the maze"
+    ],
+    "body": "To navigate the maze, the player can project their own blood. It is represented by projectiles that spawn a random decal from a reference list at the point of impact, while calculating the surface normal of the hit surface so the decal is oriented correctly.\n\nThat decal then changes color over time, simulating blood aging and making it possible to track how long the player has been moving through the maze."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — VFX",
+    "body": "The modularity of the projection blueprint and its material would make it possible to adapt this system to other types of projectiles and surfaces, for a wide range of effects in other projects. It would also be possible to animate the decal shader to turn it into a visually rich but low-cost FX system."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
+    "webm": "assets/img/showcase/TUBP/SH_TUBP_Procedural.webm",
+    "caption": "Procedural Generation — Maze"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.png?v=20260323",
+    "caption": "Procedural maze blueprint properties"
+  },
+  {
+    "type": "text",
+    "title": "C++ — Procedural Generation",
+    "listing": [
+      "Grid generation — wall placement in C++",
+      "Guarantee access to all areas (pathfinding)",
+      "Dynamic placement of entrance and collectibles"
+    ],
+    "body": "The maze generation was entirely built procedurally in C++. A grid is drawn according to the size defined in the properties, then walls are placed so there is always at least one opening.\n\nThe generation is designed so that no area can be inaccessible. Then the maze entrance and the collectibles are placed: regeneration potions, keys, spikes, and clues."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — C++",
+    "body": "The challenge in this use of C++ was to bridge pure code and the blueprint. The maze blueprint properties are numerous enough to make the maze highly customizable while still keeping it functional."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
+    "webm": "assets/img/showcase/TUBP/SH_TUBP_UX.webm",
+    "caption": "UI/UX Design — Keys"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.webp?v=20260323",
+    "caption": "Key blueprint — UI"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_B.png?v=20260323",
+    "caption": "Key blueprint — Collect"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.webp?v=20260323",
+    "caption": "Key blueprint — Set keys UI"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.webp?v=20260323",
+    "caption": "Key blueprint — Use keys"
+  },
+  {
+    "type": "text",
+    "title": "Key UI/UX Design",
+    "listing": [
+      "Collectable key — linked dynamic icon",
+      "Flexible blueprint for many variants",
+      "Reusable system for other collectibles"
+    ],
+    "body": "The challenge when building the key UI was matching each key pickup to its icon. Since every key had its own design, the idea was that collecting a key would trigger the correct icon in the interface, while still keeping the consistency of a single main key blueprint.\n\nAs a result, building a coherent key interface pushed the system further and made it reusable for other collectibles, which could also have many variants and their own inventory UI mapping."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Interfaces",
+    "body": "The interfaces in this project were built with UMG Widgets. The key inventory interface was designed to be easy to modify and adaptable to other collectible types, with properties that define the icons and interactions associated with each collected item.\n\nThe stamina and health bars are simple sliders that could also be used for other resource types in other projects, with properties to adjust their appearance and behavior."
+  }
+]

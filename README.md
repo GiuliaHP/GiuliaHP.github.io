@@ -45,6 +45,11 @@ Le site contient :
 
 ## Fonctionnement du contenu
 
+### Langue du site
+- Un toggle FR / ENG est disponible dans la navigation.
+- En mode ENG, les pages projet chargent automatiquement les manifests `assets/data/*.en.json`.
+- Le choix de langue est memorise localement dans le navigateur.
+
 ### 1) Home (`index.html`)
 - La liste des projets est definie en dur dans la section `#projects`.
 - Chaque carte projet utilise des attributs `data-*` (`data-bg`, `data-icon`, `data-video-mp4`) exploites par `assets/js/script.js` (hover, preview video, curseur personnalise).
@@ -61,6 +66,11 @@ Le site contient :
 ### 3) Page Jeux (`games.html`)
 - Les jeux WebGL affiches sont actuellement definis en dur dans le script inline de `games.html` (tableau `games`).
 - `assets/data/games.json` existe mais n'est pas consomme par la page pour l'instant.
+
+### 4) Manifests traduits
+- Convention des fichiers: `assets/data/<nom>.json` pour le francais et `assets/data/<nom>.en.json` pour l'anglais.
+- Les manifests actuellement concernes sont `herbarium`, `tubp`, `prophecy`, `chara`, `competences` et `games`.
+- Si une version anglaise manque, la page retombe sur le manifest francais.
 
 ## Mise a jour rapide du portfolio
 

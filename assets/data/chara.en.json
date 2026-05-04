@@ -1,0 +1,167 @@
+[
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Chara/SH_Chara_Setup.mp4?v=20260504",
+    "caption": "Addon setup"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Setup_A.png",
+    "caption": "Initialization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Setup_B.png",
+    "caption": "Main interface"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_UI.png",
+    "caption": "Icons"
+  },
+  {
+    "type": "text",
+    "title": "Setup",
+    "listing": [
+      "Import the ZIP in Preferences",
+      "Character Maker section in Tools",
+      "Load Scene — icons and 3D assets"
+    ],
+    "body": "Like any Blender addon, this one is just a ZIP file that you import in Preferences. Once enabled, it adds a Character Maker section in the Tools panel. That is the interface used to launch the setup.\n\nWhen the Load Scene boolean is enabled, the interface icons and all the 3D elements of the portrait that make up the character editor are imported."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Interface",
+    "body": "To make the interface easier to understand, each editable category of elements has its own matching greyed-out icon. The different parts of this icon are highlighted when the corresponding parameter is edited."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Chara/SH_Chara_Render.mp4?v=20260504",
+    "caption": "Potential render demonstration"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Shapekeys.png",
+    "caption": "Shape Keys — General"
+  },
+  {
+    "type": "text",
+    "title": "Rendering and Shape Keys",
+    "listing": [
+      "Rigging and animation of the portrait",
+      "Retopology and UV unwrapping",
+      "Texturing and final preparation"
+    ],
+    "body": "Once the character customization is satisfactory, the user can rig and animate it.\n\nTo demonstrate this, I went through the full process, including an essential retopology and UV unwrapping step, so the bust could be used for rigging, texturing, and animation."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Shape Keys",
+    "body": "The face and eyelashes use the same Shape Keys. These are synchronized so that changes remain consistent across all facial elements."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Ears.mp4?v=20260504",
+    "caption": "Ear customization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_A.png",
+    "caption": "Ear hierarchy"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_B.png",
+    "caption": "Head modifiers"
+  },
+  {
+    "type": "text",
+    "title": "Ear Customization",
+    "listing": [
+      "Multiple ear models",
+      "Boolean smoothing on the face",
+      "Earring adaptation"
+    ],
+    "body": "The ears are simple models in several variants, applied through a boolean and then smoothed into the face, which creates a soft transition between the two elements.\n\nThe earrings are moved according to the ear type, adapting to each one's length and shape."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Shape Keys",
+    "body": "Some of the Shape Keys deforming the ears are the same ones that deform the face and eyelashes, which means that changing one ear parameter applies to all elements that need deformation, in a synchronized way."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes.mp4?v=20260504",
+    "caption": "Eye customization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes_.png",
+    "caption": "Eye hierarchy"
+  },
+  {
+    "type": "text",
+    "title": "Eye Customization",
+    "listing": [
+      "Editable tilt and spacing",
+      "Pupil and eyelash variations",
+      "Animatable pupil controller"
+    ],
+    "body": "The eyes are the most customizable elements of the portrait. In addition to being able to edit their tilt and spacing, you can switch between several pupil and eyelash variations, each following the eyes' global deformations.\n\nThe pupils are alpha-based spheres skin-wrapped around the eyeballs. They are constrained by an animatable controller that rotates them, mimicking pupil movement inside the eye without deforming them."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows.mp4?v=20260504",
+    "caption": "Eyebrow customization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_A.png",
+    "caption": "Eyebrow hierarchy"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_B.png",
+    "caption": "Shape Keys — Eyebrows"
+  },
+  {
+    "type": "text",
+    "title": "Eyebrow Customization",
+    "listing": [
+      "Shape Key editing",
+      "Shape, direction, and tilt",
+      "Thickness through modifiers"
+    ],
+    "body": "The eyebrows are fully editable through Shape Keys that deform them. This makes it possible to fine-tune their shape, direction, and tilt.\n\nTheir original form, offered in three variants, is built as a plane that is then shaped with several modifiers to give it thickness while keeping the Shape Key changes easy to manage."
+  },
+  {
+    "type": "text",
+    "title": "NOTE — Shape Keys",
+    "body": "Some of the Shape Keys that deform the eyebrows are the same ones used for the face and eyelashes, so editing one eyebrow parameter affects every element that needs deformation, in a synchronized way."
+  },
+  {
+    "type": "video",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Hair.mp4?v=20260504",
+    "caption": "Hair customization"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_A.png",
+    "caption": "Hair hierarchy"
+  },
+  {
+    "type": "image",
+    "src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_B.png",
+    "caption": "Hair base modifiers"
+  },
+  {
+    "type": "text",
+    "title": "Hair Customization",
+    "listing": [
+      "Preset hairstyle variants",
+      "Hair Detailed Options (base, fringe, strands)",
+      "Boolean fusion of the parts"
+    ],
+    "body": "Hair customization is available in two formats. The first lets you switch between several prebuilt complex hairstyle variants. These are detailed but not editable.\n\nTo go further into hairstyle editing, you just need to enable the Hair Detailed Options boolean, which then allows the base, fringe, strands, and back of the hair to be modified.\n\nThis second option, far more customizable, is made possible by a modeling workflow built around multiple booleans that fuse the hairstyle parts into a single one."
+  }
+]
