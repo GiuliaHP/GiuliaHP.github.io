@@ -32,7 +32,11 @@
       "Bash(sed -i 's|data-video-webm=\"\" data-video-mp4=\"assets/img/previews/PR_Herbarium.mp4?v=20260320\"|data-video-webm=\"assets/img/previews/PR_Herbarium.webm\" data-video-mp4=\"assets/img/previews/PR_Herbarium.mp4?v=20260320\"|g' index.html)",
       "Bash(sed -i 's|data-video-webm=\"\" data-video-mp4=\"assets/img/previews/PR_TUBP.mp4?v=20260320\"|data-video-webm=\"assets/img/previews/PR_TUBP.webm\" data-video-mp4=\"assets/img/previews/PR_TUBP.mp4?v=20260320\"|g' index.html)",
       "Bash(sed -i 's|data-video-webm=\"\" data-video-mp4=\"assets/img/previews/PR_Prophecy.mp4?v=20260320\"|data-video-webm=\"assets/img/previews/PR_Prophecy.webm\" data-video-mp4=\"assets/img/previews/PR_Prophecy.mp4?v=20260320\"|g' index.html)",
-      "Bash(sed -i 's|data-video-webm=\"\" data-video-mp4=\"assets/img/previews/PR_Chara.mp4?v=20260320\"|data-video-webm=\"assets/img/previews/PR_Chara.webm\" data-video-mp4=\"assets/img/previews/PR_Chara.mp4?v=20260320\"|g' index.html)"
+      "Bash(sed -i 's|data-video-webm=\"\" data-video-mp4=\"assets/img/previews/PR_Chara.mp4?v=20260320\"|data-video-webm=\"assets/img/previews/PR_Chara.webm\" data-video-mp4=\"assets/img/previews/PR_Chara.mp4?v=20260320\"|g' index.html)",
+      "Bash(npm install *)",
+      "PowerShell(Get-Command node, npm -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-ChildItem \"d:\\\\Repository\\\\GiuliaHP.github.io\\\\assets\\\\games\\\\WEBGL_SolarSystem\\\\SandboxBUILD_WebGl\\\\Build\" | Select-Object Name, @{N='Size\\(MB\\)';E={[math]::Round\\($_.Length/1MB,2\\)}})",
+      "PowerShell(Get-ChildItem \"d:\\\\Repository\\\\GiuliaHP.github.io\\\\assets\\\\games\\\\WEBGL_SolarSystem\\\\SandboxBUILD_WebGl\\\\Build\" | ForEach-Object { \"$\\($_.Name\\) — $\\([math]::Round\\($_.Length/1MB,2\\)\\) MB\" })"
     ],
     "additionalDirectories": [
       "C:\\Users\\Admin\\AppData\\Local\\Temp\\decompress"

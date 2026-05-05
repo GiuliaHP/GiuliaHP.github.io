@@ -240,6 +240,7 @@
       }
       .cv-aside { order: -1; }
     }
+
   </style>
 </head>
 <body>
@@ -261,7 +262,7 @@
   <section>
     <div class="wrap">
       <!-- COMPÉTENCES -->
-      <div class="cv-block reveal">
+      <div id="cv-block-skills" class="cv-block reveal">
         <div class="cv-block-title">Compétences techniques</div>
         <div class="skills-cols" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
 
@@ -330,7 +331,7 @@
         <div>
 
           <!-- EXPÉRIENCE -->
-          <div class="cv-block reveal">
+          <div id="cv-block-experience" class="cv-block reveal">
             <div class="cv-block-title">Expérience</div>
             <div class="cv-entries">
               
@@ -395,7 +396,7 @@
           </div>
 
           <!-- FORMATION -->
-          <div class="cv-block reveal">
+          <div id="cv-block-formation" class="cv-block reveal">
             <div class="cv-block-title">Formation</div>
             <div class="cv-entries">
 
@@ -450,7 +451,7 @@
           </div>
 
           <!-- PROJETS NOTABLES -->
-          <div class="cv-block reveal">
+          <div id="cv-block-projets" class="cv-block reveal">
             <div class="cv-block-title">Projets Notables</div>
             <div class="cv-entries">
 
@@ -505,13 +506,6 @@
               <span class="cv-status-dot"></span>
               <strong style="color:var(--text);">Paris & Remote</strong>
             </div>
-          </div>
-
-          <!-- Télécharger -->
-          <div class="cv-block reveal">
-            <a href="#" class="cv-download">
-              ↓ &nbsp;Télécharger le CV (PDF)
-            </a>
           </div>
 
           <!-- Contact -->
@@ -579,7 +573,7 @@
     </div>
   </section>
 
-  <section class="wrap" style="padding: 3rem 0;">
+  <section id="cv-back-section" class="wrap" style="padding: 3rem 0;">
     <a href="index.html" class="project-back-link">← Retour à l'accueil</a>
   </section>
 

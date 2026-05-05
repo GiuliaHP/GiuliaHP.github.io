@@ -17,9 +17,8 @@
     "title": "Solar System",
     "description": "Exploration de notre système solaire à échelle réduite en conduisant un petit vaisseau.",
     "icon": "assets/img/icons/IC_Solar.png",
-    "buildPath": "assets/games/WEBGL_SolarSystem/index.html",
-    "type": "webgl",
-    "hidden": true
+    "buildPath": "assets/games/WEBGL_SolarSystem/SandboxBUILD_WebGl/index.html",
+    "type": "webgl"
   },
   {
     "title": "Breakout for Candy",
