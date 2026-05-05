@@ -164,8 +164,8 @@ nav {
   text-decoration: none;
 }
 .nav-logo-icon {
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.75rem;
+  height: 1.75rem;
   flex-shrink: 0;
   object-fit: contain;
 }
@@ -604,6 +604,27 @@ nav {
 .hero-meta strong {
   color: rgba(231, 238, 255, 0.96);
   font-weight: 600;
+}
+
+.hero-status {
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(128, 158, 255, 0.3);
+  border-radius: var(--radius-md);
+  background: rgba(128, 158, 255, 0.05);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: rgba(210, 219, 255, 0.82);
+}
+
+.hero-status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5dffb0;
+  box-shadow: 0 0 6px #5dffb0;
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 /* ── GALLERY TEXT VOIR PLUS ───────────────────── */

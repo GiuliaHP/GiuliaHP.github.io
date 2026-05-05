@@ -20,12 +20,7 @@
         "label": "Technical Artist · Game Art Generalist · Paris",
         "titleHtml": "Welcome<br>to my<br><em>world</em>",
         "descriptionHtml": "A generalist <em>technical artist</em> focused on creating <em>video games</em>, with a fascination for building <em>custom tools</em> for each project and for <em>stylized hand-made work</em>.<br><br>I specialize in <em>Unity</em>, with a deep knowledge of its <em>less conventional features</em>, and I am also comfortable with <em>Unreal Engine 5</em>.",
-        "metaLeadHtml": "I am currently —",
-        "metaItems": [
-          "In a master's program (Arts and Image Technologies)",
-          "Available for <strong>freelance work</strong>",
-          "Open to <strong>internships / collaborations</strong>"
-        ]
+        "metaHtml": "<div class=\"hero-status\"><span class=\"hero-status-dot\"></span><strong>Master's Degree</strong> (Arts and Image Technologies)<br><span class=\"hero-status-dot\"></span><strong>Available</strong> for freelance work, internships and collaborations<br><br><span class=\"hero-status-dot\"></span><strong>Paris &amp; Remote</strong></div>"
       },
       "sections": {
         "projects": "Selected projects",
@@ -78,19 +73,19 @@
         "descriptionHtml": "A detailed overview of my game art specialties, from concept to final render. Each section presents the different production stages and the techniques used."
       },
       "sections": {
-        "titles": ["Character", "Environment", "UI", "2D Animation"]
+        "titles": ["Character", "Environment", "UI", "2D Animation", "Illustration"]
       },
       "backLink": "← Back to home"
     },
     "cv": {
       "documentTitle": "CV — Giulia HP.",
       "hero": {
-        "label": "Resume",
+        "label": "Technical Artist · Game Art Generalist · Paris",
         "titleHtml": "Giulia <em>HP.</em>",
-        "descriptionHtml": "Generalist <em>technical artist</em> focused on video games, specialized in Unity, custom tools and <em>stylized hand-crafted work</em>. Available for freelance work, internships and collaborations."
+        "descriptionHtml": "Technical Artist · Game Art Generalist · Paris"
       },
       "blocks": {
-        "titles": ["Experience", "Education", "Notable projects", "Technical skills", "Status", "Contact", "Languages", "Interests"]
+        "titles": ["Technical skills", "Experience", "Education", "Notable projects", "Status", "Contact", "Languages", "Interests"]
       },
       "skills": {
         "columnTitles": ["Engines", "Languages", "3D tools", "2D"]

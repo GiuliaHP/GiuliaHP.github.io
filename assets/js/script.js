@@ -169,8 +169,7 @@ function applyIndexTranslations(bundle) {
   setNodeText('#hero .hero-label', bundle.hero?.label);
   setNodeHTML('#hero .hero-title', bundle.hero?.titleHtml);
   setNodeHTML('#hero .hero-desc', bundle.hero?.descriptionHtml);
-  setNodeHTML('#hero .hero-meta p strong', bundle.hero?.metaLeadHtml);
-  setAllNodeText('#hero .hero-meta li', bundle.hero?.metaItems || []);
+  setNodeHTML('#hero .hero-meta', bundle.hero?.metaHtml);
   setNodeText('#projects .section-label', bundle.sections?.projects);
   setAllNodeText('#projects .project-year', bundle.projects?.years || []);
   setNodeText('#quick-links .section-label', bundle.sections?.quickLinks);

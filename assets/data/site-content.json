@@ -20,12 +20,7 @@
         "label": "Technical Artist · Généraliste Game Art · Paris",
         "titleHtml": "Bienvenue<br>dans mon<br><em>univers</em>",
         "descriptionHtml": "<em>Technical artist</em> généraliste orientée vers la création de <em>jeux vidéos</em>, avec une fascination pour la mise en place d'<em>outils personnalisés</em> à chaque projet et le <em>fait-main stylisé</em>.<br><br>Je me spécialise dans l'utilisation d'<em>Unity</em>, avec une connaissance approfondie de ses <em>fonctionnalités les moins conventionnelles</em>, et je suis également à l'aise avec <em>Unreal Engine 5</em>.",
-        "metaLeadHtml": "Je suis actuellement —",
-        "metaItems": [
-          "En master (Arts et Technologies de l'Image)",
-          "Disponible pour des <strong>missions freelance</strong>",
-          "Ouverte aux <strong>stages / collaborations</strong>"
-        ]
+        "metaHtml": "<div class=\"hero-status\"><span class=\"hero-status-dot\"></span><strong>Master ATI</strong> (Arts et Technologies de l'Image)<br><span class=\"hero-status-dot\"></span><strong>Disponible</strong> pour des missions freelance, stages et collaborations<br><br><span class=\"hero-status-dot\"></span><strong>Paris &amp; Remote</strong></div>"
       },
       "sections": {
         "projects": "Projets sélectionnés",
@@ -40,7 +35,7 @@
         "names": ["Jeux", "Recherches", "CV"],
         "copies": [
           "Les prototypes WebGL et les expériences jouables hébergées sur le site.",
-          "Les éléments individuels classés par domaine : character, environment, UI et animation 2D.",
+          "Les éléments individuels classés par domaine : personnage, environnement, UI et animation 2D.",
           "Le parcours, les informations clés et les liens utiles pour me contacter."
         ]
       },
@@ -78,19 +73,19 @@
         "descriptionHtml": "Un aperçu détaillé de mes domaines d'expertise en game art, du concept au rendu final. Chaque section présente les différentes étapes de production et les techniques utilisées."
       },
       "sections": {
-        "titles": ["Character", "Environment", "UI", "Animation 2D"]
+        "titles": ["Personnage", "Environnement", "UI", "Animation 2D", "Illustration"]
       },
       "backLink": "← Retour à l'accueil"
     },
     "cv": {
       "documentTitle": "CV — Giulia HP.",
       "hero": {
-        "label": "Curriculum Vitae",
+        "label": "Technical Artist · Généraliste Game Art · Paris",
         "titleHtml": "Giulia <em>HP.</em>",
-        "descriptionHtml": "<em>Technical artist</em> généraliste orientée jeu vidéo — spécialisée Unity, outils personnalisés et <em>fait-main stylisé</em>. Disponible pour des missions freelance, stages et collaborations."
+        "descriptionHtml": "Technical Artist · Généraliste Game Art · Paris"
       },
       "blocks": {
-        "titles": ["Expérience", "Formation", "Projets notables", "Compétences techniques", "Statut", "Contact", "Langues", "Intérêts"]
+        "titles": ["Compétences techniques", "Expérience", "Formation", "Projets notables", "Statut", "Contact", "Langues", "Intérêts"]
       },
       "skills": {
         "columnTitles": ["Moteurs", "Langages", "Outils 3D", "2D"]
