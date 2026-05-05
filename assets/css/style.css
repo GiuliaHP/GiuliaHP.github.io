@@ -1957,7 +1957,7 @@ footer {
 }
 
 .competences-gallery-mount .gallery-row {
-  grid-template-columns: 1fr !important;
+  grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr)) !important;
   gap: 1.5rem !important;
 }
 

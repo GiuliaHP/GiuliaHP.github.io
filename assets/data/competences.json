@@ -14,6 +14,46 @@
     "type": "video",
     "src": "assets/img/skills/SK_Chara_Herbarium_Shading.mp4"
   },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Soultide_Charon.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_A.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_B.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_C.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_D.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Turnaround.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Monsters.mp4"
+  },
+  {
+    "category": "character",
+    "type": "video",
+    "src": "assets/img/skills/SK_Chara_Guacamelee.mp4"
+  },
 
   {
     "category": "environment",
@@ -29,5 +69,124 @@
     "category": "environment",
     "type": "image",
     "src": "assets/img/skills/SK_Enviro_HerbariumShop_Shading.png"
+  },
+
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Faefolk.png"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Magma.png"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_A.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_B.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_C.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_D.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_E.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_F.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_G.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_H.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_I.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_J.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_K.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Glass_L.png",
+    "series": "Glass"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Splash_A.png",
+    "series": "Splash"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Splash_B.png",
+    "series": "Splash"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Splash_C.png",
+    "series": "Splash"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Splash_D.png",
+    "series": "Splash"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Splash_E.png",
+    "series": "Splash"
+  },
+  {
+    "category": "illustration",
+    "type": "image",
+    "src": "assets/img/skills/SK_Illu_Splash_F.png",
+    "series": "Splash"
   }
 ]

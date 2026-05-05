@@ -1027,15 +1027,28 @@ if (trailerVideos.length) {
       }
 
       if (current.type === 'image') {
-        const imageRow = [current];
-        index += 1;
+        // If image has a series, group all images in that series together
+        if (current.series) {
+          const seriesName = current.series;
+          const seriesImages = [current];
+          index += 1;
 
-        while (index < items.length && items[index].type === 'image' && imageRow.length < 2) {
-          imageRow.push(items[index]);
+          while (index < items.length && 
+                 items[index].type === 'image' && 
+                 items[index].series === seriesName) {
+            seriesImages.push(items[index]);
+            index += 1;
+          }
+
+          // Split series into rows of 4
+          for (let j = 0; j < seriesImages.length; j += 4) {
+            rows.push({ kind: 'media', items: seriesImages.slice(j, j + 4) });
+          }
+        } else {
+          // Images without a series: one per row
+          rows.push({ kind: 'media', items: [current], cols: 1 });
           index += 1;
         }
-
-        rows.push({ kind: 'media', items: imageRow });
       }
     }
 
@@ -1153,7 +1166,7 @@ if (trailerVideos.length) {
       } else if (row.kind === 'media') {
         const rowEl = document.createElement('div');
         rowEl.className = 'gallery-row reveal';
-        rowEl.style.setProperty('--cols', row.items.length);
+        rowEl.style.setProperty('--cols', row.cols || row.items.length);
 
         const hasMixedMediaPair =
           row.items.length === 2 &&
