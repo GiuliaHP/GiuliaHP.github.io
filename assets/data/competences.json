@@ -2,42 +2,50 @@
   {
     "category": "character",
     "type": "image",
-    "src": "assets/img/skills/SK_Chara_Herbarium_Concept.png"
+    "src": "assets/img/skills/SK_Chara_Herbarium_Concept.png",
+    "series": "Herbarium"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Herbarium_Wireframe.mp4"
+    "src": "assets/img/skills/SK_Chara_Herbarium_Wireframe.mp4",
+    "series": "Herbarium"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Herbarium_Shading.mp4"
+    "src": "assets/img/skills/SK_Chara_Herbarium_Shading.mp4",
+    "series": "Herbarium"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Soultide_Charon.mp4"
+    "src": "assets/img/skills/SK_Chara_Soultide_Charon.mp4",
+    "series": "Soultide"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Soultide_Souls_A.mp4"
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_A.mp4",
+    "series": "Soultide"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Soultide_Souls_B.mp4"
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_B.mp4",
+    "series": "Soultide"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Soultide_Souls_C.mp4"
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_C.mp4",
+    "series": "Soultide"
   },
   {
     "category": "character",
     "type": "video",
-    "src": "assets/img/skills/SK_Chara_Soultide_Souls_D.mp4"
+    "src": "assets/img/skills/SK_Chara_Soultide_Souls_D.mp4",
+    "series": "Soultide"
   },
   {
     "category": "character",
@@ -58,28 +66,33 @@
   {
     "category": "environment",
     "type": "video",
-    "src": "assets/img/skills/SK_Enviro_Herbarium_Wireframe.mp4"
+    "src": "assets/img/skills/SK_Enviro_Herbarium_Wireframe.mp4",
+    "series": "Herbarium"
   },
   {
     "category": "environment",
     "type": "image",
-    "src": "assets/img/skills/SK_Enviro_HerbariumShop_Wireframe.png"
+    "src": "assets/img/skills/SK_Enviro_HerbariumShop_Wireframe.png",
+    "series": "Herbarium"
   },
   {
     "category": "environment",
     "type": "image",
-    "src": "assets/img/skills/SK_Enviro_HerbariumShop_Shading.png"
+    "src": "assets/img/skills/SK_Enviro_HerbariumShop_Shading.png",
+    "series": "Herbarium"
   },
 
   {
     "category": "illustration",
     "type": "image",
-    "src": "assets/img/skills/SK_Illu_Faefolk.png"
+    "src": "assets/img/skills/SK_Illu_Faefolk.png",
+    "series": "Big"
   },
   {
     "category": "illustration",
     "type": "image",
-    "src": "assets/img/skills/SK_Illu_Magma.png"
+    "src": "assets/img/skills/SK_Illu_Magma.png",
+    "series": "Big"
   },
   {
     "category": "illustration",
