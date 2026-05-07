@@ -17,14 +17,14 @@
     "listing": [
       "Rigging puppet sur sprites 2D personnages",
       "Animation en keyframes — Unity",
-      "Décors & props — simulation vent"
+      "Décors & props — simulation du vent"
     ],
-    "body": "Les sprites 2D des personnages, utilisés comme transitions entre les phases de gameplay, ont ete rigges en style puppet. Chaque personnage est decoupe en plusieurs layers correspondant aux differentes parties du corps, puis rigge et anime en keyframes.\n\nL'ensemble des rigs et des animations 2D a ete realise dans Unity, a l'exception de quelques animations clefs prealablement faites a la main."
+    "body": "Les sprites 2D des personnages, utilisés comme transitions entre les phases de gameplay, ont été riggés en style puppet. Chaque personnage est découpé en plusieurs layers correspondant aux différentes parties du corps, puis riggé et animé en keyframes.\n\nL'ensemble des rigs et des animations 2D a été réalisé dans Unity, à l'exception de quelques animations clefs préalablement faites à la main."
   },
   {
     "type": "text",
     "title": "NOTE — Animation RIG 2D",
-    "body": "Les elements d'environnement 2D (feuilles, herbes, petales) sont animes via un script qui deplace des chaines de bones en simulant le vent.\n\nUn systeme de physique simplifie a egalement ete code pour que les elements dragges a la souris, eux aussi relies a des chaines de bones, aient un effet de balancier coherent avec leurs mouvements dans la scene."
+    "body": "Les éléments d'environnement 2D (feuilles, herbes, pétales) sont animés via un script qui déplace des chaînes de bones en simulant le vent.\n\nUn système de physique simplifié a également été codé pour que les éléments déplacés à la souris, eux aussi reliés à des chaînes de bones, aient un effet de balancier cohérent avec leurs mouvements dans la scène."
   },
 
 
@@ -57,16 +57,16 @@
     "type": "text",
     "title": "Shader Breakdown",
     "listing": [
-      "Cell shading —rendu cartoon personnages",
+      "Cell shading — rendu cartoon des personnages",
       "Shader triplanaire — décors modulaires",
       "Shader d'eau — animation paramétrable"
     ],
-    "body": "L'objectif des shaders sur ce projet etait de s'integrer naturellement au style 2D des mini-jeux.\n\nPour les personnages, j'ai privilegie un rendu cartoon en cell shading. Pour les decors, j'ai opte pour un shader triplanaire afin de reduire le temps de production et obtenir des textures modulaires sans passer par Substance Painter."
+    "body": "L'objectif des shaders sur ce projet était de s'intégrer naturellement au style 2D des mini-jeux.\n\nPour les personnages, j'ai privilégié un rendu cartoon en cell shading. Pour les décors, j'ai opté pour un shader triplanaire afin de réduire le temps de production et obtenir des textures modulaires sans passer par Substance Painter."
   },
   {
     "type": "text",
     "title": "NOTE — Paramètres",
-    "body": "Le shader toon permet d'ajuster la taille des ombres, leur contraste et la couleur des highlights.\n\nLe shader triplanaire permet de melanger deux textures et un gradient, avec controle de l'offset, du blend, de la couleur et de l'orientation.\n\nLe shader de l'eau permet de regler la profondeur, l'ecume, la taille des motifs et la vitesse d'animation.\n\nL'idee globale est d'avoir des shaders stylises, adaptables a plusieurs objets et reutilisables sur d'autres projets."
+    "body": "Le shader toon permet d'ajuster la taille des ombres, leur contraste et la couleur des highlights.\n\nLe shader triplanaire permet de mélanger deux textures et un gradient, avec contrôle de l'offset, du blend, de la couleur et de l'orientation.\n\nLe shader de l'eau permet de régler la profondeur, l'écume, la taille des motifs et la vitesse d'animation.\n\nL'idée globale est d'avoir des shaders stylisés, adaptables à plusieurs objets et réutilisables sur d'autres projets."
   },
   {
     "type": "video",

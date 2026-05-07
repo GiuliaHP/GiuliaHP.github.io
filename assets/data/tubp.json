@@ -2,12 +2,11 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
-    "webm": "assets/img/showcase/TUBP/SH_TUBP_Blood.webm",
     "caption": "Projection de sang"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.webp?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png?v=20260323",
     "caption": "Référence aux décals de sang"
   },
   {
@@ -20,15 +19,15 @@
     "title": "Projection de Sang",
     "listing": [
       "Décals aléatoires au calcul de normale",
-      "Material changeant couleur — aging animation",
+      "Matériau changeant de couleur — aging animation",
       "Repérage spatial dans le labyrinthe"
     ],
-    "body": "Pour se repérer dans le labyrinthe, on peut projeter son propre sang. Ce dernier est représenté par des projectiles qui posent, à l'endroit de l'impact, un décal au hasard parmi ceux référencés, tout en calculant la normale de la surface sur laquelle il est projeté pour l'orienter dans le bon sens.\n\nCe décal laisse ensuite son material changer de couleur avec le temps, simulant le vieillissement du sang et permettant de mesurer dans le temps le passage du joueur dans le labyrinthe."
+    "body": "Pour se repérer dans le labyrinthe, on peut projeter son propre sang. Ce dernier est représenté par des projectiles qui posent, à l'endroit de l'impact, un décal au hasard parmi ceux référencés, tout en calculant la normale de la surface sur laquelle il est projeté pour l'orienter dans le bon sens.\n\nCe décal laisse ensuite son matériau changer de couleur avec le temps, simulant le vieillissement du sang et permettant de mesurer dans le temps le passage du joueur dans le labyrinthe."
   },
   {
     "type": "text",
     "title": "NOTE — VFX",
-    "body": "La modularité du blueprint de projection et de son material permettraient d'adapter ces système à d'autres types de projectiles et de surfaces, pour des effets variés dans d'autres projets. Il serait également possible d'animer le shader du décal pour en faire des FXs peu coûteux en ressource mais visuellement poussés."
+    "body": "La modularité du blueprint de projection et de son matériau permettraient d'adapter ce système à d'autres types de projectiles et de surfaces, pour des effets variés dans d'autres projets. Il serait également possible d'animer le shader du décal pour en faire des FX peu coûteux en ressources mais visuellement poussés."
   },
 
 
@@ -38,28 +37,27 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
-    "webm": "assets/img/showcase/TUBP/SH_TUBP_Procedural.webm",
     "caption": "Génération Procédurale — Labyrinthe"
   },
   {
     "type": "image",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.png?v=20260323",
-    "caption": "Properties du blueprint de labyrinthe procédural"
+    "caption": "Propriétés du blueprint de labyrinthe procédural"
   },
   {
     "type": "text",
     "title": "C++ — Génération Procédurale",
     "listing": [
-      "Génération grille — placement murs C++",
-      "Garantir accès toutes zones (pathfinding)",
-      "Placement dynamique entrée & collectibles"
+      "Génération de grille — placement des murs C++",
+      "Garantir l'accès à toutes les zones (pathfinding)",
+      "Placement dynamique de l'entrée et des collectibles"
     ],
-    "body": "La génération du labyrinthe a été entièrement réalisée en procédural, en passant par du C++. Une grille est dessinée en fonction de la taille définie dans les properties, puis les murs sont placés en allant toujours au moins une ouverture.\n\nLe calcul est fait de manière à ce qu'aucune zone ne soit inaccessible. Ensuite on place l'entrée du labyrinthe et les collectibles — potions de régénération, clefs, piques et indices."
+    "body": "La génération du labyrinthe a été entièrement réalisée de manière procédurale, en passant par du C++. Une grille est dessinée en fonction de la taille définie dans les propriétés, puis les murs sont placés en laissant toujours au moins une ouverture.\n\nLe calcul est fait de manière à ce qu'aucune zone ne soit inaccessible. Ensuite, on place l'entrée du labyrinthe et les collectibles — potions de régénération, clés, pics et indices."
   },
   {
     "type": "text",
     "title": "NOTE — C++",
-    "body": "Le défi dans cette utilisation du C++ était de faire le lien entre le code pur et le blueprint. Ainsi, les properties du Blueprint de labyrinthe sont assez nombreuses pour avoir un labyrinthe assez modifiable, tout en étant toujours fonctionnel."
+    "body": "Le défi dans cette utilisation du C++ était de faire le lien entre le code pur et le blueprint. Ainsi, les propriétés du blueprint de labyrinthe sont assez nombreuses pour obtenir un labyrinthe suffisamment modifiable, tout en restant toujours fonctionnel."
   },
 
 
@@ -69,36 +67,35 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
-    "webm": "assets/img/showcase/TUBP/SH_TUBP_UX.webm",
-    "caption": "Design UI/UX — Clefs"
+    "caption": "Design UI/UX — Clés"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.webp?v=20260323",
-    "caption": "Blueprint clefs — UI"
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png?v=20260323",
+    "caption": "Blueprint clés — UI"
   },
   {
     "type": "image",
     "src": "assets/img/showcase/TUBP/SH_TUBP_UX_B.png?v=20260323",
-    "caption": "Blueprint clefs — Collect"
+    "caption": "Blueprint clés — Collect"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.webp?v=20260323",
-    "caption": "Blueprint clefs — Set keys UI"
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png?v=20260323",
+    "caption": "Blueprint clés — Set keys UI"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.webp?v=20260323",
-    "caption": "Blueprint clefs — Use keys"
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png?v=20260323",
+    "caption": "Blueprint clés — Use keys"
   },
   {
     "type": "text",
-    "title": "Design UI/UX des Clefs",    "listing": [
-      "Clef collectable — icône dynamique associée",
-      "Blueprint modulable pour nombreuses variantes",
+    "title": "Design UI/UX des Clés",    "listing": [
+      "Clé collectable — icône dynamique associée",
+      "Blueprint modulable pour de nombreuses variantes",
       "Système réutilisable sur d'autres collectibles"
-    ],    "body": "La difficulté dans la réalisation de l'UI des clefs était de faire correspondre l'acquisition de chaque clef à son icône ; en effet, puisque chaque clef avait son propre design, l'idée était que collecter une clef appelait la bonne icône dans l'interface, tout en gardant l'uniformité d'avoir un Blueprint de clef principal.\n\nAinsi, réaliser une interface cohérente pour les clefs à pousser le système de celles-ci à être plus poussé et permettrait d'être utilisé pour d'autres collectibles, qui eux-mêmes pourraient avoir de nombreuses variantes et leur correspondance dans un inventaire en UI."
+    ],    "body": "La difficulté dans la réalisation de l'UI des clés était de faire correspondre l'acquisition de chaque clé à son icône ; en effet, puisque chaque clé avait son propre design, l'idée était que collecter une clé appelait la bonne icône dans l'interface, tout en gardant l'uniformité d'avoir un blueprint de clé principal.\n\nAinsi, la réalisation d'une interface cohérente pour les clés a permis de pousser leur système plus loin et de le rendre utilisable pour d'autres collectibles, qui eux-mêmes pourraient avoir de nombreuses variantes et leur correspondance dans un inventaire en UI."
   },
   {
     "type": "text",

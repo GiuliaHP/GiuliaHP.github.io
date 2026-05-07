@@ -452,6 +452,80 @@ async function initGamesPage() {
   await initGamesPage();
 })();
 
+/* CHUNKED MEDIA LOADER
+   Loads media elements (images/videos) in DOM order by batches (chunks).
+   Usage: ensure deferred media use `data-src` or `data-video-mp4` attributes
+   for sources you want controlled. Call with options: {chunkSize, delay}.
+*/
+async function loadMediaInChunks({ chunkSize = 6, delay = 200 } = {}) {
+  const selectors = [
+    'img[data-src]',
+    'img[data-lazy]',
+    'video[data-video-mp4]',
+    'video[data-src]'
+  ];
+
+  const nodes = Array.from(document.querySelectorAll(selectors.join(',')));
+  if (!nodes.length) return;
+
+  const loadImage = el => new Promise(resolve => {
+    if (el.complete && el.naturalWidth) return resolve();
+    const onLoad = () => { cleanup(); resolve(); };
+    const onError = () => { cleanup(); resolve(); };
+    const cleanup = () => { el.removeEventListener('load', onLoad); el.removeEventListener('error', onError); };
+    el.addEventListener('load', onLoad);
+    el.addEventListener('error', onError);
+    // transfer data-src -> src if present
+    const src = el.dataset.src || el.dataset.lazy;
+    if (src) el.src = src;
+  });
+
+  const loadVideo = el => new Promise(resolve => {
+    // if video already has loaded sources, resolve
+    if (el.dataset.loaded) return resolve();
+    const mp4 = el.dataset.videoMp4 || el.dataset.src;
+    if (mp4) {
+      const source = document.createElement('source');
+      source.src = mp4;
+      source.type = 'video/mp4';
+      el.appendChild(source);
+      // ask browser to load
+      el.load();
+      el.dataset.loaded = 'true';
+    }
+    // resolve after canplay or timeout
+    const onCanPlay = () => { cleanup(); resolve(); };
+    const onError = () => { cleanup(); resolve(); };
+    const cleanup = () => { el.removeEventListener('canplay', onCanPlay); el.removeEventListener('error', onError); };
+    el.addEventListener('canplay', onCanPlay, { once: true });
+    el.addEventListener('error', onError, { once: true });
+    // fallback timeout
+    setTimeout(() => resolve(), 3000);
+  });
+
+  for (let i = 0; i < nodes.length; i += chunkSize) {
+    const chunk = nodes.slice(i, i + chunkSize);
+    await Promise.all(chunk.map(node => {
+      if (node.tagName === 'IMG') return loadImage(node);
+      if (node.tagName === 'VIDEO') return loadVideo(node);
+      return Promise.resolve();
+    }));
+
+    // small pause between chunks
+    if (i + chunkSize < nodes.length) await new Promise(r => setTimeout(r, delay));
+  }
+}
+
+// Start chunked loading after a short idle time so critical rendering isn't blocked
+if (typeof window !== 'undefined') {
+  window.addEventListener('load', () => {
+    // give a small grace period for browser to handle immediate requests
+    setTimeout(() => {
+      loadMediaInChunks({ chunkSize: 6, delay: 250 }).catch(() => {});
+    }, 300);
+  });
+}
+
 function setProjectCursorPosition(x, y) {
   if (!canTrackProjectIcons) return;
   projectCursorIcon.style.left = x + 'px';
@@ -970,6 +1044,7 @@ if (trailerVideos.length) {
     }
 
     // Build rows with support for: one video + multiple side images.
+    // Now groups media with following text (title at top, media, then description)
     const rows = [];
     let index = 0;
 
@@ -993,61 +1068,82 @@ if (trailerVideos.length) {
         continue;
       }
 
+      // Try to collect media items before a text block
+      const mediaItems = [];
+      let mediaIndex = index;
+      
+      // Collect video items
       if (current.type === 'video') {
-        const nextItem = items[index + 1];
+        const nextItem = items[mediaIndex + 1];
         if (nextItem && nextItem.type === 'video') {
-          rows.push({ kind: 'media', items: [current, nextItem] });
-          index += 2;
-          continue;
+          mediaItems.push({ kind: 'media', items: [current, nextItem] });
+          mediaIndex += 2;
+        } else {
+          // Collect side images
+          const sideImages = [];
+          let lookahead = mediaIndex + 1;
+          while (lookahead < items.length && items[lookahead].type === 'image') {
+            sideImages.push(items[lookahead]);
+            lookahead += 1;
+          }
+
+          if (sideImages.length >= 2) {
+            mediaItems.push({ kind: 'media-stack', video: current, images: sideImages });
+            mediaIndex = lookahead;
+          } else if (sideImages.length === 1) {
+            mediaItems.push({ kind: 'media', items: [current, sideImages[0]] });
+            mediaIndex = lookahead;
+          } else {
+            mediaItems.push({ kind: 'media', items: [current] });
+            mediaIndex += 1;
+          }
         }
-
-        const sideImages = [];
-        let lookahead = index + 1;
-        while (lookahead < items.length && items[lookahead].type === 'image') {
-          sideImages.push(items[lookahead]);
-          lookahead += 1;
-        }
-
-        if (sideImages.length >= 2) {
-          rows.push({ kind: 'media-stack', video: current, images: sideImages });
-          index = lookahead;
-          continue;
-        }
-
-        if (sideImages.length === 1) {
-          rows.push({ kind: 'media', items: [current, sideImages[0]] });
-          index = lookahead;
-          continue;
-        }
-
-        rows.push({ kind: 'media', items: [current] });
-        index += 1;
-        continue;
-      }
-
-      if (current.type === 'image') {
+      } else if (current.type === 'image') {
         // If image has a series, group all images in that series together
         if (current.series) {
           const seriesName = current.series;
           const seriesImages = [current];
-          index += 1;
+          mediaIndex += 1;
 
-          while (index < items.length && 
-                 items[index].type === 'image' && 
-                 items[index].series === seriesName) {
-            seriesImages.push(items[index]);
-            index += 1;
+          while (mediaIndex < items.length && 
+                 items[mediaIndex].type === 'image' && 
+                 items[mediaIndex].series === seriesName) {
+            seriesImages.push(items[mediaIndex]);
+            mediaIndex += 1;
           }
 
           // Split series into rows of 4
           for (let j = 0; j < seriesImages.length; j += 4) {
-            rows.push({ kind: 'media', items: seriesImages.slice(j, j + 4) });
+            mediaItems.push({ kind: 'media', items: seriesImages.slice(j, j + 4) });
           }
         } else {
           // Images without a series: one per row
-          rows.push({ kind: 'media', items: [current], cols: 1 });
-          index += 1;
+          mediaItems.push({ kind: 'media', items: [current], cols: 1 });
+          mediaIndex += 1;
         }
+      }
+
+      // Check if there's a text block following the media
+      const followingText = mediaIndex < items.length && items[mediaIndex].type === 'text' ? items[mediaIndex] : null;
+      
+      if (followingText && !followingText.title.startsWith('NOTE')) {
+        // Collect NOTE items following the text
+        const attachedNotes = [];
+        let lookahead = mediaIndex + 1;
+        while (lookahead < items.length && 
+               items[lookahead].type === 'text' && 
+               items[lookahead].title && 
+               items[lookahead].title.startsWith('NOTE')) {
+          attachedNotes.push(items[lookahead]);
+          lookahead += 1;
+        }
+        
+        rows.push({ kind: 'group', mediaRows: mediaItems, text: followingText, attachedNotes });
+        index = lookahead;
+      } else {
+        // No following text, just add the media rows
+        rows.push(...mediaItems);
+        index = mediaIndex;
       }
     }
 
@@ -1159,7 +1255,143 @@ if (trailerVideos.length) {
 
     for (let i = 0; i < rows.length; i += 1) {
       const row = rows[i];
-      if (row.kind === 'text') {
+      if (row.kind === 'group') {
+        // Create title header
+        const titleEl = document.createElement('div');
+        titleEl.className = 'gallery-group-title reveal';
+        const h2 = document.createElement('h2');
+        h2.textContent = row.text.title;
+        titleEl.appendChild(h2);
+        gallery.appendChild(titleEl);
+
+        // Render all media rows in the group
+        for (const mediaRow of row.mediaRows) {
+          if (mediaRow.kind === 'media') {
+            const rowEl = document.createElement('div');
+            rowEl.className = 'gallery-row reveal';
+            rowEl.style.setProperty('--cols', mediaRow.cols || mediaRow.items.length);
+
+            const hasMixedMediaPair =
+              mediaRow.items.length === 2 &&
+              mediaRow.items.some(media => media.type === 'video') &&
+              mediaRow.items.some(media => media.type === 'image');
+
+            if (hasMixedMediaPair) {
+              rowEl.classList.add('has-mixed-media-pair');
+
+              const pairImage = mediaRow.items.find(media => media.type === 'image');
+              const imageRatio = pairImage ? await getImageAspectRatio(pairImage.src) : null;
+              const shouldPlaceBelowVideo = shouldMoveImageBelowVideo(imageRatio);
+              if (shouldPlaceBelowVideo) {
+                rowEl.classList.add('has-mixed-media-pair-below');
+              }
+            }
+
+            for (const media of mediaRow.items) rowEl.appendChild(createMediaItem(media));
+            gallery.appendChild(rowEl);
+          } else if (mediaRow.kind === 'media-stack') {
+            const ratioEntries = await Promise.all(
+              mediaRow.images.map(async image => ({
+                image,
+                ratio: await getImageAspectRatio(image.src)
+              }))
+            );
+
+            const sideImages = [];
+            const sideImageRatios = [];
+            const underVideoImages = [];
+            for (const entry of ratioEntries) {
+              if (shouldMoveImageBelowVideo(entry.ratio)) {
+                underVideoImages.push(entry.image);
+              } else {
+                sideImages.push(entry.image);
+                sideImageRatios.push(entry.ratio);
+              }
+            }
+
+            const rowEl = document.createElement('div');
+            rowEl.className = 'gallery-row gallery-row--media-stack reveal';
+
+            const videoItem = createMediaItem(mediaRow.video);
+            rowEl.appendChild(videoItem);
+
+            if (sideImages.length) {
+              const imageStack = document.createElement('div');
+              imageStack.className = 'gallery-image-stack';
+              imageStack.style.setProperty('--stack-count', String(sideImages.length));
+              imageStack.style.setProperty('--stack-base-height', '210px');
+
+              const useTwoLanes = sideImages.length >= 4;
+              let maxOffsetY = 0;
+
+              for (let imageIndex = 0; imageIndex < sideImages.length; imageIndex += 1) {
+                const image = sideImages[imageIndex];
+                const ratio = sideImageRatios[imageIndex];
+                const imageItem = createMediaItem(image);
+                imageItem.classList.add('gallery-item--stack-image');
+
+                const rotate = (Math.random() * 9) - 4.5;
+                const jitterX = (Math.random() * 24) - 12;
+                const lift = Math.random() * 8;
+                const lane = useTwoLanes ? imageIndex % 2 : 0;
+                const tier = useTwoLanes ? Math.floor(imageIndex / 2) : imageIndex;
+                const baseStepY = useTwoLanes ? 120 : 100;
+                const laneOffsetY = useTwoLanes ? lane * 42 : 0;
+                const laneOffsetX = useTwoLanes ? lane * 280 : 0;
+
+                let heightAdjustment = 0;
+                if (ratio && ratio < 0.5) {
+                  heightAdjustment = -70;
+                } else if (ratio && ratio < 0.65) {
+                  heightAdjustment = -40;
+                }
+
+                const offsetY = tier * baseStepY + laneOffsetY - lift + heightAdjustment;
+                const offsetX = laneOffsetX + jitterX;
+
+                if (offsetY > maxOffsetY) maxOffsetY = offsetY;
+
+                imageItem.style.setProperty('--stack-rotate', `${rotate.toFixed(2)}deg`);
+                imageItem.style.setProperty('--stack-offset-x', `${offsetX.toFixed(2)}px`);
+                imageItem.style.setProperty('--stack-offset-y', `${offsetY.toFixed(2)}px`);
+                imageItem.style.setProperty('--stack-z', String(imageIndex + 1));
+
+                imageStack.appendChild(imageItem);
+              }
+
+              imageStack.style.setProperty('--stack-max-offset', `${maxOffsetY.toFixed(2)}px`);
+              rowEl.appendChild(imageStack);
+            } else {
+              rowEl.classList.add('is-side-empty');
+            }
+
+            if (underVideoImages.length) {
+              const underVideo = document.createElement('div');
+              underVideo.className = 'gallery-under-video';
+
+              for (const image of underVideoImages) {
+                const imageItem = createMediaItem(image);
+                imageItem.classList.add('gallery-item--under-video');
+                underVideo.appendChild(imageItem);
+              }
+
+              rowEl.appendChild(underVideo);
+            }
+
+            gallery.appendChild(rowEl);
+          }
+        }
+
+        // Add text block (description + notes)
+        const block = createTextBlock(row.text, 'reveal', row.attachedNotes || []);
+        gallery.appendChild(block);
+
+        // Add separator line
+        const separator = document.createElement('hr');
+        separator.className = 'gallery-group-separator reveal';
+        gallery.appendChild(separator);
+
+      } else if (row.kind === 'text') {
         const block = createTextBlock(row.item, 'reveal', row.attachedNotes || []);
         gallery.appendChild(block);
       } else if (row.kind === 'media') {

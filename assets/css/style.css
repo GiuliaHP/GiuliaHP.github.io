@@ -43,45 +43,58 @@ html, body, body * {
   transform: translate(-50%, -50%);
   transition: width 0.3s, height 0.3s, background 0.3s;
 }
+.cursor::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: transparent;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
 .cursor.hovering {
   width: 48px; height: 48px;
   background: transparent;
   border: 1px solid var(--accent);
 }
+.cursor.hovering::after {
+  background: var(--accent);
+  opacity: 1;
+}
 
 .project-cursor-icon {
   position: fixed;
-  width: 70px;
-  height: 70px;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(150, 181, 255, 0.6);
-  background:
-    linear-gradient(160deg, rgba(154, 181, 255, 0.34), rgba(8, 14, 33, 0.66));
-  box-shadow:
-    0 0 0 1px rgba(224, 232, 255, 0.08) inset,
-    0 16px 36px rgba(8, 11, 24, 0.5),
-    0 0 16px rgba(128, 158, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   display: grid;
   place-items: center;
   pointer-events: none;
   z-index: 9000;
   opacity: 0;
   transform: translate(-50%, -50%) scale(0.74);
-  transition: opacity 0.2s ease, transform 0.24s ease, box-shadow 0.25s ease;
-  will-change: transform, opacity, box-shadow;
+  transition: opacity 0.2s ease, transform 0.24s ease;
+  will-change: transform, opacity;
 }
 
 .project-cursor-icon.visible {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
-  animation: projectCursorGlow 1.75s ease-in-out infinite;
+  animation: none;
 }
 
 .project-cursor-icon img {
-  width: 76%;
-  height: 76%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   display: none;
   filter: drop-shadow(0 0 6px rgba(158, 185, 255, 0.36));
@@ -293,6 +306,15 @@ nav {
   transform: translateY(8px);
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 130;
+}
+
+.nav-projects-menu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.85rem;
+  height: 0.85rem;
 }
 
 .nav-projects-menu li + li {
@@ -1308,9 +1330,15 @@ section { padding: 6rem 0; }
   padding: 1.15rem 1.15rem 1rem;
   border: 1px solid var(--border);
   border-radius: 1rem;
-  background: linear-gradient(180deg, rgba(18, 23, 49, 0.82), rgba(11, 14, 26, 0.88));
-  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(18, 23, 49, 0.82); /* fallback */
+  background-image: var(--contact-bg, none);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   color: var(--text);
+  text-decoration: none;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 .contact-link:hover {
@@ -1348,6 +1376,42 @@ section { padding: 6rem 0; }
 .contact-link:hover .contact-logo {
   opacity: 1;
   transform: scale(1.08) rotate(-3deg);
+}
+
+.contact-link {
+  /* disable direct background-image so pseudo-element can render it blurred */
+  background-image: none !important;
+}
+
+.contact-link > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* blurred background image layer */
+.contact-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: var(--contact-bg, none);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.06);
+  filter: blur(3px) opacity(0.45);
+  will-change: transform, filter;
+  pointer-events: none;
+}
+
+/* subtle gradient overlay above the image to improve contrast */
+.contact-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0));
+  pointer-events: none;
 }
 
 /* ── SHOWCASE GALLERY ──────────────────────── */
@@ -1797,6 +1861,35 @@ body.lightbox-open {
   line-height: 1.9;
   max-width: 72ch;
   white-space: pre-line;
+}
+
+.gallery-group-title {
+  margin-bottom: 1.5rem;
+}
+
+.gallery-group-title h2 {
+  font-family: var(--head);
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(128, 158, 255, 0.35);
+  margin-bottom: 0;
+}
+
+.gallery-group-title h2 em {
+  font-style: italic;
+  color: var(--accent-glow);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.gallery-group-separator {
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 2.75rem 0 2.75rem 0;
+  padding: 0.65rem 0;
+  background: transparent;
 }
 
 @media (max-width: 720px) {

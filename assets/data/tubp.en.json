@@ -2,12 +2,11 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
-    "webm": "assets/img/showcase/TUBP/SH_TUBP_Blood.webm",
     "caption": "Blood Projection"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.webp?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png?v=20260323",
     "caption": "Blood decal reference"
   },
   {
@@ -33,7 +32,6 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
-    "webm": "assets/img/showcase/TUBP/SH_TUBP_Procedural.webm",
     "caption": "Procedural Generation — Maze"
   },
   {
@@ -59,12 +57,11 @@
   {
     "type": "video",
     "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
-    "webm": "assets/img/showcase/TUBP/SH_TUBP_UX.webm",
     "caption": "UI/UX Design — Keys"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.webp?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png?v=20260323",
     "caption": "Key blueprint — UI"
   },
   {
@@ -74,12 +71,12 @@
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.webp?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png?v=20260323",
     "caption": "Key blueprint — Set keys UI"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.webp?v=20260323",
+    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png?v=20260323",
     "caption": "Key blueprint — Use keys"
   },
   {

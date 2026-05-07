@@ -70,7 +70,7 @@
 	{
 		"type": "video",
 		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
-		"caption": "Adaptabilite des variantes au Rig"
+		"caption": "Adaptabilité des variantes au rig"
 	},
 	{
 		"type": "text",
@@ -80,12 +80,12 @@
 			"Facilité de prise en main pour l'animation",
 			"Structure réutilisable"
 		],
-		"body": "Le défi de ce RIG était de le rendre facile à animer pour des mouvements sinusoïdaux et organiques.\n\nLa solution a été d'utiliser une Spline IK, contrôlée par une Spline. Un contrôleur a été créé pour chaque point de cette spline, permettant de déplacer la courbe et donc la colonne du poisson naturellement.\n\nPour simuler les mouvements de nageoires sans avoir à les animer à la main ni à les simuler, des modifiers de Damped Track ont été utilisés : chaque bone de la chaîne d'une nageoire copie avec un délai la rotation de son parent, créant ainsi un mouvement naturel basé sur le déplacement de la chaîne."
+		"body": "Le défi de ce rig était de le rendre facile à animer pour des mouvements sinusoïdaux et organiques.\n\nLa solution a été d'utiliser une Spline IK, contrôlée par une spline. Un contrôleur a été créé pour chaque point de cette spline, permettant de déplacer la courbe et donc la colonne du poisson naturellement.\n\nPour simuler les mouvements de nageoires sans avoir à les animer à la main ni à les simuler, des modifiers de Damped Track ont été utilisés : chaque bone de la chaîne d'une nageoire copie avec un délai la rotation de son parent, créant ainsi un mouvement naturel basé sur le déplacement de la chaîne."
 	},
 	{
 		"type": "text",
 		"title": "NOTE — Variantes",
-		"body": "La simplicité de ce RIG permettait aux variantes des éléments composant le poisson de pouvoir toutes y être parentées sans nécessiter de changements ou d'adaptations, rendant ainsi le système de randomisation totalement compatible avec le rig et les animations prévues. Il serait donc très facile de créer plusieurs variantes sans avoir à changer le RIG."
+		"body": "La simplicité de ce rig permettait aux variantes des éléments composant le poisson de pouvoir toutes y être parentées sans nécessiter de changements ou d'adaptations, rendant ainsi le système de randomisation totalement compatible avec le rig et les animations prévues. Il serait donc très facile de créer plusieurs variantes sans avoir à changer le rig."
 	},
 
 
@@ -118,7 +118,7 @@
 	{
 		"type": "text",
 		"title": "NOTE — Perspectives d'Animation",
-		"body": "La simplicité d'utilisation de ce rig révèle qu'il serait facile à animer par du code ou en passant par des moyens plus expérimentaux et moins chronofages que l'animation manuelle."
+		"body": "La simplicité d'utilisation de ce rig révèle qu'il serait facile à animer par du code ou en passant par des moyens plus expérimentaux et moins chronophages que l'animation manuelle."
 	},
 
 

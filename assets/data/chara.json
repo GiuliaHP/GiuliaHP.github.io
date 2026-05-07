@@ -40,7 +40,7 @@
 	{
 		"type": "video",
 		"src": "assets/img/showcase/Chara/SH_Chara_Render.mp4?v=20260504",
-		"caption": "Démonstration de rendu potenciel"
+		"caption": "Démonstration de rendu potentiel"
 	},
 	{
 		"type": "image",
@@ -73,7 +73,7 @@
 	{
 		"type": "image",
 		"src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_A.png",
-		"caption": "Hierarchie des oreilles"
+		"caption": "Hiérarchie des oreilles"
 	},
 	{
 		"type": "image",
@@ -101,7 +101,7 @@
 	{
 		"type": "image",
 		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes_.png",
-		"caption": "Hierarchie des yeux"
+		"caption": "Hiérarchie des yeux"
 	},
 	{
 		"type": "text",
@@ -124,7 +124,7 @@
 	{
 		"type": "image",
 		"src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_A.png",
-		"caption": "Hierarchie des sourcils"
+		"caption": "Hiérarchie des sourcils"
 	},
 	{
 		"type": "image",
@@ -157,7 +157,7 @@
 	{
 		"type": "image",
 		"src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_A.png",
-		"caption": "Hierarchie des cheveux"
+		"caption": "Hiérarchie des cheveux"
 	},
 	{
 		"type": "image",
