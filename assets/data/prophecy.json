@@ -1,23 +1,22 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.mp4",
-    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog.webm",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Dialog.mp4",
     "caption": "Système de dialogue"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_A.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Dialog_A.png",
     "caption": "Déclencheur de dialogue"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_B.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Dialog_B.png",
     "caption": "Dialogue Manager"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Dialog_C.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Dialog_C.png",
     "caption": "Scriptable Object de dialogue"
   },
   {
@@ -42,19 +41,17 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.mp4",
-    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.webm",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Enviro_A.mp4",
     "caption": "Environnement — Perspective"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.mp4",
-    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.webm",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Enviro_B.mp4",
     "caption": "Environnement — Couches & Parallax"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Enviro.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Enviro.png",
     "caption": "Vue orthographique sans post-process de l'environnement"
   },
   {
@@ -79,13 +76,12 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.mp4",
-    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.webm",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Pixel.mp4",
     "caption": "Animation pixel art"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Pixel.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Pixel.png",
     "caption": ""
   },
   {
@@ -110,13 +106,12 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.mp4",
-    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.webm",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Shadow.mp4",
     "caption": "Dynamiques des ombres"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Shadow.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Shadow.png",
     "caption": ""
   },
   {
@@ -141,18 +136,17 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
-    "webm": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites.webm",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Sprites.mp4",
     "caption": "Animation des sprites"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_A.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Sprites_A.png",
     "caption": ""
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Prophecy/SH_Prophecy_Sprites_B.png",
+    "src": "../assets/img/showcase/Prophecy/SH_Prophecy_Sprites_B.png",
     "caption": ""
   },
   {

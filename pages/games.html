@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="../assets/img/icons/IC_Prophecy.png" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    #games-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .games-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      align-items: center;
+      justify-items: center;
+    }
+
+    /* Réduit l'espace entre les sections sur cette page */
+    section {
+      padding: 1rem 0;
+    }
+
+    .game-card {
+      width: 160px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    /* Wrapper icône + badge logo — référence de positionnement */
+    .game-card-icon-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+    }
+
+    .game-card-preview {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md, 4px);
+      border: 1px solid rgba(150, 181, 255, 0.6);
+      background: linear-gradient(160deg, rgba(154, 181, 255, 0.34), rgba(8, 14, 33, 0.66));
+      box-shadow:
+        0 0 0 1px rgba(224, 232, 255, 0.08) inset,
+        0 16px 36px rgba(8, 11, 24, 0.5),
+        0 0 16px rgba(128, 158, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: box-shadow 0.25s ease, transform 0.24s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cercle lumineux derrière l'icône */
+    .game-card-preview::before {
+      content: '';
+      position: absolute;
+      width: 68%;
+      height: 68%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(128, 158, 255, 0.18) 0%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .game-card:hover .game-card-preview {
+      box-shadow:
+        0 0 0 1px rgba(224, 232, 255, 0.12) inset,
+        0 18px 40px rgba(8, 11, 24, 0.54),
+        0 0 26px rgba(128, 158, 255, 0.45);
+    }
+
+    .game-card-preview img {
+      width: 72%;
+      height: 72%;
+      object-fit: contain;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 6px rgba(158, 185, 255, 0.36));
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .game-card:hover .game-card-preview img {
+      transform: scale(1.2) translateY(-2px);
+      filter: drop-shadow(0 0 10px rgba(158, 185, 255, 0.6));
+    }
+
+    /* Badge logo (Blender, RD…) — pop-up à l'extérieur du cadre, coin bas-droite */
+    .addon-logo {
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 30px;
+      height: 30px;
+      background: #151b2e;
+      border-radius: 6px;
+      border: 1px solid rgba(150, 181, 255, 0.4);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.55), 0 0 8px rgba(128,158,255,0.15);
+      z-index: 3;
+      pointer-events: none;
+      object-fit: contain;
+      aspect-ratio: 1/1;
+      transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+    }
+
+    .game-card:hover .addon-logo {
+      transform: scale(1.2) translate(-1px, 1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5), 0 0 12px rgba(128,158,255,0.3);
+    }
+
+    /* Titre toujours visible sous la carte */
+    .game-card-title {
+      font-family: var(--head, 'Space Grotesk', sans-serif);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #dbe3ff;
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Description visible au hover, se déploie sous le titre */
+    .game-card-desc {
+      font-size: 0.72rem;
+      color: rgba(171, 160, 255, 0.7);
+      text-align: center;
+      width: 160px;
+      line-height: 1.45;
+      min-height: 72px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.28s ease, opacity 0.22s ease;
+    }
+
+    .game-card:hover .game-card-desc {
+      max-height: 72px;
+      opacity: 1;
+    }
+
+    /* Modal pour lancer le jeu */
+    .game-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(8, 11, 24, 0.95);
+      z-index: 5000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .game-modal.active {
+      display: flex;
+    }
+
+    .game-modal-content {
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(128, 158, 255, 0.3);
+    }
+
+    .game-modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .game-modal-title {
+      font-family: var(--head);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .game-modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+
+    .game-modal-close:hover {
+      color: var(--text);
+    }
+
+    .game-modal-body {
+      padding: 1.5rem;
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-canvas {
+      width: 100%;
+      max-width: 800px;
+      max-height: 60vh;
+      display: block;
+      background: #000;
+    }
+
+    .game-loading {
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .game-loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(128, 158, 255, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 1rem auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .game-error {
+      color: #ff6b6b;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      #games-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .game-modal-content {
+        max-height: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="project-cursor-icon" id="projectCursorIcon" aria-hidden="true">
+    <img id="projectCursorIconImg" alt="" />
+    <span id="projectCursorIconLabel"></span>
+  </div>
+
+  <div id="nav-placeholder"></div>
+
+  <section id="hero" class="project-page-hero">
+    <div class="wrap">
+      <h1 class="hero-title"><em>Jeux</em> divers</h1>
+      <div class="hero-bottom">
+        <p class="hero-desc">
+          De nombreux jeux et quelques addons réalisés au fil du temps, certains en <em>WebGl</em>, la plupart pour <em>Windows</em>. Certains sont plus des <em>démos techniques</em>, d'autres des <em>expériences plus abouties</em>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section data-games-section="play">
+    <div class="wrap">
+      <div class="section-label reveal">Jouer</div>
+      <div id="games-gallery-play" class="games-gallery"></div>
+    </div>
+  </section>
+
+  <section data-games-section="download">
+    <div class="wrap">
+      <div class="section-label reveal">Télécharger</div>
+      <div id="games-gallery-download" class="games-gallery"></div>
+    </div>
+  </section>
+
+  <section data-games-section="addons">
+    <div class="wrap">
+      <div class="section-label reveal">Addons</div>
+      <div id="games-gallery-addons" class="games-gallery"></div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding: 3rem 0;">
+    <a href="index.html" class="project-back-link">← Retour à l'accueil</a>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Modal pour lancer les jeux -->
+  <div class="game-modal" id="gameModal">
+    <div class="game-modal-content">
+      <div class="game-modal-header">
+        <h2 class="game-modal-title" id="gameModalTitle">Jeu</h2>
+        <button class="game-modal-close" id="gameModalClose">✕</button>
+      </div>
+      <div class="game-modal-body" id="gameModalBody">
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="../assets/js/components.js"></script>
+  <script defer src="../assets/js/media-lightbox.js"></script>
+<script defer src="../assets/js/script.js"></script>
+  <script>
+    let games = [];
+
+    async function loadGamesData() {
+      const isEnglish = document.documentElement.lang === 'en';
+      const manifest = isEnglish ? '../assets/data/games.en.json' : '../assets/data/games.json';
+
+      try {
+        const response = await fetch(manifest);
+        if (!response.ok) throw new Error('failed to load games');
+        games = await response.json();
+      } catch (e) {
+        console.error(e);
+      }
+
+      loadGames();
+    }
+
+    // Charge les jeux et les affiche
+    function loadGames() {
+      const playGallery = document.getElementById('games-gallery-play');
+      const downloadGallery = document.getElementById('games-gallery-download');
+      const addonsGallery = document.getElementById('games-gallery-addons');
+
+      if (!playGallery || !downloadGallery || !addonsGallery) return;
+
+      // Filtre les jeux par catégorie (et exclut les cachés)
+      const playGames = games.filter(g => g.type === 'webgl' && !g.hidden);
+      const downloadGames = games.filter(g => g.type === 'itch' && !g.hidden);
+      const addonGames = games.filter(g => g.type === 'addon' && !g.hidden);
+
+      // Fonction pour créer les cartes d'une galerie
+      function renderGallery(gallery, gameList) {
+        gallery.innerHTML = '';
+        gameList.forEach((game) => {
+          const card = document.createElement('div');
+          card.className = 'game-card reveal';
+          let addonLogoHtml = '';
+          if (game.addonLogo) {
+            addonLogoHtml = `<img src="${game.addonLogo}" class="addon-logo" alt="Addon logo">`;
+          }
+          card.innerHTML = `
+            <div class="game-card-icon-wrap">
+              <div class="game-card-preview">
+                <img src="${game.icon}" alt="${game.title}" loading="lazy">
+              </div>
+              ${addonLogoHtml}
+            </div>
+            <div class="game-card-title">${game.title}</div>
+            <div class="game-card-desc">${game.description}</div>
+          `;
+          // Ajoute la logique du clic
+          card.addEventListener('click', () => {
+            if (game.title === 'Blink Doctor' && game.link) {
+              window.open(game.link, '_blank', 'noopener,noreferrer');
+            } else if (game.type === 'itch') {
+              window.open(game.link, '_blank', 'noopener,noreferrer');
+            } else if (game.type === 'addon') {
+              const link = document.createElement('a');
+              link.href = game.downloadPath;
+              link.download = game.title + '.zip';
+              link.click();
+            } else if (game.type === 'webgl') {
+              launchGame(game);
+            }
+          });
+          gallery.appendChild(card);
+        });
+
+        // Branche les nouvelles cartes sur l'observer reveal
+        if (typeof obs !== 'undefined') {
+          gallery.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        } else {
+          gallery.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }
+      }
+
+      // Remplit chaque galerie
+      renderGallery(playGallery, playGames);
+      renderGallery(downloadGallery, downloadGames);
+      renderGallery(addonsGallery, addonGames);
+    }
+
+    // Lance un jeu dans la modal
+    function launchGame(game) {
+      const modal = document.getElementById('gameModal');
+      const modalTitle = document.getElementById('gameModalTitle');
+      const modalBody = document.getElementById('gameModalBody');
+
+      modalTitle.textContent = game.title;
+      modalBody.innerHTML = `
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement du jeu...</p>
+        </div>
+      `;
+
+      modal.classList.add('active');
+      // Désactive le scroll du body
+      document.body.style.overflow = 'hidden';
+
+      // Simule le chargement du jeu
+      setTimeout(() => {
+        if (game.buildPath) {
+          // Pour les jeux WebGL, intégrer via iframe 16/9 + bouton fullscreen
+          modalBody.innerHTML = `
+            <div style="width: 100%; max-width: 900px; aspect-ratio: 16/9; position: relative; margin: 0 auto;">
+              <iframe
+                id="webglGameIframe"
+                src="${game.buildPath}"
+                style="width: 100%; height: 100%; border: none; border-radius: 4px; display: block; background: #000;"
+                allow="autoplay; fullscreen"
+                allowfullscreen>
+              </iframe>
+              <button id="fullscreenBtn" style="position: absolute; bottom: 16px; right: 16px; z-index: 10; background: rgba(24,32,64,0.85); color: #dbe3ff; border: none; border-radius: 6px; padding: 0.5em 1em; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.18); transition: background 0.2s;">⛶ Plein écran</button>
+            </div>
+          `;
+          // Ajoute l'action fullscreen
+          setTimeout(() => {
+            const btn = document.getElementById('fullscreenBtn');
+            const iframe = document.getElementById('webglGameIframe');
+            if (btn && iframe) {
+              btn.addEventListener('click', function() {
+                if (iframe.requestFullscreen) {
+                  iframe.requestFullscreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                  iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) {
+                  iframe.msRequestFullscreen();
+                }
+              });
+            }
+          }, 100);
+        } else if (game.canvasId) {
+          // Ou utiliser un canvas
+          modalBody.innerHTML = `
+            <canvas id="${game.canvasId}" class="game-canvas"></canvas>
+          `;
+          // Charger le script du jeu ici
+          const script = document.createElement('script');
+          script.src = game.scriptPath;
+          document.body.appendChild(script);
+        }
+      }, 400);
+    }
+
+    // Ferme la modal
+    document.getElementById('gameModalClose').addEventListener('click', () => {
+      const modal = document.getElementById('gameModal');
+      modal.classList.remove('active');
+      // Réactive le scroll du body
+      document.body.style.overflow = '';
+      // Nettoie le contenu
+      document.getElementById('gameModalBody').innerHTML = `
+        <div class="game-loading">
+          <div class="game-loading-spinner"></div>
+          <p>Chargement...</p>
+        </div>
+      `;
+    });
+
+    // Ferme en cliquant en dehors
+    document.getElementById('gameModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('gameModal')) {
+        document.getElementById('gameModalClose').click();
+      }
+    });
+
+    // Charge les jeux au démarrage
+    window.addEventListener('load', function() {
+      loadGamesData();
+    });
+    // Fallback si load n'est pas appelé
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadGamesData);
+    } else {
+      loadGamesData();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+/* Lightbox chrome, shared by the portfolio pages and the carnet. */
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background: rgba(5, 8, 20, 0.84);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.video-lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.video-lightbox-inner {
+  position: relative;
+  width: auto;
+  max-width: 92vw;
+  max-height: 86vh;
+  border: 1px solid rgba(128, 158, 255, 0.26);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(5, 8, 19, 0.35);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.48);
+  transform: scale(0.92);
+  opacity: 0;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+}
+.video-lightbox.is-open .video-lightbox-inner {
+  transform: scale(1);
+  opacity: 1;
+}
+.video-lightbox video {
+  width: auto;
+  height: auto;
+  max-width: 92vw;
+  max-height: 86vh;
+  display: block;
+  object-fit: cover;
+  background: transparent;
+}
+.video-lightbox img {
+  width: auto;
+  height: auto;
+  max-width: 92vw;
+  max-height: 86vh;
+  display: none;
+  object-fit: cover;
+  background: transparent;
+}
+.video-lightbox-title {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.7rem;
+  max-width: min(72vw, 720px);
+  padding: 0.42rem 0.62rem;
+  border: 1px solid rgba(128, 158, 255, 0.28);
+  border-radius: var(--radius-sm);
+  background: rgba(6, 10, 24, 0.74);
+  color: rgba(232, 239, 255, 0.94);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.video-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid rgba(170, 190, 255, 0.45);
+  border-radius: var(--radius-sm);
+  background: rgba(8, 12, 28, 0.82);
+  color: #e8efff;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.video-lightbox-close:hover {
+  background: rgba(24, 33, 70, 0.92);
+}
+@media (max-width: 700px) {
+  .video-lightbox {
+    padding: 0.8rem;
+  }
+  .video-lightbox-inner {
+    max-width: 100%;
+  }
+  .video-lightbox video,
+  .video-lightbox img {
+    max-width: 100%;
+    max-height: 78vh;
+  }
+  .video-lightbox-title {
+    left: 0.5rem;
+    right: 0.5rem;
+    top: 0.5rem;
+    bottom: auto;
+    max-width: none;
+    font-size: 0.68rem;
+  }
+}

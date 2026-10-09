@@ -1,17 +1,17 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_Blood.mp4?v=20260323",
     "caption": "Projection de sang"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_A.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_Blood_A.png?v=20260323",
     "caption": "Référence aux décals de sang"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Blood_B.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_Blood_B.png?v=20260323",
     "caption": "Blueprint projection de sang"
   },
   {
@@ -36,12 +36,12 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_Procedural.mp4?v=20260323",
     "caption": "Génération Procédurale — Labyrinthe"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_Procedural.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_Procedural.png?v=20260323",
     "caption": "Propriétés du blueprint de labyrinthe procédural"
   },
   {
@@ -66,27 +66,27 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_UX.mp4?v=20260323",
     "caption": "Design UI/UX — Clés"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_A.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_UX_A.png?v=20260323",
     "caption": "Blueprint clés — UI"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_B.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_UX_B.png?v=20260323",
     "caption": "Blueprint clés — Collect"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_C.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_UX_C.png?v=20260323",
     "caption": "Blueprint clés — Set keys UI"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/TUBP/SH_TUBP_UX_D.png?v=20260323",
+    "src": "../assets/img/showcase/TUBP/SH_TUBP_UX_D.png?v=20260323",
     "caption": "Blueprint clés — Use keys"
   },
   {

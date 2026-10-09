@@ -4,7 +4,7 @@
   <div class="nav-inner">
     <div class="nav-logo-section">
       <a class="nav-logo" href="index.html">
-        <img class="nav-logo-icon" src="assets/img/icons/IC_Main.png" alt="" aria-hidden="true" />
+        <img class="nav-logo-icon" src="../assets/img/icons/IC_Main.png" alt="" aria-hidden="true" />
         <span>Giulia HP.</span>
       </a>
       <div class="nav-logo-submenu">

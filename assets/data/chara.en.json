@@ -1,22 +1,22 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/Chara/SH_Chara_Setup.mp4?v=20260504",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Setup.mp4?v=20260504",
     "caption": "Addon setup"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Setup_A.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Setup_A.png",
     "caption": "Initialization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Setup_B.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Setup_B.png",
     "caption": "Main interface"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_UI.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_UI.png",
     "caption": "Icons"
   },
   {
@@ -36,12 +36,12 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Chara/SH_Chara_Render.mp4?v=20260504",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Render.mp4?v=20260504",
     "caption": "Potential render demonstration"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Shapekeys.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Shapekeys.png",
     "caption": "Shape Keys — General"
   },
   {
@@ -61,17 +61,17 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Ears.mp4?v=20260504",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Ears.mp4?v=20260504",
     "caption": "Ear customization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_A.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Ears_A.png",
     "caption": "Ear hierarchy"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Ears_B.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Ears_B.png",
     "caption": "Head modifiers"
   },
   {
@@ -91,12 +91,12 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes.mp4?v=20260504",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Eyes.mp4?v=20260504",
     "caption": "Eye customization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyes_.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Eyes_.png",
     "caption": "Eye hierarchy"
   },
   {
@@ -111,17 +111,17 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows.mp4?v=20260504",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Eyebrows.mp4?v=20260504",
     "caption": "Eyebrow customization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_A.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_A.png",
     "caption": "Eyebrow hierarchy"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_B.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Eyebrows_B.png",
     "caption": "Shape Keys — Eyebrows"
   },
   {
@@ -141,17 +141,17 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Hair.mp4?v=20260504",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Hair.mp4?v=20260504",
     "caption": "Hair customization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_A.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Hair_A.png",
     "caption": "Hair hierarchy"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Chara/SH_Chara_Use_Hair_B.png",
+    "src": "../assets/img/showcase/Chara/SH_Chara_Use_Hair_B.png",
     "caption": "Hair base modifiers"
   },
   {

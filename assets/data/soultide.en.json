@@ -1,12 +1,12 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Lighting.mp4",
     "caption": "Skybox"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.png",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Lighting.png",
     "caption": "Unreal setup"
   },
   {
@@ -21,22 +21,22 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Random.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_Random.mp4",
     "caption": "Fish randomization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Parameters.png",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_Parameters.png",
     "caption": "Generation parameters"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_A.png",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_BP_A.png",
     "caption": "Fish blueprint — Randomization"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_B.png",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_BP_B.png",
     "caption": "Fish blueprint — Generation"
   },
   {
@@ -56,12 +56,12 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Fish.mp4",
     "caption": "Fish Rig"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
     "caption": "Rig adaptability to variants"
   },
   {
@@ -81,17 +81,17 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Eel.mp4",
     "caption": "Eel Rig — Amplitude"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
     "caption": "Eel Rig — Facial Controls"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
     "caption": "Eel Rig — Usage"
   },
   {
@@ -111,17 +111,17 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal.mp4",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fishoal.mp4",
     "caption": "Fish shoal"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_A.png",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fishoal_A.png",
     "caption": "Fish generation"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_B.png",
+    "src": "../assets/img/showcase/Soultide/SH_Soultide_Fishoal_B.png",
     "caption": "Fish animation"
   },
   {

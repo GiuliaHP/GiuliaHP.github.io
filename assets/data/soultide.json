@@ -2,12 +2,12 @@
     
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Lighting.mp4",
 		"caption": "Skybox"
 	},
 	{
 		"type": "image",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Lighting.png",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Lighting.png",
 		"caption": "Setup Unreal"
 	},
 	{
@@ -26,22 +26,22 @@
     
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Random.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_Random.mp4",
 		"caption": "Randomisation des poissons"
 	},
 	{
 		"type": "image",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_Parameters.png",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_Parameters.png",
 		"caption": "Paramètres de génération"
 	},
 	{
 		"type": "image",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_A.png",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_BP_A.png",
 		"caption": "Blueprint de Poisson — Randomisation"
 	},
 	{
 		"type": "image",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fish_BP_B.png",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fish_BP_B.png",
 		"caption": "Blueprint de Poisson — Génération"
 	},
 	{
@@ -64,12 +64,12 @@
 
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Fish.mp4",
 		"caption": "Rig Poisson"
 	},
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Fish_Adaptability.mp4",
 		"caption": "Adaptabilité des variantes au rig"
 	},
 	{
@@ -92,17 +92,17 @@
 	
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Eel.mp4",
 		"caption": "Rig Anguille — Amplitude"
 	},
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Jaw.mp4",
 		"caption": "Rig Anguille — Contrôles Faciaux"
 	},
 	{
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_RIG_Eel_Use.mp4",
 		"caption": "Rig Anguille — Utilisation"
 	},
 	{
@@ -125,17 +125,17 @@
 
     {
 		"type": "video",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal.mp4",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fishoal.mp4",
 		"caption": "Banc de poissons"
 	},
 	{
 		"type": "image",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_A.png",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fishoal_A.png",
 		"caption": "Génération des poissons"
 	},
 	{
 		"type": "image",
-		"src": "assets/img/showcase/Soultide/SH_Soultide_Fishoal_B.png",
+		"src": "../assets/img/showcase/Soultide/SH_Soultide_Fishoal_B.png",
 		"caption": "Animation des poissons"
 	},
 	{

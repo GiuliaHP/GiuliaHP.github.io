@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- served by the app's own loopback server, so entry media resolve through
+       exactly the relative paths the published page uses -->
+  <base href="/">
+  <link rel="stylesheet" href="/assets/css/carnet-entry.css">
+  <script src="/assets/js/carnet-sanitize.js"></script>
+  <title>Giulia HP — Carnet</title>
+  <style>
+    :root { color-scheme:dark; --bg:#0b0e1a; --panel:#121731; --border:#2a3158; --text:#e8eaff; --muted:#9ba2c7; --accent:#809eff; --violet:#6e4aff; --bold:#bcd4ff; --page:1002px; }
+    * { box-sizing:border-box; } html,body { height:100%; } body { background:radial-gradient(circle at 15% 0,#1a2145 0,var(--bg) 42%); color:var(--text); display:flex; flex-direction:column; font:14px Inter,Segoe UI,sans-serif; margin:0; overflow:hidden; }
+    header { align-items:center; border-bottom:1px solid var(--border); display:flex; flex:none; gap:14px; justify-content:space-between; padding:7px 18px; } .brand { align-items:center; display:flex; font:600 16px "Space Grotesk",sans-serif; gap:9px; } .brand img { height:22px; object-fit:contain; width:22px; } .muted { color:var(--muted); }
+    main { display:grid; flex:1; gap:14px; grid-template-columns:220px minmax(0,1fr); margin:0; min-height:0; padding:10px 14px; width:100%; } .editor-column { --gutter:max(0px,calc((100% - var(--page)) / 2)); display:flex; flex-direction:column; min-height:0; min-width:0; width:100%; } /* the controls span the panel, like the canvas below them */ .form-grid { display:grid; flex:none; gap:8px 12px; grid-template-columns:2fr 1fr; } label { color:var(--muted); display:grid; font-size:12px; gap:6px; } label.full { grid-column:1/-1; } input { background:#0c1023; border:1px solid var(--border); border-radius:8px; color:var(--text); font:inherit; outline:none; padding:7px 10px; width:100%; } input:focus,[contenteditable]:focus { border-color:var(--accent); box-shadow:0 0 0 3px #809eff22; } .editor:focus { box-shadow:inset 0 0 0 1px var(--accent),0 0 0 3px #809eff22; }
+    .toolbar { align-items:center; display:flex; flex-wrap:wrap; gap:6px; } .toolbar-sep { background:var(--border); flex:none; height:18px; width:1px; } .toolbar button.on { background:var(--violet); border-color:var(--accent); } button { background:#202952; border:1px solid var(--border); border-radius:7px; color:var(--text); cursor:pointer; padding:6px 10px; } button:hover { border-color:var(--accent); } button.primary { background:linear-gradient(135deg,var(--violet),#4b78e8); border:0; font-weight:600; padding:8px 16px; }
+    .editor-wrap { display:flex; flex:1; flex-direction:column; min-height:0; } .editor-label { color:var(--muted); display:block; font-size:12px; margin-top:8px; } .editor { background:#0c1023; border:0; border-radius:10px; box-shadow:inset 0 0 0 1px var(--border); flex:1; font:16px/1.7 Inter,Arial,sans-serif; margin:6px 0 0; min-height:0; overflow-y:auto; padding:24px max(28px,calc((100% - var(--page)) / 2)); outline:none; width:100%; } .editor:empty::before { color:var(--muted); content:attr(data-placeholder); pointer-events:none; }    .sidebar { background:#0e1226; border:1px solid var(--border); border-radius:12px; display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+    .sidebar-head { align-items:center; border-bottom:1px solid var(--border); display:flex; gap:8px; justify-content:space-between; padding:9px 11px; } .sidebar-head h2 { font:600 14px "Space Grotesk",sans-serif; margin:0; } .sidebar-head button { font-size:12px; padding:6px 10px; }
+    .entry-list { display:flex; flex:1; flex-direction:column; gap:5px; min-height:0; overflow-y:auto; padding:7px; }
+    .entry-item { background:#141a35; border:1px solid transparent; border-radius:9px; display:grid; gap:3px; grid-template-columns:1fr auto; overflow:hidden; padding:7px 9px; position:relative; } .entry-item.tinted { padding-left:15px; } .entry-item.tinted::before { background:linear-gradient(180deg,var(--entry-a),var(--entry-b)); bottom:0; content:""; left:0; position:absolute; top:0; width:3px; } .entry-item.tinted .entry-open strong { color:var(--entry-a); } @supports ((background-clip:text) or (-webkit-background-clip:text)) { .entry-item.tinted.gradient .entry-open strong { -webkit-background-clip:text; background-clip:text; background-image:linear-gradient(95deg,var(--entry-a),var(--entry-b)); color:transparent; } } .entry-open .mini-tag { color:var(--tag); }
+    .entry-item:hover { border-color:var(--border); } .entry-item.current { background:#1b2350; border-color:var(--accent); }
+    .entry-open { all:unset; cursor:pointer; display:grid; gap:3px; min-width:0; } .entry-open strong { color:var(--text); font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .entry-open span { color:var(--muted); font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .entry-delete { align-self:start; background:transparent; border-color:transparent; color:var(--muted); line-height:1; padding:4px 7px; } .entry-delete:hover { background:#3a1b2c; border-color:#ff9b9b; color:#ff9b9b; }
+    .confirm { align-items:center; color:#ffc9c9; display:flex; font-size:12px; gap:6px; grid-column:1/-1; padding-top:6px; } .confirm button { font-size:12px; padding:4px 9px; } .confirm .yes { background:#5c1f33; border-color:#ff9b9b; }
+    .sidebar-empty { color:var(--muted); font-size:12px; padding:14px 16px; }
+    .media-selected { box-shadow:0 0 0 2px var(--accent),0 0 0 7px #809eff2e; } .media-dragging { opacity:.35; } .editor img,.editor video { cursor:pointer; } .resize-handle { background:var(--accent); border:2px solid #0b0e1a; border-radius:3px; cursor:ew-resize; height:18px; position:fixed; width:18px; z-index:45; } .resize-handle[hidden] { display:none; } .resize-readout { background:#1b2350; border:1px solid var(--accent); border-radius:6px; color:var(--text); font-size:11px; padding:3px 7px; position:fixed; z-index:46; } .resize-readout[hidden] { display:none; }
+    .drop-marker { background:var(--accent); border-radius:2px; box-shadow:0 0 10px var(--accent); height:3px; pointer-events:none; position:fixed; z-index:40; } .drop-marker[hidden] { display:none; }
+    .media-toolbar { align-items:center; background:#1b2350; border:1px solid var(--accent); border-radius:9px; box-shadow:0 12px 26px #05060caa; display:flex; gap:4px; padding:5px 6px; position:fixed; z-index:50; } .media-toolbar[hidden] { display:none; } .media-toolbar button { background:#0c1023; font-size:12px; line-height:1; padding:6px 9px; } .media-toolbar button.on { background:var(--violet); border-color:var(--accent); } .media-toolbar button:disabled { color:var(--muted); cursor:default; opacity:.45; } .media-toolbar button.danger:hover { background:#5c1f33; border-color:#ff9b9b; color:#ff9b9b; } .media-toolbar .sep { background:var(--border); flex:none; height:18px; width:1px; } .media-toolbar .scale-field { align-items:center; color:var(--muted); display:flex; font-size:11px; gap:2px; } .media-toolbar .scale-field input { background:#0c1023; border:1px solid var(--border); border-radius:6px; color:var(--text); font:inherit; font-size:12px; padding:5px 4px; text-align:right; width:52px; }
+    .tag-field { position:relative; } .tag-suggest { background:#0e1226; border:1px solid var(--accent); border-radius:9px; box-shadow:0 14px 28px #05060cbb; left:0; max-height:212px; overflow-y:auto; padding:4px; position:absolute; right:0; top:calc(100% + 4px); z-index:30; } .tag-suggest[hidden] { display:none; }
+    .tag-suggest button { align-items:center; background:transparent; border-color:transparent; display:flex; gap:9px; padding:7px 9px; text-align:left; width:100%; } .tag-suggest button.active,.tag-suggest button:hover { background:#1b2350; border-color:var(--accent); } .tag-suggest .dot { background:var(--dot,var(--accent)); border-radius:50%; flex:none; height:10px; width:10px; } .tag-suggest .name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .tag-suggest .count { color:var(--muted); font-size:11px; margin-left:auto; }
+    .tag-colors { align-items:center; display:flex; flex-wrap:wrap; gap:8px; grid-column:1/-1; } .tag-colors:empty { display:none; }
+    .tag-chip { align-items:center; background:#141a35; border:1px solid var(--chip); border-radius:999px; display:flex; gap:7px; padding:3px 11px 3px 3px; } .tag-chip span { color:var(--chip); font-size:12px; font-weight:600; }
+    .tag-chip input[type=color] { background:none; border:0; cursor:pointer; height:24px; padding:0; width:24px; } .tag-chip input[type=color]::-webkit-color-swatch-wrapper { padding:0; } .tag-chip input[type=color]::-webkit-color-swatch { border:1px solid #ffffff33; border-radius:50%; }
+    .accent-preview { border-left:2px solid var(--entry-a,var(--violet)); grid-column:1/-1; padding:2px 0 2px 14px; position:relative; } .accent-preview[hidden] { display:none; } .accent-preview em { color:var(--muted); display:block; font-size:11px; font-style:normal; letter-spacing:.08em; text-transform:uppercase; } .accent-preview strong { color:var(--entry-a,var(--text)); display:block; font:600 22px/1.2 "Space Grotesk",sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .accent-preview.gradient { border-left-color:transparent; } .accent-preview.gradient::before { background:linear-gradient(180deg,var(--entry-a),var(--entry-b)); bottom:0; content:""; left:-2px; position:absolute; top:0; width:2px; } .accent-preview.gradient strong { -webkit-background-clip:text; background-clip:text; background-image:linear-gradient(95deg,var(--entry-a),var(--entry-b)); color:transparent; }
+    .actions { align-items:center; display:flex; flex:none; gap:12px; justify-content:space-between; padding-top:8px; } #status { color:var(--muted); min-height:20px; } #status.error { color:#ff9b9b; }
+    @media (max-width:1100px) { main { grid-template-columns:1fr; grid-template-rows:minmax(140px,24%) minmax(0,1fr); } }
+    @media (max-width:900px) { header { padding:12px 16px; } main { padding:12px; } .form-grid { grid-template-columns:1fr; } label.full { grid-column:auto; } }
+  </style>
+</head>
+<body>
+  <header><div class="brand"><img src="data:image/png;base64,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" alt=""><span>Journal / Carnet</span></div></header>
+  <main>
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <h2>Entrées</h2>
+        <button type="button" id="new-entry">+ Nouvelle</button>
+      </div>
+      <div id="entry-list" class="entry-list" aria-label="Entrées enregistrées"></div>
+      <p id="entry-list-empty" class="sidebar-empty" hidden>Aucune entrée enregistrée.</p>
+    </aside>
+    <div class="editor-column">
+    <div class="form-grid">
+      <label>Titre<input id="title" maxlength="140" placeholder="Une nouvelle recherche..."></label>
+      <label>Date<input id="entry-date" type="date"></label>
+      <label class="full">Tags / mots-clés<div class="tag-field"><input id="tags" placeholder="design, techno, recherche" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="tag-suggest"><div class="tag-suggest" id="tag-suggest" role="listbox" aria-label="Tags existants" hidden></div></div></label>
+      <div class="tag-colors" id="tag-colors" aria-label="Couleurs des tags"></div>
+      <div class="accent-preview" id="accent-preview" hidden><em>Aperçu du cadre et du titre</em><strong id="accent-preview-title"></strong></div>
+    </div>
+    <div class="editor-wrap">
+      <span class="editor-label" id="editor-label">Texte riche</span>
+      <div class="toolbar" aria-label="Mise en forme">
+        <button type="button" data-command="bold"><strong>Gras</strong></button><button type="button" data-command="italic"><em>Italique</em></button>
+        <button type="button" data-block="H2">H2</button><button type="button" data-block="H3">H3</button><button type="button" data-command="insertUnorderedList">Liste</button>
+        <span class="toolbar-sep"></span>
+        <button type="button" data-command="justifyLeft" data-align-state="left" title="Aligner le texte à gauche">◰</button><button type="button" data-command="justifyCenter" data-align-state="center" title="Centrer le texte">◳</button><button type="button" data-command="justifyRight" data-align-state="right" title="Aligner le texte à droite">◲</button><button type="button" data-command="justifyFull" data-align-state="justify" title="Justifier le texte">▦</button>
+        <span class="toolbar-sep"></span>
+        <button type="button" id="link">Lien</button><button type="button" id="add-media">Ajouter des médias</button>
+      </div>
+      <div id="editor" class="editor entry-body" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="editor-label" data-placeholder="Écrivez votre entrée…"></div>
+    </div>
+    <div class="actions"><span id="status" role="status"></span><button class="primary" id="save">Enregistrer l'entrée</button></div>
+    </div>
+  </main>
+  <div class="media-toolbar" id="media-toolbar" role="toolbar" aria-label="Média sélectionné" hidden>
+    <button type="button" data-align="inline" title="Dans le texte : le média suit le flux et se place à côté des autres">↔</button><button type="button" data-align="left" title="Flottant à gauche : le texte habille le média par la droite">◧</button><button type="button" data-align="right" title="Flottant à droite : le texte habille le média par la gauche">◨</button><button type="button" data-align="center" title="Centré sur sa propre ligne">▣</button>
+    <span class="sep"></span>
+    <button type="button" id="media-narrower" title="Réduire de 5 %">−</button><label class="scale-field" title="Largeur en % de la colonne de texte"><input id="media-scale" type="number" min="10" max="100" step="5" placeholder="auto" aria-label="Largeur du média en pourcentage de la colonne">%</label><button type="button" id="media-wider" title="Agrandir de 5 %">+</button><button type="button" id="media-auto" title="Taille d'origine du média">Auto</button>
+    <span class="sep"></span>
+    <button type="button" id="media-replace" title="Remplacer le fichier">Remplacer</button><button type="button" class="danger" id="media-remove" title="Supprimer le média (Suppr)">✕</button>
+  </div>
+  <div class="drop-marker" id="drop-marker" hidden></div>
+  <div class="resize-handle" id="resize-handle" hidden title="Glissez pour redimensionner"></div>
+  <div class="resize-readout" id="resize-readout" hidden></div>
+  <div class="resize-handle" id="resize-handle" hidden title="Glissez pour redimensionner"></div>
+  <div class="resize-readout" id="resize-readout" hidden></div>
+  <script>
+    const $ = (id) => document.getElementById(id); let currentId = ""; let savedRange = null; let bridgeReady = false;
+    let entries = []; let pendingDelete = ""; let tagColors = {}; let tagColorTimer = 0;
+    let selectedMedia = null; let draggedMedia = null; let dropRange = null; let suggestions = []; let suggestIndex = -1;
+    $("entry-date").value = new Date().toISOString().slice(0, 10);
+    function focusEditor() { $("editor").focus(); if (savedRange) { const selection = getSelection(); selection.removeAllRanges(); selection.addRange(savedRange); } }
+    function saveSelection() { const selection = getSelection(); if (selection.rangeCount && $("editor").contains(selection.anchorNode)) savedRange = selection.getRangeAt(0).cloneRange(); }
+    const MEDIA_SELECTOR = "img,video";
+    const ALIGNMENTS = ["inline", "left", "right", "center"];   // left/right float, so text wraps beside them
+    // Width is a share of the text column, in the steps carnet-entry.css declares.
+    const WIDTHS = window.CarnetSanitize.WIDTHS.map(Number);
+    const WIDTH_MIN = WIDTHS[0], WIDTH_MAX = WIDTHS[WIDTHS.length - 1], WIDTH_STEP = 5;
+    function mediaBlock(node) {
+      const start = node instanceof Element ? node : node && node.parentElement;
+      const block = start && start.closest(MEDIA_SELECTOR);
+      return block && $("editor").contains(block) ? block : null;
+    }
+    function mediaAlign(element) { return ALIGNMENTS.includes(element.dataset.align) ? element.dataset.align : "inline"; }
+    const snapWidth = (value) => Math.min(WIDTH_MAX, Math.max(WIDTH_MIN, Math.round(value / WIDTH_STEP) * WIDTH_STEP));
+    // No data-width at all means the media's own size; a value is a share of the column.
+    function mediaWidth(element) {
+      const width = Number(element.dataset.width);
+      return WIDTHS.includes(width) ? width : 0;
+    }
+    function applyMediaLayout(element) {
+      const align = mediaAlign(element), width = mediaWidth(element);
+      element.dataset.align = align;
+      if (width) element.dataset.width = String(width); else delete element.dataset.width;
+      element.draggable = true;
+      element.removeAttribute("style");        // placement and size are both CSS now
+    }
+    function positionMediaToolbar() {
+      const toolbar = $("media-toolbar");
+      if (!selectedMedia) { toolbar.hidden = true; return; }
+      const box = selectedMedia.getBoundingClientRect(), frame = $("editor").getBoundingClientRect();
+      if (box.bottom < frame.top + 8 || box.top > frame.bottom - 8) { toolbar.hidden = true; return; }
+      toolbar.hidden = false;
+      const size = toolbar.getBoundingClientRect();
+      const above = box.top - size.height - 8;
+      toolbar.style.top = `${Math.round(above >= frame.top ? above : Math.min(box.bottom + 8, frame.bottom - size.height - 8))}px`;
+      toolbar.style.left = `${Math.round(Math.max(8, Math.min(box.left, window.innerWidth - size.width - 8)))}px`;
+    }
+    const columnWidth = () => $("editor").clientWidth - parseFloat(getComputedStyle($("editor")).paddingLeft) * 2;
+    function positionResizeHandle() {
+      const handle = $("resize-handle");
+      if (!selectedMedia) { handle.hidden = true; return; }
+      const box = selectedMedia.getBoundingClientRect(), frame = $("editor").getBoundingClientRect();
+      const visible = box.bottom > frame.top && box.top < frame.bottom;
+      handle.hidden = !visible;
+      if (!visible) return;
+      handle.style.left = `${Math.round(box.right - 9)}px`;
+      handle.style.top = `${Math.round(box.top + box.height / 2 - 9)}px`;
+    }
+    function renderMediaToolbar() {
+      if (!selectedMedia) { $("media-toolbar").hidden = true; $("resize-handle").hidden = true; return; }
+      const align = mediaAlign(selectedMedia), width = mediaWidth(selectedMedia);
+      $("media-toolbar").querySelectorAll("[data-align]").forEach((button) => button.classList.toggle("on", button.dataset.align === align));
+      if (document.activeElement !== $("media-scale")) $("media-scale").value = width ? String(width) : "";
+      $("media-narrower").disabled = width !== 0 && width <= WIDTH_MIN;
+      $("media-wider").disabled = width >= WIDTH_MAX;
+      $("media-auto").disabled = width === 0;
+      positionMediaToolbar();
+      positionResizeHandle();
+    }
+    function selectMedia(element) {
+      if (selectedMedia && selectedMedia !== element) selectedMedia.classList.remove("media-selected");
+      selectedMedia = element;
+      element.classList.add("media-selected");
+      renderMediaToolbar();
+    }
+    function clearMediaSelection() {
+      if (selectedMedia) selectedMedia.classList.remove("media-selected");
+      selectedMedia = null;
+      $("media-toolbar").hidden = true;
+      $("resize-handle").hidden = true;
+    }
+    function removeMedia(element) {
+      if (!element || !$("editor").contains(element)) return;
+      const parent = element.parentNode, index = [...parent.childNodes].indexOf(element);
+      clearMediaSelection();
+      element.remove();
+      const range = document.createRange();
+      range.setStart(parent, Math.min(index, parent.childNodes.length));
+      range.collapse(true);
+      const selection = getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      $("editor").focus(); saveSelection(); setStatus("Média supprimé.");
+    }
+    function setMediaWidth(value) {
+      if (!selectedMedia) return;
+      if (value === "" || value === null) delete selectedMedia.dataset.width;   // back to the media's own size
+      else selectedMedia.dataset.width = String(snapWidth(Number(value) || WIDTH_MAX));
+      applyMediaLayout(selectedMedia); renderMediaToolbar();
+    }
+    // Stepping from 'auto' starts at whatever share of the column the media covers.
+    function measuredWidth(element) {
+      const column = $("editor").clientWidth - parseFloat(getComputedStyle($("editor")).paddingLeft) * 2;
+      return snapWidth(element.getBoundingClientRect().width / column * 100);
+    }
+    const stepMediaWidth = (direction) => setMediaWidth((mediaWidth(selectedMedia) || measuredWidth(selectedMedia)) + direction * WIDTH_STEP);
+    $("editor").addEventListener("mousedown", (event) => { const block = mediaBlock(event.target); if (block) selectMedia(block); else clearMediaSelection(); });
+    $("editor").addEventListener("click", (event) => { if (mediaBlock(event.target)) return; $("editor").focus(); saveSelection(); });
+    $("editor").addEventListener("contextmenu", (event) => { const block = mediaBlock(event.target); if (!block) return; event.preventDefault(); selectMedia(block); });
+    $("editor").addEventListener("scroll", () => { positionMediaToolbar(); positionResizeHandle(); });
+    window.addEventListener("resize", () => { positionMediaToolbar(); positionResizeHandle(); });
+    // Dragging the handle sets the width as a share of the column, in 5% steps.
+    $("resize-handle").addEventListener("pointerdown", (event) => {
+      if (!selectedMedia) return;
+      event.preventDefault();
+      const left = selectedMedia.getBoundingClientRect().left, column = columnWidth(), readout = $("resize-readout");
+      $("resize-handle").setPointerCapture(event.pointerId);
+      const onMove = (move) => {
+        const width = snapWidth((move.clientX - left) / column * 100);
+        selectedMedia.dataset.width = String(width);
+        applyMediaLayout(selectedMedia);
+        readout.hidden = false;
+        readout.textContent = `${width} %`;
+        readout.style.left = `${Math.round(move.clientX + 14)}px`;
+        readout.style.top = `${Math.round(move.clientY - 10)}px`;
+        positionResizeHandle();
+      };
+      const onUp = () => {
+        $("resize-handle").removeEventListener("pointermove", onMove);
+        readout.hidden = true;
+        renderMediaToolbar();
+        setStatus(`Largeur : ${mediaWidth(selectedMedia)} % de la colonne.`);
+      };
+      $("resize-handle").addEventListener("pointermove", onMove);
+      $("resize-handle").addEventListener("pointerup", onUp, { once: true });
+    });
+    document.addEventListener("mousedown", (event) => {
+      const inChrome = $("media-toolbar").contains(event.target) || event.target === $("resize-handle");
+      if (!$("editor").contains(event.target) && !inChrome) clearMediaSelection();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (!selectedMedia || ["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
+      if (event.key === "Delete" || event.key === "Backspace") { event.preventDefault(); removeMedia(selectedMedia); return; }
+      if (event.key === "Escape") { event.preventDefault(); clearMediaSelection(); return; }
+      if (!event.ctrlKey && !event.metaKey && !["Shift", "Control", "Alt", "Meta"].includes(event.key)) clearMediaSelection();
+    });
+    $("media-toolbar").querySelectorAll("[data-align]").forEach((button) => button.addEventListener("click", () => {
+      if (!selectedMedia) return;
+      selectedMedia.dataset.align = button.dataset.align;
+      applyMediaLayout(selectedMedia); renderMediaToolbar();
+    }));
+    $("media-narrower").addEventListener("click", () => stepMediaWidth(-1));
+    $("media-wider").addEventListener("click", () => stepMediaWidth(1));
+    $("media-auto").addEventListener("click", () => setMediaWidth(""));
+    $("media-scale").addEventListener("input", () => setMediaWidth($("media-scale").value));
+    $("media-scale").addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); $("editor").focus(); } });
+    $("media-remove").addEventListener("click", () => removeMedia(selectedMedia));
+    function dropRangeFrom(event) {
+      const editor = $("editor");
+      const point = document.caretRangeFromPoint ? document.caretRangeFromPoint(event.clientX, event.clientY) : null;
+      if (point && editor.contains(point.startContainer)) {
+        const block = mediaBlock(point.startContainer);
+        if (!block) return point;
+        const box = block.getBoundingClientRect(), range = document.createRange();
+        if (event.clientY < box.top + box.height / 2) range.setStartBefore(block); else range.setStartAfter(block);
+        range.collapse(true);
+        return range;
+      }
+      const range = document.createRange();
+      const below = [...editor.children].find((child) => child !== draggedMedia && event.clientY < child.getBoundingClientRect().bottom);
+      if (below) range.setStartBefore(below); else { range.selectNodeContents(editor); range.collapse(false); }
+      return range;
+    }
+    function showDropMarker(range) {
+      const marker = $("drop-marker"), frame = $("editor").getBoundingClientRect();
+      const rect = range.getClientRects()[0] || range.getBoundingClientRect();
+      if (!rect || (!rect.height && !rect.width && !rect.top)) { marker.hidden = true; return; }
+      marker.hidden = false;
+      marker.style.top = `${Math.round(Math.max(frame.top, Math.min(rect.top + rect.height, frame.bottom)))}px`;
+      marker.style.left = `${Math.round(frame.left + 24)}px`;
+      marker.style.width = `${Math.round(Math.max(60, frame.width - 56))}px`;
+    }
+    function endMediaDrag() {
+      if (draggedMedia) draggedMedia.classList.remove("media-dragging");
+      draggedMedia = null; dropRange = null; $("drop-marker").hidden = true;
+    }
+    $("editor").addEventListener("dragstart", (event) => {
+      const block = mediaBlock(event.target);
+      if (!block) return;
+      draggedMedia = block;
+      selectMedia(block);
+      $("media-toolbar").hidden = true;
+      block.classList.add("media-dragging");
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", "giuliahp-media");
+    });
+    $("editor").addEventListener("dragover", (event) => {
+      if (!draggedMedia) return;
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+      dropRange = dropRangeFrom(event);
+      showDropMarker(dropRange);
+    });
+    $("editor").addEventListener("drop", (event) => {
+      if (!draggedMedia) return;
+      event.preventDefault();
+      const block = draggedMedia, range = dropRange || dropRangeFrom(event);
+      endMediaDrag();
+      range.insertNode(block);
+      selectMedia(block); saveSelection(); setStatus("Média déplacé.");
+    });
+    $("editor").addEventListener("dragend", () => { const block = draggedMedia; endMediaDrag(); if (block) selectMedia(block); });
+    // Anything pasted goes through the published allow-list first, so the canvas
+    // never shows formatting the site would drop on the floor.
+    $("editor").addEventListener("paste", (event) => {
+      const html = event.clipboardData && event.clipboardData.getData("text/html");
+      if (!html) return;                                  // plain text needs no cleaning
+      event.preventDefault();
+      const clean = window.CarnetSanitize.sanitize(html);
+      document.execCommand("insertHTML", false, clean.html);
+      hydrateMedia($("editor"));
+      saveSelection();
+      setStatus(clean.stripped.length
+        ? `Collage nettoyé : ${clean.stripped.join(", ")} retiré(s), ces éléments ne s'affichent pas sur le site.`
+        : "Collé.");
+    });
+    // Anything pasted goes through the published allow-list first, so the canvas
+    // never shows formatting the site would drop on the floor.
+    $("editor").addEventListener("paste", (event) => {
+      const html = event.clipboardData && event.clipboardData.getData("text/html");
+      if (!html) return;                                  // plain text needs no cleaning
+      event.preventDefault();
+      const clean = window.CarnetSanitize.sanitize(html);
+      document.execCommand("insertHTML", false, clean.html);
+      hydrateMedia($("editor"));
+      saveSelection();
+      setStatus(clean.stripped.length
+        ? `Collage nettoyé : ${clean.stripped.join(", ")} retiré(s), ces éléments ne s'affichent pas sur le site.`
+        : "Collé.");
+    });
+    $("editor").addEventListener("keyup", saveSelection); $("editor").addEventListener("mouseup", saveSelection); $("editor").addEventListener("input", saveSelection);
+    ["keyup", "mouseup", "input", "focus"].forEach((type) => $("editor").addEventListener(type, renderFormatState));
+    const TEXT_ALIGNS = ["left", "center", "right", "justify"];
+    function renderTextAlign() {
+      const active = TEXT_ALIGNS.find((value) => { try { return document.queryCommandState(`justify${value === "justify" ? "Full" : value[0].toUpperCase() + value.slice(1)}`); } catch { return false; } });
+      document.querySelectorAll("[data-align-state]").forEach((button) => button.classList.toggle("on", button.dataset.alignState === (active || "left")));
+    }
+    document.querySelectorAll("[data-command]").forEach((button) => button.addEventListener("mousedown", (event) => { event.preventDefault(); focusEditor(); document.execCommand(button.dataset.command, false); saveSelection(); renderFormatState(); }));
+    const currentBlock = () => String(document.queryCommandValue("formatBlock") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+    function renderFormatState() {
+      document.querySelectorAll("[data-command]:not([data-align-state])").forEach((button) => {
+        let active = false;
+        try { active = document.queryCommandState(button.dataset.command); } catch { active = false; }
+        button.classList.toggle("on", active);
+      });
+      const block = currentBlock();
+      document.querySelectorAll("[data-block]").forEach((button) => button.classList.toggle("on", button.dataset.block.toUpperCase() === block));
+      renderTextAlign();
+    }
+    document.querySelectorAll("[data-block]").forEach((button) => button.addEventListener("mousedown", (event) => {
+      event.preventDefault(); focusEditor();
+      const wanted = button.dataset.block.toUpperCase();
+      document.execCommand("formatBlock", false, currentBlock() === wanted ? "P" : wanted);   // clicking the active heading goes back to a paragraph
+      saveSelection(); renderFormatState();
+    }));
+    $("link").addEventListener("mousedown", (event) => { event.preventDefault(); focusEditor(); const url = prompt("URL du lien"); if (url) document.execCommand("createLink", false, url); saveSelection(); });
+    function setStatus(message, error = false) { $("status").textContent = message; $("status").classList.toggle("error", error); }
+    function requireBridge(method) {
+      const api = window.pywebview && window.pywebview.api;
+      if (!bridgeReady || !api || typeof api[method] !== "function") {
+        throw new Error("Le pont de l'éditeur n'est pas prêt. Fermez puis relancez l'application.");
+      }
+      return api;
+    }
+    function mediaLayout(element) {
+      const align = mediaAlign(element), width = mediaWidth(element);
+      return `${align === "inline" ? "" : ` data-align="${align}"`}${width ? ` data-width="${width}"` : ""}`;
+    }
+    function serializeEditor() {
+      const clone = $("editor").cloneNode(true);
+      // a media still waiting to be imported leaves a placeholder for the backend
+      clone.querySelectorAll("[data-media-token]").forEach((element) => {
+        element.outerHTML = `<div data-media-token="${escapeText(element.dataset.mediaToken)}"${mediaLayout(element)}></div>`;
+      });
+      clone.querySelectorAll("img,video").forEach((element) => {
+        element.removeAttribute("draggable");
+        element.removeAttribute("data-media-kind");
+        element.classList.remove("media-selected", "media-dragging");
+        if (!element.getAttribute("class")) element.removeAttribute("class");
+      });
+      clone.querySelectorAll("[style]").forEach((element) => {
+        const align = element.style.textAlign;
+        if (!TEXT_ALIGNS.includes(align)) return;
+        element.dataset.textAlign = align;
+        element.style.textAlign = "";
+        if (!element.getAttribute("style")) element.removeAttribute("style");
+      });
+      clone.querySelectorAll("a").forEach((element) => { element.target = "_blank"; element.rel = "noopener noreferrer"; });
+      // the same allow-list the published page uses, so nothing shown here is dropped there
+      return window.CarnetSanitize.sanitize(clone.innerHTML);
+    }
+    // A staged media is the same kind of element as a saved one: the local server
+    // serves the file straight off disk, so there is only one thing to lay out.
+    function mediaPlaceholder(media) {
+        const element = document.createElement(media.kind === "video" ? "video" : "img");
+        if (media.kind === "video") { element.controls = true; element.preload = "metadata"; }
+        else { element.alt = media.filename || ""; }
+        element.src = media.url;
+        element.dataset.mediaToken = media.token;
+        element.dataset.mediaKind = media.kind;
+        applyMediaLayout(element);
+        return element;
+    }
+    async function replaceMedia() {
+      const target = selectedMedia;
+      if (!target) return;
+      setStatus("Traitement du média…");
+      try {
+        const media = await requireBridge("pick_media").pick_media();
+        if (!media) { setStatus(""); return; }
+        const element = mediaPlaceholder(media);
+        element.dataset.align = mediaAlign(target);
+        if (mediaWidth(target)) element.dataset.width = String(mediaWidth(target));
+        applyMediaLayout(element);
+        target.replaceWith(element);
+        clearMediaSelection(); selectMedia(element);
+        setStatus("Média remplacé — il sera traité à l'enregistrement.");
+      } catch (error) { setStatus(error.message || String(error), true); }
+    }
+    $("media-replace").addEventListener("click", replaceMedia);
+    async function insertMedia() {
+      saveSelection(); setStatus("Traitement des médias…");
+      try {
+        const picked = (await requireBridge("add_media").add_media()) || {};
+        const chosen = picked.media || [], skipped = picked.skipped || [];
+        if (!chosen.length) { setStatus(skipped.length ? `Aucun média ajouté : ${skipped.join(" · ")}` : "", skipped.length > 0); return; }
+        clearMediaSelection(); focusEditor();
+        const selection = getSelection();
+        const caret = selection.rangeCount ? selection.getRangeAt(0) : null;
+        const range = document.createRange();
+        if (caret && $("editor").contains(caret.commonAncestorContainer)) { range.setStart(caret.startContainer, caret.startOffset); range.setEnd(caret.endContainer, caret.endOffset); }
+        else { range.selectNodeContents($("editor")); range.collapse(false); }
+        range.deleteContents();
+        let last = null;
+        for (const media of chosen) {      // each block lands after the previous one
+          last = mediaPlaceholder(media);
+          range.insertNode(last);
+          range.setStartAfter(last); range.collapse(true);
+        }
+        selection.removeAllRanges(); selection.addRange(range); saveSelection();
+        selectMedia(last);
+        setStatus(`${chosen.length} média(s) ajouté(s).${skipped.length ? ` Ignoré(s) : ${skipped.join(" · ")}` : ""}`, skipped.length > 0);
+      } catch (error) { setStatus(error.message || String(error), true); }
+    }
+    function escapeText(value) { return String(value).replace(/[&<>"']/g, (char) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[char])); }
+    $("add-media").addEventListener("click", insertMedia);
+    function colorFor(tag) {
+      if (!tag) return "";
+      if (tagColors[tag]) return tagColors[tag];
+      const folded = tag.toLowerCase();
+      const key = Object.keys(tagColors).find((name) => name.toLowerCase() === folded);
+      return key ? tagColors[key] : "";
+    }
+    function entryTagList(entry) {
+      return Array.isArray(entry.tags)
+        ? entry.tags.filter(Boolean)
+        : String(entry.tags || "").split(",").map((tag) => tag.trim()).filter(Boolean);
+    }
+    function currentTags() {
+      return $("tags").value.split(",").map((tag) => tag.trim()).filter(Boolean).filter((tag, index, all) => all.indexOf(tag) === index);
+    }
+    function knownTags() {
+      const seen = new Map();
+      entries.forEach((entry) => entryTagList(entry).forEach((tag) => {
+        const known = seen.get(tag.toLowerCase());
+        if (known) known.count += 1; else seen.set(tag.toLowerCase(), { tag, count: 1 });
+      }));
+      Object.keys(tagColors).forEach((tag) => { if (!seen.has(tag.toLowerCase())) seen.set(tag.toLowerCase(), { tag, count: 0 }); });
+      return [...seen.values()];
+    }
+    function tagSegment() {
+      const input = $("tags"), caret = input.selectionStart === null ? input.value.length : input.selectionStart;
+      const start = input.value.lastIndexOf(",", caret - 1) + 1;
+      const end = input.value.indexOf(",", caret);
+      return { start, end: end === -1 ? input.value.length : end, value: input.value.slice(start, end === -1 ? undefined : end) };
+    }
+    function closeTagSuggestions() {
+      suggestions = []; suggestIndex = -1;
+      $("tag-suggest").textContent = "";
+      $("tag-suggest").hidden = true;
+      $("tags").setAttribute("aria-expanded", "false");
+    }
+    function renderTagSuggestions() {
+      const box = $("tag-suggest");
+      box.textContent = "";
+      box.hidden = suggestions.length === 0;
+      $("tags").setAttribute("aria-expanded", suggestions.length ? "true" : "false");
+      suggestions.forEach((item, index) => {
+        const option = document.createElement("button");
+        option.type = "button";
+        option.setAttribute("role", "option");
+        option.setAttribute("aria-selected", index === suggestIndex ? "true" : "false");
+        if (index === suggestIndex) option.classList.add("active");
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        dot.style.setProperty("--dot", colorFor(item.tag) || "#809eff");
+        const name = document.createElement("span");
+        name.className = "name";
+        name.textContent = item.tag;
+        option.append(dot, name);
+        if (item.count) {
+          const count = document.createElement("span");
+          count.className = "count";
+          count.textContent = `${item.count} entrée${item.count > 1 ? "s" : ""}`;
+          option.append(count);
+        }
+        option.addEventListener("mousedown", (event) => { event.preventDefault(); chooseTag(item.tag); });
+        box.append(option);
+      });
+      if (suggestIndex >= 0 && box.children[suggestIndex]) box.children[suggestIndex].scrollIntoView({ block: "nearest" });
+    }
+    function updateTagSuggestions() {
+      const query = tagSegment().value.trim().toLowerCase();
+      const taken = currentTags().map((tag) => tag.toLowerCase()).filter((tag) => tag !== query);
+      suggestions = knownTags()
+        .filter((item) => !taken.includes(item.tag.toLowerCase()) && (!query || item.tag.toLowerCase().includes(query)))
+        .sort((a, b) => {
+          const lead = Number(b.tag.toLowerCase().startsWith(query)) - Number(a.tag.toLowerCase().startsWith(query));
+          return lead || b.count - a.count || a.tag.localeCompare(b.tag, "fr");
+        })
+        .slice(0, 8);
+      suggestIndex = -1;                                  // nothing preselected: Enter still creates the typed tag
+      renderTagSuggestions();
+    }
+    function chooseTag(tag) {
+      const input = $("tags"), segment = tagSegment();
+      const head = input.value.slice(0, segment.start).split(",").map((value) => value.trim()).filter(Boolean);
+      const tail = input.value.slice(segment.end).split(",").map((value) => value.trim()).filter(Boolean);
+      const unique = [];
+      [...head, tag, ...tail].forEach((value) => { if (!unique.some((kept) => kept.toLowerCase() === value.toLowerCase())) unique.push(value); });
+      input.value = tail.length ? unique.join(", ") : `${unique.join(", ")}, `;
+      const caret = tail.length ? unique.slice(0, Math.min(head.length + 1, unique.length)).join(", ").length : input.value.length;
+      input.setSelectionRange(caret, caret);
+      closeTagSuggestions();
+      renderTagColors();
+      refreshTagColors();
+      input.focus();
+    }
+    function renderAccentPreview(tags) {
+      const palette = tags.map(colorFor).filter(Boolean);
+      const preview = $("accent-preview");
+      preview.hidden = palette.length === 0;
+      if (!palette.length) {
+        $("editor").style.removeProperty("--entry-a");
+        $("editor").style.removeProperty("--entry-b");
+        return;
+      }
+      preview.style.setProperty("--entry-a", palette[0]);
+      preview.style.setProperty("--entry-b", palette[1] || palette[0]);
+      $("editor").style.setProperty("--entry-a", palette[0]);          // h2 follows the first tag
+      $("editor").style.setProperty("--entry-b", palette[1] || palette[0]);   // h3 the second
+      preview.classList.toggle("gradient", palette.length > 1);
+      $("accent-preview-title").textContent = $("title").value.trim() || "Titre de l'entrée";
+    }
+    function renderTagColors() {
+      const tags = currentTags();
+      $("tag-colors").textContent = "";
+      tags.forEach((tag) => {
+        const color = colorFor(tag) || "#809eff";
+        const chip = document.createElement("span");
+        chip.className = "tag-chip";
+        chip.style.setProperty("--chip", color);
+        const picker = document.createElement("input");
+        picker.type = "color";
+        picker.value = color;
+        picker.title = `Couleur de « ${tag} »`;
+        picker.addEventListener("change", async () => {
+          try {
+            tagColors = await requireBridge("set_tag_color").set_tag_color(tag, picker.value);
+            renderTagColors();
+            renderEntryList();
+            setStatus(`Couleur de « ${tag} » enregistrée.`);
+          } catch (error) {
+            setStatus(error.message || String(error), true);
+          }
+        });
+        const name = document.createElement("span");
+        name.textContent = tag;
+        chip.append(picker, name);
+        $("tag-colors").append(chip);
+      });
+      renderAccentPreview(tags);
+    }
+    async function refreshTagColors() {
+      try {
+        tagColors = await requireBridge("get_tag_colors").get_tag_colors($("tags").value);
+      } catch (error) {
+        tagColors = {};
+      }
+      renderTagColors();
+      renderEntryList();
+    }
+    $("tags").addEventListener("input", () => {
+      const input = $("tags");
+      if (input.value.includes("#")) {                     // tags are stored and shown without a leading #
+        const caret = input.selectionStart, cleaned = input.value.replace(/#/g, "");
+        const shift = input.value.length - cleaned.length;
+        input.value = cleaned;
+        input.setSelectionRange(Math.max(0, caret - shift), Math.max(0, caret - shift));
+      }
+      renderTagColors();
+      updateTagSuggestions();
+      clearTimeout(tagColorTimer);
+      tagColorTimer = setTimeout(refreshTagColors, 300);
+    });
+    $("tags").addEventListener("keydown", (event) => {
+      const open = suggestions.length > 0;
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        if (!open) { updateTagSuggestions(); return; }
+        event.preventDefault();
+        const step = event.key === "ArrowDown" ? 1 : -1;
+        suggestIndex = suggestIndex < 0
+          ? (step === 1 ? 0 : suggestions.length - 1)
+          : (suggestIndex + step + suggestions.length) % suggestions.length;
+        renderTagSuggestions();
+        return;
+      }
+      if (open && suggestIndex >= 0 && (event.key === "Enter" || event.key === "Tab")) { event.preventDefault(); chooseTag(suggestions[suggestIndex].tag); return; }
+      if (open && event.key === "Escape") { event.preventDefault(); closeTagSuggestions(); }
+    });
+    $("tags").addEventListener("focus", updateTagSuggestions);
+    $("tags").addEventListener("click", updateTagSuggestions);
+    $("tags").addEventListener("blur", () => { $("tags").value = currentTags().join(", "); closeTagSuggestions(); renderTagColors(); });
+    $("title").addEventListener("input", () => renderAccentPreview(currentTags()));
+    // Saved media already carry a project-relative src, and <base href="/"> makes
+    // the local server resolve it exactly as the published page does.
+    function hydrateMedia(root) {
+      root.querySelectorAll("img,video").forEach((element) => {
+        element.dataset.mediaKind = element.tagName === "VIDEO" ? "video" : "image";
+        applyMediaLayout(element);
+      });
+    }
+    function renderEntryList() {
+      $("entry-list").textContent = "";
+      $("entry-list-empty").hidden = entries.length > 0;
+      entries.forEach((entry) => {
+        const item = document.createElement("div");
+        item.className = entry.id === currentId ? "entry-item current" : "entry-item";
+        const open = document.createElement("button");
+        open.type = "button";
+        open.className = "entry-open";
+        const tagList = entryTagList(entry);
+        const palette = tagList.map(colorFor).filter(Boolean);
+        if (palette.length) {
+          item.classList.add("tinted");
+          if (palette.length > 1) item.classList.add("gradient");
+          item.style.setProperty("--entry-a", palette[0]);
+          item.style.setProperty("--entry-b", palette[1] || palette[0]);
+        }
+        const labels = tagList.map((tag) => {
+          const color = colorFor(tag);
+          return color ? `<span class="mini-tag" style="--tag:${color}">${escapeText(tag)}</span>` : escapeText(tag);
+        }).join(", ");
+        open.innerHTML = `<strong>${escapeText(entry.title || "(sans titre)")}</strong><span>${escapeText(entry.date || "")}${labels ? " · " + labels : ""}</span>`;
+        open.addEventListener("click", () => loadEntry(entry));
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "entry-delete";
+        remove.title = "Supprimer cette entrée";
+        remove.textContent = "✕";
+        remove.addEventListener("click", () => { pendingDelete = pendingDelete === entry.id ? "" : entry.id; renderEntryList(); });
+        item.append(open, remove);
+        if (pendingDelete === entry.id) {
+          const row = document.createElement("div");
+          row.className = "confirm";
+          const question = document.createElement("span");
+          question.textContent = "Supprimer définitivement ?";
+          const yes = document.createElement("button");
+          yes.type = "button"; yes.className = "yes"; yes.textContent = "Supprimer";
+          yes.addEventListener("click", () => deleteEntry(entry.id));
+          const no = document.createElement("button");
+          no.type = "button"; no.textContent = "Annuler";
+          no.addEventListener("click", () => { pendingDelete = ""; renderEntryList(); });
+          row.append(question, yes, no);
+          item.append(row);
+        }
+        $("entry-list").append(item);
+      });
+    }
+    async function refreshEntries() {
+      entries = await requireBridge("get_entries").get_entries();
+      pendingDelete = "";
+      renderEntryList();
+    }
+    async function loadEntry(entry) {
+      setStatus("Ouverture…");
+      try {
+        clearMediaSelection();
+        const holder = document.createElement("div");
+        // clean on the way in too: the canvas must never show formatting the
+        // published page would strip, or the preview lies before you touch anything
+        const loaded = window.CarnetSanitize.sanitize(entry.body || "");
+        holder.innerHTML = loaded.html;
+        // the stored alignment becomes an inline style again, which is what execCommand reads
+        holder.querySelectorAll("[data-text-align]").forEach((element) => {
+          if (TEXT_ALIGNS.includes(element.dataset.textAlign)) element.style.textAlign = element.dataset.textAlign;
+        });
+        hydrateMedia(holder);
+        currentId = entry.id;
+        $("title").value = entry.title || "";
+        $("entry-date").value = entry.date || new Date().toISOString().slice(0, 10);
+        $("tags").value = Array.isArray(entry.tags) ? entry.tags.join(", ") : (entry.tags || "");
+        $("editor").innerHTML = holder.innerHTML;
+        savedRange = null;
+        pendingDelete = "";
+        closeTagSuggestions();
+        renderEntryList();
+        await refreshTagColors();
+        setStatus(loaded.stripped.length
+          ? `Entrée ouverte : ${entry.title || entry.id} — mise en forme non publiable ignorée (${loaded.stripped.join(", ")}).`
+          : `Entrée ouverte : ${entry.title || entry.id}`);
+      } catch (error) {
+        setStatus(error.message || String(error), true);
+      }
+    }
+    function resetForm() {
+      currentId = ""; savedRange = null; pendingDelete = ""; clearMediaSelection(); closeTagSuggestions();
+      $("title").value = ""; $("tags").value = "";
+      $("entry-date").value = new Date().toISOString().slice(0, 10);
+      $("editor").innerHTML = "";
+      renderEntryList();
+      renderTagColors();
+    }
+    async function deleteEntry(id) {
+      setStatus("Suppression…");
+      try {
+        await requireBridge("delete_entry").delete_entry(id);
+        if (id === currentId) resetForm();
+        await refreshEntries();
+        setStatus("Entrée supprimée.");
+      } catch (error) {
+        setStatus(error.message || String(error), true);
+      }
+    }
+    $("new-entry").addEventListener("click", () => { resetForm(); setStatus("Nouvelle entrée."); });
+    function markMediaSaved(media) {
+      Object.entries(media || {}).forEach(([token, path]) => {
+        const element = $("editor").querySelector(`[data-media-token="${token}"]`);
+        if (!element) return;
+        const target = element.tagName === "VIDEO" ? element : element;
+        target.setAttribute("src", path);     // the staged copy is gone; point at the imported file
+        delete element.dataset.mediaToken;
+      });
+    }
+    $("save").addEventListener("click", async () => {
+      setStatus("Enregistrement…");
+      try {
+        const clean = serializeEditor();
+        const entry = await requireBridge("save_entry").save_entry($("title").value, $("entry-date").value, $("tags").value, clean.html, currentId);
+        currentId = entry.id;
+        markMediaSaved(entry.media);
+        await refreshEntries();
+        await refreshTagColors();
+        setStatus(clean.stripped.length
+          ? `Entrée enregistrée : ${entry.id} — mise en forme non publiable retirée (${clean.stripped.join(", ")}).`
+          : `Entrée enregistrée : ${entry.id}`, clean.stripped.length > 0);
+      } catch (error) {
+        setStatus(error.message || String(error), true);
+      }
+    });
+    window.addEventListener("pywebviewready", async () => {
+      bridgeReady = true;
+      try {
+        await refreshTagColors();
+        await refreshEntries();
+        setStatus(entries.length ? `${entries.length} entrée(s) existante(s).` : "Carnet vide — écrivez la première entrée.");
+      } catch (error) {
+        setStatus(error.message || String(error), true);
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,14 +1,12 @@
 [
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.mp4?v=20260320",
-    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.webm",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_RIG_A.mp4?v=20260320",
     "caption": "Animation & Rigging 2D — Personnages"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.mp4?v=20260320",
-    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.webm",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_RIG_B.mp4?v=20260320",
     "caption": "Rigging 2D — Décors & Props"
   },
   {
@@ -33,24 +31,22 @@
 
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.mp4?v=20260320",
-    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.webm",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.mp4?v=20260320",
     "caption": "Toon Shader"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.webp",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_Shader_A.webp",
     "caption": "Shadergraph toon"
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.mp4?v=20260320",
-    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.webm",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.mp4?v=20260320",
     "caption": "Shader triplanaire"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.webp",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_Shader_B.webp",
     "caption": "Shadergraph triplanaire"
   },
   {
@@ -70,13 +66,12 @@
   },
   {
     "type": "video",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.mp4?v=20260320",
-    "webm": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.webm",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.mp4?v=20260320",
     "caption": "Shader d'eau"
   },
   {
     "type": "image",
-    "src": "assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.webp",
+    "src": "../assets/img/showcase/Herbarium/SH_Herbarium_Shader_C.webp",
     "caption": "Shadergraph d'eau"
   }
 ]

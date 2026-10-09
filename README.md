@@ -1,114 +1,38 @@
-# GiuliaHP.github.io
+# Giulia HP. — Portfolio
 
-Portfolio game art / technical art (site statique HTML/CSS/JS) heberge sur GitHub Pages.
+Welcome to my portfolio repository.
 
-## Vue d'ensemble
+I am Giulia, a game artist and technical artist interested in creating
+visual worlds, expressive characters, and interactive experiences. This
+portfolio brings together my work in environment art, character art,
+illustration, shaders, UI, and real-time game development.
 
-Le site contient :
-- une page d'accueil portfolio (`index.html`),
-- des pages projet detaillees (`project-*.html`),
-- une page de jeux WebGL (`games.html`),
-- des galeries dynamiques alimentees via JSON (`assets/data/*.json`).
+## About the portfolio
 
-## Structure actuelle
+The portfolio is a static website built with HTML, CSS, and JavaScript.
+It's creation was highly assisted by Claude.
 
-```text
-/
-|- index.html
-|- games.html
-|- project-herbarium.html
-|- project-blueprint.html
-|- project-prophecy.html
-|- project-portrait.html
-|- README.md
-`- assets/
-   |- css/
-   |  `- style.css
-   |- js/
-   |  `- script.js
-   |- data/
-   |  |- herbarium.json
-   |  |- tubp.json
-   |  |- prophecy.json
-   |  |- chara.json
-   |  `- games.json
-   |- games/
-   |  `- ... (builds WebGL)
-   `- img/
-      |- backgrounds/
-      |- icons/
-      |- logos/
-      |- previews/
-      |- trailers/
-      `- showcase/
-```
+The portfolio includes:
 
-## Fonctionnement du contenu
+- selected projects such as **SoulTide**, **The Herbarium**, **The Unfinished
+  Blueprint**, **Prophecy**, and **Character Maker**;
+- project pages with images, videos, breakdowns, and interactive WebGL builds;
+- research and skills galleries;
+- a CV and a personal journal documenting ongoing work.
 
-### Langue du site
-- Un toggle FR / ENG est disponible dans la navigation.
-- En mode ENG, les pages projet chargent automatiquement les manifests `assets/data/*.en.json`.
-- Le choix de langue est memorise localement dans le navigateur.
+The site is designed to show not only final images, but also the creative and
+technical process behind each project.
 
-### 1) Home (`index.html`)
-- La liste des projets est definie en dur dans la section `#projects`.
-- Chaque carte projet utilise des attributs `data-*` (`data-bg`, `data-icon`, `data-video-mp4`) exploites par `assets/js/script.js` (hover, preview video, curseur personnalise).
-- Les jauges de competences se reglent avec `data-level="NN"`.
+## An open collection of my work
 
-### 2) Pages projet (`project-*.html`)
-- Les medias de showcase sont charges dynamiquement via :
-  - `data-manifest="assets/data/herbarium.json"`
-  - `data-manifest="assets/data/tubp.json"`
-  - `data-manifest="assets/data/prophecy.json"`
-  - `data-manifest="assets/data/chara.json"`
-- Le rendu est gere par `assets/js/script.js` (mise en page mixed media, lightbox image/video, fallback si le JSON est invalide ou vide).
+This repository gathers my projects in one place so they can be freely
+accessed, explored, and shared. Keeping the portfolio on GitHub makes my work
+available beyond a single presentation website: the projects, experiments,
+visual research, and technical explorations can all be discovered in an open
+repository.
 
-### 3) Page Jeux (`games.html`)
-- Les jeux WebGL affiches sont actuellement definis en dur dans le script inline de `games.html` (tableau `games`).
-- `assets/data/games.json` existe mais n'est pas consomme par la page pour l'instant.
+The portfolio is published as a static website through GitHub Pages. The
+repository is also a living archive that grows as I develop new projects and
+continue learning.
 
-### 4) Manifests traduits
-- Convention des fichiers: `assets/data/<nom>.json` pour le francais et `assets/data/<nom>.en.json` pour l'anglais.
-- Les manifests actuellement concernes sont `herbarium`, `tubp`, `prophecy`, `chara`, `competences` et `games`.
-- Si une version anglaise manque, la page retombe sur le manifest francais.
-
-## Mise a jour rapide du portfolio
-
-### Ajouter ou modifier un projet dans la home
-1. Editer la section `#projects` dans `index.html`.
-2. Mettre a jour les medias associes dans `assets/img/backgrounds/`, `assets/img/icons/`, `assets/img/previews/`.
-
-### Mettre a jour une galerie de page projet
-1. Editer le fichier JSON correspondant dans `assets/data/`.
-2. Types supportes dans les manifests : `video`, `image`, `text`.
-3. Champs courants :
-   - `type`
-   - `src` (pour `video`/`image`)
-   - `caption`
-   - `title`, `body` (pour `text`)
-
-### Mettre a jour la page Jeux
-1. Editer le tableau `games` directement dans `games.html`.
-2. Verifier que chaque `buildPath` pointe vers un `index.html` WebGL valide sous `assets/games/`.
-
-## Personnalisation visuelle
-
-Les variables globales (couleurs, rayons, typographies, etc.) sont centralisees dans `assets/css/style.css`.
-
-## Developpement local
-
-Lancer un serveur local a la racine du projet :
-
-```bash
-python -m http.server 5500
-```
-
-Puis ouvrir :
-- `http://localhost:5500/` (home)
-- `http://localhost:5500/games.html` (page jeux)
-
-## Notes de maintenance
-
-- Si une section showcase n'apparait plus, verifier d'abord le `data-manifest` dans la page projet et le JSON cible.
-- Si une preview video ne se lance pas au hover, verifier les attributs `data-video-webm` / `data-video-mp4` sur la ligne projet concernee.
-- `assets/data/chara.json` est actuellement vide : la section showcase de `project-portrait.html` sera retiree automatiquement tant que ce manifest reste vide.
+Thank you for taking the time to look at my work.
