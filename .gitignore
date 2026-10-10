@@ -1,4 +1,3 @@
-/dist/
 tools/build/
 tools/*.spec
 __pycache__/
