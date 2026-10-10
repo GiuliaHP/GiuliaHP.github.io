@@ -6,7 +6,8 @@
     "projectsAll": "Tous les projets",
     "games": "Jeux",
     "work": "Recherches",
-    "cv": "CV"
+    "cv": "CV",
+    "carnet": "Carnet"
   },
   "footer": {
     "copy": "© 2026 Giulia HP.",
@@ -28,11 +29,24 @@
         "contact": "Contact"
       },
       "projects": {
-        "years": ["En cours", "2026", "2025", "2025"]
+        "years": [
+          "En cours",
+          "2026",
+          "2025",
+          "2025"
+        ]
       },
       "quickLinks": {
-        "kickers": ["Page dédiée", "Page dédiée", "Page dédiée"],
-        "names": ["Jeux", "Recherches", "CV"],
+        "kickers": [
+          "Page dédiée",
+          "Page dédiée",
+          "Page dédiée"
+        ],
+        "names": [
+          "Jeux",
+          "Recherches",
+          "CV"
+        ],
         "copies": [
           "Les prototypes WebGL et les expériences jouables hébergées sur le site.",
           "Les éléments individuels classés par domaine : personnage, environnement, UI et animation 2D.",
@@ -42,7 +56,12 @@
       "contact": {
         "titleHtml": "Travaillons<br><em>ensemble</em>",
         "copyHtml": "Pour un projet, une collaboration ou une question, voici les meilleurs moyens de me joindre.",
-        "labels": ["Email", "GitHub", "LinkedIn", "Itch.io"]
+        "labels": [
+          "Email",
+          "GitHub",
+          "LinkedIn",
+          "Itch.io"
+        ]
       }
     },
     "games": {
@@ -73,7 +92,13 @@
         "descriptionHtml": "Un aperçu détaillé de mes domaines d'expertise en game art, du concept au rendu final. Chaque section présente les différentes étapes de production et les techniques utilisées."
       },
       "sections": {
-        "titles": ["Personnage", "Environnement", "UI", "Animation 2D", "Illustration"]
+        "titles": [
+          "Personnage",
+          "Environnement",
+          "UI",
+          "Animation 2D",
+          "Illustration"
+        ]
       },
       "backLink": "← Retour à l'accueil"
     },
@@ -85,10 +110,24 @@
         "descriptionHtml": "Technical Artist · Généraliste Game Art · Paris"
       },
       "blocks": {
-        "titles": ["Compétences techniques", "Expérience", "Formation", "Projets notables", "Statut", "Contact", "Langues", "Intérêts"]
+        "titles": [
+          "Compétences techniques",
+          "Expérience",
+          "Formation",
+          "Projets notables",
+          "Statut",
+          "Contact",
+          "Langues",
+          "Intérêts"
+        ]
       },
       "skills": {
-        "columnTitles": ["Moteurs", "Langages", "Outils 3D", "2D"]
+        "columnTitles": [
+          "Moteurs",
+          "Langages",
+          "Outils 3D",
+          "2D"
+        ]
       },
       "entries": {
         "experience": [
@@ -96,86 +135,143 @@
             "dateHtml": "2021<br>→ 2024",
             "titleHtml": "Game Jams",
             "descHtml": "Diverses game jams de 48 h réalisées en équipes de trois à cinq personnes.",
-            "tags": ["Unity", "Maya", "Modeling", "Rigging", "Animation", "Dessin", "C#"]
+            "tags": [
+              "Unity",
+              "Maya",
+              "Modeling",
+              "Rigging",
+              "Animation",
+              "Dessin",
+              "C#"
+            ]
           },
           {
             "dateHtml": "2020",
             "titleHtml": "Concours de la BD scolaire",
-            "orgs": ["Festival de la Bande Dessinée — Angoulême"],
+            "orgs": [
+              "Festival de la Bande Dessinée — Angoulême"
+            ],
             "descHtml": "Création originale d'une page de bande dessinée.",
-            "tags": ["Dessin", "Écriture"],
-            "extraOrgs": ["Petit Fauve de bronze"]
+            "tags": [
+              "Dessin",
+              "Écriture"
+            ],
+            "extraOrgs": [
+              "Petit Fauve de bronze"
+            ]
           },
           {
             "dateHtml": "2019",
             "titleHtml": "Concours Jeunesse de la Nouvelle Policière",
-            "orgs": ["Festival du Polar — Avignon"],
-            "tags": ["Écriture"],
-            "extraOrgs": ["Seconde place"]
+            "orgs": [
+              "Festival du Polar — Avignon"
+            ],
+            "tags": [
+              "Écriture"
+            ],
+            "extraOrgs": [
+              "Seconde place"
+            ]
           },
           {
             "dateHtml": "2019",
             "titleHtml": "Représentation semi-théâtrale au Musée Louis Vouland",
-            "orgs": ["Club d'écriture du lycée Frédérique Mistral — Avignon"],
+            "orgs": [
+              "Club d'écriture du lycée Frédérique Mistral — Avignon"
+            ],
             "descHtml": "Écriture en collaboration puis réalisation d'une pièce immersive semi-théâtrale dans le cadre de la Nuit des musées.",
-            "tags": ["Écriture", "Théâtre"]
+            "tags": [
+              "Écriture",
+              "Théâtre"
+            ]
           }
         ],
         "education": [
           {
             "dateHtml": "2025<br>→ 2027<br>(en cours)",
             "titleHtml": "Master ATI<br>Création Numérique - parcours Arts et Technologies de l'Image Virtuelle",
-            "orgs": ["Université Paris 8 — Saint-Denis"],
+            "orgs": [
+              "Université Paris 8 — Saint-Denis"
+            ],
             "descHtml": "Conception, développement et production d'œuvres artistiques numériques innovantes dans les domaines de l'image de synthèse, du temps réel, de la réalité virtuelle et augmentée."
           },
           {
             "dateHtml": "2024<br>→ 2025",
             "titleHtml": "Licence 3 ATI<br>Arts Plastiques – parcours Arts et Technologies de l'Image",
-            "orgs": ["Université Paris 8 — Saint-Denis"],
+            "orgs": [
+              "Université Paris 8 — Saint-Denis"
+            ],
             "descHtml": "Approche artistique et technique de l'image numérique, et développement d'expertises spécifiques adaptées aux secteurs de l'animation, des effets spéciaux, du jeu vidéo et des environnements immersifs.",
-            "extraOrgs": ["Mention Très Bien"]
+            "extraOrgs": [
+              "Mention Très Bien"
+            ]
           },
           {
             "dateHtml": "2021<br>→ 2024",
             "titleHtml": "Formation en Game Art",
-            "orgs": ["École des Nouvelles Images — Avignon"],
+            "orgs": [
+              "École des Nouvelles Images — Avignon"
+            ],
             "descHtml": "Formation artistique et technique pour préparer au travail en studio de jeu vidéo et en entreprise de création d'images numériques."
           },
           {
             "dateHtml": "2018<br>→ 2021",
             "titleHtml": "BAC Technologique STD2A<br>Sciences et Technologies du Design et des Arts Appliqués",
-            "orgs": ["Lycée Frédéric Mistral — Avignon"],
+            "orgs": [
+              "Lycée Frédéric Mistral — Avignon"
+            ],
             "descHtml": "Filière technologique qui initie aux principaux métiers créatifs à travers un cursus axé sur le design, l'art et les technologies associées.",
-            "extraOrgs": ["Mention Bien"]
+            "extraOrgs": [
+              "Mention Bien"
+            ]
           },
           {
             "dateHtml": "2014<br>→ 2018",
             "titleHtml": "Brevet des collèges",
-            "orgs": ["Cité Scolaire Jean Henri Fabre — Carpentras"],
-            "extraOrgs": ["Mention Très Bien"]
+            "orgs": [
+              "Cité Scolaire Jean Henri Fabre — Carpentras"
+            ],
+            "extraOrgs": [
+              "Mention Très Bien"
+            ]
           }
         ],
         "projects": [
           {
             "dateHtml": "2026",
             "titleHtml": "<a href=\"project-herbarium.html\" style=\"color:inherit;text-decoration:none;\">The Herbarium</a>",
-            "orgs": ["Jeu Unity · C#"],
+            "orgs": [
+              "Jeu Unity · C#"
+            ],
             "descHtml": "Jeu cozy inspiré de Cooking Mama, centré sur la création de potions.",
-            "tags": ["Unity", "C#"]
+            "tags": [
+              "Unity",
+              "C#"
+            ]
           },
           {
             "dateHtml": "2025",
             "titleHtml": "<a href=\"project-blueprint.html\" style=\"color:inherit;text-decoration:none;\">The Unfinished Blueprint</a>",
-            "orgs": ["Jeu Unreal Engine 5 · Blueprint & C++"],
+            "orgs": [
+              "Jeu Unreal Engine 5 · Blueprint & C++"
+            ],
             "descHtml": "Exploration et résolution de puzzles dans un labyrinthe procédural, avec une esthétique épurée.",
-            "tags": ["Unreal Engine 5", "C++"]
+            "tags": [
+              "Unreal Engine 5",
+              "C++"
+            ]
           },
           {
             "dateHtml": "2024",
             "titleHtml": "<a href=\"project-prophecy.html\" style=\"color:inherit;text-decoration:none;\">Prophecy</a>",
-            "orgs": ["Démo Unity · C#"],
+            "orgs": [
+              "Démo Unity · C#"
+            ],
             "descHtml": "Démo d'un plateformer narratif en pixel art, avec des phases de Visual Novel.",
-            "tags": ["Blender", "Python"]
+            "tags": [
+              "Blender",
+              "Python"
+            ]
           }
         ]
       },
@@ -187,14 +283,38 @@
         "html": "<span class=\"cv-status-dot\"></span><strong style=\"color:var(--text);\">Recherche</strong> alternance pour l'année universitaire 2026-2027<br><span class=\"cv-status-dot\"></span><strong style=\"color:var(--text);\">Disponible</strong> pour des missions freelance, stages et collaborations<br><br><span class=\"cv-status-dot\"></span><strong style=\"color:var(--text);\">Paris &amp; Remote</strong>"
       },
       "contact": {
-        "labels": ["Email", "GitHub", "LinkedIn", "Itch.io", "Lieu"],
-        "values": ["giulia.perucca@gmail.com", "giuliahp", "giulia haut perucca", "Aconitum", "Paris, France"]
+        "labels": [
+          "Email",
+          "GitHub",
+          "LinkedIn",
+          "Itch.io",
+          "Lieu"
+        ],
+        "values": [
+          "giulia.perucca@gmail.com",
+          "giuliahp",
+          "giulia haut perucca",
+          "Aconitum",
+          "Paris, France"
+        ]
       },
       "languages": {
-        "names": ["Français", "Anglais"],
-        "levels": ["Natif", "B2"]
+        "names": [
+          "Français",
+          "Anglais"
+        ],
+        "levels": [
+          "Natif",
+          "B2"
+        ]
       },
-      "interests": ["Dessin", "Animation", "Jeux vidéo", "Écriture", "Lecture"]
+      "interests": [
+        "Dessin",
+        "Animation",
+        "Jeux vidéo",
+        "Écriture",
+        "Lecture"
+      ]
     }
   }
 }

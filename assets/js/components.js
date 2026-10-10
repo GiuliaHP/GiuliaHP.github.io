@@ -31,6 +31,7 @@
           <li><a href="games.html" data-i18n="header.games">Jeux</a></li>
           <li><a href="travaux.html" data-i18n="header.work">Recherches</a></li>
           <li><a href="cv.html" data-i18n="header.cv">CV</a></li>
+          <li><a href="carnet.html" data-i18n="header.carnet">Carnet</a></li>
       </ul>
     </div>
   </div>
