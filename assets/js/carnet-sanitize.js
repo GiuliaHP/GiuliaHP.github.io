@@ -2,7 +2,7 @@
    The published page and the desktop editor both run markup through this, so the
    editor can no longer display formatting the site would silently throw away. */
 (function (global) {
-  const ALLOWED = new Set(["P", "BR", "STRONG", "B", "EM", "I", "H2", "H3", "UL", "OL", "LI", "A", "IMG", "VIDEO", "SOURCE", "DIV"]);
+  const ALLOWED = new Set(["P", "BR", "STRONG", "B", "EM", "I", "H2", "H3", "UL", "OL", "LI", "A", "IMG", "VIDEO", "SOURCE", "DIV", "HR"]);
   const WIDTHS = Array.from({ length: 19 }, (value, index) => String(10 + index * 5));   // matches carnet-entry.css
   const ALIGNS = ["inline", "left", "center", "right"];
   const TEXT_BLOCKS = ["P", "H2", "H3", "UL", "OL", "LI", "DIV"];
@@ -11,6 +11,8 @@
   const MEDIA = ["IMG", "VIDEO"];
   const WITH_SRC = ["IMG", "VIDEO", "SOURCE"];
   const isToken = (value) => /^[a-f0-9]{8,64}$/.test(String(value || ""));
+  // a heading tinted with one of the entry's tags stores the tag's name, so it follows the tag's colour
+  const isTagName = (value) => /^[^<>"&]{1,60}$/.test(String(value || ""));
 
   function keeps(element, attribute) {
     const layout = MEDIA_LAYOUT.get(attribute.name);
@@ -19,7 +21,12 @@
       || (MEDIA.includes(element.tagName) && layout && layout.includes(attribute.value))
       || (TEXT_BLOCKS.includes(element.tagName) && attribute.name === "data-text-align" && TEXT_ALIGNS.includes(attribute.value))
       // the editor's unsaved-media placeholder; the backend swaps it for a real tag on save
-      || (element.tagName === "DIV" && attribute.name === "data-media-token" && isToken(attribute.value));
+      || (element.tagName === "DIV" && attribute.name === "data-media-token" && isToken(attribute.value))
+      // a strip of media laid side by side at one shared height
+      || (element.tagName === "DIV" && attribute.name === "data-media-row")
+      // where the folded preview of an entry stops
+      || (element.tagName === "HR" && attribute.name === "data-preview-cut")
+      || (["H2", "H3"].includes(element.tagName) && attribute.name === "data-tag-color" && isTagName(attribute.value));
   }
 
   /* Returns the cleaned HTML plus what had to go, so the editor can say so. */
@@ -51,4 +58,21 @@
   }
 
   global.CarnetSanitize = { sanitize, ALLOWED, WIDTHS, ALIGNS, TEXT_ALIGNS };
+
+  /* Media rows share one height: each item grows by its aspect ratio, which is
+     only known once the file's size has loaded. Shared for the same reason as
+     the allow-list: the editor's canvas and the page must lay a row out alike. */
+  function fitMedia(element) {
+    const apply = () => {
+      const width = element.naturalWidth || element.videoWidth, height = element.naturalHeight || element.videoHeight;
+      if (width && height) element.style.flexGrow = (width / height).toFixed(4);
+    };
+    if ((element.tagName === "IMG" && element.complete) || (element.tagName === "VIDEO" && element.readyState >= 1)) apply();
+    else element.addEventListener(element.tagName === "VIDEO" ? "loadedmetadata" : "load", apply, { once: true });
+  }
+  function fitRows(root) {
+    root.querySelectorAll("[data-media-row] > img, [data-media-row] > video").forEach(fitMedia);
+  }
+
+  global.CarnetMedia = { fitMedia, fitRows };
 }(window));

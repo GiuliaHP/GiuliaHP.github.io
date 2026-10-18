@@ -13,3 +13,8 @@
 .entry-body [data-width="55"] { width:55%; } .entry-body [data-width="60"] { width:60%; } .entry-body [data-width="65"] { width:65%; } .entry-body [data-width="70"] { width:70%; } .entry-body [data-width="75"] { width:75%; } .entry-body [data-width="80"] { width:80%; } .entry-body [data-width="85"] { width:85%; } .entry-body [data-width="90"] { width:90%; } .entry-body [data-width="95"] { width:95%; } .entry-body [data-width="100"] { width:100%; }
 .entry-body [data-align="left"] { float:left; margin:6px 16px 12px 0; } .entry-body [data-align="right"] { float:right; margin:6px 0 12px 16px; } .entry-body [data-align="center"] { clear:both; display:block; margin-left:auto; margin-right:auto; } .entry-body::after { clear:both; content:""; display:block; }
 @media (max-width:700px) { .entry-body img[data-width],.entry-body video[data-width] { width:auto; } .entry-body [data-align="left"],.entry-body [data-align="right"] { float:none; margin:18px 8px 18px 0; } }
+/* A media row fills the column at one shared height: each item grows in
+   proportion to its aspect ratio, which carnet.js / the editor write as
+   flex-grow once the file's size is known. Width and float do not apply here. */
+.entry-body [data-media-row] { align-items:flex-start; clear:both; display:flex; gap:8px; margin:18px 0; }
+.entry-body [data-media-row] > img,.entry-body [data-media-row] > video { flex:1 1 0; float:none; height:auto; margin:0; min-width:0; width:auto; }

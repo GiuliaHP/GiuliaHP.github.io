@@ -6,37 +6,55 @@
   <title>Giulia HP — Carnet</title>
   <link rel="icon" type="image/png" href="../assets/img/icons/IC_Main.png">
   <link rel="stylesheet" href="../assets/css/carnet.css">
-  <link rel="stylesheet" href="../assets/css/media-lightbox.css">
+  <link rel="stylesheet" href="../assets/css/media-lightbox.css?v=2">
 </head>
 <body>
   <header class="journal-hero">
     <div class="journal-wrap">
-      <a class="journal-brand" href="index.html" aria-label="Retour à l'accueil"><img src="../assets/img/icons/IC_Main.png" alt=""></a>
-      <p class="journal-kicker">Notes · recherches · fragments</p>
-      <h1>Le carnet<br><em>de recherche</em></h1>
-      <p class="journal-intro">Un journal vivant autour du game art, des outils et des images en construction.</p>
+      <div class="journal-heading">
+        <a class="journal-brand" href="index.html" aria-label="Retour à l'accueil">
+          <img class="journal-brand-closed" src="../assets/img/logos/LO_CarnetClosed.png" alt="">
+          <img class="journal-brand-open" src="../assets/img/logos/LO_CarnetOpen.png" alt="">
+        </a>
+        <div class="journal-heading-copy">
+          <p class="journal-kicker">Notes · recherches · inspirations</p>
+          <h1>Carnet de Recherche</h1>
+          <p class="journal-intro">Carnet de bord rasqsemblant mes expérimentation, références et autres déblatération conernant la production de mon mémoire de Master Arts et Tehcnologies de l'Image.</p>
+        </div>
+      </div>
     </div>
   </header>
   <main class="journal-wrap">
     <section id="journal-controls" class="journal-controls" aria-label="Filtres du carnet">
-      <label class="search-label" for="search">Rechercher<input id="search" type="search" placeholder="Titre, texte, tag..."></label>
-      <div class="filter-row">
-        <div class="tag-picker">
-          <button id="tag-toggle" class="tag-toggle" type="button" aria-expanded="false" aria-controls="tags">Tags<span id="tag-toggle-value" class="tag-toggle-value">tous</span><span class="tag-toggle-caret" aria-hidden="true"></span></button>
-          <div id="tags" class="tag-panel" role="group" aria-label="Filtrer par tag" hidden></div>
+      <div class="research-layout">
+        <div class="research-fields">
+          <label class="search-label" for="search">Rechercher<input id="search" type="search" placeholder="Titre, texte, tag..."></label>
+          <div class="date-filter">
+            <label class="date-label" for="date-from">À partir du</label>
+            <input id="date-from" type="date">
+            <button id="date-clear" class="date-clear" type="button" hidden>Effacer</button>
+          </div>
         </div>
-        <button id="sort" type="button">Chronologie Décroissante</button>
-      </div>
-      <div class="date-filter">
-        <label class="date-label" for="date-from">À partir du</label>
-        <input id="date-from" type="date">
-        <button id="date-clear" class="date-clear" type="button" hidden>Effacer</button>
+        <div class="research-actions">
+          <div class="tag-picker">
+            <button id="tag-toggle" class="tag-toggle" type="button" aria-expanded="false" aria-controls="tags">Tags<span id="tag-toggle-value" class="tag-toggle-value">tous</span><span class="tag-toggle-caret" aria-hidden="true"></span></button>
+            <div id="tags" class="tag-panel" role="group" aria-label="Filtrer par tag" hidden></div>
+          </div>
+          <div id="journal-toolbar" class="journal-toolbar" hidden>
+            <button id="sort" class="toolbar-icon" type="button"><img class="sort-logo" src="../assets/img/logos/LO_CroissantNot.png" alt=""></button>
+            <button id="toggle-all" class="toolbar-icon" type="button" aria-pressed="false"><img class="toggle-all-logo" src="../assets/img/logos/LO_ShowEverything.png" alt=""></button>
+          </div>
+        </div>
       </div>
     </section>
     <section id="entries" class="journal-stream" aria-live="polite"></section>
+    <p id="share-status" class="visually-hidden" aria-live="polite"></p>
     <p id="empty" class="empty-state" hidden>Aucune entrée ne correspond à ces filtres.</p>
   </main>
-  <script defer src="../assets/js/media-lightbox.js"></script>
+  <button id="go-to-top" class="go-to-top" type="button" aria-label="Retour en haut" title="Retour en haut">
+    <img src="../assets/img/logos/LO_GoToTop.png" alt="">
+  </button>
+  <script defer src="../assets/js/media-lightbox.js?v=2"></script>
   <script src="../assets/js/carnet-sanitize.js"></script>
   <script src="../assets/js/carnet.js"></script>
 </body>

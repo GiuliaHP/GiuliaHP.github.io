@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body><pre id="out">running</pre>
+<iframe id="f" src="/tools/desktop_app.html" style="width:1200px;height:900px"></iframe>
+<script>
+const out=[];const log=(n,ok,x="")=>out.push(`${ok?"PASS":"FAIL"} ${n} ${x}`);const wait=(ms)=>new Promise(r=>setTimeout(r,ms));
+document.getElementById("f").onload=async()=>{const w=document.getElementById("f").contentWindow,d=w.document,ed=d.getElementById("editor");
+const caretIn=(node,off)=>{const r=d.createRange();r.setStart(node,off);r.collapse(true);const s=w.getSelection();s.removeAllRanges();s.addRange(r);w.saveSelection();};
+const key=(k,opts={})=>{const e=new w.KeyboardEvent("keydown",{key:k,ctrlKey:true,bubbles:true,cancelable:true,...opts});(opts.target||ed).dispatchEvent(e);return e;};
+try{
+ ed.focus(); ed.innerHTML="<p><br></p>"; w.resetHistory(); caretIn(ed.firstChild,0);
+ d.execCommand("insertText",false,"abc"); await wait(500);
+ d.execCommand("insertText",false," def"); await wait(500);
+ log("typed",ed.textContent==="abc def");
+ key("z"); log("ctrl+z undoes last typing step",ed.textContent==="abc",JSON.stringify(ed.textContent));
+ key("z"); log("ctrl+z again",ed.textContent==="",JSON.stringify(ed.textContent));
+ key("y"); log("ctrl+y redoes",ed.textContent==="abc");
+ key("Z",{shiftKey:true}); log("ctrl+shift+z redoes",ed.textContent==="abc def");
+ d.execCommand("insertText",false,"!"); key("z"); log("pending typing undone at once",ed.textContent==="abc def",JSON.stringify(ed.textContent));
+ // typing after undo then redo is not possible
+ key("z"); d.execCommand("insertText",false,"X"); await wait(500); key("y"); log("new typing drops redo",ed.textContent.endsWith("X"));
+ // rows
+ ed.innerHTML='<p>t</p><img src="assets/carnet/Carnet_CreatureKitchen_Banner-235f823a61.webp" alt="a"><img src="../assets/img/icons/IC_Main.png" alt="b"><p>e</p>';
+ w.hydrateMedia(ed); w.resetHistory();
+ w.selectMedia(ed.querySelector("img")); w.toggleRow(); await wait(900);
+ const steps=w.eval("history.length");
+ log("row is one step (image loads add none)",steps===2,steps);
+ key("z"); log("undo row",!ed.querySelector("[data-media-row]")&&ed.querySelectorAll("img").length===2);
+ key("y"); log("redo row",!!ed.querySelector("[data-media-row]")); await wait(600);
+ log("redo row re-measured",!!ed.querySelector("[data-media-row] img").style.flexGrow);
+ // link edit in nested h3 > i > a (Creature Kitchen shape), then undo
+ ed.innerHTML='<h3 data-text-align="center"><i>Ce qui effraye.&nbsp;<a href="https://therat.zone/projects" target="_blank" rel="noopener noreferrer">https://therat.zone/projects</a></i></h3>';
+ w.hydrateMedia(ed); w.resetHistory();
+ caretIn(ed.querySelector("a").firstChild,5); w.openLinkEditor();
+ log("nested link prefilled",d.getElementById("link-text").value==="https://therat.zone/projects");
+ d.getElementById("link-text").value="The Rat Zone"; w.applyLink(); await wait(500);
+ const a=ed.querySelector("a");
+ log("nested link text edited",a&&a.textContent==="The Rat Zone"&&a.getAttribute("href")==="https://therat.zone/projects"&&!!a.closest("i"),ed.innerHTML);
+ key("z"); log("undo link edit",ed.querySelector("a").textContent==="https://therat.zone/projects");
+ // fields keep native undo
+ const t=d.getElementById("title"); t.focus(); const e=key("z",{target:t}); log("title field not intercepted",!e.defaultPrevented);
+}catch(e){out.push("ERROR "+e.stack)}document.getElementById("out").textContent=out.join("\n");};
+</script></body></html>

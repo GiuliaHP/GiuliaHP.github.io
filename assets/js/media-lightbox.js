@@ -16,6 +16,7 @@
     <button type="button" class="video-lightbox-close" aria-label="Fermer">x</button>
     <div class="video-lightbox-inner" role="dialog" aria-modal="true" aria-label="Video en plein ecran">
       <video controls playsinline preload="metadata"></video>
+      <iframe title="Video en plein ecran" allow="autoplay; fullscreen" allowfullscreen></iframe>
       <img alt="" />
       <div class="video-lightbox-title" hidden></div>
     </div>
@@ -23,6 +24,7 @@
   document.body.appendChild(overlay);
 
   const modalVideo = overlay.querySelector('video');
+  const modalFrame = overlay.querySelector('iframe');
   const modalImage = overlay.querySelector('img');
   const modalTitle = overlay.querySelector('.video-lightbox-title');
   const closeBtn = overlay.querySelector('.video-lightbox-close');
@@ -58,12 +60,14 @@
 
   const showVideo = () => {
     modalVideo.style.display = 'block';
+    modalFrame.style.display = 'none';
     modalImage.style.display = 'none';
   };
 
   const showImage = () => {
     modalImage.style.display = 'block';
     modalVideo.style.display = 'none';
+    modalFrame.style.display = 'none';
   };
 
   const closeLightbox = () => {
@@ -72,6 +76,7 @@
     modalVideo.pause();
     modalVideo.removeAttribute('src');
     modalVideo.load();
+    modalFrame.removeAttribute('src');
     modalImage.removeAttribute('src');
     modalImage.removeAttribute('alt');
     modalTitle.textContent = '';
@@ -97,6 +102,18 @@
     if (playAttempt && typeof playAttempt.catch === 'function') {
       playAttempt.catch(() => {});
     }
+  };
+
+  window.openYouTubeLightbox = videoUrl => {
+    showVideo();
+    modalVideo.style.display = 'none';
+    modalFrame.style.display = 'block';
+    modalFrame.src = videoUrl;
+    modalFrame.title = 'Video en plein ecran';
+    modalTitle.textContent = '';
+    modalTitle.hidden = true;
+    overlay.classList.add('is-open');
+    document.body.classList.add('lightbox-open');
   };
 
   const openImageLightbox = sourceImage => {

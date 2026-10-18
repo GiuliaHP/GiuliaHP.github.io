@@ -179,8 +179,7 @@ class JournalStore:
         self.data_path = self.project_dir / "assets" / "data" / "carnet_data.json"
         self.tags_path = self.project_dir / "assets" / "data" / "carnet_tags.json"
         self.media_dir = self.project_dir / "assets" / "carnet"
-        self.staging_dir = Path(tempfile.gettempdir()) / "GiuliaHP-Carnet"
-        self.staging_dir.mkdir(parents=True, exist_ok=True)
+        self.staging_dir = Path(tempfile.mkdtemp(prefix="GiuliaHP-Carnet-"))
         self.staged_media: dict[str, dict[str, Any]] = {}
         self.materialized_media: dict[str, tuple[str, str]] = {}
         self.data_path.parent.mkdir(parents=True, exist_ok=True)
@@ -260,13 +259,13 @@ class JournalStore:
         return colors
 
     def delete_entry(self, entry_id: str) -> dict[str, Any]:
-        """Remove one entry. Media files are left on disk on purpose."""
+        """Remove one entry and delete media no longer referenced by any entry."""
         entries = self.load()
         remaining = [entry for entry in entries if entry.get("id") != entry_id]
         if len(remaining) == len(entries):
             raise ValueError(f"Cette entrée n'existe plus : {entry_id}")
         self.data_path.write_text(json.dumps(remaining, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-        return {"id": entry_id, "remaining": len(remaining)}
+        return {"id": entry_id, "remaining": len(remaining), "deleted_media": self.cleanup_unused_media()}
 
     def media_path(self, relative_path: str) -> Path:
         """Resolve a site-relative media path, refusing anything outside the project."""
@@ -415,13 +414,20 @@ class JournalStore:
                     str(staged["source"]), staged["kind"], Path(staged["filename"]).stem
                 )
                 self.materialized_media[token] = (relative_path, staged["filename"])
-                staged["source"].unlink(missing_ok=True)
-                staged["source"] = None
                 original_name = staged["filename"]
             media[token] = relative_path
             return self.render_media(relative_path, original_name, self._layout_attributes(match.group(0)))
 
         return self.MEDIA_PLACEHOLDER.sub(replace, body), media
+
+    def cleanup_staging(self) -> None:
+        """Remove this editor session's temporary files after the webview closes."""
+        try:
+            shutil.rmtree(self.staging_dir)
+        except FileNotFoundError:
+            return
+        except OSError:
+            logger.warning("Could not remove temporary staging directory %s", self.staging_dir, exc_info=True)
 
     @staticmethod
     def _layout_attributes(placeholder: str) -> str:
@@ -515,7 +521,7 @@ class JournalStore:
         return self.media_dir / f"{safe_stem}-{digest}{suffix}"
 
     def unused_media(self) -> list[dict[str, Any]]:
-        """Media in assets/carnet no entry refers to. Listing only; nothing is deleted."""
+        """Return media in assets/carnet no entry refers to."""
         referenced = {match for entry in self.load() for match in re.findall(r'src="([^"]+)"', str(entry.get("body", "")))}
         orphans = []
         for media in sorted(self.media_dir.iterdir()):
@@ -525,6 +531,23 @@ class JournalStore:
             if relative not in referenced:
                 orphans.append({"path": relative, "bytes": media.stat().st_size})
         return orphans
+
+    def cleanup_unused_media(self) -> list[str]:
+        """Delete media files that are no longer referenced by saved entries."""
+        deleted: list[str] = []
+        for orphan in self.unused_media():
+            path = self.project_dir / orphan["path"]
+            try:
+                path.unlink()
+            except FileNotFoundError:
+                continue
+            except OSError:
+                logger.warning("Could not delete unused media %s", path, exc_info=True)
+                continue
+            deleted.append(orphan["path"])
+        if deleted:
+            logger.info("Deleted %d unused media file(s): %s", len(deleted), ", ".join(deleted))
+        return deleted
 
 
 class EditorApi:
@@ -639,6 +662,7 @@ def run_editor(project_dir: Path) -> None:
         import ctypes
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("GiuliaHP.Carnet")
     store = JournalStore(project_dir)
+    store.cleanup_unused_media()
     api = EditorApi(store)
     html_path = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent)) / "desktop_app.html"
     server = start_editor_server(project_dir, store.staging_dir, html_path)
@@ -662,6 +686,7 @@ def run_editor(project_dir: Path) -> None:
     finally:
         server.shutdown()
         server.server_close()
+        store.cleanup_staging()
 
 
 def main() -> None:

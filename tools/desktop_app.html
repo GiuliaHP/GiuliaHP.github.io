@@ -32,8 +32,18 @@
     .tag-colors { align-items:center; display:flex; flex-wrap:wrap; gap:8px; grid-column:1/-1; } .tag-colors:empty { display:none; }
     .tag-chip { align-items:center; background:#141a35; border:1px solid var(--chip); border-radius:999px; display:flex; gap:7px; padding:3px 11px 3px 3px; } .tag-chip span { color:var(--chip); font-size:12px; font-weight:600; }
     .tag-chip input[type=color] { background:none; border:0; cursor:pointer; height:24px; padding:0; width:24px; } .tag-chip input[type=color]::-webkit-color-swatch-wrapper { padding:0; } .tag-chip input[type=color]::-webkit-color-swatch { border:1px solid #ffffff33; border-radius:50%; }
-    .accent-preview { border-left:2px solid var(--entry-a,var(--violet)); grid-column:1/-1; padding:2px 0 2px 14px; position:relative; } .accent-preview[hidden] { display:none; } .accent-preview em { color:var(--muted); display:block; font-size:11px; font-style:normal; letter-spacing:.08em; text-transform:uppercase; } .accent-preview strong { color:var(--entry-a,var(--text)); display:block; font:600 22px/1.2 "Space Grotesk",sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .accent-preview.gradient { border-left-color:transparent; } .accent-preview.gradient::before { background:linear-gradient(180deg,var(--entry-a),var(--entry-b)); bottom:0; content:""; left:-2px; position:absolute; top:0; width:2px; } .accent-preview.gradient strong { -webkit-background-clip:text; background-clip:text; background-image:linear-gradient(95deg,var(--entry-a),var(--entry-b)); color:transparent; }
+    .accent-preview { border-bottom:2px solid var(--entry-a,var(--violet)); grid-column:1/-1; padding:2px 0 8px; position:relative; } .accent-preview[hidden] { display:none; } .accent-preview em { color:var(--muted); display:block; font-size:11px; font-style:normal; letter-spacing:.08em; text-transform:uppercase; } .accent-preview strong { color:var(--entry-a,var(--text)); display:block; font:600 22px/1.2 "Space Grotesk",sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .accent-preview.gradient { border-bottom-color:transparent; } .accent-preview.gradient::after { background:linear-gradient(90deg,var(--entry-a),var(--entry-b)); bottom:-2px; content:""; height:2px; left:0; position:absolute; right:0; } .accent-preview.gradient strong { -webkit-background-clip:text; background-clip:text; background-image:linear-gradient(95deg,var(--entry-a),var(--entry-b)); color:transparent; }
+    /* link editor: one popover for both the address and the text shown */
+    .link-popover { background:#1b2350; border:1px solid var(--accent); border-radius:10px; box-shadow:0 14px 30px #05060cbb; display:grid; gap:8px; padding:10px; position:fixed; width:320px; z-index:55; } .link-popover[hidden] { display:none; } .link-popover .link-actions { align-items:center; display:flex; gap:6px; } .link-popover .link-actions .grow { flex:1; } .link-popover button { font-size:12px; padding:5px 10px; } .link-popover button.primary { padding:5px 12px; } .link-popover .danger:hover { background:#5c1f33; border-color:#ff9b9b; color:#ff9b9b; } .link-popover .danger[hidden] { display:none; }
+    /* heading colours come from the entry's own tags */
+    .heading-colors { align-items:center; display:flex; gap:4px; } .heading-colors .label { color:var(--muted); font-size:11px; margin-right:2px; } .heading-colors button { font-size:11px; padding:4px 7px; } .heading-colors .swatch { background:var(--swatch); border:2px solid #0c1023; border-radius:50%; box-shadow:0 0 0 1px var(--border); height:20px; padding:0; width:20px; } .heading-colors .swatch.on { box-shadow:0 0 0 2px var(--accent); } .heading-colors button:disabled { cursor:default; opacity:.35; } .heading-colors .empty { color:var(--muted); font-size:11px; font-style:italic; }
+    /* where the folded preview on the site stops */
+    .editor hr[data-preview-cut] { border:0; border-top:2px dashed var(--accent); height:0; margin:26px 0 22px; overflow:visible; position:relative; } .editor hr[data-preview-cut]::after { background:#0c1023; color:var(--accent); content:"✂ fin de l'aperçu replié"; font-size:11px; left:50%; letter-spacing:.06em; padding:0 8px; position:absolute; text-transform:uppercase; top:-9px; transform:translateX(-50%); }
+    .editor [data-media-row] { border-radius:10px; outline:1px dashed #809eff44; outline-offset:4px; } .editor [data-media-row]:hover { outline-color:#809eff99; }
+    .drop-marker.vertical { box-shadow:0 0 10px var(--accent); width:3px; }
+    /* quick, explanatory tooltips on the media controls (native titles take a second to show) */
+    .media-toolbar [data-tip] { position:relative; } .media-toolbar [data-tip]:hover::after,.media-toolbar [data-tip]:focus-visible::after { background:#0c1023; border:1px solid var(--border); border-radius:6px; box-shadow:0 8px 18px #05060caa; color:var(--text); content:attr(data-tip); font-size:11px; font-weight:400; left:50%; line-height:1.35; max-width:240px; padding:5px 8px; pointer-events:none; position:absolute; text-align:left; top:calc(100% + 8px); transform:translateX(-50%); white-space:normal; width:max-content; z-index:60; }
     .actions { align-items:center; display:flex; flex:none; gap:12px; justify-content:space-between; padding-top:8px; } #status { color:var(--muted); min-height:20px; } #status.error { color:#ff9b9b; }
     @media (max-width:1100px) { main { grid-template-columns:1fr; grid-template-rows:minmax(140px,24%) minmax(0,1fr); } }
     @media (max-width:900px) { header { padding:12px 16px; } main { padding:12px; } .form-grid { grid-template-columns:1fr; } label.full { grid-column:auto; } }
@@ -66,7 +76,11 @@
         <span class="toolbar-sep"></span>
         <button type="button" data-command="justifyLeft" data-align-state="left" title="Aligner le texte à gauche">◰</button><button type="button" data-command="justifyCenter" data-align-state="center" title="Centrer le texte">◳</button><button type="button" data-command="justifyRight" data-align-state="right" title="Aligner le texte à droite">◲</button><button type="button" data-command="justifyFull" data-align-state="justify" title="Justifier le texte">▦</button>
         <span class="toolbar-sep"></span>
-        <button type="button" id="link">Lien</button><button type="button" id="add-media">Ajouter des médias</button>
+        <button type="button" id="link" title="Insérer ou modifier un lien (Ctrl+K) : adresse et texte affiché">Lien</button><button type="button" id="add-media" title="Plusieurs fichiers choisis d'un coup forment une rangée">Ajouter des médias</button>
+        <span class="toolbar-sep"></span>
+        <button type="button" id="preview-cut" title="L'aperçu replié du site s'arrête après le paragraphe courant. Recliquez juste au-dessus de la ligne pour la retirer ; sans ligne, l'aperçu est coupé à hauteur fixe.">✂ Aperçu</button>
+        <span class="toolbar-sep"></span>
+        <span class="heading-colors" id="heading-colors" aria-label="Couleur du titre H2 / H3"></span>
       </div>
       <div id="editor" class="editor entry-body" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="editor-label" data-placeholder="Écrivez votre entrée…"></div>
     </div>
@@ -74,15 +88,20 @@
     </div>
   </main>
   <div class="media-toolbar" id="media-toolbar" role="toolbar" aria-label="Média sélectionné" hidden>
-    <button type="button" data-align="inline" title="Dans le texte : le média suit le flux et se place à côté des autres">↔</button><button type="button" data-align="left" title="Flottant à gauche : le texte habille le média par la droite">◧</button><button type="button" data-align="right" title="Flottant à droite : le texte habille le média par la gauche">◨</button><button type="button" data-align="center" title="Centré sur sa propre ligne">▣</button>
+    <button type="button" data-align="inline" aria-label="Dans le texte" data-tip="Dans le texte : le média suit le flux et se place à côté des autres">↔</button><button type="button" data-align="left" aria-label="Flottant à gauche" data-tip="Flottant à gauche : le texte habille le média par la droite">◧</button><button type="button" data-align="right" aria-label="Flottant à droite" data-tip="Flottant à droite : le texte habille le média par la gauche">◨</button><button type="button" data-align="center" aria-label="Centré" data-tip="Centré sur sa propre ligne">▣</button>
     <span class="sep"></span>
-    <button type="button" id="media-narrower" title="Réduire de 5 %">−</button><label class="scale-field" title="Largeur en % de la colonne de texte"><input id="media-scale" type="number" min="10" max="100" step="5" placeholder="auto" aria-label="Largeur du média en pourcentage de la colonne">%</label><button type="button" id="media-wider" title="Agrandir de 5 %">+</button><button type="button" id="media-auto" title="Taille d'origine du média">Auto</button>
+    <button type="button" id="media-narrower" aria-label="Réduire de 5 %" data-tip="Réduire la largeur de 5 % de la colonne">−</button><label class="scale-field" data-tip="Largeur en % de la colonne de texte ; vide = taille d'origine"><input id="media-scale" type="number" min="10" max="100" step="5" placeholder="auto" aria-label="Largeur du média en pourcentage de la colonne">%</label><button type="button" id="media-wider" aria-label="Agrandir de 5 %" data-tip="Agrandir la largeur de 5 % de la colonne">+</button><button type="button" id="media-auto" data-tip="Revenir à la taille d'origine du fichier">Auto</button>
     <span class="sep"></span>
-    <button type="button" id="media-replace" title="Remplacer le fichier">Remplacer</button><button type="button" class="danger" id="media-remove" title="Supprimer le média (Suppr)">✕</button>
+    <button type="button" id="media-earlier" aria-label="Déplacer avant" data-tip="Échanger avec le média précédent (dans la rangée ou juste avant)">◀</button><button type="button" id="media-later" aria-label="Déplacer après" data-tip="Échanger avec le média suivant (dans la rangée ou juste après)">▶</button><button type="button" id="media-row" data-tip="Rangée : aligne ce média avec son voisin, même hauteur sur toute la largeur. Recliquez pour le sortir de la rangée. Astuce : glissez un média sur le bord gauche ou droit d'un autre.">Rangée</button>
+    <span class="sep"></span>
+    <button type="button" id="media-replace" data-tip="Remplacer le fichier en gardant la mise en page">Remplacer</button><button type="button" class="danger" id="media-remove" aria-label="Supprimer le média" data-tip="Supprimer le média (Suppr)">✕</button>
+  </div>
+  <div class="link-popover" id="link-popover" role="dialog" aria-label="Lien" hidden>
+    <label>Texte affiché<input id="link-text" placeholder="Texte du lien"></label>
+    <label>Adresse<input id="link-url" placeholder="https://…" spellcheck="false"></label>
+    <div class="link-actions"><button type="button" class="danger" id="link-remove">Retirer le lien</button><span class="grow"></span><button type="button" id="link-cancel">Annuler</button><button type="button" class="primary" id="link-apply">Appliquer</button></div>
   </div>
   <div class="drop-marker" id="drop-marker" hidden></div>
-  <div class="resize-handle" id="resize-handle" hidden title="Glissez pour redimensionner"></div>
-  <div class="resize-readout" id="resize-readout" hidden></div>
   <div class="resize-handle" id="resize-handle" hidden title="Glissez pour redimensionner"></div>
   <div class="resize-readout" id="resize-readout" hidden></div>
   <script>
@@ -115,6 +134,53 @@
       if (width) element.dataset.width = String(width); else delete element.dataset.width;
       element.draggable = true;
       element.removeAttribute("style");        // placement and size are both CSS now
+      if (rowOf(element)) window.CarnetMedia.fitMedia(element);   // except a row's share, which is measured
+    }
+    // A row is a strip of media at one shared height. It takes no caret, so text
+    // never ends up between its pictures; it always sits directly in the editor.
+    const ROW_SELECTOR = "[data-media-row]";
+    function rowOf(element) { const parent = element && element.parentElement; return parent && parent.matches(ROW_SELECTOR) ? parent : null; }
+    function topLevel(node) {
+      let current = node;
+      while (current && current.parentNode !== $("editor")) current = current.parentNode;
+      return current;
+    }
+    function createRow(items) {
+      const row = document.createElement("div");
+      row.dataset.mediaRow = "";
+      row.contentEditable = "false";
+      row.append(...items);
+      return row;
+    }
+    function trailingParagraph(after) {
+      if (after.nextSibling) return;
+      const paragraph = document.createElement("p");
+      paragraph.append(document.createElement("br"));
+      after.after(paragraph);       // somewhere to keep typing below a row
+    }
+    // Lift a row out of a paragraph, drop stray text, and dissolve it once it holds a single media.
+    function normalizeRow(row) {
+      if (!row || !row.isConnected) return;
+      [...row.childNodes].forEach((node) => { if (!(node instanceof Element) || !node.matches(MEDIA_SELECTOR)) node.remove(); });
+      const media = [...row.children];
+      if (media.length < 2) { row.replaceWith(...media); media.forEach(applyMediaLayout); return; }
+      const top = topLevel(row);
+      if (top && top !== row) top.after(row);
+      row.contentEditable = "false";
+      media.forEach(applyMediaLayout);
+      trailingParagraph(row);
+    }
+    const normalizeRows = () => $("editor").querySelectorAll(ROW_SELECTOR).forEach(normalizeRow);
+    // The nearest media beside this one, skipping blank text and line breaks.
+    function mediaNeighbour(element, forward) {
+      let node = forward ? element.nextSibling : element.previousSibling;
+      while (node && ((node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) || node.nodeName === "BR")) node = forward ? node.nextSibling : node.previousSibling;
+      return node instanceof Element && (node.matches(MEDIA_SELECTOR) || node.matches(ROW_SELECTOR)) ? node : null;
+    }
+    function siblingMedia(element, forward) {
+      if (rowOf(element)) return forward ? element.nextElementSibling : element.previousElementSibling;
+      const next = mediaNeighbour(element, forward);
+      return next && next.matches(MEDIA_SELECTOR) ? next : null;
     }
     function positionMediaToolbar() {
       const toolbar = $("media-toolbar");
@@ -132,7 +198,7 @@
       const handle = $("resize-handle");
       if (!selectedMedia) { handle.hidden = true; return; }
       const box = selectedMedia.getBoundingClientRect(), frame = $("editor").getBoundingClientRect();
-      const visible = box.bottom > frame.top && box.top < frame.bottom;
+      const visible = box.bottom > frame.top && box.top < frame.bottom && !rowOf(selectedMedia);
       handle.hidden = !visible;
       if (!visible) return;
       handle.style.left = `${Math.round(box.right - 9)}px`;
@@ -140,12 +206,17 @@
     }
     function renderMediaToolbar() {
       if (!selectedMedia) { $("media-toolbar").hidden = true; $("resize-handle").hidden = true; return; }
-      const align = mediaAlign(selectedMedia), width = mediaWidth(selectedMedia);
-      $("media-toolbar").querySelectorAll("[data-align]").forEach((button) => button.classList.toggle("on", button.dataset.align === align));
-      if (document.activeElement !== $("media-scale")) $("media-scale").value = width ? String(width) : "";
-      $("media-narrower").disabled = width !== 0 && width <= WIDTH_MIN;
-      $("media-wider").disabled = width >= WIDTH_MAX;
-      $("media-auto").disabled = width === 0;
+      const align = mediaAlign(selectedMedia), width = mediaWidth(selectedMedia), inRow = Boolean(rowOf(selectedMedia));
+      // inside a row the strip decides size and placement, so those controls step aside
+      $("media-toolbar").querySelectorAll("[data-align]").forEach((button) => { button.classList.toggle("on", !inRow && button.dataset.align === align); button.disabled = inRow; });
+      if (document.activeElement !== $("media-scale")) $("media-scale").value = width && !inRow ? String(width) : "";
+      $("media-scale").disabled = inRow;
+      $("media-narrower").disabled = inRow || (width !== 0 && width <= WIDTH_MIN);
+      $("media-wider").disabled = inRow || width >= WIDTH_MAX;
+      $("media-auto").disabled = inRow || width === 0;
+      $("media-earlier").disabled = !siblingMedia(selectedMedia, false);
+      $("media-later").disabled = !siblingMedia(selectedMedia, true);
+      $("media-row").classList.toggle("on", inRow);
       positionMediaToolbar();
       positionResizeHandle();
     }
@@ -163,6 +234,11 @@
     }
     function removeMedia(element) {
       if (!element || !$("editor").contains(element)) return;
+      const row = rowOf(element);
+      if (row) {                              // a row takes no caret: just close the gap
+        clearMediaSelection(); element.remove(); normalizeRow(row);
+        $("editor").focus(); setStatus("Média supprimé."); return;
+      }
       const parent = element.parentNode, index = [...parent.childNodes].indexOf(element);
       clearMediaSelection();
       element.remove();
@@ -237,25 +313,63 @@
     $("media-scale").addEventListener("input", () => setMediaWidth($("media-scale").value));
     $("media-scale").addEventListener("keydown", (event) => { if (event.key === "Enter") { event.preventDefault(); $("editor").focus(); } });
     $("media-remove").addEventListener("click", () => removeMedia(selectedMedia));
-    function dropRangeFrom(event) {
-      const editor = $("editor");
-      const point = document.caretRangeFromPoint ? document.caretRangeFromPoint(event.clientX, event.clientY) : null;
-      if (point && editor.contains(point.startContainer)) {
-        const block = mediaBlock(point.startContainer);
-        if (!block) return point;
-        const box = block.getBoundingClientRect(), range = document.createRange();
-        if (event.clientY < box.top + box.height / 2) range.setStartBefore(block); else range.setStartAfter(block);
-        range.collapse(true);
-        return range;
+    function moveMedia(forward) {
+      const element = selectedMedia, other = element && siblingMedia(element, forward);
+      if (!other) return;
+      if (forward) other.after(element); else other.before(element);
+      selectMedia(element); setStatus("Média déplacé.");
+    }
+    $("media-earlier").addEventListener("click", () => moveMedia(false));
+    $("media-later").addEventListener("click", () => moveMedia(true));
+    // Join the neighbouring media (or its row), or step out of the row this one is in.
+    function toggleRow() {
+      const element = selectedMedia;
+      if (!element) return;
+      const row = rowOf(element);
+      if (row) {
+        row.after(element);
+        normalizeRow(row); applyMediaLayout(element); trailingParagraph(element);
+        selectMedia(element); setStatus("Média sorti de la rangée."); return;
       }
-      const range = document.createRange();
+      const forward = Boolean(mediaNeighbour(element, true)), neighbour = mediaNeighbour(element, forward);
+      if (!neighbour) { setStatus("Placez un autre média juste à côté, ou glissez-le sur le bord gauche/droit de celui-ci, pour former une rangée.", true); return; }
+      if (neighbour.matches(ROW_SELECTOR)) { if (forward) neighbour.prepend(element); else neighbour.append(element); }
+      else { const created = createRow([]); element.before(created); created.append(...(forward ? [element, neighbour] : [neighbour, element])); }
+      normalizeRow(rowOf(element));
+      selectMedia(element); setStatus("Rangée : les médias partagent la même hauteur sur toute la largeur.");
+    }
+    $("media-row").addEventListener("click", toggleRow);
+    // Where a dragged media lands: on a media's left/right edge it goes beside it
+    // (in a row), anywhere else it goes before/after the block under the pointer.
+    function dropTargetFrom(event) {
+      const editor = $("editor"), range = document.createRange();
+      const before = (block, box) => { if (event.clientY < box.top + box.height / 2) range.setStartBefore(block); else range.setStartAfter(block); range.collapse(true); return { range }; };
+      const hit = document.elementFromPoint(event.clientX, event.clientY);
+      const media = hit && mediaBlock(hit);
+      if (media && media !== draggedMedia) {
+        const box = media.getBoundingClientRect(), x = (event.clientX - box.left) / box.width;
+        if (x < 0.3 || x > 0.7) return { side: media, before: x < 0.3 };
+        return before(rowOf(media) || media, box);
+      }
+      const row = hit instanceof Element && hit.closest(ROW_SELECTOR);
+      if (row && editor.contains(row)) return before(row, row.getBoundingClientRect());
+      const point = document.caretRangeFromPoint ? document.caretRangeFromPoint(event.clientX, event.clientY) : null;
+      if (point && editor.contains(point.startContainer) && !mediaBlock(point.startContainer)) return { range: point };
       const below = [...editor.children].find((child) => child !== draggedMedia && event.clientY < child.getBoundingClientRect().bottom);
       if (below) range.setStartBefore(below); else { range.selectNodeContents(editor); range.collapse(false); }
-      return range;
+      return { range };
     }
-    function showDropMarker(range) {
+    function showDropMarker(target) {
       const marker = $("drop-marker"), frame = $("editor").getBoundingClientRect();
-      const rect = range.getClientRects()[0] || range.getBoundingClientRect();
+      if (target.side) {                        // a vertical bar on the edge it will join
+        const box = target.side.getBoundingClientRect();
+        marker.hidden = false; marker.classList.add("vertical");
+        marker.style.top = `${Math.round(box.top)}px`; marker.style.height = `${Math.round(box.height)}px`;
+        marker.style.left = `${Math.round(target.before ? box.left - 6 : box.right + 3)}px`; marker.style.width = "";
+        return;
+      }
+      marker.classList.remove("vertical"); marker.style.height = "";
+      const rect = target.range.getClientRects()[0] || target.range.getBoundingClientRect();
       if (!rect || (!rect.height && !rect.width && !rect.top)) { marker.hidden = true; return; }
       marker.hidden = false;
       marker.style.top = `${Math.round(Math.max(frame.top, Math.min(rect.top + rect.height, frame.bottom)))}px`;
@@ -280,16 +394,23 @@
       if (!draggedMedia) return;
       event.preventDefault();
       event.dataTransfer.dropEffect = "move";
-      dropRange = dropRangeFrom(event);
+      dropRange = dropTargetFrom(event);
       showDropMarker(dropRange);
     });
     $("editor").addEventListener("drop", (event) => {
       if (!draggedMedia) return;
       event.preventDefault();
-      const block = draggedMedia, range = dropRange || dropRangeFrom(event);
+      const block = draggedMedia, target = dropRange || dropTargetFrom(event), source = rowOf(block);
       endMediaDrag();
-      range.insertNode(block);
-      selectMedia(block); saveSelection(); setStatus("Média déplacé.");
+      if (target.side) {
+        const beside = target.side, row = rowOf(beside);
+        if (row) { if (target.before) beside.before(block); else beside.after(block); }
+        else { const created = createRow([]); beside.before(created); created.append(...(target.before ? [block, beside] : [beside, block])); }
+        normalizeRow(rowOf(block));
+      } else target.range.insertNode(block);
+      if (source && source !== rowOf(block)) normalizeRow(source);
+      applyMediaLayout(block);
+      selectMedia(block); saveSelection(); setStatus(rowOf(block) ? "Média placé dans la rangée." : "Média déplacé.");
     });
     $("editor").addEventListener("dragend", () => { const block = draggedMedia; endMediaDrag(); if (block) selectMedia(block); });
     // Anything pasted goes through the published allow-list first, so the canvas
@@ -301,20 +422,7 @@
       const clean = window.CarnetSanitize.sanitize(html);
       document.execCommand("insertHTML", false, clean.html);
       hydrateMedia($("editor"));
-      saveSelection();
-      setStatus(clean.stripped.length
-        ? `Collage nettoyé : ${clean.stripped.join(", ")} retiré(s), ces éléments ne s'affichent pas sur le site.`
-        : "Collé.");
-    });
-    // Anything pasted goes through the published allow-list first, so the canvas
-    // never shows formatting the site would drop on the floor.
-    $("editor").addEventListener("paste", (event) => {
-      const html = event.clipboardData && event.clipboardData.getData("text/html");
-      if (!html) return;                                  // plain text needs no cleaning
-      event.preventDefault();
-      const clean = window.CarnetSanitize.sanitize(html);
-      document.execCommand("insertHTML", false, clean.html);
-      hydrateMedia($("editor"));
+      paintHeadings();
       saveSelection();
       setStatus(clean.stripped.length
         ? `Collage nettoyé : ${clean.stripped.join(", ")} retiré(s), ces éléments ne s'affichent pas sur le site.`
@@ -338,6 +446,8 @@
       const block = currentBlock();
       document.querySelectorAll("[data-block]").forEach((button) => button.classList.toggle("on", button.dataset.block.toUpperCase() === block));
       renderTextAlign();
+      $("link").classList.toggle("on", Boolean(savedRange && linkAt(savedRange.startContainer)));
+      renderHeadingColors();
     }
     document.querySelectorAll("[data-block]").forEach((button) => button.addEventListener("mousedown", (event) => {
       event.preventDefault(); focusEditor();
@@ -345,7 +455,156 @@
       document.execCommand("formatBlock", false, currentBlock() === wanted ? "P" : wanted);   // clicking the active heading goes back to a paragraph
       saveSelection(); renderFormatState();
     }));
-    $("link").addEventListener("mousedown", (event) => { event.preventDefault(); focusEditor(); const url = prompt("URL du lien"); if (url) document.execCommand("createLink", false, url); saveSelection(); });
+    // Link editor: one popover sets both the address and the text shown, for a new
+    // link or the one under the caret, so changing the wording no longer means
+    // fighting the caret at the edge of an <a>.
+    let linkTarget = null, linkRange = null, linkOriginalText = "";
+    function linkAt(node) {
+      const element = node instanceof Element ? node : node && node.parentElement;
+      const anchor = element && element.closest("a");
+      return anchor && $("editor").contains(anchor) ? anchor : null;
+    }
+    function openLinkEditor() {
+      saveSelection();
+      linkRange = savedRange ? savedRange.cloneRange() : null;
+      linkTarget = linkRange ? (linkAt(linkRange.startContainer) || linkAt(linkRange.endContainer)) : null;
+      linkOriginalText = linkTarget ? linkTarget.textContent : (linkRange ? linkRange.toString() : "");
+      $("link-text").value = linkOriginalText;
+      $("link-url").value = linkTarget ? linkTarget.getAttribute("href") || "" : "";
+      $("link-remove").hidden = !linkTarget;
+      const popover = $("link-popover");
+      popover.hidden = false;
+      const anchorBox = (linkTarget || linkRange || $("link")).getBoundingClientRect();
+      const box = anchorBox.width || anchorBox.height ? anchorBox : $("link").getBoundingClientRect(), size = popover.getBoundingClientRect();
+      const below = box.bottom + 8 + size.height < window.innerHeight;
+      popover.style.top = `${Math.round(below ? box.bottom + 8 : Math.max(8, box.top - size.height - 8))}px`;
+      popover.style.left = `${Math.round(Math.max(8, Math.min(box.left, window.innerWidth - size.width - 8)))}px`;
+      ($("link-text").value ? $("link-url") : $("link-text")).focus();
+    }
+    function closeLinkEditor(refocus = true) {
+      $("link-popover").hidden = true;
+      linkTarget = null; linkRange = null;
+      if (refocus) focusEditor();
+    }
+    // Bare domains get https://; anything that is not a web, mail or anchor link is refused.
+    function cleanUrl(value) {
+      const url = value.trim();
+      if (!url) return "";
+      if (/^(https?:|mailto:|#)/i.test(url)) return url;
+      if (/^[a-z][a-z0-9+.-]*:/i.test(url)) return null;
+      return `https://${url.replace(/^\/+/, "")}`;
+    }
+    function applyLink() {
+      const url = cleanUrl($("link-url").value);
+      if (url === null) { setStatus("Adresse refusée : utilisez un lien http(s) ou mailto.", true); return; }
+      if (!url) { setStatus("Indiquez l'adresse du lien.", true); $("link-url").focus(); return; }
+      const text = $("link-text").value.trim() || url, target = linkTarget, range = linkRange;
+      const sameText = text === linkOriginalText.trim();
+      $("editor").focus();
+      const selection = getSelection(), replace = document.createRange();
+      if (target && $("editor").contains(target)) replace.selectNode(target);
+      else if (range) { replace.setStart(range.startContainer, range.startOffset); replace.setEnd(range.endContainer, range.endOffset); }
+      else { replace.selectNodeContents($("editor")); replace.collapse(false); }
+      if (target && sameText) target.setAttribute("href", url);           // keeps any bold/italic inside
+      else {
+        selection.removeAllRanges(); selection.addRange(replace);
+        if (!target && sameText && !replace.collapsed) document.execCommand("createLink", false, url);
+        else document.execCommand("insertHTML", false, `<a href="${escapeText(url)}">${escapeText(text)}</a>`);
+      }
+      closeLinkEditor(false); saveSelection(); renderFormatState();
+      setStatus(target ? "Lien modifié." : "Lien ajouté.");
+    }
+    function removeLink() {
+      const target = linkTarget;
+      if (!target) return;
+      $("editor").focus();
+      const range = document.createRange(), selection = getSelection();
+      range.selectNodeContents(target);
+      selection.removeAllRanges(); selection.addRange(range);
+      document.execCommand("unlink", false);
+      closeLinkEditor(false); saveSelection(); renderFormatState(); setStatus("Lien retiré.");
+    }
+    $("link").addEventListener("mousedown", (event) => { event.preventDefault(); if ($("link-popover").hidden) openLinkEditor(); else closeLinkEditor(); });
+    $("link-apply").addEventListener("click", applyLink);
+    $("link-cancel").addEventListener("click", () => closeLinkEditor());
+    $("link-remove").addEventListener("click", removeLink);
+    $("link-popover").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") { event.preventDefault(); applyLink(); }
+      if (event.key === "Escape") { event.preventDefault(); closeLinkEditor(); }
+    });
+    $("editor").addEventListener("keydown", (event) => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openLinkEditor(); } });
+    $("editor").addEventListener("dblclick", (event) => { if (linkAt(event.target)) { saveSelection(); openLinkEditor(); } });
+    document.addEventListener("mousedown", (event) => {
+      if (!$("link-popover").hidden && !$("link-popover").contains(event.target) && event.target !== $("link")) closeLinkEditor(false);
+    });
+    // Heading colours: a palette made of the entry's own tags. The heading keeps the
+    // tag's name, so recolouring the tag recolours it here and on the site.
+    function headingAtCaret() {
+      const range = savedRange;
+      const node = range && range.startContainer, element = node instanceof Element ? node : node && node.parentElement;
+      const heading = element && element.closest("h2,h3");
+      return heading && $("editor").contains(heading) ? heading : null;
+    }
+    function paintHeadings() {
+      $("editor").querySelectorAll("[data-tag-color]").forEach((heading) => {
+        const color = colorFor(heading.dataset.tagColor);
+        if (color) heading.style.color = color; else heading.style.removeProperty("color");
+      });
+    }
+    function setHeadingColor(tag) {
+      const heading = headingAtCaret();
+      if (!heading) return;
+      if (tag) heading.dataset.tagColor = tag; else { delete heading.dataset.tagColor; heading.style.removeProperty("color"); if (!heading.getAttribute("style")) heading.removeAttribute("style"); }
+      paintHeadings(); renderHeadingColors(); focusEditor();
+      setStatus(tag ? `Titre coloré avec « ${tag} ».` : "Couleur du titre : automatique (selon les tags).");
+    }
+    function renderHeadingColors() {
+      const box = $("heading-colors"), heading = headingAtCaret(), current = heading ? heading.dataset.tagColor || "" : null;
+      const tags = currentTags().filter((tag) => colorFor(tag));
+      box.textContent = "";
+      const label = document.createElement("span");
+      label.className = "label"; label.textContent = "Couleur titre";
+      box.append(label);
+      const make = (tag) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.disabled = !heading;
+        if (tag) {
+          button.className = `swatch${current === tag ? " on" : ""}`;
+          button.style.setProperty("--swatch", colorFor(tag));
+          button.title = heading ? `Colorer ce titre avec « ${tag} »` : "Placez le curseur dans un titre H2 ou H3";
+          button.setAttribute("aria-label", `Couleur du tag ${tag}`);
+        } else {
+          button.textContent = "Auto";
+          button.classList.toggle("on", current === "");
+          button.title = heading ? "Couleur par défaut : 1er tag pour H2, 2e pour H3" : "Placez le curseur dans un titre H2 ou H3";
+        }
+        button.addEventListener("mousedown", (event) => { event.preventDefault(); setHeadingColor(tag); });
+        box.append(button);
+      };
+      make("");
+      if (tags.length) tags.forEach(make);
+      else { const empty = document.createElement("span"); empty.className = "empty"; empty.textContent = "ajoutez des tags"; box.append(empty); }
+    }
+    // The preview cut: the site's folded entry shows everything above it.
+    function togglePreviewCut() {
+      focusEditor();
+      const editor = $("editor"), existing = editor.querySelector("hr[data-preview-cut]");
+      const block = savedRange ? topLevel(savedRange.startContainer === editor ? editor.childNodes[Math.max(0, savedRange.startOffset - 1)] : savedRange.startContainer) : null;
+      if (existing && block && block.nextSibling === existing) {          // clicking just above the line takes it away
+        existing.remove(); renderPreviewCut(); setStatus("Coupure retirée : l'aperçu replié sera coupé à hauteur fixe."); return;
+      }
+      if (existing) existing.remove();
+      const cut = document.createElement("hr");
+      cut.dataset.previewCut = "";
+      if (block && block.parentNode === editor) block.after(cut); else editor.append(cut);
+      trailingParagraph(cut);
+      renderPreviewCut(); saveSelection();
+      setStatus("Aperçu replié : tout ce qui est au-dessus de la ligne pointillée.");
+    }
+    function renderPreviewCut() { $("preview-cut").classList.toggle("on", Boolean($("editor").querySelector("hr[data-preview-cut]"))); }
+    $("preview-cut").addEventListener("mousedown", (event) => { event.preventDefault(); togglePreviewCut(); });
+    $("editor").addEventListener("input", renderPreviewCut);
     function setStatus(message, error = false) { $("status").textContent = message; $("status").classList.toggle("error", error); }
     function requireBridge(method) {
       const api = window.pywebview && window.pywebview.api;
@@ -369,6 +628,13 @@
         element.removeAttribute("data-media-kind");
         element.classList.remove("media-selected", "media-dragging");
         if (!element.getAttribute("class")) element.removeAttribute("class");
+        if (element.parentElement && element.parentElement.matches(ROW_SELECTOR)) element.removeAttribute("style");   // the page re-measures a row
+      });
+      clone.querySelectorAll(ROW_SELECTOR).forEach((row) => row.removeAttribute("contenteditable"));
+      // a tag-coloured heading is painted on display; only the tag's name is stored
+      clone.querySelectorAll("[data-tag-color]").forEach((heading) => {
+        heading.style.removeProperty("color");
+        if (!heading.getAttribute("style")) heading.removeAttribute("style");
       });
       clone.querySelectorAll("[style]").forEach((element) => {
         const align = element.style.textAlign;
@@ -405,6 +671,7 @@
         if (mediaWidth(target)) element.dataset.width = String(mediaWidth(target));
         applyMediaLayout(element);
         target.replaceWith(element);
+        applyMediaLayout(element);              // re-measures it when it sits in a row
         clearMediaSelection(); selectMedia(element);
         setStatus("Média remplacé — il sera traité à l'enregistrement.");
       } catch (error) { setStatus(error.message || String(error), true); }
@@ -424,14 +691,22 @@
         else { range.selectNodeContents($("editor")); range.collapse(false); }
         range.deleteContents();
         let last = null;
-        for (const media of chosen) {      // each block lands after the previous one
-          last = mediaPlaceholder(media);
+        if (chosen.length > 1) {           // several files at once become a row, between blocks
+          const row = createRow(chosen.map(mediaPlaceholder));
+          const block = topLevel(range.startContainer);
+          if (block && block !== $("editor")) block.after(row); else range.insertNode(row);
+          normalizeRow(row);
+          last = row.lastElementChild;
+          range.setStartAfter(row); range.collapse(true);
+        } else {
+          last = mediaPlaceholder(chosen[0]);
           range.insertNode(last);
           range.setStartAfter(last); range.collapse(true);
         }
         selection.removeAllRanges(); selection.addRange(range); saveSelection();
         selectMedia(last);
-        setStatus(`${chosen.length} média(s) ajouté(s).${skipped.length ? ` Ignoré(s) : ${skipped.join(" · ")}` : ""}`, skipped.length > 0);
+        const rowNote = chosen.length > 1 ? " En rangée — « Rangée » sur un média pour l'en sortir." : "";
+        setStatus(`${chosen.length} média(s) ajouté(s).${rowNote}${skipped.length ? ` Ignoré(s) : ${skipped.join(" · ")}` : ""}`, skipped.length > 0);
       } catch (error) { setStatus(error.message || String(error), true); }
     }
     function escapeText(value) { return String(value).replace(/[&<>"']/g, (char) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[char])); }
@@ -572,6 +847,8 @@
         $("tag-colors").append(chip);
       });
       renderAccentPreview(tags);
+      paintHeadings();
+      renderHeadingColors();
     }
     async function refreshTagColors() {
       try {
@@ -617,10 +894,12 @@
     // Saved media already carry a project-relative src, and <base href="/"> makes
     // the local server resolve it exactly as the published page does.
     function hydrateMedia(root) {
+      root.querySelectorAll(ROW_SELECTOR).forEach((row) => { row.contentEditable = "false"; });
       root.querySelectorAll("img,video").forEach((element) => {
         element.dataset.mediaKind = element.tagName === "VIDEO" ? "video" : "image";
         applyMediaLayout(element);
       });
+      if (root === $("editor")) normalizeRows();
     }
     function renderEntryList() {
       $("entry-list").textContent = "";
@@ -693,7 +972,10 @@
         $("entry-date").value = entry.date || new Date().toISOString().slice(0, 10);
         $("tags").value = Array.isArray(entry.tags) ? entry.tags.join(", ") : (entry.tags || "");
         $("editor").innerHTML = holder.innerHTML;
+        hydrateMedia($("editor"));             // live nodes this time, so rows can measure their files
+        renderPreviewCut();
         savedRange = null;
+        resetHistory();                        // undo never reaches into the previous entry
         pendingDelete = "";
         closeTagSuggestions();
         renderEntryList();
@@ -710,6 +992,8 @@
       $("title").value = ""; $("tags").value = "";
       $("entry-date").value = new Date().toISOString().slice(0, 10);
       $("editor").innerHTML = "";
+      renderPreviewCut();
+      resetHistory();
       renderEntryList();
       renderTagColors();
     }
@@ -726,6 +1010,15 @@
     }
     $("new-entry").addEventListener("click", () => { resetForm(); setStatus("Nouvelle entrée."); });
     function markMediaSaved(media) {
+      // the staged copies are deleted on save, so undo steps must point at the imported files too
+      history.forEach((step) => {
+        const holder = document.createElement("template");
+        holder.innerHTML = step.html;
+        Object.entries(media || {}).forEach(([token, path]) => holder.content.querySelectorAll(`[data-media-token="${token}"]`).forEach((element) => {
+          element.setAttribute("src", path); element.removeAttribute("data-media-token");
+        }));
+        step.html = holder.innerHTML;
+      });
       Object.entries(media || {}).forEach(([token, path]) => {
         const element = $("editor").querySelector(`[data-media-token="${token}"]`);
         if (!element) return;
@@ -750,6 +1043,95 @@
         setStatus(error.message || String(error), true);
       }
     });
+    // Undo/redo is the app's own. Rows, links, heading colours, the preview cut and
+    // media moves all change the canvas directly, which the browser's native undo
+    // cannot follow, so snapshots of the canvas cover those and typing alike.
+    const HISTORY_LIMIT = 200, HISTORY_PAUSE = 400;     // a pause in typing closes one undo step
+    let history = [], historyIndex = -1, historyTimer = 0;
+    function nodePath(node) {
+      const path = [];
+      while (node && node !== $("editor")) { if (!node.parentNode) return null; path.unshift([...node.parentNode.childNodes].indexOf(node)); node = node.parentNode; }
+      return node ? path : null;
+    }
+    function nodeAt(path) { let node = $("editor"); for (const index of path || []) node = node && node.childNodes[index]; return node || null; }
+    // Only what the author made: selection rings, drag handles, measured row shares
+    // and painted heading colours are put back by hydrating after a restore.
+    function snapshotHtml(root) {
+      const clone = root.cloneNode(true);
+      clone.querySelectorAll(".media-selected,.media-dragging").forEach((element) => { element.classList.remove("media-selected", "media-dragging"); if (!element.getAttribute("class")) element.removeAttribute("class"); });
+      clone.querySelectorAll("img,video").forEach((element) => element.removeAttribute("draggable"));
+      clone.querySelectorAll(`${ROW_SELECTOR} > img, ${ROW_SELECTOR} > video`).forEach((element) => element.removeAttribute("style"));
+      clone.querySelectorAll("[data-tag-color]").forEach((heading) => { heading.style.removeProperty("color"); if (!heading.getAttribute("style")) heading.removeAttribute("style"); });
+      return clone.innerHTML;
+    }
+    function editorCaret() {
+      const selection = getSelection();
+      if (!selection.rangeCount || !$("editor").contains(selection.anchorNode)) return null;
+      const range = selection.getRangeAt(0);
+      return { start: nodePath(range.startContainer), startOffset: range.startOffset, end: nodePath(range.endContainer), endOffset: range.endOffset };
+    }
+    function commitHistory() {
+      clearTimeout(historyTimer); historyTimer = 0;
+      const html = snapshotHtml($("editor")), caret = editorCaret(), top = history[historyIndex];
+      if (top && top.html === html) { if (caret) top.caret = caret; return; }
+      history = history.slice(0, historyIndex + 1);
+      history.push({ html, caret });
+      if (history.length > HISTORY_LIMIT) history.shift();
+      historyIndex = history.length - 1;
+    }
+    const historyObserver = new MutationObserver(() => { clearTimeout(historyTimer); historyTimer = setTimeout(commitHistory, HISTORY_PAUSE); });
+    historyObserver.observe($("editor"), { childList: true, subtree: true, characterData: true, attributes: true });
+    function resetHistory() {
+      historyObserver.takeRecords();
+      clearTimeout(historyTimer); historyTimer = 0;
+      history = []; historyIndex = -1;
+      commitHistory();
+    }
+    function restoreHistory(step) {
+      clearMediaSelection(); closeLinkEditor(false);
+      $("editor").innerHTML = step.html;
+      hydrateMedia($("editor"));
+      paintHeadings(); renderPreviewCut();
+      historyObserver.takeRecords();          // restoring is not itself a new step
+      clearTimeout(historyTimer); historyTimer = 0;
+      $("editor").focus();
+      const selection = getSelection(), range = document.createRange();
+      try {
+        const start = nodeAt(step.caret && step.caret.start), end = nodeAt(step.caret && step.caret.end);
+        if (!start || !end) throw new Error("no caret");
+        range.setStart(start, step.caret.startOffset); range.setEnd(end, step.caret.endOffset);
+      } catch (error) { range.selectNodeContents($("editor")); range.collapse(false); }
+      selection.removeAllRanges(); selection.addRange(range);
+      saveSelection(); renderFormatState();
+    }
+    function undo() {
+      commitHistory();                        // typing still waiting for its pause counts as a step
+      if (historyIndex <= 0) { setStatus("Rien à annuler."); return; }
+      historyIndex -= 1; restoreHistory(history[historyIndex]); setStatus("Annulé.");
+    }
+    function redo() {
+      commitHistory();
+      if (historyIndex >= history.length - 1) { setStatus("Rien à rétablir."); return; }
+      historyIndex += 1; restoreHistory(history[historyIndex]); setStatus("Rétabli.");
+    }
+    // A click ends the typing step in progress, so a toolbar action is its own step.
+    document.addEventListener("mousedown", () => { if (historyTimer) commitHistory(); }, true);
+    // Ctrl+Z / Ctrl+Y / Ctrl+Shift+Z; the title, date and tag fields keep their own undo.
+    document.addEventListener("keydown", (event) => {
+      if (!(event.ctrlKey || event.metaKey) || event.altKey) return;
+      const key = event.key.toLowerCase();
+      if (key !== "z" && key !== "y") return;
+      if (event.target instanceof Element && event.target.closest("input,textarea")) return;
+      event.preventDefault(); event.stopPropagation();
+      if (key === "y" || event.shiftKey) redo(); else undo();
+    }, true);
+    // the context menu's Undo/Redo arrive this way
+    $("editor").addEventListener("beforeinput", (event) => {
+      if (event.inputType !== "historyUndo" && event.inputType !== "historyRedo") return;
+      event.preventDefault();
+      if (event.inputType === "historyUndo") undo(); else redo();
+    });
+    resetHistory();
     window.addEventListener("pywebviewready", async () => {
       bridgeReady = true;
       try {

@@ -1,13 +1,15 @@
 {
   "Animation": "#fe67d6",
   "Blender": "#fe9620",
-  "Conférence": "#5e3dff",
+  "Conférence": "#5ca3ff",
   "Creation — Tooling": "#e17fbd",
-  "Développement": "#8c66f5",
+  "Développement": "#c366f5",
   "Inspiration": "#ffdd00",
+  "Jeu Vidéo": "#52da62",
   "Modulaire": "#7cfeb4",
-  "Prise de Notes": "#a052ff",
+  "Prise de Notes": "#4035d4",
   "RIG 2D": "#7ad5ff",
+  "Shader": "#b18c59",
   "Stylized": "#4d91ff",
   "Tooling": "#fffcad"
 }
