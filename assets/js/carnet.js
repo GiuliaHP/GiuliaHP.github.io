@@ -83,16 +83,29 @@
     $("tag-toggle-value").textContent = state.tag || "tous";
     $("tag-toggle").classList.toggle("filtered", Boolean(state.tag));
   }
+  const postId = new URLSearchParams(window.location.search).get("post");
+  const detailUrl = (entry) => {
+    const url = new URL(window.location.href);
+    url.search = "";
+    url.searchParams.set("post", entry.id);
+    url.hash = "";
+    return url.href;
+  };
   function render() {
     renderTags();
     const query = $("search").value.trim().toLowerCase(), date = dateFloor();
     $("date-clear").hidden = !date;
-    const visible = state.entries.filter((entry) => {
+    const filtered = state.entries.filter((entry) => {
       const tags = entryTags(entry);
       const haystack = `${entry.title} ${entry.body} ${tags.join(" ")}`.toLowerCase();
       return (!query || haystack.includes(query)) && (!state.tag || tags.includes(state.tag)) && (!date || entry.date >= date);
     }).sort((a, b) => (state.newestFirst ? -1 : 1) * `${a.date}-${a.id}`.localeCompare(`${b.date}-${b.id}`));
-    $("entries").innerHTML = visible.map((entry) => {
+    const detailEntry = postId ? state.entries.find((entry) => entry.id === postId) : null;
+    const visible = postId ? (detailEntry ? [detailEntry] : []) : filtered;
+    $("journal-controls").hidden = Boolean(postId);
+    $("entries").classList.toggle("journal-detail", Boolean(postId));
+    const detailBack = detailEntry ? `<a class="entry-detail-back" href="carnet.html">← Retour au carnet</a>` : "";
+    $("entries").innerHTML = detailBack + visible.map((entry) => {
       const tags = entryTags(entry);
       const accent = entryAccent(tags);
       const classes = accent ? `entry entry-tinted${accent.gradient ? " entry-gradient" : ""}` : "entry";
@@ -102,9 +115,36 @@
         const color = colorFor(tag);
         return color ? `<span class="tinted" style="--tag:${color}">${escapeHtml(tag)}</span>` : `<span>${escapeHtml(tag)}</span>`;
       }).join("");
-      return `<article class="${classes}"${style}><div class="entry-meta"><time datetime="${escapeHtml(entry.date)}">${date}</time><span>${escapeHtml(entry.id)}</span></div><h2>${escapeHtml(entry.title)}</h2><div class="entry-body">${renderBody(entry.body)}</div><div class="entry-tags">${chips}</div></article>`;
+      return `<article class="${classes}"${style} data-entry-url="${escapeHtml(detailUrl(entry))}" tabindex="0"><div class="entry-meta"><time datetime="${escapeHtml(entry.date)}">${date}</time></div><div class="entry-actions"><button class="entry-share" type="button" data-share-url="${escapeHtml(detailUrl(entry))}">Partager</button><span class="entry-share-status" aria-live="polite"></span></div><h2><a class="entry-title-link" href="${escapeHtml(detailUrl(entry))}">${escapeHtml(entry.title)}</a></h2><div class="entry-body">${renderBody(entry.body)}</div><div class="entry-tags">${chips}</div></article>`;
     }).join("");
-    $("empty").hidden = visible.length > 0;
+    $("empty").hidden = visible.length > 0 || Boolean(detailEntry);
+    if (postId && !detailEntry) $("empty").textContent = "Cette entrée n'existe pas ou n'est plus disponible.";
+    if (postId && detailEntry) document.title = `${detailEntry.title} — Giulia HP`;
+    document.querySelectorAll(".entry").forEach((entry) => {
+      entry.addEventListener("click", (event) => {
+        if (event.target.closest("a,button,img,video")) return;
+        window.location.href = entry.dataset.entryUrl;
+      });
+      entry.addEventListener("keydown", (event) => {
+        if ((event.key === "Enter" || event.key === " ") && event.target === entry) {
+          event.preventDefault();
+          window.location.href = entry.dataset.entryUrl;
+        }
+      });
+    });
+    document.querySelectorAll(".entry-share").forEach((button) => button.addEventListener("click", async () => {
+      const status = button.parentElement.querySelector(".entry-share-status");
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: button.closest(".entry").querySelector("h2").textContent, url: button.dataset.shareUrl });
+        } else {
+          await navigator.clipboard.writeText(button.dataset.shareUrl);
+          status.textContent = "Lien copié";
+        }
+      } catch (error) {
+        if (error.name !== "AbortError") status.textContent = "Impossible de partager le lien";
+      }
+    }));
   }
   $("search").addEventListener("input", render);
   $("date-from").addEventListener("change", render);
@@ -130,4 +170,3 @@
     $("empty").textContent = "Le carnet ne peut pas être chargé pour le moment.";
   });
 }());
-

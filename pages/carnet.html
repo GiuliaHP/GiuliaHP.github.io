@@ -11,14 +11,14 @@
 <body>
   <header class="journal-hero">
     <div class="journal-wrap">
-      <a class="journal-brand" href="index.html"><img src="../assets/img/icons/IC_Main.png" alt="">Giulia HP.</a>
+      <a class="journal-brand" href="index.html" aria-label="Retour à l'accueil"><img src="../assets/img/icons/IC_Main.png" alt=""></a>
       <p class="journal-kicker">Notes · recherches · fragments</p>
       <h1>Le carnet<br><em>de recherche</em></h1>
       <p class="journal-intro">Un journal vivant autour du game art, des outils et des images en construction.</p>
     </div>
   </header>
   <main class="journal-wrap">
-    <section class="journal-controls" aria-label="Filtres du carnet">
+    <section id="journal-controls" class="journal-controls" aria-label="Filtres du carnet">
       <label class="search-label" for="search">Rechercher<input id="search" type="search" placeholder="Titre, texte, tag..."></label>
       <div class="filter-row">
         <div class="tag-picker">
@@ -41,4 +41,3 @@
   <script src="../assets/js/carnet.js"></script>
 </body>
 </html>
-
