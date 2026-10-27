@@ -1053,6 +1053,11 @@ if (trailerVideos.length) {
         video.loop = true;
         video.playsInline = true;
         video.preload = 'none';
+
+        const posterUrl = media.poster || (media.src ? media.src.replace(/\.(mp4|webm)(\?.*)?$/i, '_poster.webp') : '');
+        if (posterUrl) {
+          video.poster = posterUrl;
+        }
         if (media.webm) {
           const sourceWebm = document.createElement('source');
           sourceWebm.src = media.webm;
@@ -1084,7 +1089,7 @@ if (trailerVideos.length) {
               video.pause();
             }
           });
-        }, { threshold: 0.25 });
+        }, { threshold: 0.15, rootMargin: '250px 0px' });
         videoObs.observe(inner);
 
       } else if (media.type === 'image') {
