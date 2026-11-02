@@ -8,6 +8,7 @@
     descending: "../assets/img/logos/LO_CroissantNot.png",
     showEverything: "../assets/img/logos/LO_ShowEverything.png",
     showNothing: "../assets/img/logos/LO_ShowNothing.png",
+    entry: "../assets/img/logos/LO_CarnetEntry.png",
   };
   const OPEN_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const SORT_LABEL = { newest: "Chronologie Décroissante", oldest: "Chronologie Croissante" };
@@ -99,6 +100,14 @@
     $("tag-toggle").classList.toggle("filtered", Boolean(state.tag));
   }
   const postId = new URLSearchParams(window.location.search).get("post");
+  const returningFromEntry = sessionStorage.getItem("carnet-return-transition") === "1";
+  if (returningFromEntry) {
+    sessionStorage.removeItem("carnet-return-transition");
+    document.body.classList.add("journal-returning");
+    window.addEventListener("load", () => {
+      window.setTimeout(() => document.body.classList.remove("journal-returning"), 700);
+    }, { once: true });
+  }
   const detailUrl = (entry) => {
     const url = new URL(window.location.href);
     url.search = "";
@@ -108,6 +117,9 @@
   };
   function render() {
     renderTags();
+    $("journal-brand").href = postId ? "#" : "index.html";
+    $("journal-brand").dataset.returnToCarnet = postId ? "history" : "";
+    $("journal-brand").setAttribute("aria-label", postId ? "Retour au carnet" : "Retour à l'accueil");
     const query = $("search").value.trim().toLowerCase(), date = dateFloor();
     $("date-clear").hidden = !date;
     const filtered = state.entries.filter((entry) => {
@@ -117,14 +129,12 @@
     }).sort((a, b) => (state.newestFirst ? -1 : 1) * `${a.date}-${a.id}`.localeCompare(`${b.date}-${b.id}`));
     const detailEntry = postId ? state.entries.find((entry) => entry.id === postId) : null;
     const visible = postId ? (detailEntry ? [detailEntry] : []) : filtered;
+    document.body.classList.toggle("journal-detail-mode", Boolean(postId));
     $("journal-controls").hidden = Boolean(postId);
     $("entries").classList.toggle("journal-detail", Boolean(postId));
-    const detailBack = detailEntry
-      ? `<a class="entry-detail-back" href="carnet.html" aria-label="Retour au carnet" title="Retour au carnet"><img src="../assets/img/logos/LO_CarnetBack.png" alt=""></a>`
-      : "";
     const listMode = !postId;
     $("journal-toolbar").hidden = !listMode || visible.length === 0;
-    $("entries").innerHTML = detailBack + visible.map((entry) => {
+    $("entries").innerHTML = visible.map((entry) => {
       const tags = entryTags(entry);
       const accent = entryAccent(tags);
       const open = !listMode || state.expanded.has(entry.id);
@@ -139,25 +149,30 @@
       const body = renderBody(entry.body);
       // a cut placed in the editor ends the folded preview; without one the body is clipped to a fixed height
       const bodyClass = /<hr\b[^>]*data-preview-cut/i.test(body) ? "entry-body has-cut" : "entry-body";
-      const listActions = listMode
-        ? `<button class="entry-icon entry-toggle" type="button" aria-controls="${bodyId}" aria-expanded="${open}" aria-label="${open ? "Replier" : "Déplier"} l'entrée" title="${open ? "Replier" : "Déplier"}"><img src="${open ? ICON.less : ICON.more}" alt=""></button>`
-          + `<a class="entry-icon entry-open" href="${url}" aria-label="Ouvrir l'entrée seule" title="Ouvrir l'entrée seule">${OPEN_ICON}</a>`
+      const shareColor = tags.map(colorFor).find(Boolean) || "var(--muted)";
+      const iconColors = tags.map(colorFor).filter(Boolean);
+      const openColor = iconColors[1] || iconColors[0] || "var(--muted)";
+      const toggleAction = listMode
+        ? `<button class="entry-icon entry-toggle" type="button" style="--icon-color:${shareColor}" aria-controls="${bodyId}" aria-expanded="${open}" aria-label="${open ? "Replier" : "Déplier"} l'entrée" title="${open ? "Replier" : "Déplier"}"><span class="entry-toggle-icon" aria-hidden="true"></span></button>`
         : "";
-      const share = `<button class="entry-icon entry-share" type="button" data-share-url="${url}" aria-label="Copier le lien de l'entrée" title="Copier le lien"><img src="${ICON.copy}" alt=""></button>`;
-      return `<article class="${classes}"${style} data-entry-id="${escapeHtml(entry.id)}"><header class="entry-head"><div class="entry-heading"><div class="entry-meta"><time datetime="${escapeHtml(entry.date)}">${date}</time></div><h2 class="entry-title">${escapeHtml(entry.title)}</h2></div><div class="entry-actions">${listActions}${share}</div></header><div class="${bodyClass}" id="${bodyId}">${body}</div><div class="entry-tags">${chips}</div></article>`;
+      const openAction = listMode
+        ? `<a class="entry-icon entry-open" href="${url}" style="--icon-color:${openColor}" aria-label="Ouvrir l'entrée seule" title="Ouvrir l'entrée seule"><span class="entry-open-icon" aria-hidden="true"></span></a>`
+        : "";
+      const share = `<button class="entry-share" type="button" data-share-url="${url}" style="--share-color:${shareColor}" aria-label="Copier le lien de l'entrée" title="Copier le lien"><span class="entry-share-icon" aria-hidden="true"></span></button>`;
+      return `<article class="${classes}"${style} data-entry-id="${escapeHtml(entry.id)}"><header class="entry-head"><div class="entry-heading"><div class="entry-meta"><time datetime="${escapeHtml(entry.date)}">${date}</time></div><h2 class="entry-title">${escapeHtml(entry.title)}</h2></div><div class="entry-actions">${openAction}</div></header><div class="${bodyClass}" id="${bodyId}">${body}</div><div class="entry-tags">${share}${toggleAction}${chips}</div></article>`;
     }).join("");
     $("empty").hidden = visible.length > 0 || Boolean(detailEntry);
     if (postId && !detailEntry) $("empty").textContent = "Cette entrée n'existe pas ou n'est plus disponible.";
     if (postId && detailEntry) document.title = `${detailEntry.title} — Giulia HP`;
-    paintHeadings($("entries"));
+    paintTagColors($("entries"));
     window.CarnetMedia.fitRows($("entries"));
     renderToggleAll();
   }
-  // Headings coloured in the editor name a tag; the colour is looked up here so it follows the tag.
-  function paintHeadings(root) {
-    root.querySelectorAll("[data-tag-color]").forEach((heading) => {
-      const color = colorFor(heading.dataset.tagColor);
-      if (color) heading.style.color = color;
+  // Text blocks coloured in the editor name a tag; the colour is looked up here so it follows the tag.
+  function paintTagColors(root) {
+    root.querySelectorAll("[data-tag-color]").forEach((element) => {
+      const color = colorFor(element.dataset.tagColor);
+      if (color) element.style.setProperty("--tag-color", color);
     });
   }
   const visibleIds = () => [...document.querySelectorAll(".entry[data-entry-id]")].map((entry) => entry.dataset.entryId);
@@ -178,7 +193,6 @@
       button.setAttribute("aria-expanded", String(open));
       button.setAttribute("aria-label", `${label} l'entrée`);
       button.title = label;
-      button.querySelector("img").src = open ? ICON.less : ICON.more;
     }
   }
   // Copy feedback is the icon dimming briefly; the hidden live region says it for screen readers.
@@ -197,15 +211,31 @@
     button.copiedTimer = setTimeout(() => { button.classList.remove("copied"); $("share-status").textContent = ""; }, 1200);
   }
   $("entries").addEventListener("click", (event) => {
+    const back = event.target.closest("[data-return-to-carnet]");
+    if (back) sessionStorage.setItem("carnet-return-transition", "1");
     const share = event.target.closest(".entry-share");
     if (share) { shareEntry(share); return; }
     const toggle = event.target.closest(".entry-toggle");
     const article = event.target.closest(".entry");
     if (toggle) { setExpanded(article, article.classList.contains("entry-collapsed")); renderToggleAll(); return; }
-    // clicking a folded preview opens it, unless the click was meant for a link or a media
-    if (article && article.classList.contains("entry-collapsed") && event.target.closest(".entry-body") && !event.target.closest("a,button,img,video")) {
-      setExpanded(article, true); renderToggleAll();
+    // clicking an entry body toggles it, unless the click was meant for a link or a media
+    if (article && article.querySelector(".entry-toggle") && event.target.closest(".entry-body") && !event.target.closest("a,button,img,video")) {
+      setExpanded(article, article.classList.contains("entry-collapsed")); renderToggleAll();
     }
+  });
+  $("entries").addEventListener("dblclick", (event) => {
+    const article = event.target.closest(".entry");
+    const openLink = article && article.querySelector(".entry-open");
+    if (!openLink || event.target.closest("a,button,img,video")) return;
+    event.preventDefault();
+    window.location.href = openLink.href;
+  });
+  $("journal-brand").addEventListener("click", (event) => {
+    if (!$("journal-brand").dataset.returnToCarnet) return;
+    event.preventDefault();
+    sessionStorage.setItem("carnet-return-transition", "1");
+    if (window.history.length > 1) window.history.back();
+    else window.location.href = "carnet.html";
   });
   $("toggle-all").addEventListener("click", () => {
     const ids = visibleIds(), open = !ids.every((id) => state.expanded.has(id));

@@ -3,13 +3,15 @@
   "Blender": "#fe9620",
   "Conférence": "#5ca3ff",
   "Creation — Tooling": "#e17fbd",
-  "Développement": "#c366f5",
+  "Customisation": "#f1a2e3",
+  "Développement": "#a3ea5d",
   "Inspiration": "#ffdd00",
-  "Jeu Vidéo": "#52da62",
+  "Jeu Vidéo": "#b481f3",
   "Modulaire": "#7cfeb4",
   "Prise de Notes": "#4035d4",
   "RIG 2D": "#7ad5ff",
   "Shader": "#b18c59",
   "Stylized": "#4d91ff",
-  "Tooling": "#fffcad"
+  "Tooling": "#fffcad",
+  "UI": "#c59e67"
 }
