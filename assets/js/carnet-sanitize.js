@@ -26,7 +26,7 @@
       || (element.tagName === "DIV" && attribute.name === "data-media-row")
       // where the folded preview of an entry stops
       || (element.tagName === "HR" && attribute.name === "data-preview-cut")
-      || (["H2", "H3"].includes(element.tagName) && attribute.name === "data-tag-color" && isTagName(attribute.value));
+      || (TEXT_BLOCKS.includes(element.tagName) && attribute.name === "data-tag-color" && isTagName(attribute.value));
   }
 
   /* Returns the cleaned HTML plus what had to go, so the editor can say so. */

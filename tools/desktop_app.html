@@ -14,7 +14,7 @@
     * { box-sizing:border-box; } html,body { height:100%; } body { background:radial-gradient(circle at 15% 0,#1a2145 0,var(--bg) 42%); color:var(--text); display:flex; flex-direction:column; font:14px Inter,Segoe UI,sans-serif; margin:0; overflow:hidden; }
     header { align-items:center; border-bottom:1px solid var(--border); display:flex; flex:none; gap:14px; justify-content:space-between; padding:7px 18px; } .brand { align-items:center; display:flex; font:600 16px "Space Grotesk",sans-serif; gap:9px; } .brand img { height:22px; object-fit:contain; width:22px; } .muted { color:var(--muted); }
     main { display:grid; flex:1; gap:14px; grid-template-columns:220px minmax(0,1fr); margin:0; min-height:0; padding:10px 14px; width:100%; } .editor-column { --gutter:max(0px,calc((100% - var(--page)) / 2)); display:flex; flex-direction:column; min-height:0; min-width:0; width:100%; } /* the controls span the panel, like the canvas below them */ .form-grid { display:grid; flex:none; gap:8px 12px; grid-template-columns:2fr 1fr; } label { color:var(--muted); display:grid; font-size:12px; gap:6px; } label.full { grid-column:1/-1; } input { background:#0c1023; border:1px solid var(--border); border-radius:8px; color:var(--text); font:inherit; outline:none; padding:7px 10px; width:100%; } input:focus,[contenteditable]:focus { border-color:var(--accent); box-shadow:0 0 0 3px #809eff22; } .editor:focus { box-shadow:inset 0 0 0 1px var(--accent),0 0 0 3px #809eff22; }
-    .toolbar { align-items:center; display:flex; flex-wrap:wrap; gap:6px; } .toolbar-sep { background:var(--border); flex:none; height:18px; width:1px; } .toolbar button.on { background:var(--violet); border-color:var(--accent); } button { background:#202952; border:1px solid var(--border); border-radius:7px; color:var(--text); cursor:pointer; padding:6px 10px; } button:hover { border-color:var(--accent); } button.primary { background:linear-gradient(135deg,var(--violet),#4b78e8); border:0; font-weight:600; padding:8px 16px; }
+    .toolbar { align-items:center; display:flex; flex-wrap:wrap; gap:6px; } .toolbar-sep { background:var(--border); flex:none; height:18px; width:1px; } .toolbar button.on { background:var(--violet); border-color:var(--accent); } .toolbar [data-align-state] svg { height:16px; vertical-align:middle; width:16px; } button { background:#202952; border:1px solid var(--border); border-radius:7px; color:var(--text); cursor:pointer; padding:6px 10px; } button:hover { border-color:var(--accent); } button.primary { background:linear-gradient(135deg,var(--violet),#4b78e8); border:0; font-weight:600; padding:8px 16px; }
     .editor-wrap { display:flex; flex:1; flex-direction:column; min-height:0; } .editor-label { color:var(--muted); display:block; font-size:12px; margin-top:8px; } .editor { background:#0c1023; border:0; border-radius:10px; box-shadow:inset 0 0 0 1px var(--border); flex:1; font:16px/1.7 Inter,Arial,sans-serif; margin:6px 0 0; min-height:0; overflow-y:auto; padding:24px max(28px,calc((100% - var(--page)) / 2)); outline:none; width:100%; } .editor:empty::before { color:var(--muted); content:attr(data-placeholder); pointer-events:none; }    .sidebar { background:#0e1226; border:1px solid var(--border); border-radius:12px; display:flex; flex-direction:column; min-height:0; overflow:hidden; }
     .sidebar-head { align-items:center; border-bottom:1px solid var(--border); display:flex; gap:8px; justify-content:space-between; padding:9px 11px; } .sidebar-head h2 { font:600 14px "Space Grotesk",sans-serif; margin:0; } .sidebar-head button { font-size:12px; padding:6px 10px; }
     .entry-list { display:flex; flex:1; flex-direction:column; gap:5px; min-height:0; overflow-y:auto; padding:7px; }
@@ -36,7 +36,7 @@
     .accent-preview.gradient { border-bottom-color:transparent; } .accent-preview.gradient::after { background:linear-gradient(90deg,var(--entry-a),var(--entry-b)); bottom:-2px; content:""; height:2px; left:0; position:absolute; right:0; } .accent-preview.gradient strong { -webkit-background-clip:text; background-clip:text; background-image:linear-gradient(95deg,var(--entry-a),var(--entry-b)); color:transparent; }
     /* link editor: one popover for both the address and the text shown */
     .link-popover { background:#1b2350; border:1px solid var(--accent); border-radius:10px; box-shadow:0 14px 30px #05060cbb; display:grid; gap:8px; padding:10px; position:fixed; width:320px; z-index:55; } .link-popover[hidden] { display:none; } .link-popover .link-actions { align-items:center; display:flex; gap:6px; } .link-popover .link-actions .grow { flex:1; } .link-popover button { font-size:12px; padding:5px 10px; } .link-popover button.primary { padding:5px 12px; } .link-popover .danger:hover { background:#5c1f33; border-color:#ff9b9b; color:#ff9b9b; } .link-popover .danger[hidden] { display:none; }
-    /* heading colours come from the entry's own tags */
+    /* Text colours come from the entry's own tags. */
     .heading-colors { align-items:center; display:flex; gap:4px; } .heading-colors .label { color:var(--muted); font-size:11px; margin-right:2px; } .heading-colors button { font-size:11px; padding:4px 7px; } .heading-colors .swatch { background:var(--swatch); border:2px solid #0c1023; border-radius:50%; box-shadow:0 0 0 1px var(--border); height:20px; padding:0; width:20px; } .heading-colors .swatch.on { box-shadow:0 0 0 2px var(--accent); } .heading-colors button:disabled { cursor:default; opacity:.35; } .heading-colors .empty { color:var(--muted); font-size:11px; font-style:italic; }
     /* where the folded preview on the site stops */
     .editor hr[data-preview-cut] { border:0; border-top:2px dashed var(--accent); height:0; margin:26px 0 22px; overflow:visible; position:relative; } .editor hr[data-preview-cut]::after { background:#0c1023; color:var(--accent); content:"✂ fin de l'aperçu replié"; font-size:11px; left:50%; letter-spacing:.06em; padding:0 8px; position:absolute; text-transform:uppercase; top:-9px; transform:translateX(-50%); }
@@ -74,13 +74,13 @@
         <button type="button" data-command="bold"><strong>Gras</strong></button><button type="button" data-command="italic"><em>Italique</em></button>
         <button type="button" data-block="H2">H2</button><button type="button" data-block="H3">H3</button><button type="button" data-command="insertUnorderedList">Liste</button>
         <span class="toolbar-sep"></span>
-        <button type="button" data-command="justifyLeft" data-align-state="left" title="Aligner le texte à gauche">◰</button><button type="button" data-command="justifyCenter" data-align-state="center" title="Centrer le texte">◳</button><button type="button" data-command="justifyRight" data-align-state="right" title="Aligner le texte à droite">◲</button><button type="button" data-command="justifyFull" data-align-state="justify" title="Justifier le texte">▦</button>
+        <button type="button" data-command="justifyLeft" data-align-state="left" title="Aligner le texte à gauche">◰</button><button type="button" data-command="justifyCenter" data-align-state="center" title="Centrer le texte"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18M6 9h12M3 13h18M6 17h12M3 21h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><button type="button" data-command="justifyRight" data-align-state="right" title="Aligner le texte à droite">◲</button><button type="button" data-command="justifyFull" data-align-state="justify" title="Justifier le texte">▦</button>
         <span class="toolbar-sep"></span>
         <button type="button" id="link" title="Insérer ou modifier un lien (Ctrl+K) : adresse et texte affiché">Lien</button><button type="button" id="add-media" title="Plusieurs fichiers choisis d'un coup forment une rangée">Ajouter des médias</button>
         <span class="toolbar-sep"></span>
         <button type="button" id="preview-cut" title="L'aperçu replié du site s'arrête après le paragraphe courant. Recliquez juste au-dessus de la ligne pour la retirer ; sans ligne, l'aperçu est coupé à hauteur fixe.">✂ Aperçu</button>
         <span class="toolbar-sep"></span>
-        <span class="heading-colors" id="heading-colors" aria-label="Couleur du titre H2 / H3"></span>
+        <span class="heading-colors" id="heading-colors" aria-label="Couleur du texte"></span>
       </div>
       <div id="editor" class="editor entry-body" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="editor-label" data-placeholder="Écrivez votre entrée…"></div>
     </div>
@@ -422,7 +422,7 @@
       const clean = window.CarnetSanitize.sanitize(html);
       document.execCommand("insertHTML", false, clean.html);
       hydrateMedia($("editor"));
-      paintHeadings();
+      paintTagColors();
       saveSelection();
       setStatus(clean.stripped.length
         ? `Collage nettoyé : ${clean.stripped.join(", ")} retiré(s), ces éléments ne s'affichent pas sur le site.`
@@ -537,49 +537,48 @@
     document.addEventListener("mousedown", (event) => {
       if (!$("link-popover").hidden && !$("link-popover").contains(event.target) && event.target !== $("link")) closeLinkEditor(false);
     });
-    // Heading colours: a palette made of the entry's own tags. The heading keeps the
-    // tag's name, so recolouring the tag recolours it here and on the site.
-    function headingAtCaret() {
+    // Text colours use the entry's own tags, so recolouring a tag updates the editor and site.
+    function textBlockAtCaret() {
       const range = savedRange;
       const node = range && range.startContainer, element = node instanceof Element ? node : node && node.parentElement;
-      const heading = element && element.closest("h2,h3");
-      return heading && $("editor").contains(heading) ? heading : null;
+      const block = element && element.closest("p,h2,h3,li,div");
+      return block && block !== $("editor") && $("editor").contains(block) ? block : null;
     }
-    function paintHeadings() {
-      $("editor").querySelectorAll("[data-tag-color]").forEach((heading) => {
-        const color = colorFor(heading.dataset.tagColor);
-        if (color) heading.style.color = color; else heading.style.removeProperty("color");
+    function paintTagColors() {
+      $("editor").querySelectorAll("[data-tag-color]").forEach((element) => {
+        const color = colorFor(element.dataset.tagColor);
+        if (color) element.style.setProperty("--tag-color", color); else element.style.removeProperty("--tag-color");
       });
     }
-    function setHeadingColor(tag) {
-      const heading = headingAtCaret();
-      if (!heading) return;
-      if (tag) heading.dataset.tagColor = tag; else { delete heading.dataset.tagColor; heading.style.removeProperty("color"); if (!heading.getAttribute("style")) heading.removeAttribute("style"); }
-      paintHeadings(); renderHeadingColors(); focusEditor();
-      setStatus(tag ? `Titre coloré avec « ${tag} ».` : "Couleur du titre : automatique (selon les tags).");
+    function setTextColor(tag) {
+      const block = textBlockAtCaret();
+      if (!block) return;
+      if (tag) block.dataset.tagColor = tag; else { delete block.dataset.tagColor; block.style.removeProperty("--tag-color"); if (!block.getAttribute("style")) block.removeAttribute("style"); }
+      paintTagColors(); renderHeadingColors(); focusEditor();
+      setStatus(tag ? `Texte coloré avec « ${tag} ».` : "Couleur du texte retirée.");
     }
     function renderHeadingColors() {
-      const box = $("heading-colors"), heading = headingAtCaret(), current = heading ? heading.dataset.tagColor || "" : null;
+      const box = $("heading-colors"), block = textBlockAtCaret(), current = block ? block.dataset.tagColor || "" : null;
       const tags = currentTags().filter((tag) => colorFor(tag));
       box.textContent = "";
       const label = document.createElement("span");
-      label.className = "label"; label.textContent = "Couleur titre";
+      label.className = "label"; label.textContent = "Couleur texte";
       box.append(label);
       const make = (tag) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.disabled = !heading;
+        button.disabled = !block;
         if (tag) {
           button.className = `swatch${current === tag ? " on" : ""}`;
           button.style.setProperty("--swatch", colorFor(tag));
-          button.title = heading ? `Colorer ce titre avec « ${tag} »` : "Placez le curseur dans un titre H2 ou H3";
+          button.title = block ? `Colorer le texte avec « ${tag} »` : "Placez le curseur dans un paragraphe ou un titre";
           button.setAttribute("aria-label", `Couleur du tag ${tag}`);
         } else {
           button.textContent = "Auto";
           button.classList.toggle("on", current === "");
-          button.title = heading ? "Couleur par défaut : 1er tag pour H2, 2e pour H3" : "Placez le curseur dans un titre H2 ou H3";
+          button.title = block ? "Retirer la couleur du texte" : "Placez le curseur dans un paragraphe ou un titre";
         }
-        button.addEventListener("mousedown", (event) => { event.preventDefault(); setHeadingColor(tag); });
+        button.addEventListener("mousedown", (event) => { event.preventDefault(); setTextColor(tag); });
         box.append(button);
       };
       make("");
@@ -631,10 +630,10 @@
         if (element.parentElement && element.parentElement.matches(ROW_SELECTOR)) element.removeAttribute("style");   // the page re-measures a row
       });
       clone.querySelectorAll(ROW_SELECTOR).forEach((row) => row.removeAttribute("contenteditable"));
-      // a tag-coloured heading is painted on display; only the tag's name is stored
-      clone.querySelectorAll("[data-tag-color]").forEach((heading) => {
-        heading.style.removeProperty("color");
-        if (!heading.getAttribute("style")) heading.removeAttribute("style");
+      // A tag-coloured text block is painted on display; only the tag's name is stored.
+      clone.querySelectorAll("[data-tag-color]").forEach((element) => {
+        element.style.removeProperty("--tag-color");
+        if (!element.getAttribute("style")) element.removeAttribute("style");
       });
       clone.querySelectorAll("[style]").forEach((element) => {
         const align = element.style.textAlign;
@@ -847,7 +846,7 @@
         $("tag-colors").append(chip);
       });
       renderAccentPreview(tags);
-      paintHeadings();
+      paintTagColors();
       renderHeadingColors();
     }
     async function refreshTagColors() {
@@ -1043,7 +1042,7 @@
         setStatus(error.message || String(error), true);
       }
     });
-    // Undo/redo is the app's own. Rows, links, heading colours, the preview cut and
+    // Undo/redo is the app's own. Rows, links, text colours, the preview cut and
     // media moves all change the canvas directly, which the browser's native undo
     // cannot follow, so snapshots of the canvas cover those and typing alike.
     const HISTORY_LIMIT = 200, HISTORY_PAUSE = 400;     // a pause in typing closes one undo step
@@ -1055,13 +1054,13 @@
     }
     function nodeAt(path) { let node = $("editor"); for (const index of path || []) node = node && node.childNodes[index]; return node || null; }
     // Only what the author made: selection rings, drag handles, measured row shares
-    // and painted heading colours are put back by hydrating after a restore.
+    // and painted text colours are put back by hydrating after a restore.
     function snapshotHtml(root) {
       const clone = root.cloneNode(true);
       clone.querySelectorAll(".media-selected,.media-dragging").forEach((element) => { element.classList.remove("media-selected", "media-dragging"); if (!element.getAttribute("class")) element.removeAttribute("class"); });
       clone.querySelectorAll("img,video").forEach((element) => element.removeAttribute("draggable"));
       clone.querySelectorAll(`${ROW_SELECTOR} > img, ${ROW_SELECTOR} > video`).forEach((element) => element.removeAttribute("style"));
-      clone.querySelectorAll("[data-tag-color]").forEach((heading) => { heading.style.removeProperty("color"); if (!heading.getAttribute("style")) heading.removeAttribute("style"); });
+      clone.querySelectorAll("[data-tag-color]").forEach((element) => { element.style.removeProperty("--tag-color"); if (!element.getAttribute("style")) element.removeAttribute("style"); });
       return clone.innerHTML;
     }
     function editorCaret() {
@@ -1091,7 +1090,7 @@
       clearMediaSelection(); closeLinkEditor(false);
       $("editor").innerHTML = step.html;
       hydrateMedia($("editor"));
-      paintHeadings(); renderPreviewCut();
+      paintTagColors(); renderPreviewCut();
       historyObserver.takeRecords();          // restoring is not itself a new step
       clearTimeout(historyTimer); historyTimer = 0;
       $("editor").focus();
@@ -1145,4 +1144,3 @@
   </script>
 </body>
 </html>
-
